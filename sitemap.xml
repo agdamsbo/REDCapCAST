@@ -28,6 +28,12 @@
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/clean_redcap_name.html</loc>
   </url>
   <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/d2w.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/ds2dd.html</loc>
+  </url>
+  <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/focused_metadata.html</loc>
   </url>
   <url>
@@ -53,5 +59,8 @@
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/split_non_repeating_forms.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/strsplitx.html</loc>
   </url>
 </urlset>
