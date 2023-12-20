@@ -116,6 +116,7 @@
 <li><p><code>REDcap_split()</code>: Works largely as the original <code>REDCapRITS::REDCap_split()</code>. It takes a REDCap dataset and metadata (data dictionary) to split the data set into a list of dataframes of instruments.</p></li>
 <li><p><code><a href="reference/read_redcap_tables.html">read_redcap_tables()</a></code>: wraps the use of <a href="https://github.com/OuhscBbmc/REDCapR" class="external-link"><code>REDCapR::redcap_read()</code></a> with <code><a href="reference/REDCap_split.html">REDCap_split()</a></code> to ease the export of REDCap data.</p></li>
 <li><p><code><a href="reference/redcap_wider.html">redcap_wider()</a></code>: pivots each data frame with repeated instruments to a wide format utilizing the <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link"><code>tidyr::pivot_wider()</code></a> from the <a href="https://www.tidyverse.org/" class="external-link">tidyverse</a>.</p></li>
+<li><p><code><a href="reference/easy_redcap.html">easy_redcap()</a></code>: combines secure API key storage with the <code>keyring</code>-package, focused data retrieval and optional widening. This is the recommended approach for easy data access and analysis.</p></li>
 </ul>
 <p>Compared to the original <code>REDCapRITS</code>, all matching functions are improved to accept column naming of REDCap data from manual download or API export.</p>
 </div>
