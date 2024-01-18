@@ -12,7 +12,7 @@ Contains only synthetic data."><meta property="og:image" content="https://agdams
     
     <a class="navbar-brand me-2" href="../index.html">REDCapCAST</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,10 +81,13 @@ Contains only synthetic data.</p>
 <dd><p>CPR number, character</p></dd>
 
   <dt>inclusion</dt>
-<dd><p>Inclusion date, date</p></dd>
+<dd><p>Inclusion date, Date</p></dd>
+
+  <dt>inclusion_time</dt>
+<dd><p>Inclusion time, hms</p></dd>
 
   <dt>dob</dt>
-<dd><p>Date of birth, date</p></dd>
+<dd><p>Date of birth, Date</p></dd>
 
   <dt>age</dt>
 <dd><p>Age decimal, numeric</p></dd>
@@ -114,16 +117,16 @@ Contains only synthetic data.</p>
 <dd><p>mRS Assessed, character</p></dd>
 
   <dt>mrs_date</dt>
-<dd><p>Assesment date, date</p></dd>
+<dd><p>Assesment date, Date</p></dd>
 
   <dt>mrs_score</dt>
-<dd><p>Score, numeric</p></dd>
+<dd><p>Categorical score, numeric</p></dd>
 
   <dt>mrs_complete</dt>
 <dd><p>Complete, numeric</p></dd>
 
-  <dt>event_date</dt>
-<dd><p>Event date, date</p></dd>
+  <dt>event_datetime</dt>
+<dd><p>Event datetime, POSIXct</p></dd>
 
   <dt>event_type</dt>
 <dd><p>Event type, character</p></dd>

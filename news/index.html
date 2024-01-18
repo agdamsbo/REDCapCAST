@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">REDCapCAST</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +50,18 @@
       <small>Source: <a href="https://github.com/agdamsbo/REDCapCAST/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="24.1.2" id="redcapcast-2412">REDCapCAST 24.1.2<a class="anchor" aria-label="anchor" href="#redcapcast-2412"></a></h2>
+<div class="section level4">
+<h4 id="functions-24-1-2">Functions<a class="anchor" aria-label="anchor" href="#functions-24-1-2"></a></h4>
+<ul><li><p>Fix: <code><a href="../reference/ds2dd.html">ds2dd()</a></code>: uses correct default dd column names. Will be deprecated.</p></li>
+<li><p>NEW: <code><a href="../reference/ds2dd_detailed.html">ds2dd_detailed()</a></code>: extension of the <code><a href="../reference/ds2dd.html">ds2dd()</a></code>, which serves to preserve as much metadata as possible automatically. Depends on a group of helper functions also introduced. Of special note is the <code><a href="../reference/guess_time_only_filter.html">guess_time_only_filter()</a></code>, which will try to guess which columns/variables should be formatted as time only formats. Supports hms time format. DETAILED INSTRUCTION AND VIGNETTE IS PENDING.</p></li>
+</ul></div>
+<div class="section level4">
+<h4 id="other-24-1-2">Other<a class="anchor" aria-label="anchor" href="#other-24-1-2"></a></h4>
+<p>I believe <code>renv</code> has now been added and runs correctly. After clone, do <code><a href="https://rstudio.github.io/renv/reference/restore.html" class="external-link">renv::restore()</a></code> to install all necessary package to modify the package.</p>
+</div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="24.1.1" id="redcapcast-2411">REDCapCAST 24.1.1<a class="anchor" aria-label="anchor" href="#redcapcast-2411"></a></h2><p class="text-muted">CRAN release: 2024-01-09</p>
 <div class="section level4">

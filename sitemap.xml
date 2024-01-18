@@ -34,6 +34,9 @@
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/ds2dd.html</loc>
   </url>
   <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/ds2dd_detailed.html</loc>
+  </url>
+  <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/easy_redcap.html</loc>
   </url>
   <url>
@@ -43,7 +46,16 @@
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/get_api_key.html</loc>
   </url>
   <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/guess_time_only_filter.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/hms2character.html</loc>
+  </url>
+  <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/mark_complete.html</loc>
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/match_fields_to_form.html</loc>
@@ -68,5 +80,8 @@
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/strsplitx.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/time_only_correction.html</loc>
   </url>
 </urlset>
