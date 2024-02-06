@@ -49,6 +49,9 @@
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/get_api_key.html</loc>
   </url>
   <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/get_id_name.html</loc>
+  </url>
+  <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/guess_time_only_filter.html</loc>
   </url>
   <url>
@@ -56,6 +59,9 @@
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/is.repeated_longitudinal.html</loc>
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/mark_complete.html</loc>

@@ -95,7 +95,7 @@ easing the split around the defined delimiter, see example.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"12 months follow-up"</span>, <span class="st">"3 steps"</span>, <span class="st">"mRS 6 weeks"</span>, <span class="st">"Counting to 231 now"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">strsplitx</span><span class="op">(</span><span class="va">test</span>,<span class="st">"[0-9]"</span>,type<span class="op">=</span><span class="st">"around"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">strsplitx</span><span class="op">(</span><span class="va">test</span>, <span class="st">"[0-9]"</span>, type <span class="op">=</span> <span class="st">"around"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1"                 "2"                 " months follow-up"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
