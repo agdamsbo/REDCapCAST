@@ -40,6 +40,9 @@
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/easy_redcap.html</loc>
   </url>
   <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/file_extension.html</loc>
+  </url>
+  <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/focused_metadata.html</loc>
   </url>
   <url>
@@ -67,6 +70,9 @@
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/match_fields_to_form.html</loc>
   </url>
   <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/read_input.html</loc>
+  </url>
+  <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/read_redcap_instrument.html</loc>
   </url>
   <url>
@@ -85,6 +91,12 @@
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/sanitize_split.html</loc>
   </url>
   <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/server_factory.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/shiny_cast.html</loc>
+  </url>
+  <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/split_non_repeating_forms.html</loc>
   </url>
   <url>
@@ -92,5 +104,8 @@
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/time_only_correction.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/ui_factory.html</loc>
   </url>
 </urlset>
