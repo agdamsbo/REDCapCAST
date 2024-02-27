@@ -7,10 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="Originally forked from the R part of REDCapRITS by Paul Egeler. 
     See &lt;https://github.com/pegeler/REDCapRITS&gt;.
-    Handles castellated datasets from REDCap projects with repeating instruments. 
-    Assists in casting tidy tables from raw REDCap data exports for each 
-    repeated instrument. Keeps a focused data export approach, by allowing to 
-    only export required data from the database.
+    REDCap database casting and handling of castellated data when using 
+    repeated instruments and longitudinal projects. Keeps a focused data export 
+    approach, by allowing to only export required data from the database.
     REDCap (Research Electronic Data Capture) is a secure, web-based software
     platform designed to support data capture for research studies, providing
     1) an intuitive interface for validated data capture; 2) audit trails for
@@ -33,10 +32,9 @@
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="REDCap Castellated Data Handling">
 <meta property="og:description" content="Originally forked from the R part of REDCapRITS by Paul Egeler. 
     See &lt;https://github.com/pegeler/REDCapRITS&gt;.
-    Handles castellated datasets from REDCap projects with repeating instruments. 
-    Assists in casting tidy tables from raw REDCap data exports for each 
-    repeated instrument. Keeps a focused data export approach, by allowing to 
-    only export required data from the database.
+    REDCap database casting and handling of castellated data when using 
+    repeated instruments and longitudinal projects. Keeps a focused data export 
+    approach, by allowing to only export required data from the database.
     REDCap (Research Electronic Data Capture) is a secure, web-based software
     platform designed to support data capture for research studies, providing
     1) an intuitive interface for validated data capture; 2) audit trails for
@@ -74,7 +72,9 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/Database-creation.html">Database-creation</a>
     <a class="dropdown-item" href="articles/Introduction.html">Introduction</a>
+    <a class="dropdown-item" href="articles/Shiny-app.html">Shiny-app</a>
   </div>
 </li>
 <li class="nav-item">
@@ -105,25 +105,26 @@
 <img src="logo.png" class="logo" alt=""><h1 id="redcapcast-package-">REDCapCAST package <a class="anchor" aria-label="anchor" href="#redcapcast-package-"></a>
 </h1>
 </div>
-<p>REDCap Castellated data handling when using repeated instruments.</p>
+<p>REDCap database casting and handling of castellated data when using repeated instruments and longitudinal projects.</p>
 <p>This package is a fork of <a href="https://github.com/pegeler/REDCapRITS" class="external-link">pegeler/REDCapRITS</a>. The REDCapRITS represents great and extensive work to handle castellated REDCap data in different programming languages. This fork is purely minded on R usage and includes a few implementations of the main <code>REDCap_split</code> function.</p>
-<p>The main goal for this project was to allow for a “minimal data” approach by allowing to filter records, instruments and variables in the export to only download data needed. I think this approach is desireable for handling sensitive, clinical data. No similar functionality is available from similar tools (like <code>REDCapR</code> or <code>REDCapTidieR</code>). Please refer to <a href="https://redcap-tools.github.io/" class="external-link">REDCap-Tools</a> for other great tools.</p>
+<p>This package is very much to be seen as an attempt at a R-to-REDCap-to-R foundry for handling both the transition from dataset/variable list to database and the other way, from REDCap database to a tidy dataset. The goal was also to allow for a “minimal data” approach by allowing to filter records, instruments and variables in the export to only download data needed. I think this approach is desirable for handling sensitive, clinical data. Please refer to <a href="https://redcap-tools.github.io/" class="external-link">REDCap-Tools</a> for other great tools for working with REDCap in R.</p>
 <div class="section level2">
 <h2 id="use-and-immprovements">Use and immprovements<a class="anchor" aria-label="anchor" href="#use-and-immprovements"></a>
 </h2>
-<p>This package is primarily relevant for working with longitudinal projects and/or projects using repeated instruments. Here is just a short descirption of the main functions:</p>
+<p>Here is just a short description of the main functions:</p>
 <ul>
 <li><p><code>REDcap_split()</code>: Works largely as the original <code>REDCapRITS::REDCap_split()</code>. It takes a REDCap dataset and metadata (data dictionary) to split the data set into a list of dataframes of instruments.</p></li>
-<li><p><code><a href="reference/read_redcap_tables.html">read_redcap_tables()</a></code>: wraps the use of <a href="https://github.com/OuhscBbmc/REDCapR" class="external-link"><code>REDCapR::redcap_read()</code></a> with <code><a href="reference/REDCap_split.html">REDCap_split()</a></code> to ease the export of REDCap data.</p></li>
-<li><p><code><a href="reference/redcap_wider.html">redcap_wider()</a></code>: pivots each data frame with repeated instruments to a wide format utilizing the <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link"><code>tidyr::pivot_wider()</code></a> from the <a href="https://www.tidyverse.org/" class="external-link">tidyverse</a>.</p></li>
+<li><p><code><a href="reference/read_redcap_tables.html">read_redcap_tables()</a></code>: wraps the use of <a href="https://github.com/OuhscBbmc/REDCapR" class="external-link"><code>REDCapR::redcap_read()</code></a> with <code><a href="reference/REDCap_split.html">REDCap_split()</a></code> to ease the export of REDCap data. Default output is a list of data frames with one data frame for each REDCap instrument.</p></li>
+<li><p><code><a href="reference/redcap_wider.html">redcap_wider()</a></code>: joins and pivots a list of data frames with repeated instruments to a wide format utilizing the <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link"><code>tidyr::pivot_wider()</code></a> from the <a href="https://www.tidyverse.org/" class="external-link">tidyverse</a>.</p></li>
 <li><p><code><a href="reference/easy_redcap.html">easy_redcap()</a></code>: combines secure API key storage with the <code>keyring</code>-package, focused data retrieval and optional widening. This is the recommended approach for easy data access and analysis.</p></li>
+<li><p><code><a href="reference/ds2dd_detailed.html">ds2dd_detailed()</a></code>: Converts a data set to a data dictionary for upload to a new REDCap database. Variables (fields) and instruments in a REDCap data base are defined by this data dictionary.</p></li>
+<li><p><code><a href="reference/shiny_cast.html">shiny_cast()</a></code>: <a href="">Shiny</a> application to ease the process of converting a spreadsheet/data set to a REDCap database. The app runs locally and data is transferred securely. You can just create and upload the data dictionary, but you can also transfer the given data in the same process.</p></li>
 </ul>
-<p>Compared to the original <code>REDCapRITS</code>, all matching functions are improved to accept column naming of REDCap data from manual download or API export.</p>
 </div>
 <div class="section level2">
 <h2 id="future">Future<a class="anchor" aria-label="anchor" href="#future"></a>
 </h2>
-<p>The plan with this package is to be bundled with a Handbook on working with REDCap from R. I plan to also include functionality to assist in casting (yes, pun intended) the initial REDCap database.</p>
+<p>The plan with this package is to be bundled with a Handbook on working with REDCap from R. This work is in progress but is limited by the time available. Please feel free to contact me or create and issue with ideas for future additions.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>

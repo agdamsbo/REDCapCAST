@@ -7,7 +7,13 @@
     <loc>https://agdamsbo.github.io/REDCapCAST/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/articles/Database-creation.html</loc>
+  </url>
+  <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/articles/Introduction.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/articles/Shiny-app.html</loc>
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/articles/index.html</loc>
@@ -29,6 +35,9 @@
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/d2w.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/deploy_shiny.html</loc>
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/ds2dd.html</loc>
@@ -68,6 +77,9 @@
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/match_fields_to_form.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/mtcars_redcap.html</loc>
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/read_input.html</loc>
