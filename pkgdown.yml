@@ -1,11 +1,11 @@
-pandoc: 2.19.2
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   Database-creation: Database-creation.html
   Introduction: Introduction.html
   Shiny-app: Shiny-app.html
-last_built: 2024-02-27T13:31Z
+last_built: 2024-02-28T06:53Z
 urls:
   reference: https://agdamsbo.github.io/REDCapCAST/reference
   article: https://agdamsbo.github.io/REDCapCAST/articles
