@@ -6,7 +6,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light" data-bs-theme="light"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">REDCapCAST</a>
 
@@ -64,11 +64,13 @@
 <span>  add.auto.id <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  date.format <span class="op">=</span> <span class="st">"dmy"</span>,</span>
 <span>  form.name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  form.sep <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  form.prefix <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  field.type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  field.label <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  field.label.attr <span class="op">=</span> <span class="st">"label"</span>,</span>
 <span>  field.validation <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  metadata <span class="op">=</span> <span class="va">metadata_names</span>,</span>
+<span>  metadata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">REDCapCAST</span><span class="fu">::</span><span class="va"><a href="redcapcast_meta.html">redcapcast_meta</a></span><span class="op">)</span>,</span>
 <span>  validate.time <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  time.var.sel.pos <span class="op">=</span> <span class="st">"[Tt]i[d(me)]"</span>,</span>
 <span>  time.var.sel.neg <span class="op">=</span> <span class="st">"[Dd]at[eo]"</span></span>
@@ -93,6 +95,17 @@ dmy.</p></dd>
 <dt>form.name</dt>
 <dd><p>manually specify form name(s). Vector of length 1 or
 ncol(data). Default is NULL and "data" is used.</p></dd>
+
+
+<dt>form.sep</dt>
+<dd><p>If supplied dataset has form names as suffix or prefix to the
+column/variable names, the seperator can be specified. If supplied, the
+form.sep is ignored. Default is NULL.</p></dd>
+
+
+<dt>form.prefix</dt>
+<dd><p>Flag to set if form is prefix (TRUE) or suffix (FALSE) to
+the column names. Assumes all columns have pre- or suffix if specified.</p></dd>
 
 
 <dt>field.type</dt>
@@ -156,7 +169,7 @@ Please, do always inspect the data dictionary before upload.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">redcapcast_data</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">REDCapCAST</span><span class="fu">::</span><span class="va"><a href="redcapcast_data.html">redcapcast_data</a></span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">|&gt;</span> <span class="fu">ds2dd_detailed</span><span class="op">(</span>validate.time <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $is.POSIX</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 19 × 2</span></span>
@@ -264,17 +277,17 @@ Please, do always inspect the data dictionary before upload.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $meta</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 24 × 18</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    field_name               form_name section_header field_type field_label     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> record_id                data      <span style="color: #BB0000;">NA</span>             text       record_id       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> redcap_event_name        data      <span style="color: #BB0000;">NA</span>             text       redcap_event_na…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> redcap_repeat_instrument data      <span style="color: #BB0000;">NA</span>             text       redcap_repeat_i…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> redcap_repeat_instance   data      <span style="color: #BB0000;">NA</span>             text       redcap_repeat_i…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> cpr                      data      <span style="color: #BB0000;">NA</span>             text       cpr             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> inclusion                data      <span style="color: #BB0000;">NA</span>             text       inclusion       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> inclusion_time           data      <span style="color: #BB0000;">NA</span>             text       inclusion_time  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> dob                      data      <span style="color: #BB0000;">NA</span>             text       dob             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> age                      data      <span style="color: #BB0000;">NA</span>             text       age             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> age_integer              data      <span style="color: #BB0000;">NA</span>             text       age_integer     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> record_id                <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       record_id       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> redcap_event_name        <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       redcap_event_na…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> redcap_repeat_instrument <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       redcap_repeat_i…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> redcap_repeat_instance   <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       redcap_repeat_i…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> cpr                      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       cpr             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> inclusion                <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       inclusion       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> inclusion_time           <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       inclusion_time  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> dob                      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       dob             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> age                      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       age             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> age_integer              <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       age_integer     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;lgl&gt;, field_note &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span>
@@ -287,30 +300,30 @@ Please, do always inspect the data dictionary before upload.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> A default id column has been added</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 150 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    default_trial_id sepal.length sepal.width petal.length petal.width species</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>                1          5.1         3.5          1.4         0.2 setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>                2          4.9         3            1.4         0.2 setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>                3          4.7         3.2          1.3         0.2 setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>                4          4.6         3.1          1.5         0.2 setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>                5          5           3.6          1.4         0.2 setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>                6          5.4         3.9          1.7         0.4 setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>                7          4.6         3.4          1.4         0.3 setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>                8          5           3.4          1.5         0.2 setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>                9          4.4         2.9          1.4         0.2 setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>               10          4.9         3.1          1.5         0.1 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    record_id sepal.length sepal.width petal.length petal.width species</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>         1          5.1         3.5          1.4         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>         2          4.9         3            1.4         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>         3          4.7         3.2          1.3         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>         4          4.6         3.1          1.5         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>         5          5           3.6          1.4         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>         6          5.4         3.9          1.7         0.4 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>         7          4.6         3.4          1.4         0.3 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>         8          5           3.4          1.5         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>         9          4.4         2.9          1.4         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>        10          4.9         3.1          1.5         0.1 setosa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 140 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $meta</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 18</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   field_name       form_name section_header field_type field_label     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> default_trial_id data      <span style="color: #BB0000;">NA</span>             text       default_trial_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> sepal.length     data      <span style="color: #BB0000;">NA</span>             text       Sepal.Length    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> sepal.width      data      <span style="color: #BB0000;">NA</span>             text       Sepal.Width     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> petal.length     data      <span style="color: #BB0000;">NA</span>             text       Petal.Length    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> petal.width      data      <span style="color: #BB0000;">NA</span>             text       Petal.Width     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> species          data      <span style="color: #BB0000;">NA</span>             radio      Species         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   field_name   form_name section_header field_type field_label </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> record_id    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       record_id   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> sepal.length <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       sepal.length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> sepal.width  <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       sepal.width </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> petal.length <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       petal.length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> petal.width  <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       petal.width </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> species      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             radio      species     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;chr&gt;, field_note &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_min &lt;lgl&gt;, text_validation_max &lt;lgl&gt;, identifier &lt;lgl&gt;,</span></span>
@@ -322,38 +335,77 @@ Please, do always inspect the data dictionary before upload.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> A default id column has been added</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 32 × 12</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    default_trial_id   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>                1  21       6  160    110  3.9   2.62  16.5     0     1     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>                2  21       6  160    110  3.9   2.88  17.0     0     1     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>                3  22.8     4  108     93  3.85  2.32  18.6     1     1     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>                4  21.4     6  258    110  3.08  3.22  19.4     1     0     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>                5  18.7     8  360    175  3.15  3.44  17.0     0     0     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>                6  18.1     6  225    105  2.76  3.46  20.2     1     0     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>                7  14.3     8  360    245  3.21  3.57  15.8     0     0     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>                8  24.4     4  147.    62  3.69  3.19  20       1     0     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>                9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>               10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    record_id   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>         1  21       6  160    110  3.9   2.62  16.5     0     1     4     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>         2  21       6  160    110  3.9   2.88  17.0     0     1     4     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>         3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>         4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>         5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>         6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>         7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>         8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>         9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>        10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 22 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: carb &lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $meta</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 18</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    field_name       form_name section_header field_type field_label     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> default_trial_id data      <span style="color: #BB0000;">NA</span>             text       default_trial_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> mpg              data      <span style="color: #BB0000;">NA</span>             text       mpg             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> cyl              data      <span style="color: #BB0000;">NA</span>             text       cyl             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> disp             data      <span style="color: #BB0000;">NA</span>             text       disp            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> hp               data      <span style="color: #BB0000;">NA</span>             text       hp              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> drat             data      <span style="color: #BB0000;">NA</span>             text       drat            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> wt               data      <span style="color: #BB0000;">NA</span>             text       wt              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> qsec             data      <span style="color: #BB0000;">NA</span>             text       qsec            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> vs               data      <span style="color: #BB0000;">NA</span>             text       vs              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> am               data      <span style="color: #BB0000;">NA</span>             text       am              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> gear             data      <span style="color: #BB0000;">NA</span>             text       gear            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> carb             data      <span style="color: #BB0000;">NA</span>             text       carb            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    field_name form_name section_header field_type field_label</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> record_id  <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       record_id  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> mpg        <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       mpg        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> cyl        <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       cyl        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> disp       <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       disp       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> hp         <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       hp         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> drat       <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       drat       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> wt         <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       wt         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> qsec       <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       qsec       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> vs         <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       vs         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> am         <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       am         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> gear       <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       gear       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> carb       <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>             text       carb       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;lgl&gt;, field_note &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_min &lt;lgl&gt;, text_validation_max &lt;lgl&gt;, identifier &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   branching_logic &lt;lgl&gt;, required_field &lt;lgl&gt;, custom_alignment &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   question_number &lt;lgl&gt;, matrix_group_name &lt;lgl&gt;, matrix_ranking &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   field_annotation &lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">ds2dd_detailed</span><span class="op">(</span>add.auto.id <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="st">"data"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> A default id column has been added</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"{sample(x = c('a','b'),size = length(names(data)),</span></span></span>
+<span class="r-in"><span><span class="st">replace=TRUE,prob = rep(x=.5,2))}__{names(data)}"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">|&gt;</span> <span class="fu">ds2dd_detailed</span><span class="op">(</span>form.sep<span class="op">=</span><span class="st">"__"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 150 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    record_id sepal.length sepal.width petal.length petal.width species</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>         1          5.1         3.5          1.4         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>         2          4.9         3            1.4         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>         3          4.7         3.2          1.3         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>         4          4.6         3.1          1.5         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>         5          5           3.6          1.4         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>         6          5.4         3.9          1.7         0.4 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>         7          4.6         3.4          1.4         0.3 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>         8          5           3.4          1.5         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>         9          4.4         2.9          1.4         0.2 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>        10          4.9         3.1          1.5         0.1 setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 140 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $meta</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 18</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   field_name   form_name section_header field_type field_label </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> record_id    b         <span style="color: #BB0000;">NA</span>             text       record_id   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> sepal.length b         <span style="color: #BB0000;">NA</span>             text       sepal.length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> sepal.width  b         <span style="color: #BB0000;">NA</span>             text       sepal.width </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> petal.length a         <span style="color: #BB0000;">NA</span>             text       petal.length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> petal.width  a         <span style="color: #BB0000;">NA</span>             text       petal.width </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> species      a         <span style="color: #BB0000;">NA</span>             radio      species     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;chr&gt;, field_note &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_min &lt;lgl&gt;, text_validation_max &lt;lgl&gt;, identifier &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   branching_logic &lt;lgl&gt;, required_field &lt;lgl&gt;, custom_alignment &lt;lgl&gt;,</span></span>
@@ -371,7 +423,7 @@ Please, do always inspect the data dictionary before upload.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.8.</p>
 </div>
 
     </footer></div>
