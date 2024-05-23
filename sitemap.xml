@@ -34,13 +34,28 @@
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/REDCap_split.html</loc>
   </url>
   <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/case_match_regex_list.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/char2choice.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/char2cond.html</loc>
+  </url>
+  <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/clean_redcap_name.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/create_html_table.html</loc>
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/create_instrument_meta.html</loc>
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/d2w.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/doc2dd.html</loc>
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/ds2dd.html</loc>
@@ -58,6 +73,9 @@
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/focused_metadata.html</loc>
   </url>
   <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/format_subheader.html</loc>
+  </url>
+  <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/get_api_key.html</loc>
   </url>
   <url>
@@ -70,7 +88,13 @@
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/hms2character.html</loc>
   </url>
   <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/html_tag_wrap.html</loc>
+  </url>
+  <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/is_missing.html</loc>
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/is_repeated_longitudinal.html</loc>
@@ -83,6 +107,21 @@
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/mtcars_redcap.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.character.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.data.frame.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.default.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.html</loc>
+  </url>
+  <url>
+    <loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.response.html</loc>
   </url>
   <url>
     <loc>https://agdamsbo.github.io/REDCapCAST/reference/read_input.html</loc>
