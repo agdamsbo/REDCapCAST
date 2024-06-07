@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">REDCapCAST</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.6.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,16 +53,16 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="24.5.1" id="redcapcast-2451">REDCapCAST 24.5.1<a class="anchor" aria-label="anchor" href="#redcapcast-2451"></a></h2>
+<h2 class="pkg-version" data-toc-text="24.6.1" id="redcapcast-2461">REDCapCAST 24.6.1<a class="anchor" aria-label="anchor" href="#redcapcast-2461"></a></h2>
 <div class="section level4">
-<h4 id="functions-24-5-1">Functions<a class="anchor" aria-label="anchor" href="#functions-24-5-1"></a></h4>
+<h4 id="functions-24-6-1">Functions<a class="anchor" aria-label="anchor" href="#functions-24-6-1"></a></h4>
 <ul><li><p>Fix: <code><a href="../reference/read_redcap_tables.html">read_redcap_tables()</a></code>: field names testing allows to include “[form_name]_complete” fields.</p></li>
 <li><p>Fix: <code><a href="../reference/ds2dd_detailed.html">ds2dd_detailed()</a></code>: default record ID name is now “record_id”, the REDCap default. Default is still to use the first column name. Support was added to interpret column name prefix or suffix as instrument names. See the examples.</p></li>
 <li><p>New: <code><a href="../reference/create_instrument_meta.html">create_instrument_meta()</a></code>: creates zip with instrument files to allow adding new instruments to project in production. Takes data dictionary as input and creates a zip for each instrument specified by the <code>form_name</code> column.</p></li>
 <li><p>New: <code><a href="../reference/doc2dd.html">doc2dd()</a></code>: function to convert document table to data dictionary. This allows to specify instrument or whole data dictionary in text document, which for most is easier to work with and easily modifiable. The generic case is a data frame with variable names as values in a column. This is a format like the REDCap data dictionary, but gives a few options for formatting. Has a few related functions for data handling and formatting. One interesting function is <code><a href="../reference/case_match_regex_list.html">case_match_regex_list()</a></code>, which allows for a dynamic <code><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">dplyr::case_when()</a></code>-like approach for regex-matching. I think it is neat at least.</p></li>
 </ul></div>
 <div class="section level4">
-<h4 id="documentation-and-more-24-5-1">Documentation and more<a class="anchor" aria-label="anchor" href="#documentation-and-more-24-5-1"></a></h4>
+<h4 id="documentation-and-more-24-6-1">Documentation and more<a class="anchor" aria-label="anchor" href="#documentation-and-more-24-6-1"></a></h4>
 <ul><li>Dependencies: In order to deploy <code><a href="../reference/shiny_cast.html">shiny_cast()</a></code> with <code>shinylive</code>, I need to remove <code>curl</code> as a dependency. To accomplish this, the <code>shiny_deploy()</code> helper functions has been moved to the package <a href="https://github.com/agdamsbo/package.aid" class="external-link"><code>pacakge.aid</code></a>. This was before realising that <code>REDCapR</code> has <code>curl</code> as dependency, which is the culprit. <code>REDCapCAST</code> is not going to be a <code>shinylive</code> web-app without removing <code>REDCapR</code> dependency, which in the app is used for easy data upload and data dictionary deployment.</li>
 </ul></div>
 </div>
@@ -80,7 +80,7 @@
 </ul></div>
 <div class="section level4">
 <h4 id="other-24-2-1">Other<a class="anchor" aria-label="anchor" href="#other-24-2-1"></a></h4>
-<p>I believe <code>renv</code> has now been added and runs correctly. After clone, do <code><a href="https://rstudio.github.io/renv/reference/restore.html" class="external-link">renv::restore()</a></code> to install all necessary package to modify the package. This seems to always be back and forth. <code>renv</code> may be on its way out again.</p>
+<p>I believe <code>renv</code> has now been added and runs correctly. After clone, do <code>renv::restore()</code> to install all necessary package to modify the package. This seems to always be back and forth. <code>renv</code> may be on its way out again.</p>
 <p>Added a Code of Conduct.</p>
 </div>
 </div>
