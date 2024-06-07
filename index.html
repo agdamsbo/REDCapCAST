@@ -95,7 +95,8 @@
 <li><p><code><a href="reference/redcap_wider.html">redcap_wider()</a></code>: joins and pivots a list of data frames with repeated instruments to a wide format utilizing the <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link"><code>tidyr::pivot_wider()</code></a> from the <a href="https://www.tidyverse.org/" class="external-link">tidyverse</a>.</p></li>
 <li><p><code><a href="reference/easy_redcap.html">easy_redcap()</a></code>: combines secure API key storage with the <code>keyring</code>-package, focused data retrieval and optional widening. This is the recommended approach for easy data access and analysis.</p></li>
 <li><p><code><a href="reference/ds2dd_detailed.html">ds2dd_detailed()</a></code>: Converts a data set to a data dictionary for upload to a new REDCap database. Variables (fields) and instruments in a REDCap data base are defined by this data dictionary.</p></li>
-<li><p><code><a href="reference/shiny_cast.html">shiny_cast()</a></code>: <a href="https://www.rstudio.com/products/shiny/" class="external-link">Shiny</a> application to ease the process of converting a spreadsheet/data set to a REDCap database. The app runs locally and data is transferred securely. You can just create and upload the data dictionary, but you can also transfer the given data in the same process. The app is <a href="https://agdamsbo.shinyapps.io/redcapcast/" class="external-link">hosted on shinyapps.io</a> while I work on a <a href="https://posit-dev.github.io/r-shinylive/" class="external-link">shinylive</a> implementation.</p></li>
+<li><p><code><a href="reference/doc2dd.html">doc2dd()</a></code>: Converts a document table to data dictionary. This allows to specify instrument or whole data dictionary in text document, which for most is easier to work with and easily modifiable. Very much like a easy version of just working directly in the data dictionary file itself.</p></li>
+<li><p><code><a href="reference/shiny_cast.html">shiny_cast()</a></code>: <a href="https://www.rstudio.com/products/shiny/" class="external-link">Shiny</a> application to ease the process of converting a spreadsheet/data set to a REDCap database. The app runs locally and data is transferred securely. You can just create and upload the data dictionary, but you can also transfer the given data in the same process. The app is <a href="https://agdamsbo.shinyapps.io/redcapcast/" class="external-link">hosted on shinyapps.io</a> <del>while I work on a <a href="https://posit-dev.github.io/r-shinylive/" class="external-link">shinylive</a> implementation</del>.</p></li>
 </ul>
 </div>
 <div class="section level2">
@@ -109,7 +110,7 @@
 <p>The package is available on CRAN. Install the latest version:</p>
 <pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"REDCapCAST"</span><span class="op">)</span></span></code></pre>
 <p>Install the latest version directly from GitHub:</p>
-<pre><code><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"agdamsbo/REDCapCAST"</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"agdamsbo/REDCapCAST"</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
@@ -163,7 +164,7 @@
 <li><a href="https://github.com/agdamsbo/REDCapCAST" class="external-link"><img src="https://img.shields.io/github/r-package/v/agdamsbo/REDCapCAST" alt="GitHub R package version"></a></li>
 <li><a href="https://CRAN.R-project.org/package=REDCapCAST" class="external-link"><img src="https://img.shields.io/cran/v/REDCapCAST" alt="CRAN/METACRAN"></a></li>
 <li><a href="https://doi.org/10.5281/zenodo.8013984" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8013984.svg" alt="DOI"></a></li>
-<li><a href="https://github.com/agdamsbo/REDCapCAST/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/agdamsbo/REDCapCAST/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/agdamsbo/REDCapCAST/actions/workflows/rhub.yaml" class="external-link"><img src="https://github.com/agdamsbo/REDCapCAST/actions/workflows/rhub.yaml/badge.svg" alt="R-hub"></a></li>
 <li><a href="https://github.com/agdamsbo/REDCapCAST/actions/workflows/pages/pages-build-deployment" class="external-link"><img src="https://github.com/agdamsbo/REDCapCAST/actions/workflows/pages/pages-build-deployment/badge.svg" alt="Page deployed"></a></li>
 <li><a href="https://app.codecov.io/gh/agdamsbo/REDCapCAST?branch=master" class="external-link"><img src="https://codecov.io/gh/agdamsbo/REDCapCAST/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://cran.r-project.org/package=REDCapCAST" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/REDCapCAST" alt="CRAN downloads"></a></li>
