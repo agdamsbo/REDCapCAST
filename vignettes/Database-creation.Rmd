@@ -67,7 +67,7 @@ Additional specifications to the DataDictionary can be made manually, or it can 
 
 ## Data base from table
 
-
+...instructions and examples are coming...
 
 
 ## Meta data and data upload
