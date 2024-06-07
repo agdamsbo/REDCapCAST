@@ -2,7 +2,7 @@
 [![GitHub R package version](https://img.shields.io/github/r-package/v/agdamsbo/REDCapCAST)](https://github.com/agdamsbo/REDCapCAST)
 [![CRAN/METACRAN](https://img.shields.io/cran/v/REDCapCAST)](https://CRAN.R-project.org/package=REDCapCAST)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8013984.svg)](https://doi.org/10.5281/zenodo.8013984)
-[![R-CMD-check](https://github.com/agdamsbo/REDCapCAST/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/agdamsbo/REDCapCAST/actions/workflows/R-CMD-check.yaml)
+[![R-hub](https://github.com/agdamsbo/REDCapCAST/actions/workflows/rhub.yaml/badge.svg)](https://github.com/agdamsbo/REDCapCAST/actions/workflows/rhub.yaml)
 [![Page deployed](https://github.com/agdamsbo/REDCapCAST/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/agdamsbo/REDCapCAST/actions/workflows/pages/pages-build-deployment)
 [![Codecov test coverage](https://codecov.io/gh/agdamsbo/REDCapCAST/branch/master/graph/badge.svg)](https://app.codecov.io/gh/agdamsbo/REDCapCAST?branch=master)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/REDCapCAST)](https://cran.r-project.org/package=REDCapCAST)
@@ -34,7 +34,9 @@ Here is just a short description of the main functions:
 
 * `ds2dd_detailed()`: Converts a data set to a data dictionary for upload to a new REDCap database. Variables (fields) and instruments in a REDCap data base are defined by this data dictionary.
 
-* `shiny_cast()`: [Shiny](https://www.rstudio.com/products/shiny/) application to ease the process of converting a spreadsheet/data set to a REDCap database. The app runs locally and data is transferred securely. You can just create and upload the data dictionary, but you can also transfer the given data in the same process. The app is [hosted on shinyapps.io](https://agdamsbo.shinyapps.io/redcapcast/) while I work on a [shinylive](https://posit-dev.github.io/r-shinylive/) implementation.
+* `doc2dd()`: Converts a document table to data dictionary. This allows to specify instrument or whole data dictionary in text document, which for most is easier to work with and easily modifiable. Very much like a easy version of just working directly in the data dictionary file itself.
+
+* `shiny_cast()`: [Shiny](https://www.rstudio.com/products/shiny/) application to ease the process of converting a spreadsheet/data set to a REDCap database. The app runs locally and data is transferred securely. You can just create and upload the data dictionary, but you can also transfer the given data in the same process. The app is [hosted on shinyapps.io](https://agdamsbo.shinyapps.io/redcapcast/) ~~while I work on a [shinylive](https://posit-dev.github.io/r-shinylive/) implementation~~.
 
 ## Future
 
@@ -51,7 +53,7 @@ install.packages("REDCapCAST")
 Install the latest version directly from GitHub:
 
 ```
-remotes::install_github("agdamsbo/REDCapCAST")
+pak::pak("agdamsbo/REDCapCAST")
 ```
 
 ## Code of Conduct
