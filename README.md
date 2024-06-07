@@ -3,6 +3,7 @@
 [![CRAN/METACRAN](https://img.shields.io/cran/v/REDCapCAST)](https://CRAN.R-project.org/package=REDCapCAST)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8013984.svg)](https://doi.org/10.5281/zenodo.8013984)
 [![R-hub](https://github.com/agdamsbo/REDCapCAST/actions/workflows/rhub.yaml/badge.svg)](https://github.com/agdamsbo/REDCapCAST/actions/workflows/rhub.yaml)
+[![R-CMD-check](https://github.com/agdamsbo/REDCapCAST/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/agdamsbo/REDCapCAST/actions/workflows/R-CMD-check.yaml)
 [![Page deployed](https://github.com/agdamsbo/REDCapCAST/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/agdamsbo/REDCapCAST/actions/workflows/pages/pages-build-deployment)
 [![Codecov test coverage](https://codecov.io/gh/agdamsbo/REDCapCAST/branch/master/graph/badge.svg)](https://app.codecov.io/gh/agdamsbo/REDCapCAST?branch=master)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/REDCapCAST)](https://cran.r-project.org/package=REDCapCAST)
