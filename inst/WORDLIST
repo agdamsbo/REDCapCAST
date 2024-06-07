@@ -4,6 +4,7 @@ Codecov
 DOI
 DataDictionary
 GStat
+Github
 GithubActions
 JSON
 Lifecycle
@@ -14,7 +15,6 @@ README
 REDCap
 REDCapR
 REDCapRITS
-THe
 UI
 WD
 al
@@ -34,8 +34,10 @@ dplyr
 ds
 dta
 et
+github
 gues
 hms
+https
 immprovements
 io
 jbi
@@ -55,6 +57,7 @@ perl
 pos
 pre
 readr
+realising
 sel
 sep
 seperator
@@ -64,9 +67,11 @@ stRoke
 stata
 strsplit
 subheader
+textclean
 thorugh
 tibble
 tidyverse
+trinker
 ui
 uri
 wil

@@ -343,10 +343,10 @@ ds2dd_detailed <- function(data,
       lapply(function(x) {
         if (is.factor(x)) {
           ## Re-factors to avoid confusion with missing levels
-          ## Assumes alle relevant levels are represented in the data
+          ## Assumes all relevant levels are represented in the data
           re_fac <- factor(x)
           paste(
-            paste(unique(as.numeric(re_fac)),
+            paste(seq_along(levels(re_fac)),
               levels(re_fac),
               sep = ", "
             ),

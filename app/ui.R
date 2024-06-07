@@ -1,6 +1,6 @@
 ui <- shiny::shinyUI(
   shiny::fluidPage(
-    theme = shinythemes::shinytheme("united"),
+    theme = shinythemes::shinytheme("flatly"),
 
     ## -----------------------------------------------------------------------------
     ## Application title
@@ -11,15 +11,20 @@ ui <- shiny::shinyUI(
     #                   windowTitle = "REDCap database creator"
     # ),
 
-    shiny::titlePanel(title = shiny::div(shiny::a(shiny::img(src="logo.png"),href="https://agdamsbo.github.io/REDCapCAST"),
-                                  "Easy REDCap database creation"),
+    shiny::titlePanel(
+      title = shiny::div(
+        shiny::a(shiny::img(src = "logo.png"), href = "https://agdamsbo.github.io/REDCapCAST"),
+        "Easy REDCap database creation"
+      ),
       windowTitle = "REDCap database creator"
     ),
-    shiny::h4("This tool includes to convenient functions:",
-              shiny::br(),
-              "1) creating a REDCap data dictionary based on a spreadsheet (.csv/.xls(x)/.dta) and",
-              shiny::br(),
-              "2) creating said database on a given REDCap server and uploading the dataset via API access."),
+    shiny::h4(
+      "This tool includes to convenient functions:",
+      shiny::br(),
+      "1) creating a REDCap data dictionary based on a spreadsheet (.csv/.xls(x)/.dta) and",
+      shiny::br(),
+      "2) creating said database on a given REDCap server and uploading the dataset via API access."
+    ),
 
 
     ## -----------------------------------------------------------------------------
@@ -60,7 +65,7 @@ ui <- shiny::shinyUI(
         label = "API key",
         value = ""
       ),
-      shiny::h6("An API key is an access key to the REDCap database. Please", shiny::a("see here for directions", href="https://www.iths.org/news/redcap-tip/redcap-api-101/"), " to obtain an API key for your project."),
+      shiny::h6("An API key is an access key to the REDCap database. Please", shiny::a("see here for directions", href = "https://www.iths.org/news/redcap-tip/redcap-api-101/"), " to obtain an API key for your project."),
       shiny::actionButton(
         inputId = "upload.meta",
         label = "Upload datadictionary", icon = shiny::icon("book-bookmark")
@@ -110,17 +115,17 @@ ui <- shiny::shinyUI(
     shiny::br(),
     shiny::hr(),
     shiny::tags$footer(shiny::strong("Disclaimer: "),
-                       "This tool is aimed at demonstrating use of REDCapCAST. No responsibility for data loss or any other problems will be taken. Please contact me for support.",
-                       shiny::br(),
-                       shiny::a("License: GPL-3+",href="https://agdamsbo.github.io/REDCapCAST/LICENSE.html"),
-                       "|",
-                       shiny::a("agdamsbo/REDCapCAST",href="https://agdamsbo.github.io/REDCapCAST"),
-                       "|",
-                       shiny::a("Source",href="https://github.com/agdamsbo/REDCapCAST"),
-                       "|",
-                       shiny::a("Contact",href="https://andreas.gdamsbo.dk"),
-                align = "center",
-                style = "
+      "This tool is aimed at demonstrating use of REDCapCAST. No responsibility for data loss or any other problems will be taken. Please contact me for support.",
+      shiny::br(),
+      shiny::a("License: GPL-3+", href = "https://agdamsbo.github.io/REDCapCAST/LICENSE.html"),
+      "|",
+      shiny::a("agdamsbo/REDCapCAST", href = "https://agdamsbo.github.io/REDCapCAST"),
+      "|",
+      shiny::a("Source", href = "https://github.com/agdamsbo/REDCapCAST"),
+      "|",
+      shiny::a("Contact", href = "https://andreas.gdamsbo.dk"),
+      align = "center",
+      style = "
                  position:fixed;
                  bottom:40px;
                  width:100%;
@@ -129,6 +134,7 @@ ui <- shiny::shinyUI(
                  padding: 0px;
                  background-color: White;
                  z-index: 100;
-                ")
+                "
+    )
   )
 )

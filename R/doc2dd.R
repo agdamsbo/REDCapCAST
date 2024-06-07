@@ -108,6 +108,9 @@ doc2dd <- function(data,
       )
   }
 
+
+
+
   ## Defining the calculations
   if (is_missing(col.calculation)) {
     out <- out |>
@@ -115,12 +118,13 @@ doc2dd <- function(data,
         calculations = missing.default
       )
   } else {
+    # With inspiration from textclean package, curly apostrophe is replaced
     out <- out |>
       dplyr::mutate(
         calculations = dplyr::pick(col.calculation) |>
           unlist() |>
           tolower() |>
-          (\(.x) gsub("’", "'", .x))()
+          replace_curly_quote()
       )
   }
 
@@ -287,4 +291,23 @@ is_missing <- function(data,nas=c("", "NA")) {
   } else {
     is.na(data) | data %in% nas
   }
+}
+
+
+#' Replace curly apostrophes and quotes from word
+#'
+#' @description
+#' Copied from textclean, which has not been updated since 2018 and is not
+#' on CRAN. Github:https://github.com/trinker/textclean
+#'
+#' @param x character vector
+#'
+#' @return character vector
+replace_curly_quote <- function(x){
+  replaces <- c('\x91', '\x92', '\x93', '\x94')
+  Encoding(replaces) <- "latin1"
+  for (i in 1:4) {
+    x <- gsub(replaces[i], c("'", "'", "\"", "\"")[i], x, fixed = TRUE)
+  }
+  x
 }
