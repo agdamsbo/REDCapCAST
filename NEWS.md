@@ -13,7 +13,7 @@
 
 ### Documentation and more
 
-* Dependencies: In order to deploy `shiny_cast()` with `shinylive`, I need to remove `curl` as a dependency. To accomplish this, the `shiny_deploy()` helper functions has been moved to the package [`pacakge.aid`](https://github.com/agdamsbo/package.aid). This was before realising that `REDCapR` has `curl` as dependency, which is the culprit. `REDCapCAST` is not going to be a `shinylive` web-app without removing `REDCapR` dependency or any other REDCap database interaction, which would defy the purpose. I'll stick to hosted Shiny app instead.
+* Dependencies: In order to deploy `shiny_cast()` with `shinylive`, I need to remove `curl` as a dependency. To accomplish this, the `shiny_deploy()` helper functions has been moved to the package [`project.aid`](https://github.com/agdamsbo/project.aid). This was before realising that `REDCapR` has `curl` as dependency, which is the culprit. `REDCapCAST` is not going to be a `shinylive` web-app without removing `REDCapR` dependency or any other REDCap database interaction, which would defy the purpose. I'll stick to hosted Shiny app instead.
 
 # REDCapCAST 24.2.1
 
