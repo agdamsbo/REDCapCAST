@@ -21,7 +21,7 @@ ui <- shiny::shinyUI(
     shiny::h4(
       "This tool includes to convenient functions:",
       shiny::br(),
-      "1) creating a REDCap data dictionary based on a spreadsheet (.csv/.xls(x)/.dta) and",
+      "1) creating a REDCap data dictionary based on a spreadsheet (.csv/.xls(x)/.dta/.ods) and",
       shiny::br(),
       "2) creating said database on a given REDCap server and uploading the dataset via API access."
     ),
@@ -39,7 +39,8 @@ ui <- shiny::shinyUI(
           ".csv",
           ".xls",
           ".xlsx",
-          ".dta"
+          ".dta",
+          ".ods"
         )
       ),
       shiny::h6("Below you can download the dataset formatted for upload and the
@@ -115,7 +116,7 @@ ui <- shiny::shinyUI(
     shiny::br(),
     shiny::hr(),
     shiny::tags$footer(shiny::strong("Disclaimer: "),
-      "This tool is aimed at demonstrating use of REDCapCAST. No responsibility for data loss or any other problems will be taken. Please contact me for support.",
+      "This tool is aimed at demonstrating use of REDCapCAST. The app can be run locally or on a hosted server (will save no data anywhere). No responsibility for data loss or any other problems will be taken. Please contact me for support.",
       shiny::br(),
       shiny::a("License: GPL-3+", href = "https://agdamsbo.github.io/REDCapCAST/LICENSE.html"),
       "|",
