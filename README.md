@@ -54,7 +54,8 @@ install.packages("REDCapCAST")
 Install the latest version directly from GitHub:
 
 ```
-pak::pak("agdamsbo/REDCapCAST")
+require("remotes")
+remotes::install_github("agdamsbo/REDCapCAST")
 ```
 
 ## Code of Conduct
