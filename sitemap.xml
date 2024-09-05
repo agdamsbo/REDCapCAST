@@ -1,168 +1,58 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/404.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/articles/Database-creation.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/articles/Introduction.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/articles/Shiny-app.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/index.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/REDCap_split.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/case_match_regex_list.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/char2choice.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/char2cond.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/clean_redcap_name.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/create_html_table.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/create_instrument_meta.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/d2w.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/doc2dd.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/ds2dd.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/ds2dd_detailed.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/easy_redcap.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/file_extension.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/focused_metadata.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/format_subheader.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/get_api_key.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/get_id_name.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/guess_time_only_filter.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/hms2character.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/html_tag_wrap.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/is_missing.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/is_repeated_longitudinal.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/mark_complete.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/match_fields_to_form.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/mtcars_redcap.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.character.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.data.frame.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.default.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.response.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/read_input.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/read_redcap_instrument.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/read_redcap_tables.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/redcap_wider.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/redcapcast_data.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/redcapcast_meta.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/replace_curly_quote.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/sanitize_split.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/server_factory.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/shiny_cast.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/split_non_repeating_forms.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/strsplitx.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/time_only_correction.html</loc>
-  </url>
-  <url>
-    <loc>https://agdamsbo.github.io/REDCapCAST/reference/ui_factory.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/404.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/LICENSE.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/articles/Database-creation.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/articles/Introduction.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/articles/Shiny-app.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/articles/index.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/authors.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/index.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/news/index.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/REDCap_split.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/case_match_regex_list.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/char2choice.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/char2cond.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/clean_redcap_name.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/create_html_table.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/create_instrument_meta.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/d2w.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/doc2dd.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/ds2dd.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/ds2dd_detailed.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/easy_redcap.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/file_extension.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/focused_metadata.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/format_subheader.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/get_api_key.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/get_id_name.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/guess_time_only_filter.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/hms2character.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/html_tag_wrap.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/index.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/is_missing.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/is_repeated_longitudinal.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/mark_complete.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/match_fields_to_form.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/mtcars_redcap.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.character.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.data.frame.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.default.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.response.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/read_input.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/read_redcap_instrument.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/read_redcap_tables.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/redcap_wider.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/redcapcast_data.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/redcapcast_meta.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/replace_curly_quote.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/sanitize_split.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/server_factory.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/shiny_cast.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/split_non_repeating_forms.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/strsplitx.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/time_only_correction.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/ui_factory.html</loc></url>
 </urlset>
+
