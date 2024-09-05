@@ -1,3 +1,7 @@
+# REDCapCAST 24.9.1
+
+Minor changes to pass tests and renv is out.
+
 # REDCapCAST 24.6.1
 
 ### Functions
