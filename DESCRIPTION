@@ -53,12 +53,13 @@ Imports:
     readr,
     stats,
     shiny,
-    openxlsx2,
     haven,
-    readODS,
     zip,
-    assertthat
+    assertthat,
+    openxlsx2,
+    readODS
 Collate: 
+    'REDCapCAST-package.R'
     'utils.r'
     'process_user_input.r'
     'REDCap_split.r'
