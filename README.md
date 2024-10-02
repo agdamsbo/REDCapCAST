@@ -37,7 +37,7 @@ Here is just a short description of the main functions:
 
 * `doc2dd()`: Converts a document table to data dictionary. This allows to specify instrument or whole data dictionary in text document, which for most is easier to work with and easily modifiable. Very much like a easy version of just working directly in the data dictionary file itself.
 
-* `shiny_cast()`: [Shiny](https://www.rstudio.com/products/shiny/) application to ease the process of converting a spreadsheet/data set to a REDCap database. The app runs locally and data is transferred securely. You can just create and upload the data dictionary, but you can also transfer the given data in the same process. The app is [hosted on shinyapps.io](https://agdamsbo.shinyapps.io/redcapcast/) ~~while I work on a [shinylive](https://posit-dev.github.io/r-shinylive/) implementation~~.
+* `shiny_cast()`: [Shiny](https://shiny.posit.co/) application to ease the process of converting a spreadsheet/data set to a REDCap database. The app runs locally and data is transferred securely. You can just create and upload the data dictionary, but you can also transfer the given data in the same process. The app is [hosted on shinyapps.io](https://agdamsbo.shinyapps.io/redcapcast/) ~~while I work on a [shinylive](https://posit-dev.github.io/r-shinylive/) implementation~~.
 
 ## Future
 

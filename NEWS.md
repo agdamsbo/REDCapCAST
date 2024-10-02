@@ -1,3 +1,7 @@
+# REDCapCAST 24.10.2
+
+Updated links and spelling.
+
 # REDCapCAST 24.10.1
 
 Minor changes to pass tests and renv is out. `rhub` is really not running as smooth as previously.
