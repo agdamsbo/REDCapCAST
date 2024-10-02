@@ -1,6 +1,6 @@
-# REDCapCAST 24.9.1
+# REDCapCAST 24.10.1
 
-Minor changes to pass tests and renv is out.
+Minor changes to pass tests and renv is out. `rhub` is really not running as smooth as previously.
 
 # REDCapCAST 24.6.1
 
