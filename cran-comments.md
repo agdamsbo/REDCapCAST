@@ -1,11 +1,8 @@
-── R CMD check results ───────────────────────────────────────── REDCapCAST 24.6.1 ────
-Duration: 22.2s
+── R CMD check results ─────────────────────────────────────────────────────────────────────────────── REDCapCAST 24.10.1 ────
+Duration: 23.8s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
 R CMD check succeeded
-
 ## Test environments
-New Rhubv2 implemented and tested with GitHub actions. All passed.
-
-Link corrected.
+Rhubv2 runs and checks out.
