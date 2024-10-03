@@ -1,4 +1,4 @@
-# REDCapCAST 24.10.2
+# REDCapCAST 24.10.3
 
 Updated links and spelling.
 
@@ -39,7 +39,7 @@ Minor changes to pass tests and renv is out. `rhub` is really not running as smo
 
 * NEW: `read_redcap_instrument()`: convenience function to retrieve complete instrument. Goes a little against the focused approach. With `REDCapR::redcap_read()` you can specify a form to download. You have to also specify the record id variable though. This is done for you with `read_redcap_instrument()`. Nothing fancy.
 
-* NEW: `shiny_cast()`: [Shiny](https://www.rstudio.com/products/shiny/) application to ease the process of converting a spreadsheet/data set to a REDCap database. The app runs locally and data is transferred securely. You can just create and upload the data dictionary, but you can also transfer the given data in the same process. I plan to host the app with shinyapps.io, but for now you can run it locally.
+* NEW: `shiny_cast()`: [Shiny](https://shiny.posit.co/) application to ease the process of converting a spreadsheet/data set to a REDCap database. The app runs locally and data is transferred securely. You can just create and upload the data dictionary, but you can also transfer the given data in the same process. I plan to host the app with shinyapps.io, but for now you can run it locally.
 
 ### Other
 
