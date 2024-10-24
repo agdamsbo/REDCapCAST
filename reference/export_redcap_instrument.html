@@ -65,12 +65,17 @@ production.</p>
 Could be from `ds2dd_detailed()`</p></dd>
 
 
+<dt id="arg-file">file<a class="anchor" aria-label="anchor" href="#arg-file"></a></dt>
+<dd><p>destination file name.</p></dd>
+
+
+<dt id="arg-force">force<a class="anchor" aria-label="anchor" href="#arg-force"></a></dt>
+<dd><p>force instrument creation and ignore different form names by
+just using the first.</p></dd>
+
+
 <dt id="arg-record-id">record.id<a class="anchor" aria-label="anchor" href="#arg-record-id"></a></dt>
 <dd><p>record id variable name. Default is 'record_id'.</p></dd>
-
-
-<dt id="arg-dir">dir<a class="anchor" aria-label="anchor" href="#arg-dir"></a></dt>
-<dd><p>destination dir for the instrument zip. Default is the current WD.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -80,31 +85,25 @@ Could be from `ds2dd_detailed()`</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">iris</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="ds2dd_detailed.html">ds2dd_detailed</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    add.auto.id <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>    form.name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">6</span>, replace <span class="op">=</span> <span class="cn">TRUE</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="st">"meta"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="op">(</span>\<span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/split.html" class="external-link">split</a></span><span class="op">(</span><span class="va">.x</span>, <span class="va">.x</span><span class="op">$</span><span class="va">form_name</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="op">}</span><span class="op">)</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/imap.html" class="external-link">imap</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">.x</span>, <span class="va">.i</span><span class="op">)</span><span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu">export_redcap_instrument</span><span class="op">(</span><span class="va">.x</span>,file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">.i</span>,<span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">".zip"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> A default id column has been added</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in map2(.x, vec_index(.x), .f, ...):</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> With name: b.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `export_redcap_instrument()`:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> could not find function "export_redcap_instrument"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#iris |&gt;</span></span></span>
+<span class="r-in"><span><span class="co">#  ds2dd_detailed(</span></span></span>
+<span class="r-in"><span><span class="co">#    add.auto.id = TRUE,</span></span></span>
+<span class="r-in"><span><span class="co">#    form.name = sample(c("b", "c"), size = 6, replace = TRUE, prob = rep(.5, 2))</span></span></span>
+<span class="r-in"><span><span class="co">#  ) |&gt;</span></span></span>
+<span class="r-in"><span><span class="co">#  purrr::pluck("meta") |&gt;</span></span></span>
+<span class="r-in"><span><span class="co">#  (\(.x){</span></span></span>
+<span class="r-in"><span><span class="co">#  split(.x, .x$form_name)</span></span></span>
+<span class="r-in"><span><span class="co">#  })() |&gt;</span></span></span>
+<span class="r-in"><span><span class="co">#  purrr::imap(function(.x, .i){</span></span></span>
+<span class="r-in"><span><span class="co">#  export_redcap_instrument(.x,file=here::here(paste0(.i,Sys.Date(),".zip")))</span></span></span>
+<span class="r-in"><span><span class="co">#  })</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">iris</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="ds2dd_detailed.html">ds2dd_detailed</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    add.auto.id <span class="op">=</span> <span class="cn">TRUE</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="st">"meta"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">export_redcap_instrument</span><span class="op">(</span>file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"instrument"</span>,<span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">".zip"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in export_redcap_instrument(purrr::pluck(ds2dd_detailed(iris, add.auto.id = TRUE),     "meta"), file = here::here(paste0("instrument", Sys.Date(),     ".zip"))):</span> could not find function "export_redcap_instrument"</span>
+<span class="r-in"><span><span class="co">#iris |&gt;</span></span></span>
+<span class="r-in"><span><span class="co">#  ds2dd_detailed(</span></span></span>
+<span class="r-in"><span><span class="co">#    add.auto.id = TRUE</span></span></span>
+<span class="r-in"><span><span class="co">#  ) |&gt;</span></span></span>
+<span class="r-in"><span><span class="co">#  purrr::pluck("meta") |&gt;</span></span></span>
+<span class="r-in"><span><span class="co">#  export_redcap_instrument(file=here::here(paste0("instrument",Sys.Date(),".zip")))</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
