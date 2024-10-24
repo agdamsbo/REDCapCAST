@@ -34,9 +34,23 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/agdamsbo/REDCapCAST/blob/v24.10.3/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/agdamsbo/REDCapCAST/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="24.10.4" id="redcapcast-24104">REDCapCAST 24.10.4<a class="anchor" aria-label="anchor" href="#redcapcast-24104"></a></h2>
+<p>Revised tests.</p>
+<div class="section level4">
+<h4 id="functions-24-10-4">Functions:<a class="anchor" aria-label="anchor" href="#functions-24-10-4"></a></h4>
+<ul><li><p>Bug: ‘form.name’ specified to ‘ds2dd_detailed()’ was ignored. Corrected to only be ignored if ‘form.sep’ is specified. Added handling of re-occurring <code>form.sep</code> pattern.</p></li>
+<li><p>New: <code><a href="../reference/export_redcap_instrument.html">export_redcap_instrument()</a></code> is a new version of <code><a href="../reference/create_instrument_meta.html">create_instrument_meta()</a></code>, that will only export a single instrument. Multiple instrument export can be done with <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply()</a></code> or <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map()</a></code>. This allows for inclusion of this functionality in the Shiny implementation and is easier to handle. <code><a href="../reference/create_instrument_meta.html">create_instrument_meta()</a></code> is deprecated.</p></li>
+</ul></div>
+<div class="section level4">
+<h4 id="shiny-24-10-4">Shiny:<a class="anchor" aria-label="anchor" href="#shiny-24-10-4"></a></h4>
+<ul><li>New: Export a REDCap instrument ready to add to your database based on an uploaded spreadsheet. This is thanks to the <code><a href="../reference/export_redcap_instrument.html">export_redcap_instrument()</a></code> function. THis functionality is intended for projects in production and adding instruments should be handled manually and not by API upload.</li>
+</ul><p>The shiny implementation is included with this package. Implementing in shinylive may be looked into again later.</p>
+</div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="24.10.3" id="redcapcast-24103">REDCapCAST 24.10.3<a class="anchor" aria-label="anchor" href="#redcapcast-24103"></a></h2><p class="text-muted">CRAN release: 2024-10-03</p>
 <p>Updated links and spelling.</p>
