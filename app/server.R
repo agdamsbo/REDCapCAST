@@ -41,6 +41,14 @@ server <- function(input, output, session) {
     }
   )
 
+  # Downloadable .zip of instrument ----
+  output$downloadInstrument <- shiny::downloadHandler(
+    filename = paste0("REDCapCAST_instrument",Sys.Date(),".zip"),
+    content = function(file) {
+      create_instrument_meta_single(purrr::pluck(dd(), "meta"), file)
+    }
+  )
+
   output_staging <- shiny::reactiveValues()
   output_staging$meta <- output_staging$data <- NA
 

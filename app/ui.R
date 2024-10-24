@@ -19,11 +19,11 @@ ui <- shiny::shinyUI(
       windowTitle = "REDCap database creator"
     ),
     shiny::h4(
-      "This tool includes to convenient functions:",
+      "THese are the functionalities to create and migrate data from a spreadsheet to a REDCap database:",
       shiny::br(),
-      "1) creating a REDCap data dictionary based on a spreadsheet (.csv/.xls(x)/.dta/.ods) and",
+      "1) create a REDCap data dictionary or instrument based on a spreadsheet (.csv/.xls(x)/.dta/.ods) and",
       shiny::br(),
-      "2) creating said database on a given REDCap server and uploading the dataset via API access."
+      "2) upload said database file on a given REDCap server and upload the dataset via API access or download for all manual upload."
     ),
 
 
@@ -49,7 +49,10 @@ ui <- shiny::shinyUI(
       shiny::downloadButton("downloadData", "Download data"),
 
       # Button
-      shiny::downloadButton("downloadMeta", "Download datadictionary"),
+      shiny::downloadButton("downloadMeta", "Download data dictionary"),
+
+      # Button
+      shiny::downloadButton("downloadInstrument", "Download as instrument"),
 
 
       # Horizontal line ----
