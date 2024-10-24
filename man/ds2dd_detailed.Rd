@@ -34,7 +34,7 @@ ncol(data). Default is NULL and "data" is used.}
 
 \item{form.sep}{If supplied dataset has form names as suffix or prefix to the
 column/variable names, the seperator can be specified. If supplied, the
-form.sep is ignored. Default is NULL.}
+form.name is ignored. Default is NULL.}
 
 \item{form.prefix}{Flag to set if form is prefix (TRUE) or suffix (FALSE) to
 the column names. Assumes all columns have pre- or suffix if specified.}
@@ -87,11 +87,17 @@ data <- REDCapCAST::redcapcast_data
 data |> ds2dd_detailed(validate.time = TRUE)
 data |> ds2dd_detailed()
 iris |> ds2dd_detailed(add.auto.id = TRUE)
+iris |>
+  ds2dd_detailed(
+    add.auto.id = TRUE,
+    form.name = sample(c("b", "c"), size = 6, replace = TRUE, prob = rep(.5, 2))
+  ) |>
+  purrr::pluck("meta")
 mtcars |> ds2dd_detailed(add.auto.id = TRUE)
 data <- iris |>
   ds2dd_detailed(add.auto.id = TRUE) |>
   purrr::pluck("data")
 names(data) <- glue::glue("{sample(x = c('a','b'),size = length(names(data)),
 replace=TRUE,prob = rep(x=.5,2))}__{names(data)}")
-data |> ds2dd_detailed(form.sep="__")
+data |> ds2dd_detailed(form.sep = "__")
 }

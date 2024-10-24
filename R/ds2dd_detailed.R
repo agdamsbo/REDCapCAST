@@ -117,7 +117,7 @@ hms2character <- function(data) {
 #' ncol(data). Default is NULL and "data" is used.
 #' @param form.sep If supplied dataset has form names as suffix or prefix to the
 #' column/variable names, the seperator can be specified. If supplied, the
-#' form.sep is ignored. Default is NULL.
+#' form.name is ignored. Default is NULL.
 #' @param form.prefix Flag to set if form is prefix (TRUE) or suffix (FALSE) to
 #' the column names. Assumes all columns have pre- or suffix if specified.
 #' @param field.type manually specify field type(s). Vector of length 1 or
@@ -149,13 +149,19 @@ hms2character <- function(data) {
 #' data |> ds2dd_detailed(validate.time = TRUE)
 #' data |> ds2dd_detailed()
 #' iris |> ds2dd_detailed(add.auto.id = TRUE)
+#' iris |>
+#'   ds2dd_detailed(
+#'     add.auto.id = TRUE,
+#'     form.name = sample(c("b", "c"), size = 6, replace = TRUE, prob = rep(.5, 2))
+#'   ) |>
+#'   purrr::pluck("meta")
 #' mtcars |> ds2dd_detailed(add.auto.id = TRUE)
 #' data <- iris |>
 #'   ds2dd_detailed(add.auto.id = TRUE) |>
 #'   purrr::pluck("data")
 #' names(data) <- glue::glue("{sample(x = c('a','b'),size = length(names(data)),
 #' replace=TRUE,prob = rep(x=.5,2))}__{names(data)}")
-#' data |> ds2dd_detailed(form.sep="__")
+#' data |> ds2dd_detailed(form.sep = "__")
 ds2dd_detailed <- function(data,
                            add.auto.id = FALSE,
                            date.format = "dmy",
@@ -229,27 +235,34 @@ ds2dd_detailed <- function(data,
   ## form_name and field_name
 
   if (!is.null(form.sep)) {
-    if (form.sep!=""){
-    suppressMessages(nms <- strsplit(names(data), split = form.sep) |>
-      dplyr::bind_cols())
-    ## Assumes form.sep only occurs once and form.prefix defines if form is prefix or suffix
-    dd$form_name <- clean_redcap_name(dplyr::slice(nms,ifelse(form.prefix, 1, 2)))
-    ## The other split part is used as field names
-    dd$field_name <- dplyr::slice(nms,ifelse(!form.prefix, 1, 2)) |> as.character()
+    if (form.sep != "") {
+      parts <- strsplit(names(data), split = form.sep)
+
+      ## form.sep should be unique, but handles re-occuring pattern (by only considering first or last) and form.prefix defines if form is prefix or suffix
+      ## The other split part is used as field names
+      if (form.prefix){
+        dd$form_name <- clean_redcap_name(Reduce(c,lapply(parts,\(.x) .x[[1]])))
+        dd$field_name <- Reduce(c,lapply(parts,\(.x) paste(.x[seq_len(length(.x))[-1]],collapse=form.sep)))
+      } else {
+        dd$form_name <- clean_redcap_name(Reduce(c,lapply(parts,\(.x) .x[[length(.x)]])))
+        dd$field_name <- Reduce(c,lapply(parts,\(.x) paste(.x[seq_len(length(.x)-1)],collapse=form.sep)))
+      }
     } else {
       dd$form_name <- "data"
       dd$field_name <- gsub(" ", "_", tolower(colnames(data)))
     }
-  } else if (is.null(form.sep)) {
+  } else {
     ## if no form name prefix, the colnames are used as field_names
     dd$field_name <- gsub(" ", "_", tolower(colnames(data)))
-  } else if (is.null(form.name)) {
-    dd$form_name <- "data"
-  } else {
-    if (length(form.name) == 1 || length(form.name) == nrow(dd)) {
-      dd$form_name <- form.name
+
+    if (is.null(form.name)) {
+      dd$form_name <- "data"
     } else {
-      stop("Length of supplied 'form.name' has to be one (1) or ncol(data).")
+      if (length(form.name) == 1 || length(form.name) == nrow(dd)) {
+        dd$form_name <- form.name
+      } else {
+        stop("Length of supplied 'form.name' has to be one (1) or ncol(data).")
+      }
     }
   }
 

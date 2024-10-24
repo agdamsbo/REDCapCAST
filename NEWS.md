@@ -1,3 +1,19 @@
+# REDCapCAST 24.10.4
+
+Revised tests.
+
+### Functions:
+
+* Bug: 'form.name' specified to 'ds2dd_detailed()' was ignored. Corrected to only be ignored if 'form.sep' is specified. Added handling of re-occurring `form.sep` pattern.
+
+* New: `export_redcap_instrument()` is a new version of `create_instrument_meta()`, that will only export a single instrument. Multiple instrument export can be done with `lapply()` or `purrr::map()`. This allows for inclusion of this functionality in the Shiny implementation and is easier to handle. `create_instrument_meta()` is deprecated.
+
+### Shiny:
+
+* New: Export a REDCap instrument ready to add to your database based on an uploaded spreadsheet. This is thanks to the `export_redcap_instrument()` function. THis functionality is intended for projects in production and adding instruments should be handled manually and not by API upload.
+
+The shiny implementation is included with this package. Implementing in shinylive may be looked into again later.
+
 # REDCapCAST 24.10.3
 
 Updated links and spelling.
