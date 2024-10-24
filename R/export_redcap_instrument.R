@@ -8,31 +8,33 @@
 #'
 #' @param data metadata for the relevant instrument.
 #' Could be from `ds2dd_detailed()`
-#' @param dir destination dir for the instrument zip. Default is the current WD.
+#' @param file destination file name.
+#' @param force force instrument creation and ignore different form names by
+#' just using the first.
 #' @param record.id record id variable name. Default is 'record_id'.
 #'
 #' @return exports zip-file
 #'
 #' @examples
-#' iris |>
-#'   ds2dd_detailed(
-#'     add.auto.id = TRUE,
-#'     form.name = sample(c("b", "c"), size = 6, replace = TRUE, prob = rep(.5, 2))
-#'   ) |>
-#'   purrr::pluck("meta") |>
-#'   (\(.x){
-#'   split(.x, .x$form_name)
-#'   })() |>
-#'   purrr::imap(function(.x, .i){
-#'   export_redcap_instrument(.x,file=here::here(paste0(.i,Sys.Date(),".zip")))
-#'   })
+#' #iris |>
+#' #  ds2dd_detailed(
+#' #    add.auto.id = TRUE,
+#' #    form.name = sample(c("b", "c"), size = 6, replace = TRUE, prob = rep(.5, 2))
+#' #  ) |>
+#' #  purrr::pluck("meta") |>
+#' #  (\(.x){
+#' #  split(.x, .x$form_name)
+#' #  })() |>
+#' #  purrr::imap(function(.x, .i){
+#' #  export_redcap_instrument(.x,file=here::here(paste0(.i,Sys.Date(),".zip")))
+#' #  })
 #'
-#' iris |>
-#'   ds2dd_detailed(
-#'     add.auto.id = TRUE
-#'   ) |>
-#'   purrr::pluck("meta") |>
-#'   export_redcap_instrument(file=here::here(paste0("instrument",Sys.Date(),".zip")))
+#' #iris |>
+#' #  ds2dd_detailed(
+#' #    add.auto.id = TRUE
+#' #  ) |>
+#' #  purrr::pluck("meta") |>
+#' #  export_redcap_instrument(file=here::here(paste0("instrument",Sys.Date(),".zip")))
 export_redcap_instrument <- function(data,
                                      file,
                                      force=FALSE,
