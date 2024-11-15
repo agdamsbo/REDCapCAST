@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">REDCapCAST</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.10.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.11.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,16 +38,20 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="24.10.4" id="redcapcast-24104">REDCapCAST 24.10.4<a class="anchor" aria-label="anchor" href="#redcapcast-24104"></a></h2>
+<h2 class="pkg-version" data-toc-text="24.11.1" id="redcapcast-24111">REDCapCAST 24.11.1<a class="anchor" aria-label="anchor" href="#redcapcast-24111"></a></h2>
 <p>Revised tests.</p>
+<p>Documentation has been slightly updated to highlight the shiny app for casting REDCap metadata. I am working on hosting my own Shiny Server.</p>
 <div class="section level4">
-<h4 id="functions-24-10-4">Functions:<a class="anchor" aria-label="anchor" href="#functions-24-10-4"></a></h4>
+<h4 id="functions-24-11-1">Functions:<a class="anchor" aria-label="anchor" href="#functions-24-11-1"></a></h4>
 <ul><li><p>Bug: ‘form.name’ specified to ‘ds2dd_detailed()’ was ignored. Corrected to only be ignored if ‘form.sep’ is specified. Added handling of re-occurring <code>form.sep</code> pattern.</p></li>
 <li><p>New: <code><a href="../reference/export_redcap_instrument.html">export_redcap_instrument()</a></code> is a new version of <code><a href="../reference/create_instrument_meta.html">create_instrument_meta()</a></code>, that will only export a single instrument. Multiple instrument export can be done with <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply()</a></code> or <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map()</a></code>. This allows for inclusion of this functionality in the Shiny implementation and is easier to handle. <code><a href="../reference/create_instrument_meta.html">create_instrument_meta()</a></code> is deprecated.</p></li>
+<li><p>Improved: <code><a href="../reference/shiny_cast.html">shiny_cast()</a></code> app has been updated to actually work if you install the package and not clones the whole repository.</p></li>
 </ul></div>
 <div class="section level4">
-<h4 id="shiny-24-10-4">Shiny:<a class="anchor" aria-label="anchor" href="#shiny-24-10-4"></a></h4>
-<ul><li>New: Export a REDCap instrument ready to add to your database based on an uploaded spreadsheet. This is thanks to the <code><a href="../reference/export_redcap_instrument.html">export_redcap_instrument()</a></code> function. THis functionality is intended for projects in production and adding instruments should be handled manually and not by API upload.</li>
+<h4 id="shiny-24-11-1">Shiny:<a class="anchor" aria-label="anchor" href="#shiny-24-11-1"></a></h4>
+<ul><li><p>New: Major overhaul of the app interface with the introduction of <code>bslib</code> for building the page. Also Detailed documentation added for the app workflow.</p></li>
+<li><p>New: Export a REDCap instrument ready to add to your database based on an uploaded spreadsheet. This is thanks to the <code><a href="../reference/export_redcap_instrument.html">export_redcap_instrument()</a></code> function. THis functionality is intended for projects in production and adding instruments should be handled manually and not by API upload.</p></li>
+<li><p>Bug: Export datadictionary with “” instead of “NA” for NAs. Upload to REDCap failed. Not anymore.</p></li>
 </ul><p>The shiny implementation is included with this package. Implementing in shinylive may be looked into again later.</p>
 </div>
 </div>
