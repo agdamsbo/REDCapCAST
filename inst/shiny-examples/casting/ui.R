@@ -4,7 +4,7 @@ ui <-
     title = "REDCap database creator",
     bslib::page_navbar(
       title = "Easy REDCap database creation",
-      sidebar = bslib::sidebar(
+      sidebar = bslib::sidebar(width = 300,
         shiny::h5("1) Database meta data"),
         shiny::fileInput(
           inputId = "ds",
