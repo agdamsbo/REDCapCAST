@@ -60,6 +60,12 @@ require("remotes")
 remotes::install_github("agdamsbo/REDCapCAST")
 ```
 
+Launch the REDCapCAST app interface directly on your own machine:
+
+```
+REDCapCAST::shiny_cast()
+```
+
 ## Code of Conduct
 
 Please note that the REDCapCAST project is released with a [Contributor Code of Conduct](https://agdamsbo.github.io/REDCapCAST/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

@@ -4,11 +4,11 @@
 \name{REDCapCAST-package}
 \alias{REDCapCAST}
 \alias{REDCapCAST-package}
-\title{REDCapCAST: REDCap Castellated Data Handling}
+\title{REDCapCAST: REDCap Castellated Data Handling And Metadata Casting}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Originally forked from the R part of 'REDCapRITS' by Paul Egeler. See \url{https://github.com/pegeler/REDCapRITS}. 'REDCap' database casting and handling of castellated data when using repeated instruments and longitudinal projects. Keeps a focused data export approach, by allowing to only export required data from the database. 'REDCap' (Research Electronic Data Capture) is a secure, web-based software platform designed to support data capture for research studies, providing 1) an intuitive interface for validated data capture; 2) audit trails for tracking data manipulation and export procedures; 3) automated export procedures for seamless data downloads to common statistical packages; and 4) procedures for data integration and interoperability with external sources (Harris et al (2009) \doi{10.1016/j.jbi.2008.08.010}; Harris et al (2019) \doi{10.1016/j.jbi.2019.103208}).
+Originally forked from the R part of 'REDCapRITS' by Paul Egeler. See \url{https://github.com/pegeler/REDCapRITS}. 'REDCap' database casting and handling of castellated data when using repeated instruments and longitudinal projects. Keeps a focused data export approach, by allowing to only export required data from the database. Also for casting new REDCap databases based on datasets from other sources. 'REDCap' (Research Electronic Data Capture) is a secure, web-based software platform designed to support data capture for research studies, providing 1) an intuitive interface for validated data capture; 2) audit trails for tracking data manipulation and export procedures; 3) automated export procedures for seamless data downloads to common statistical packages; and 4) procedures for data integration and interoperability with external sources (Harris et al (2009) \doi{10.1016/j.jbi.2008.08.010}; Harris et al (2019) \doi{10.1016/j.jbi.2019.103208}).
 }
 \seealso{
 Useful links:

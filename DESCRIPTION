@@ -1,6 +1,6 @@
 Package: REDCapCAST
-Title: REDCap Castellated Data Handling
-Version: 24.10.3
+Title: REDCap Castellated Data Handling And Metadata Casting
+Version: 24.11.1
 Authors@R: c(
     person("Andreas Gammelgaard", "Damsbo", email = "agdamsbo@clin.au.dk", 
     role = c("aut", "cre"),comment = c(ORCID = "0000-0002-7559-1154")), 
@@ -11,6 +11,7 @@ Description: Originally forked from the R part of 'REDCapRITS' by Paul Egeler.
     'REDCap' database casting and handling of castellated data when using 
     repeated instruments and longitudinal projects. Keeps a focused data export 
     approach, by allowing to only export required data from the database.
+    Also for casting new REDCap databases based on datasets from other sources.
     'REDCap' (Research Electronic Data Capture) is a secure, web-based software
     platform designed to support data capture for research studies, providing
     1) an intuitive interface for validated data capture; 2) audit trails for
@@ -36,7 +37,7 @@ Suggests:
     spelling,
     glue,
     rhub,
-    shinythemes
+    bslib
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

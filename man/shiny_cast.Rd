@@ -4,13 +4,16 @@
 \alias{shiny_cast}
 \title{Launch the included Shiny-app for database casting and upload}
 \usage{
-shiny_cast()
+shiny_cast(...)
+}
+\arguments{
+\item{...}{Arguments passed to shiny::runApp()}
 }
 \value{
 shiny app
 }
 \description{
-Launch the included Shiny-app for database casting and upload
+Wraps shiny::runApp()
 }
 \examples{
 # shiny_cast()

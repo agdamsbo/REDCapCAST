@@ -1,0 +1,26 @@
+"record_id","redcap_event_name","redcap_repeat_instrument","redcap_repeat_instance","cpr","inclusion","inclusion_time","dob","age","age_integer","sex","cohabitation","hypertension","diabetes","region","baseline_data_start_complete","mrs_assessed","mrs_date","mrs_score","mrs_complete","con_mrs","con_calc","consensus_complete","event_datetime","event_age","event_type","new_event_complete"
+1,"inclusion",NA,NA,"1203401OB4",2023-03-13,12:38:49,1940-03-12,83.0023888238636,83,"female","Yes","No","Yes","East","Incomplete","Yes",2023-03-13,1,"Incomplete",NA,NA,NA,NA,NA,NA,NA
+2,"inclusion",NA,NA,"0102342303",2023-03-01,10:38:57,1934-02-01,89.0778044723711,89,"male","Yes","No","No","South","Incomplete","Yes",2023-03-07,1,"Incomplete",NA,NA,NA,NA,NA,NA,NA
+2,"follow1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"Yes",2023-03-09,3,"Incomplete",NA,NA,"Incomplete",NA,NA,NA,NA
+2,"follow1","New Event (?)",1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2024-01-18 12:49:42,NA,"TIA","Incomplete"
+3,"inclusion",NA,NA,"2301569823",2022-03-08,12:01:07,1956-01-23,66.1231921257795,66,"male","No","Yes","Yes","North","Incomplete",NA,NA,NA,"Incomplete",NA,NA,NA,NA,NA,NA,NA
+3,"follow1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"Yes",2022-08-16,2,"Incomplete",NA,NA,"Incomplete",NA,NA,NA,NA
+3,"follow2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"Yes",2023-03-13,1,"Incomplete",NA,NA,"Incomplete",NA,NA,NA,NA
+3,"follow1","New Event (?)",1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2024-01-18 12:49:58,NA,"AIS","Incomplete"
+3,"follow1","New Event (?)",2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2024-01-18 12:50:01,NA,"ICH","Incomplete"
+3,"follow2","New Event (?)",1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2024-01-18 12:50:05,NA,"ICH","Incomplete"
+3,"follow2","New Event (?)",2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2024-01-18 12:50:07,NA,"TIA","Incomplete"
+3,"follow2","New Event (?)",3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2024-01-18 12:50:09,NA,"AIS","Incomplete"
+4,"inclusion",NA,NA,"0204051342",2023-03-14,20:39:19,1905-04-02,117.949033861065,117,"female",NA,NA,NA,NA,"Incomplete",NA,NA,NA,"Incomplete",NA,NA,NA,NA,NA,NA,NA
+4,"follow1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"Incomplete",NA,NA,"Incomplete",NA,NA,NA,NA
+4,"follow2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"Incomplete",NA,NA,"Incomplete",NA,NA,NA,NA
+4,"follow1","New Event (?)",1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2001-04-11 08:39:05,96,"TIA","Complete"
+4,"follow1","New Event (?)",2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2010-04-11 08:39:25,105,"TIA","Complete"
+4,"follow2","New Event (?)",1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2024-01-18 12:50:19,118,"AIS","Complete"
+4,"follow2","New Event (?)",2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2024-01-18 12:50:22,118,"ICH","Incomplete"
+4,"follow2","New Event (?)",3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2024-01-18 12:50:24,118,"Unknown","Complete"
+5,"inclusion",NA,NA,"0201976043",2023-03-23,08:50:31,1897-01-02,126.21751302217,126,"male","No","Yes","Yes","East","Complete",NA,NA,NA,"Incomplete",NA,NA,NA,NA,NA,NA,NA
+5,"follow1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"Incomplete",NA,NA,"Incomplete",NA,NA,NA,NA
+5,"follow1","New Event (?)",1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2024-04-11 09:00:33,127,"AIS","Complete"
+5,"follow1","New Event (?)",2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2024-04-11 09:00:41,127,"ICH","Complete"
+6,"inclusion",NA,NA,"1202320122",2024-01-25,08:49:28,1932-02-12,91.952606829709,91,"female","No","Yes","No","East","Complete",NA,NA,NA,"Incomplete",NA,NA,NA,NA,NA,NA,NA

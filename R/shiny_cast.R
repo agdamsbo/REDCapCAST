@@ -1,23 +1,9 @@
-utils::globalVariables(c("server"))
-#' Shiny server factory
-#'
-#' @return shiny server
-#' @export
-server_factory <- function() {
-  source(here::here("app/server.R"))
-  server
-}
-
-#' UI factory for shiny app
-#'
-#' @return shiny ui
-#' @export
-ui_factory <- function() {
-  # require(ggplot2)
-  source(here::here("app/ui.R"))
-}
-
 #' Launch the included Shiny-app for database casting and upload
+#'
+#' @description
+#' Wraps shiny::runApp()
+#'
+#' @param ... Arguments passed to shiny::runApp()
 #'
 #' @return shiny app
 #' @export
@@ -25,14 +11,27 @@ ui_factory <- function() {
 #' @examples
 #' # shiny_cast()
 #'
-shiny_cast <- function() {
-  # shiny::runApp(appDir = here::here("app/"), launch.browser = TRUE)
+shiny_cast <- function(...) {
+  appDir <- system.file("shiny-examples", "casting", package = "REDCapCAST")
+  if (appDir == "") {
+    stop("Could not find example directory. Try re-installing `REDCapCAST`.", call. = FALSE)
+  }
 
-  shiny::shinyApp(
-    ui_factory(),
-    server_factory()
-  )
+  shiny::runApp(appDir = appDir, ...)
+
+  # This is from the VarSelLCM
+  # shiny_cast2 <- function(X){
+  # check.results(X)
+  # G <- .GlobalEnv
+  # assign("resVSLC", X, envir=G)
+  # a=shiny::runApp(system.file(package="REDCapCAST"),launch.browser = TRUE)
+  # return(invisible(a))
+  # }
+
+  # shiny::runApp(appDir = here::here("app/"),...)
+  # ## Need adjustments to run anywhere
 }
+
 
 
 #' Helper to import files correctly

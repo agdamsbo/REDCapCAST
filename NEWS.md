@@ -1,6 +1,8 @@
-# REDCapCAST 24.10.4
+# REDCapCAST 24.11.1
 
 Revised tests.
+
+Documentation has been slightly updated to highlight the shiny app for casting REDCap metadata. I am working on hosting my own Shiny Server.
 
 ### Functions:
 
@@ -8,9 +10,15 @@ Revised tests.
 
 * New: `export_redcap_instrument()` is a new version of `create_instrument_meta()`, that will only export a single instrument. Multiple instrument export can be done with `lapply()` or `purrr::map()`. This allows for inclusion of this functionality in the Shiny implementation and is easier to handle. `create_instrument_meta()` is deprecated.
 
+* Improved: `shiny_cast()` app has been updated to actually work if you install the package and not clones the whole repository. 
+
 ### Shiny:
 
+* New: Major overhaul of the app interface with the introduction of `bslib` for building the page. Also Detailed documentation added for the app workflow.
+
 * New: Export a REDCap instrument ready to add to your database based on an uploaded spreadsheet. This is thanks to the `export_redcap_instrument()` function. THis functionality is intended for projects in production and adding instruments should be handled manually and not by API upload.
+
+* Bug: Export datadictionary with "" instead of "NA" for NAs. Upload to REDCap failed. Not anymore.
 
 The shiny implementation is included with this package. Implementing in shinylive may be looked into again later.
 

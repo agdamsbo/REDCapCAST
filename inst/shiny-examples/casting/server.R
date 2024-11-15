@@ -1,9 +1,12 @@
 server <- function(input, output, session) {
   require(REDCapCAST)
 
+  # bslib::bs_themer()
+
   dat <- shiny::reactive({
     shiny::req(input$ds)
 
+    output_staging$file <- "loaded"
     read_input(input$ds$datapath)
   })
 
@@ -29,15 +32,15 @@ server <- function(input, output, session) {
   output$downloadData <- shiny::downloadHandler(
     filename = "data_ready.csv",
     content = function(file) {
-      write.csv(purrr::pluck(dd(), "data"), file, row.names = FALSE)
+      write.csv(purrr::pluck(dd(), "data"), file, row.names = FALSE,na = "")
     }
   )
 
   # Downloadable csv of data dictionary ----
   output$downloadMeta <- shiny::downloadHandler(
-    filename = "dictionary_ready.csv",
+    filename = "datadictionary_ready.csv",
     content = function(file) {
-      write.csv(purrr::pluck(dd(), "meta"), file, row.names = FALSE)
+      write.csv(purrr::pluck(dd(), "meta"), file, row.names = FALSE,na = "")
     }
   )
 
@@ -45,12 +48,22 @@ server <- function(input, output, session) {
   output$downloadInstrument <- shiny::downloadHandler(
     filename = paste0("REDCapCAST_instrument",Sys.Date(),".zip"),
     content = function(file) {
-      create_instrument_meta_single(purrr::pluck(dd(), "meta"), file)
+      export_redcap_instrument(purrr::pluck(dd(), "meta"), file)
     }
   )
 
   output_staging <- shiny::reactiveValues()
-  output_staging$meta <- output_staging$data <- NA
+  output_staging$meta <- output_staging$data <- output_staging$file <- NA
+
+  output$uploaded <- shiny::reactive({
+    if (is.na(output_staging$file)) {
+      "no"
+    } else {
+      "yes"
+    }
+  })
+
+  shiny::outputOptions(output, "uploaded", suspendWhenHidden = FALSE)
 
   shiny::observeEvent(input$upload.meta,{  upload_meta()  })
 
