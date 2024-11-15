@@ -55,11 +55,12 @@ Please, if you use this tool, don't hesitate to contact me with feedback if some
 This app and package can be cited using the following bibtex citation or by referencing the following doi-identifier: [10.5281/zenodo.8013984](https://doi.org/10.5281/zenodo.8013984)
 
 ```
-  @Manual{,
+  @agdamsboREDCapCAST{,
     title = {REDCapCAST: REDCap Castellated Data Handling And Metadata Casting},
     author = {Andreas Gammelgaard Damsbo and Paul Egeler},
     year = {2024},
     note = {R package version 24.11.1, https://agdamsbo.github.io/REDCapCAST/},
     url = {https://github.com/agdamsbo/REDCapCAST},
+    doi = {10.5281/zenodo.8013984},
   }
 ```
