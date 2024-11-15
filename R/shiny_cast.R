@@ -18,18 +18,6 @@ shiny_cast <- function(...) {
   }
 
   shiny::runApp(appDir = appDir, ...)
-
-  # This is from the VarSelLCM
-  # shiny_cast2 <- function(X){
-  # check.results(X)
-  # G <- .GlobalEnv
-  # assign("resVSLC", X, envir=G)
-  # a=shiny::runApp(system.file(package="REDCapCAST"),launch.browser = TRUE)
-  # return(invisible(a))
-  # }
-
-  # shiny::runApp(appDir = here::here("app/"),...)
-  # ## Need adjustments to run anywhere
 }
 
 

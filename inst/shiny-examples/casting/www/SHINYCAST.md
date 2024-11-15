@@ -16,8 +16,6 @@ The functions of this app can be described in two parts:
 
 2.  upload the created database file and data to a given REDCap server via API access.
 
-Below, each step is described in more details.
-
 ## Getting started
 
 On the left, you initially just find one single option to upload a spreadsheet. Having done this, you can then preview the uploaded data and generated data dictionary by selecting the relevant tab on the top right.
@@ -30,13 +28,15 @@ Based on the uploaded spreadsheet, the app will make a qualified guess on data c
 
 If you want to add data to an existing database, an instrument can be created. This metadata file is identical to a data dictionary, but does not include a "record_id" field and is packaged as a .zip file, which is uploaded in the "Designer" interface in REDCap.
 
-### Transferring directly to REDCap database
+### Transferring directly to a REDCap database
 
 Based on the API-functions in REDCap, you can upload your data dictionary and renamed data directly from this interface (no data is stored on the server, but consider launching this shiny app on your own machine after having installed the [REDCapCAST package](https://agdamsbo.github.io/REDCapCAST/#installation) in R). Launch a local instance of this app with:
 
 ```
 REDCapCAST::shiny_cast()
 ```
+
+Please mind you, that uploading a new data dictionary can delete data in your database and is non-reversible. Make sure to save a backup beforehand. Also, uploading a data dictionary to a server in production is not possible. This step is only advisable for newly created databases. See the "Disclaimer" above.
 
 ## Background
 
@@ -58,7 +58,7 @@ This app and package can be cited using the following bibtex citation or by refe
   @Manual{,
     title = {REDCapCAST: REDCap Castellated Data Handling And Metadata Casting},
     author = {Andreas Gammelgaard Damsbo and Paul Egeler},
-    year = {2016},
+    year = {2024},
     note = {R package version 24.11.1, https://agdamsbo.github.io/REDCapCAST/},
     url = {https://github.com/agdamsbo/REDCapCAST},
   }
