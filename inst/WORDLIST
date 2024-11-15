@@ -2,6 +2,7 @@ Andreas
 Assesment
 CMD
 Codecov
+DEPRICATED
 DOI
 DataDictionary
 GStat
@@ -18,7 +19,6 @@ README
 REDCap
 REDCapR
 REDCapRITS
-UI
 WD
 al
 api
@@ -27,6 +27,7 @@ charater
 cond
 da
 dafault
+datadictionary
 datetime
 demonstrational
 dir
@@ -41,7 +42,6 @@ github
 gues
 hms
 https
-immprovements
 io
 jbi
 keyring
@@ -62,6 +62,7 @@ pre
 readr
 realising
 renv
+runApp
 sel
 sep
 seperator
@@ -76,7 +77,6 @@ thorugh
 tibble
 tidyverse
 trinker
-ui
 uri
 wil
 ymd

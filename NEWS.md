@@ -16,7 +16,7 @@ Documentation has been slightly updated to highlight the shiny app for casting R
 
 * New: Major overhaul of the app interface with the introduction of `bslib` for building the page. Also Detailed documentation added for the app workflow.
 
-* New: Export a REDCap instrument ready to add to your database based on an uploaded spreadsheet. This is thanks to the `export_redcap_instrument()` function. THis functionality is intended for projects in production and adding instruments should be handled manually and not by API upload.
+* New: Export a REDCap instrument ready to add to your database based on an uploaded spreadsheet. This is thanks to the `export_redcap_instrument()` function. This functionality is intended for projects in production and adding instruments should be handled manually and not by API upload.
 
 * Bug: Export datadictionary with "" instead of "NA" for NAs. Upload to REDCap failed. Not anymore.
 
