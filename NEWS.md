@@ -1,3 +1,13 @@
+# REDCapCAST 24.11.2
+
+24.11.1 was rejected on CRAN based on wrong title capitalisation. This was an opportunity to extend the package overhaul.
+
+Documentation has been updated. Data parser functions have been added (based on readr) and separated from the ds2dd_detailed().
+
+Vignettes and documentation have been restructured.
+
+This package has been detached from the REDCapRITS, which it was originally forked from. The data split function will be kept, while testing will be rewritten. This projects has evolved away from the original fork, so I think this detachment is fair.
+
 # REDCapCAST 24.11.1
 
 Revised tests.
