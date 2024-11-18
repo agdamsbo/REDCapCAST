@@ -58,7 +58,8 @@ Imports:
     zip,
     assertthat,
     openxlsx2,
-    readODS
+    readODS,
+    forcats
 Collate: 
     'REDCapCAST-package.R'
     'utils.r'

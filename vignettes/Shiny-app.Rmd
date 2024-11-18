@@ -14,13 +14,34 @@ knitr::opts_chunk$set(
 )
 ```
 
-To make the easiest possible transition from spreadsheet/dataset to REDCap, I have created a small Shiny app, which adds a graphical interface to the casting of a data dictionary and data upload. Install the package and run the app as follows:
+To make the easiest possible transition from spreadsheet/dataset to REDCap, I have created a small app, which adds a graphical interface to the casting of a data dictionary and data upload. Install the package and launch the app as follows:
 
 ```{r eval=FALSE}
-require(REDCapCAST)
-shiny_cast()
+REDCapCAST::shiny_cast()
 ```
 
-The app will launch in a new window and the interface should be fairly self-explanatory.
-The app only provides the most basic functionality, but might be extended in the future.
+The app primarily wraps one function: `ds2dd_detailed()`.
+
+```{r}
+REDCap_split(
+    records = redcapcast_data,
+    metadata = redcapcast_meta,
+    forms = "all"
+  ) |> 
+  sanitize_split() |> 
+  redcap_wider() |> 
+  ds2dd_detailed()|>  
+  purrr::pluck("data") |> 
+  readr::type_convert( 
+      col_types = readr::cols(.default = readr::col_guess()))
+```
+
+
+```{r}
+redcapcast_data |> 
+  dplyr::mutate(dplyr::across(dplyr::everything(),as.character)) |>  
+  readr::type_convert( 
+      col_types = readr::cols(.default = readr::col_guess()))
+```
+
 

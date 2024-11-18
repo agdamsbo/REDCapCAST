@@ -17,7 +17,8 @@ server <- function(input, output, session) {
   dat <- shiny::reactive({
     shiny::req(input$ds)
 
-    read_input(input$ds$datapath)
+    read_input(input$ds$datapath) |>
+      parse_data()
   })
 
   # getData <- reactive({

@@ -45,7 +45,7 @@ The more advanced `ds2dd_detailed()` is a natural development. It will try to ap
 
 The dataset should be correctly formatted for the data dictionary to preserve as much information as possible.
 
-```{r eval=TRUE}
+```{r eval=FALSE}
 d2 <- REDCapCAST::redcapcast_data |> 
   dplyr::mutate(record_id = seq_len(dplyr::n()),
                 region=factor(region)) |>
