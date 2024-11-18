@@ -38,12 +38,12 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="articles/REDCapCAST.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="articles/Database-creation.html">Database-creation</a></li>
-    <li><a class="dropdown-item" href="articles/Introduction.html">Introduction</a></li>
     <li><a class="dropdown-item" href="articles/Shiny-app.html">Shiny-app</a></li>
   </ul>
 </li>
@@ -62,33 +62,26 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9">
+<!-- badges: end -->
 <div class="section level1">
 <div class="page-header">
 <img src="logo.png" class="logo" alt=""><h1 id="redcapcast-package-">REDCapCAST package <a class="anchor" aria-label="anchor" href="#redcapcast-package-"></a>
 </h1>
 </div>
-<p>REDCap database casting and handling of castellated data when using repeated instruments and longitudinal projects.</p>
-<p>This package is a fork of <a href="https://github.com/pegeler/REDCapRITS" class="external-link">pegeler/REDCapRITS</a>. The <code>REDCapRITS</code> represents great and extensive work to handle castellated REDCap data in different programming languages. This fork is purely minded on R usage and includes a few implementations of the main <code>REDCap_split</code> function. The <code>REDCapRITS</code> as well as <code>REDCapCAST</code> would not be possible without the outstanding work in <a href="https://ouhscbbmc.github.io/REDCapR/" class="external-link"><code>REDCapR</code></a>.</p>
-<div class="section level2">
-<h2 id="what-problem-does-redcapcast-solve">What problem does <code>REDCapCAST</code> solve?<a class="anchor" aria-label="anchor" href="#what-problem-does-redcapcast-solve"></a>
-</h2>
-<p>I started working on this project as the castellated longitudinal data set was a little challenging. Later, I have come to learn of the <a href="https://github.com/vubiostat/redcapAPI" class="external-link"><code>redcapAPI</code></a> package, which would also cover this functionality. I find the <code>redcapAPI</code>package quite advanced and a little difficult to work with. This have led to the continued work on this package, as an easy-to-use approach for data migration, data base creation and data handling. This package is very much to be seen as an attempt at a R-to-REDCap-to-R foundry for handling both the transition from dataset/variable list to database and the other way, from REDCap database to a tidy dataset. The goal was also to allow for a “minimal data” approach by allowing to filter records, instruments and variables in the export to only download data needed. I think this approach is desirable for handling sensitive, clinical data. Please refer to <a href="https://redcap-tools.github.io/" class="external-link">REDCap-Tools</a> for other great tools for working with REDCap in R.</p>
-<p>For any more advanced uses, consider using the <a href="https://github.com/vubiostat/redcapAPI" class="external-link"><code>redcapAPI</code></a> or <a href="https://ouhscbbmc.github.io/REDCapR/" class="external-link"><code>REDCapR</code></a> packages.</p>
-<p>What is unique in this package, is the work towards making it a lot easier to move data from different sources to REDCap databases: casting REDCap metadata based on a spreadsheet. This is all wrapped in <code><a href="reference/shiny_cast.html">shiny_cast()</a></code>and <a href="https://agdamsbo.shinyapps.io/redcapcast/" class="external-link">hosted for all to use here</a>.</p>
-</div>
-<div class="section level2">
-<h2 id="main-functionality">Main functionality<a class="anchor" aria-label="anchor" href="#main-functionality"></a>
-</h2>
-<p>Here is just a short description of the main functions:</p>
+<p>Casting metadata for REDCap database creation and handling of castellated data using repeated instruments and longitudinal projects in REDCap.</p>
+<p>This is implemented with</p>
 <ul>
-<li><p><code>REDcap_split()</code>: Works largely as the original <code>REDCapRITS::REDCap_split()</code>. It takes a REDCap dataset and metadata (data dictionary) to split the data set into a list of dataframes of instruments.</p></li>
-<li><p><code><a href="reference/read_redcap_tables.html">read_redcap_tables()</a></code>: wraps the use of <a href="https://github.com/OuhscBbmc/REDCapR" class="external-link"><code>REDCapR::redcap_read()</code></a> with <code><a href="reference/REDCap_split.html">REDCap_split()</a></code> to ease the export of REDCap data. Default output is a list of data frames with one data frame for each REDCap instrument.</p></li>
-<li><p><code><a href="reference/redcap_wider.html">redcap_wider()</a></code>: joins and pivots a list of data frames with repeated instruments to a wide format utilizing the <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link"><code>tidyr::pivot_wider()</code></a> from the <a href="https://www.tidyverse.org/" class="external-link">tidyverse</a>.</p></li>
-<li><p><code><a href="reference/easy_redcap.html">easy_redcap()</a></code>: combines secure API key storage with the <code>keyring</code>-package, focused data retrieval and optional widening. This is the recommended approach for easy data access and analysis.</p></li>
-<li><p><code><a href="reference/ds2dd_detailed.html">ds2dd_detailed()</a></code>: Converts a data set to a data dictionary for upload to a new REDCap database. Variables (fields) and instruments in a REDCap data base are defined by this data dictionary.</p></li>
-<li><p><code><a href="reference/doc2dd.html">doc2dd()</a></code>: Converts a document table to data dictionary. This allows to specify instrument or whole data dictionary in text document, which for most is easier to work with and easily modifiable. Very much like a easy version of just working directly in the data dictionary file itself.</p></li>
-<li><p><code><a href="reference/shiny_cast.html">shiny_cast()</a></code>: <a href="https://shiny.posit.co/" class="external-link">Shiny</a> application to ease the process of converting a spreadsheet/data set to a REDCap database. The app runs locally and data is transferred securely. You can just create and upload the data dictionary, but you can also transfer the given data in the same process. The app is <a href="https://agdamsbo.shinyapps.io/redcapcast/" class="external-link">hosted on shinyapps.io</a>.</p></li>
+<li><p>An app-interface for easy database creation <a href="https://agdamsbo.shinyapps.io/redcapcast/" class="external-link">accessible here</a> or available to run locally with <code><a href="reference/shiny_cast.html">shiny_cast()</a></code> allowing you to easily create a REDCap database based on an existing spreadsheet.</p></li>
+<li><p>Export data from REDCap in different formats handling castellated data, and on default only export requested data, this is mainly through <code><a href="reference/read_redcap_tables.html">read_redcap_tables()</a></code>.</p></li>
 </ul>
+<p>REDCapCAST was initially build on, and still includes code from <a href="https://github.com/pegeler/REDCapRITS" class="external-link">pegeler/REDCapRITS</a>, and relies on functions from the <a href="https://ouhscbbmc.github.io/REDCapR/" class="external-link"><code>REDCapR</code></a>-project</p>
+<div class="section level2">
+<h2 id="history">History<a class="anchor" aria-label="anchor" href="#history"></a>
+</h2>
+<p>This package was originally forked from <a href="https://github.com/pegeler/REDCapRITS" class="external-link">pegeler/REDCapRITS</a>. The <code>REDCapRITS</code> represents great and extensive work to handle castellated REDCap data in different programming languages. REDCapCAST has evolved into much more than just handling castellated data and so has been detatched from the original project while still relying on the main <code>REDCap_split</code> function. All access to the REDCap database is build on the outstanding work in <a href="#id_0"><code>REDCapR</code></a>.</p>
+<p>This package really started out of frustration during my PhD in health science hearing colleagues complaining about that “castellated” data formatting of REDCap exports when doing longitudinal projects and being used to wide data. This led to some bad decisions in building databases avoiding repeated instruments. This package solves these challenges, but solutions are also implemented else where like the <a href="https://github.com/vubiostat/redcapAPI" class="external-link">redcapAPI</a> or <a href="https://github.com/CHOP-CGTInformatics/REDCapTidieR" class="external-link">REDCapTidieR</a> packages, which are bigger project.</p>
+<p>To help new PhD students and other researchers, I have also worked on creating a few helper/wrapper-functions to ease data access. Documentation is on it’s way.</p>
+<p>For any more advanced uses, consider using the <a href="https://github.com/vubiostat/redcapAPI" class="external-link"><code>redcapAPI</code></a> or <a href="https://ouhscbbmc.github.io/REDCapR/" class="external-link"><code>REDCapR</code></a> packages.</p>
 </div>
 <div class="section level2">
 <h2 id="future">Future<a class="anchor" aria-label="anchor" href="#future"></a>
@@ -96,7 +89,7 @@
 <p>The plan with this package is to be bundled with a Handbook on working with REDCap from R. This work is in progress but is limited by the time available. Please feel free to contact me or create and issue with ideas for future additions.</p>
 </div>
 <div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<h2 id="installation-and-use">Installation and use<a class="anchor" aria-label="anchor" href="#installation-and-use"></a>
 </h2>
 <p>The package is available on CRAN. Install the latest version:</p>
 <pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"REDCapCAST"</span><span class="op">)</span></span></code></pre>

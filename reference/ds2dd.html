@@ -17,11 +17,11 @@ for a more advanced function."><meta property="og:image" content="https://agdams
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/REDCapCAST.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/Database-creation.html">Database-creation</a></li>
-    <li><a class="dropdown-item" href="../articles/Introduction.html">Introduction</a></li>
     <li><a class="dropdown-item" href="../articles/Shiny-app.html">Shiny-app</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -133,10 +133,13 @@ REDCapCAST::metadata_names.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 18                     mrs_date     basis             NA       text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 19                    mrs_score     basis             NA       text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 20                 mrs_complete     basis             NA       text</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21               event_datetime     basis             NA       text</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22                    event_age     basis             NA       text</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23                   event_type     basis             NA       text</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24           new_event_complete     basis             NA       text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21                      con_mrs     basis             NA       text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22                     con_calc     basis             NA       text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23           consensus_complete     basis             NA       text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24               event_datetime     basis             NA       text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25                    event_age     basis             NA       text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26                   event_type     basis             NA       text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27           new_event_complete     basis             NA       text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     field_label select_choices_or_calculations field_note</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                     record_id                             NA         NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2             redcap_event_name                             NA         NA</span>
@@ -158,10 +161,13 @@ REDCapCAST::metadata_names.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 18                     mrs_date                             NA         NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 19                    mrs_score                             NA         NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 20                 mrs_complete                             NA         NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21               event_datetime                             NA         NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22                    event_age                             NA         NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23                   event_type                             NA         NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24           new_event_complete                             NA         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21                      con_mrs                             NA         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22                     con_calc                             NA         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23           consensus_complete                             NA         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24               event_datetime                             NA         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25                    event_age                             NA         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26                   event_type                             NA         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27           new_event_complete                             NA         NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    text_validation_type_or_show_slider_number text_validation_min</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                                          NA                  NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                                          NA                  NA</span>
@@ -187,6 +193,9 @@ REDCapCAST::metadata_names.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 22                                         NA                  NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 23                                         NA                  NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 24                                         NA                  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25                                         NA                  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26                                         NA                  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27                                         NA                  NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    text_validation_max identifier branching_logic required_field</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                   NA         NA              NA             NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                   NA         NA              NA             NA</span>
@@ -212,6 +221,9 @@ REDCapCAST::metadata_names.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 22                  NA         NA              NA             NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 23                  NA         NA              NA             NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 24                  NA         NA              NA             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25                  NA         NA              NA             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26                  NA         NA              NA             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27                  NA         NA              NA             NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    custom_alignment question_number matrix_group_name matrix_ranking</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                NA              NA                NA             NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                NA              NA                NA             NA</span>
@@ -237,6 +249,9 @@ REDCapCAST::metadata_names.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 22               NA              NA                NA             NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 23               NA              NA                NA             NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 24               NA              NA                NA             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25               NA              NA                NA             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26               NA              NA                NA             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27               NA              NA                NA             NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    field_annotation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                NA</span>
@@ -262,6 +277,9 @@ REDCapCAST::metadata_names.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 22               NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 23               NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 24               NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25               NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26               NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27               NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Column names`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "record_id"                    "redcap_event_name"           </span>
@@ -274,8 +292,10 @@ REDCapCAST::metadata_names.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [15] "region"                       "baseline_data_start_complete"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [17] "mrs_assessed"                 "mrs_date"                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [19] "mrs_score"                    "mrs_complete"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21] "event_datetime"               "event_age"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [23] "event_type"                   "new_event_complete"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21] "con_mrs"                      "con_calc"                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [23] "consensus_complete"           "event_datetime"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "event_age"                    "event_type"                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [27] "new_event_complete"          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>

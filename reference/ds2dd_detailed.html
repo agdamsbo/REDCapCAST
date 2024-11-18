@@ -15,11 +15,11 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/REDCapCAST.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/Database-creation.html">Database-creation</a></li>
-    <li><a class="dropdown-item" href="../articles/Introduction.html">Introduction</a></li>
     <li><a class="dropdown-item" href="../articles/Shiny-app.html">Shiny-app</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -55,10 +55,7 @@
 <span>  field.label <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  field.label.attr <span class="op">=</span> <span class="st">"label"</span>,</span>
 <span>  field.validation <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  metadata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">REDCapCAST</span><span class="fu">::</span><span class="va"><a href="redcapcast_meta.html">redcapcast_meta</a></span><span class="op">)</span>,</span>
-<span>  validate.time <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  time.var.sel.pos <span class="op">=</span> <span class="st">"[Tt]i[d(me)]"</span>,</span>
-<span>  time.var.sel.neg <span class="op">=</span> <span class="st">"[Dd]at[eo]"</span></span>
+<span>  metadata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">REDCapCAST</span><span class="fu">::</span><span class="va"><a href="redcapcast_meta.html">redcapcast_meta</a></span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -124,20 +121,6 @@ file with `haven::read_dta()`).</p></dd>
 <dd><p>redcap metadata headings. Default is
 REDCapCAST:::metadata_names.</p></dd>
 
-
-<dt id="arg-validate-time">validate.time<a class="anchor" aria-label="anchor" href="#arg-validate-time"></a></dt>
-<dd><p>Flag to validate guessed time columns</p></dd>
-
-
-<dt id="arg-time-var-sel-pos">time.var.sel.pos<a class="anchor" aria-label="anchor" href="#arg-time-var-sel-pos"></a></dt>
-<dd><p>Positive selection regex string passed to
-`gues_time_only_filter()` as sel.pos.</p></dd>
-
-
-<dt id="arg-time-var-sel-neg">time.var.sel.neg<a class="anchor" aria-label="anchor" href="#arg-time-var-sel-neg"></a></dt>
-<dd><p>Negative selection regex string passed to
-`gues_time_only_filter()` as sel.neg.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -155,82 +138,9 @@ Please, do always inspect the data dictionary before upload.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">REDCapCAST</span><span class="fu">::</span><span class="va"><a href="redcapcast_data.html">redcapcast_data</a></span></span></span>
-<span class="r-in"><span><span class="va">data</span> <span class="op">|&gt;</span> <span class="fu">ds2dd_detailed</span><span class="op">(</span>validate.time <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $is.POSIX</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 19 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    inclusion_time event_datetime     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;time&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 12<span style="color: #949494;">:</span>38<span style="color: #949494;">:</span>49       <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 10<span style="color: #949494;">:</span>38<span style="color: #949494;">:</span>57       <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>       <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>       <span style="color: #BB0000;">NA</span>       2024-01-18 <span style="color: #949494;">12:49:42</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 12<span style="color: #949494;">:</span>01<span style="color: #949494;">:</span>07       <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>       <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>       <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>       <span style="color: #BB0000;">NA</span>       2024-01-18 <span style="color: #949494;">12:49:58</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>       <span style="color: #BB0000;">NA</span>       2024-01-18 <span style="color: #949494;">12:50:01</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>       <span style="color: #BB0000;">NA</span>       2024-01-18 <span style="color: #949494;">12:50:05</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>       <span style="color: #BB0000;">NA</span>       2024-01-18 <span style="color: #949494;">12:50:07</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>       <span style="color: #BB0000;">NA</span>       2024-01-18 <span style="color: #949494;">12:50:09</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 20<span style="color: #949494;">:</span>39<span style="color: #949494;">:</span>19       <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span>       <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span>       <span style="color: #BB0000;">NA</span>       2024-01-18 <span style="color: #949494;">12:50:19</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span>       <span style="color: #BB0000;">NA</span>       2024-01-18 <span style="color: #949494;">12:50:22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span>       <span style="color: #BB0000;">NA</span>       2024-01-18 <span style="color: #949494;">12:50:24</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> 08<span style="color: #949494;">:</span>50<span style="color: #949494;">:</span>31       <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> 08<span style="color: #949494;">:</span>49<span style="color: #949494;">:</span>28       <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $is.datetime</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 19 × 1</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    event_datetime     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2024-01-18 <span style="color: #949494;">12:49:42</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2024-01-18 <span style="color: #949494;">12:49:58</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2024-01-18 <span style="color: #949494;">12:50:01</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2024-01-18 <span style="color: #949494;">12:50:05</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 2024-01-18 <span style="color: #949494;">12:50:07</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 2024-01-18 <span style="color: #949494;">12:50:09</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 2024-01-18 <span style="color: #949494;">12:50:19</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 2024-01-18 <span style="color: #949494;">12:50:22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> 2024-01-18 <span style="color: #949494;">12:50:24</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> <span style="color: #BB0000;">NA</span>                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $is.time_only</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 19 × 1</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    inclusion_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;time&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 12<span style="color: #949494;">:</span>38<span style="color: #949494;">:</span>49      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 10<span style="color: #949494;">:</span>38<span style="color: #949494;">:</span>57      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 12<span style="color: #949494;">:</span>01<span style="color: #949494;">:</span>07      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 20<span style="color: #949494;">:</span>39<span style="color: #949494;">:</span>19      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> 08<span style="color: #949494;">:</span>50<span style="color: #949494;">:</span>31      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> 08<span style="color: #949494;">:</span>49<span style="color: #949494;">:</span>28      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">|&gt;</span> <span class="fu">ds2dd_detailed</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 19 × 24</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 25 × 27</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    record_id redcap_event_name redcap_repeat_instrument redcap_repeat_instance</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>         1 inclusion         <span style="color: #BB0000;">NA</span>                                           <span style="color: #BB0000;">NA</span></span>
@@ -243,24 +153,16 @@ Please, do always inspect the data dictionary before upload.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>         3 follow1           New Event (?)                                 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>         3 follow1           New Event (?)                                 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>         3 follow2           New Event (?)                                 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>         3 follow2           New Event (?)                                 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>         3 follow2           New Event (?)                                 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span>         4 inclusion         <span style="color: #BB0000;">NA</span>                                           <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span>         4 follow2           <span style="color: #BB0000;">NA</span>                                           <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span>         4 follow2           New Event (?)                                 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span>         4 follow2           New Event (?)                                 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span>         4 follow2           New Event (?)                                 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span>         5 inclusion         <span style="color: #BB0000;">NA</span>                                           <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span>         6 inclusion         <span style="color: #BB0000;">NA</span>                                           <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 20 more variables: cpr &lt;chr&gt;, inclusion &lt;date&gt;, inclusion_time &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 15 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 23 more variables: cpr &lt;chr&gt;, inclusion &lt;date&gt;, inclusion_time &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dob &lt;date&gt;, age &lt;dbl&gt;, age_integer &lt;dbl&gt;, sex &lt;chr&gt;, cohabitation &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   hypertension &lt;chr&gt;, diabetes &lt;chr&gt;, region &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   baseline_data_start_complete &lt;chr&gt;, mrs_assessed &lt;chr&gt;, mrs_date &lt;date&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mrs_score &lt;dbl&gt;, mrs_complete &lt;chr&gt;, event_datetime &lt;dttm&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   event_age &lt;lgl&gt;, event_type &lt;chr&gt;, new_event_complete &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mrs_score &lt;dbl&gt;, mrs_complete &lt;chr&gt;, con_mrs &lt;lgl&gt;, con_calc &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   consensus_complete &lt;chr&gt;, event_datetime &lt;dttm&gt;, event_age &lt;dbl&gt;, …</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $meta</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 24 × 18</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 27 × 18</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    field_name               form_name section_header field_type field_label     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> record_id                data      <span style="color: #BB0000;">NA</span>             text       record_id       </span>
@@ -273,7 +175,7 @@ Please, do always inspect the data dictionary before upload.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> dob                      data      <span style="color: #BB0000;">NA</span>             text       dob             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> age                      data      <span style="color: #BB0000;">NA</span>             text       age             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> age_integer              data      <span style="color: #BB0000;">NA</span>             text       age_integer     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;lgl&gt;, field_note &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_min &lt;lgl&gt;, text_validation_max &lt;lgl&gt;, identifier &lt;lgl&gt;,</span></span>

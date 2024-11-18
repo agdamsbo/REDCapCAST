@@ -15,11 +15,11 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/REDCapCAST.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/Database-creation.html">Database-creation</a></li>
-    <li><a class="dropdown-item" href="../articles/Introduction.html">Introduction</a></li>
     <li><a class="dropdown-item" href="../articles/Shiny-app.html">Shiny-app</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -130,7 +130,7 @@
           <code><a href="file_extension.html">file_extension()</a></code>
 
         </dt>
-        <dd>Helper to import files correctly</dd>
+        <dd>DEPRECATED Helper to import files correctly</dd>
       </dl><dl><dt>
 
           <code><a href="focused_metadata.html">focused_metadata()</a></code>
@@ -157,10 +157,22 @@
         <dd>Get the id name</dd>
       </dl><dl><dt>
 
+          <code><a href="guess_time_only.html">guess_time_only()</a></code>
+
+        </dt>
+        <dd>Guess time variables based on naming pattern</dd>
+      </dl><dl><dt>
+
           <code><a href="guess_time_only_filter.html">guess_time_only_filter()</a></code>
 
         </dt>
         <dd>Try at determining which are true time only variables</dd>
+      </dl><dl><dt>
+
+          <code><a href="haven_all_levels.html">haven_all_levels()</a></code>
+
+        </dt>
+        <dd>Finish incomplete haven attributes substituting missings with values</dd>
       </dl><dl><dt>
 
           <code><a href="hms2character.html">hms2character()</a></code>
@@ -203,6 +215,18 @@
 
         </dt>
         <dd>mtcars dataset slightly modified to use for Shiny app upload demonstration</dd>
+      </dl><dl><dt>
+
+          <code><a href="numchar2fct.html">numchar2fct()</a></code>
+
+        </dt>
+        <dd>Applying var2fct across data set</dd>
+      </dl><dl><dt>
+
+          <code><a href="parse_data.html">parse_data()</a></code>
+
+        </dt>
+        <dd>Helper to auto-parse un-formatted data with haven and readr</dd>
       </dl><dl><dt>
 
           <code><a href="process_user_input.html">process_user_input()</a></code>
@@ -305,6 +329,12 @@
 
         </dt>
         <dd>Correction based on time_only_filter function</dd>
+      </dl><dl><dt>
+
+          <code><a href="var2fct.html">var2fct()</a></code>
+
+        </dt>
+        <dd>Convert vector to factor based on threshold of number of unique levels</dd>
       </dl></div>
   </main></div>
 
