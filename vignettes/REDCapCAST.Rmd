@@ -1,5 +1,5 @@
 ---
-title: "Introduction"
+title: "REDCapCAST"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction}
@@ -30,16 +30,6 @@ redcapcast_data |> gt::gt()
 
 ```{r}
 redcapcast_meta |> gt::gt()
-```
-```{r}
-list <-
-  REDCap_split(
-    records = redcapcast_data,
-    metadata = redcapcast_meta,
-    forms = "repeating"
-  ) |> 
-  sanitize_split()
-str(list)
 ```
 
 ```{r}
