@@ -19,6 +19,9 @@ A data frame with 22 variables:
   \item{age_integer}{Age integer, numeric}
   \item{sex}{Legal sex, character}
   \item{cohabitation}{Cohabitation status, character}
+  \item{con_calc}{con_calc}
+  \item{con_mrs}{con_mrs}
+  \item{consensus_complete}{consensus_complete}
   \item{hypertension}{Hypertension, character}
   \item{diabetes}{diabetes, character}
   \item{region}{region, character}
