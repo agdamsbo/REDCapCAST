@@ -15,10 +15,7 @@ ds2dd_detailed(
   field.label = NULL,
   field.label.attr = "label",
   field.validation = NULL,
-  metadata = names(REDCapCAST::redcapcast_meta),
-  validate.time = FALSE,
-  time.var.sel.pos = "[Tt]i[d(me)]",
-  time.var.sel.neg = "[Dd]at[eo]"
+  metadata = names(REDCapCAST::redcapcast_meta)
 )
 }
 \arguments{
@@ -58,14 +55,6 @@ file with `haven::read_dta()`).}
 
 \item{metadata}{redcap metadata headings. Default is
 REDCapCAST:::metadata_names.}
-
-\item{validate.time}{Flag to validate guessed time columns}
-
-\item{time.var.sel.pos}{Positive selection regex string passed to
-`gues_time_only_filter()` as sel.pos.}
-
-\item{time.var.sel.neg}{Negative selection regex string passed to
-`gues_time_only_filter()` as sel.neg.}
 }
 \value{
 list of length 2
@@ -84,7 +73,6 @@ Ensure, that the data set is formatted with as much information as possible.
 }
 \examples{
 data <- REDCapCAST::redcapcast_data
-data |> ds2dd_detailed(validate.time = TRUE)
 data |> ds2dd_detailed()
 iris |> ds2dd_detailed(add.auto.id = TRUE)
 iris |>

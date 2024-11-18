@@ -135,18 +135,12 @@ hms2character <- function(data) {
 #' file with `haven::read_dta()`).
 #' @param metadata redcap metadata headings. Default is
 #' REDCapCAST:::metadata_names.
-#' @param validate.time Flag to validate guessed time columns
-#' @param time.var.sel.pos Positive selection regex string passed to
-#' `gues_time_only_filter()` as sel.pos.
-#' @param time.var.sel.neg Negative selection regex string passed to
-#' `gues_time_only_filter()` as sel.neg.
 #'
 #' @return list of length 2
 #' @export
 #'
 #' @examples
 #' data <- REDCapCAST::redcapcast_data
-#' data |> ds2dd_detailed(validate.time = TRUE)
 #' data |> ds2dd_detailed()
 #' iris |> ds2dd_detailed(add.auto.id = TRUE)
 #' iris |>
@@ -172,10 +166,7 @@ ds2dd_detailed <- function(data,
                            field.label = NULL,
                            field.label.attr = "label",
                            field.validation = NULL,
-                           metadata = names(REDCapCAST::redcapcast_meta),
-                           validate.time = FALSE,
-                           time.var.sel.pos = "[Tt]i[d(me)]",
-                           time.var.sel.neg = "[Dd]at[eo]") {
+                           metadata = names(REDCapCAST::redcapcast_meta)) {
   ## Handles the odd case of no id column present
   if (add.auto.id) {
     data <- dplyr::tibble(
@@ -183,43 +174,6 @@ ds2dd_detailed <- function(data,
       data
     )
     message("A default id column has been added")
-  }
-
-  if (validate.time) {
-    return(data |> guess_time_only_filter(validate = TRUE))
-  }
-
-  if (lapply(data, haven::is.labelled) |> (\(x)do.call(c, x))() |> any()) {
-    message("Data seems to be imported with haven from a Stata (.dta) file and
-            will be treated as such.")
-    data.source <- "dta"
-  } else {
-    data.source <- ""
-  }
-
-  ## data classes
-
-  ### Only keeps the first class, as time fields (POSIXct/POSIXt) has two
-  ### classes
-  if (data.source == "dta") {
-    data_classes <-
-      data |>
-      haven::as_factor() |>
-      time_only_correction(
-        sel.pos = time.var.sel.pos,
-        sel.neg = time.var.sel.neg
-      ) |>
-      lapply(\(x)class(x)[1]) |>
-      (\(x)do.call(c, x))()
-  } else {
-    data_classes <-
-      data |>
-      time_only_correction(
-        sel.pos = time.var.sel.pos,
-        sel.neg = time.var.sel.neg
-      ) |>
-      lapply(\(x)class(x)[1]) |>
-      (\(x)do.call(c, x))()
   }
 
   ## ---------------------------------------
@@ -240,12 +194,12 @@ ds2dd_detailed <- function(data,
 
       ## form.sep should be unique, but handles re-occuring pattern (by only considering first or last) and form.prefix defines if form is prefix or suffix
       ## The other split part is used as field names
-      if (form.prefix){
-        dd$form_name <- clean_redcap_name(Reduce(c,lapply(parts,\(.x) .x[[1]])))
-        dd$field_name <- Reduce(c,lapply(parts,\(.x) paste(.x[seq_len(length(.x))[-1]],collapse=form.sep)))
+      if (form.prefix) {
+        dd$form_name <- clean_redcap_name(Reduce(c, lapply(parts, \(.x) .x[[1]])))
+        dd$field_name <- Reduce(c, lapply(parts, \(.x) paste(.x[seq_len(length(.x))[-1]], collapse = form.sep)))
       } else {
-        dd$form_name <- clean_redcap_name(Reduce(c,lapply(parts,\(.x) .x[[length(.x)]])))
-        dd$field_name <- Reduce(c,lapply(parts,\(.x) paste(.x[seq_len(length(.x)-1)],collapse=form.sep)))
+        dd$form_name <- clean_redcap_name(Reduce(c, lapply(parts, \(.x) .x[[length(.x)]])))
+        dd$field_name <- Reduce(c, lapply(parts, \(.x) paste(.x[seq_len(length(.x) - 1)], collapse = form.sep)))
       }
     } else {
       dd$form_name <- "data"
@@ -269,17 +223,16 @@ ds2dd_detailed <- function(data,
   ## field_label
 
   if (is.null(field.label)) {
-    if (data.source == "dta") {
-      dd$field_label <- data |>
-        lapply(function(x) {
-          if (haven::is.labelled(x)) {
-            attributes(x)[[field.label.attr]]
-          } else {
-            NA
-          }
-        }) |>
-        (\(x)do.call(c, x))()
-    }
+    dd$field_label <- data |>
+      lapply(function(x) {
+        if (haven::is.labelled(x)) {
+          att <- haven_all_levels(x)
+          names(att)
+        } else {
+          NA
+        }
+      }) |>
+      (\(x)do.call(c, x))()
 
     dd <-
       dd |> dplyr::mutate(field_label = dplyr::if_else(is.na(field_label),
@@ -293,6 +246,8 @@ ds2dd_detailed <- function(data,
     }
   }
 
+
+  data_classes <- do.call(c, lapply(data, \(.x)class(.x)[1]))
 
   ## field_type
 
@@ -312,7 +267,6 @@ ds2dd_detailed <- function(data,
   }
 
   ## validation
-
   if (is.null(field.validation)) {
     dd <-
       dd |> dplyr::mutate(
@@ -336,15 +290,13 @@ ds2dd_detailed <- function(data,
     }
   }
 
-
-
   ## choices
 
-  if (data.source == "dta") {
+  if (any(do.call(c, lapply(data, haven::is.labelled)))) {
     factor_levels <- data |>
       lapply(function(x) {
         if (haven::is.labelled(x)) {
-          att <- attributes(x)$labels
+          att <- haven_all_levels(x)
           paste(paste(att, names(att), sep = ", "), collapse = " | ")
         } else {
           NA
@@ -383,15 +335,74 @@ ds2dd_detailed <- function(data,
 
   list(
     data = data |>
-      time_only_correction(
-        sel.pos = time.var.sel.pos,
-        sel.neg = time.var.sel.neg
-      ) |>
       hms2character() |>
       stats::setNames(dd$field_name),
     meta = dd
   )
 }
+
+#' Finish incomplete haven attributes substituting missings with values
+#'
+#' @param data haven labelled variable
+#'
+#' @return named vector
+#' @export
+#'
+#' @examples
+#' ds <- structure(c(1, 2, 3, 2, 10, 9),
+#'   labels = c(Unknown = 9, Refused = 10),
+#'   class = "haven_labelled"
+#' )
+#' ds |> haven_all_levels()
+haven_all_levels <- function(data) {
+  stopifnot(haven::is.labelled(data))
+  if (length(attributes(data)$labels) == length(unique(data))) {
+    out <- attributes(data)$labels
+  } else {
+    att <- attributes(data)$labels
+    out <- c(unique(data[!data %in% att]), att) |>
+      stats::setNames(c(unique(data[!data %in% att]), names(att)))
+  }
+  out
+}
+
+
+#' Guess time variables based on naming pattern
+#'
+#' @description
+#' This is for repairing data with time variables with appended "1970-01-01"
+#'
+#'
+#' @param data data.frame or tibble
+#' @param validate.time Flag to validate guessed time columns
+#' @param time.var.sel.pos Positive selection regex string passed to
+#' `gues_time_only_filter()` as sel.pos.
+#' @param time.var.sel.neg Negative selection regex string passed to
+#' `gues_time_only_filter()` as sel.neg.
+#'
+#' @return data.frame or tibble
+#' @export
+#'
+#' @examples
+#' redcapcast_data |> guess_time_only(validate.time = TRUE)
+guess_time_only <- function(data,
+                            validate.time = FALSE,
+                            time.var.sel.pos = "[Tt]i[d(me)]",
+                            time.var.sel.neg = "[Dd]at[eo]") {
+  if (validate.time) {
+    return(data |> guess_time_only_filter(validate = TRUE))
+  }
+
+  ### Only keeps the first class, as time fields (POSIXct/POSIXt) has two
+  ### classes
+  data |> time_only_correction(
+    sel.pos = time.var.sel.pos,
+    sel.neg = time.var.sel.neg
+  )
+}
+
+
+
 
 ### Completion
 #' Completion marking based on completed upload
@@ -412,4 +423,128 @@ mark_complete <- function(upload, ls) {
     ))
   ) |>
     stats::setNames(c(names(data)[1], paste0(forms, "_complete")))
+}
+
+
+#' Helper to auto-parse un-formatted data with haven and readr
+#'
+#' @param data data.frame or tibble
+#' @param guess_type logical to guess type with readr
+#' @param col_types specify col_types using readr semantics. Ignored if guess_type is TRUE
+#' @param locale option to specify locale. Defaults to readr::default_locale().
+#' @param ignore.vars specify column names of columns to ignore when parsing
+#' @param ... ignored
+#'
+#' @return data.frame or tibble
+#' @export
+#'
+#' @examples
+#' mtcars |>
+#'   parse_data() |>
+#'   str()
+parse_data <- function(data,
+                       guess_type = TRUE,
+                       col_types = NULL,
+                       locale = readr::default_locale(),
+                       ignore.vars = "cpr",
+                       ...) {
+  if (any(ignore.vars %in% names(data))) {
+    ignored <- data[ignore.vars]
+  } else {
+    ignored <- NULL
+  }
+
+  ## Parses haven data by applying labels as factors in case of any
+  if (do.call(c, lapply(data, (\(x)inherits(x, "haven_labelled")))) |> any()) {
+    data <- data |>
+      haven::as_factor()
+  }
+
+  ## Applying readr cols
+  if (is.null(col_types) && guess_type) {
+    if (do.call(c, lapply(data, is.character)) |> any()) {
+      data <- data |> readr::type_convert(
+        locale = locale,
+        col_types = readr::cols(.default = readr::col_guess())
+      )
+    }
+  } else {
+    data <- data |> readr::type_convert(
+      locale = locale,
+      col_types = readr::cols(col_types)
+    )
+  }
+
+  if (!is.null(ignored)) {
+    data[ignore.vars] <- ignored
+  }
+
+  data
+}
+
+#' Convert vector to factor based on threshold of number of unique levels
+#'
+#' @description
+#' This is a wrapper of forcats::as_factor, which sorts numeric vectors before
+#' factoring, but levels character vectors in order of appearance.
+#'
+#'
+#' @param data vector or data.frame column
+#' @param unique.n threshold to convert class to factor
+#'
+#' @return vector
+#' @export
+#' @importFrom forcats as_factor
+#'
+#' @examples
+#' sample(seq_len(4), 20, TRUE) |>
+#'   var2fct(6) |>
+#'   summary()
+#' sample(letters, 20) |>
+#'   var2fct(6) |>
+#'   summary()
+#' sample(letters[1:4], 20, TRUE) |> var2fct(6)
+var2fct <- function(data, unique.n) {
+  if (length(unique(data)) <= unique.n) {
+    forcats::as_factor(data)
+  } else {
+    data
+  }
+}
+
+#' Applying var2fct across data set
+#'
+#' @description
+#' Individual thresholds for character and numeric columns
+#'
+#' @param data dataset. data.frame or tibble
+#' @param numeric.threshold threshold for var2fct for numeric columns. Default
+#' is 6.
+#' @param character.throshold threshold for var2fct for character columns.
+#' Default is 6.
+#'
+#' @return data.frame or tibble
+#' @export
+#'
+#' @examples
+#' mtcars |> str()
+#' mtcars |>
+#'   numchar2fct(numeric.threshold = 6) |>
+#'   str()
+numchar2fct <- function(data, numeric.threshold = 6, character.throshold = 6) {
+  data |>
+    dplyr::mutate(
+      dplyr::across(
+        dplyr::where(is.numeric),
+        \(.x){
+          var2fct(data = .x, unique.n = numeric.threshold)
+        }
+      ),
+      dplyr::across(
+        dplyr::where(is.character),
+        \(.x){
+          var2fct(data = .x, unique.n = character.throshold)
+        }
+      )
+    )
 }
