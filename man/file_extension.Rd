@@ -2,7 +2,7 @@
 % Please edit documentation in R/shiny_cast.R
 \name{file_extension}
 \alias{file_extension}
-\title{Helper to import files correctly}
+\title{DEPRECATED Helper to import files correctly}
 \usage{
 file_extension(filenames)
 }
@@ -13,7 +13,7 @@ file_extension(filenames)
 character vector
 }
 \description{
-Helper to import files correctly
+DEPRECATED Helper to import files correctly
 }
 \examples{
 file_extension(list.files(here::here(""))[[2]])[[1]]

@@ -22,7 +22,7 @@ shiny_cast <- function(...) {
 
 
 
-#' Helper to import files correctly
+#' DEPRECATED Helper to import files correctly
 #'
 #' @param filenames file names
 #'
@@ -49,7 +49,7 @@ file_extension <- function(filenames) {
 #' @examples
 #' read_input("https://raw.githubusercontent.com/agdamsbo/cognitive.index.lookup/main/data/sample.csv")
 read_input <- function(file, consider.na = c("NA", '""', "")) {
-  ext <- file_extension(file)
+  ext <- tools::file_ext(file)
 
   tryCatch(
     {
