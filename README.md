@@ -1,70 +1,53 @@
 <!-- badges: start -->
-[![GitHub R package version](https://img.shields.io/github/r-package/v/agdamsbo/REDCapCAST)](https://github.com/agdamsbo/REDCapCAST)
-[![CRAN/METACRAN](https://img.shields.io/cran/v/REDCapCAST)](https://CRAN.R-project.org/package=REDCapCAST)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8013984.svg)](https://doi.org/10.5281/zenodo.8013984)
-[![R-hub](https://github.com/agdamsbo/REDCapCAST/actions/workflows/rhub.yaml/badge.svg)](https://github.com/agdamsbo/REDCapCAST/actions/workflows/rhub.yaml)
-[![R-CMD-check](https://github.com/agdamsbo/REDCapCAST/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/agdamsbo/REDCapCAST/actions/workflows/R-CMD-check.yaml)
-[![Page deployed](https://github.com/agdamsbo/REDCapCAST/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/agdamsbo/REDCapCAST/actions/workflows/pages/pages-build-deployment)
-[![Codecov test coverage](https://codecov.io/gh/agdamsbo/REDCapCAST/branch/master/graph/badge.svg)](https://app.codecov.io/gh/agdamsbo/REDCapCAST?branch=master)
-[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/REDCapCAST)](https://cran.r-project.org/package=REDCapCAST)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+
+[![GitHub R package version](https://img.shields.io/github/r-package/v/agdamsbo/REDCapCAST)](https://github.com/agdamsbo/REDCapCAST) [![CRAN/METACRAN](https://img.shields.io/cran/v/REDCapCAST)](https://CRAN.R-project.org/package=REDCapCAST) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8013984.svg)](https://doi.org/10.5281/zenodo.8013984) [![R-hub](https://github.com/agdamsbo/REDCapCAST/actions/workflows/rhub.yaml/badge.svg)](https://github.com/agdamsbo/REDCapCAST/actions/workflows/rhub.yaml) [![R-CMD-check](https://github.com/agdamsbo/REDCapCAST/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/agdamsbo/REDCapCAST/actions/workflows/R-CMD-check.yaml) [![Page deployed](https://github.com/agdamsbo/REDCapCAST/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/agdamsbo/REDCapCAST/actions/workflows/pages/pages-build-deployment) [![Codecov test coverage](https://codecov.io/gh/agdamsbo/REDCapCAST/branch/master/graph/badge.svg)](https://app.codecov.io/gh/agdamsbo/REDCapCAST?branch=master) [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/REDCapCAST)](https://cran.r-project.org/package=REDCapCAST) [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+
 <!-- badges: end -->
 
-# REDCapCAST package <img src="man/figures/logo.png" align="right" />
+# REDCapCAST package <img src="man/figures/logo.png" align="right"/>
 
-REDCap database casting and handling of castellated data when using repeated instruments and longitudinal projects.
+Casting metadata for REDCap database creation and handling of castellated data using repeated instruments and longitudinal projects in REDCap.
 
-This package is a fork of [pegeler/REDCapRITS](https://github.com/pegeler/REDCapRITS). The `REDCapRITS` represents great and extensive work to handle castellated REDCap data in different programming languages. This fork is purely minded on R usage and includes a few implementations of the main `REDCap_split` function. The `REDCapRITS` as well as `REDCapCAST` would not be possible without the outstanding work in [`REDCapR`](https://ouhscbbmc.github.io/REDCapR/).
+This is implemented with
 
-## What problem does `REDCapCAST` solve?
+-   An app-interface for easy database creation [accessible here](https://agdamsbo.shinyapps.io/redcapcast/) or available to run locally with `shiny_cast()` allowing you to easily create a REDCap database based on an existing spreadsheet.
 
-I started working on this project as the castellated longitudinal data set was a little challenging. Later, I have come to learn of the [`redcapAPI`](https://github.com/vubiostat/redcapAPI) package, which would also cover this functionality. I find the `redcapAPI`package quite advanced and a little difficult to work with. This have led to the continued work on this package, as an easy-to-use approach for data migration, data base creation and data handling. This package is very much to be seen as an attempt at a R-to-REDCap-to-R foundry for handling both the transition from dataset/variable list to database and the other way, from REDCap database to a tidy dataset. The goal was also to allow for a "minimal data" approach by allowing to filter records, instruments and variables in the export to only download data needed. I think this approach is desirable for handling sensitive, clinical data. Please refer to [REDCap-Tools](https://redcap-tools.github.io/) for other great tools for working with REDCap in R.
+-   Export data from REDCap in different formats handling castellated data, and on default only export requested data, this is mainly through `read_redcap_tables()`.
+
+REDCapCAST was initially build on, and still includes code from [pegeler/REDCapRITS](https://github.com/pegeler/REDCapRITS), and relies on functions from the [`REDCapR`](https://ouhscbbmc.github.io/REDCapR/)-project
+
+## History
+
+This package was originally forked from [pegeler/REDCapRITS](https://github.com/pegeler/REDCapRITS). The `REDCapRITS` represents great and extensive work to handle castellated REDCap data in different programming languages. REDCapCAST has evolved into much more than just handling castellated data and so has been detatched from the original project while still relying on the main `REDCap_split` function. All access to the REDCap database is build on the outstanding work in [`REDCapR`](#0).
+
+This package really started out of frustration during my PhD in health science hearing colleagues complaining about that "castellated" data formatting of REDCap exports when doing longitudinal projects and being used to wide data. This led to some bad decisions in building databases avoiding repeated instruments. This package solves these challenges, but solutions are also implemented else where like the [redcapAPI](https://github.com/vubiostat/redcapAPI) or [REDCapTidieR](https://github.com/CHOP-CGTInformatics/REDCapTidieR) packages, which are bigger project.
+
+To help new PhD students and other researchers, I have also worked on creating a few helper/wrapper-functions to ease data access. Documentation is on it's way.
 
 For any more advanced uses, consider using the [`redcapAPI`](https://github.com/vubiostat/redcapAPI) or [`REDCapR`](https://ouhscbbmc.github.io/REDCapR/) packages.
-
-What is unique in this package, is the work towards making it a lot easier to move data from different sources to REDCap databases: casting REDCap metadata based on a spreadsheet. This is all wrapped in `shiny_cast()`and [hosted for all to use here](https://agdamsbo.shinyapps.io/redcapcast/).
-
-## Main functionality
-
-Here is just a short description of the main functions:
-
-* `REDcap_split()`: Works largely as the original `REDCapRITS::REDCap_split()`. It takes a REDCap dataset and metadata (data dictionary) to split the data set into a list of dataframes of instruments.
-
-* `read_redcap_tables()`: wraps the use of [`REDCapR::redcap_read()`](https://github.com/OuhscBbmc/REDCapR) with `REDCap_split()` to ease the export of REDCap data. Default output is a list of data frames with one data frame for each REDCap instrument.
-
-* `redcap_wider()`: joins and pivots a list of data frames with repeated instruments to a wide format utilizing the [`tidyr::pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html) from the [tidyverse](https://www.tidyverse.org/).
-
-* `easy_redcap()`: combines secure API key storage with the `keyring`-package, focused data retrieval and optional widening. This is the recommended approach for easy data access and analysis.
-
-* `ds2dd_detailed()`: Converts a data set to a data dictionary for upload to a new REDCap database. Variables (fields) and instruments in a REDCap data base are defined by this data dictionary.
-
-* `doc2dd()`: Converts a document table to data dictionary. This allows to specify instrument or whole data dictionary in text document, which for most is easier to work with and easily modifiable. Very much like a easy version of just working directly in the data dictionary file itself.
-
-* `shiny_cast()`: [Shiny](https://shiny.posit.co/) application to ease the process of converting a spreadsheet/data set to a REDCap database. The app runs locally and data is transferred securely. You can just create and upload the data dictionary, but you can also transfer the given data in the same process. The app is [hosted on shinyapps.io](https://agdamsbo.shinyapps.io/redcapcast/).
 
 ## Future
 
 The plan with this package is to be bundled with a Handbook on working with REDCap from R. This work is in progress but is limited by the time available. Please feel free to contact me or create and issue with ideas for future additions.
 
-## Installation
+## Installation and use
 
 The package is available on CRAN. Install the latest version:
 
-```
+```         
 install.packages("REDCapCAST")
 ```
 
 Install the latest version directly from GitHub:
 
-```
+```         
 require("remotes")
 remotes::install_github("agdamsbo/REDCapCAST")
 ```
 
 Launch the REDCapCAST app interface directly on your own machine:
 
-```
+```         
 REDCapCAST::shiny_cast()
 ```
 
