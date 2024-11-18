@@ -14,6 +14,7 @@
 #' @param record.id record id variable name. Default is 'record_id'.
 #'
 #' @return exports zip-file
+#' @export
 #'
 #' @examples
 #' #iris |>
