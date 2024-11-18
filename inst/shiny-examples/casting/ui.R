@@ -19,17 +19,17 @@ ui <-
             ".ods"
           )
         ),
-        shiny::actionButton(
-          inputId = "load_data",
-          label = "Load data",
-          icon = shiny::icon("circle-down")
-        ),
+        # shiny::actionButton(
+        #   inputId = "load_data",
+        #   label = "Load data",
+        #   icon = shiny::icon("circle-down")
+        # ),
         shiny::helpText("Have a look at the preview panels to validate the data dictionary and imported data."),
         # For some odd reason this only unfolds when the preview panel is shown..
-        # This has been solved by adding an arbitrary button to load data
+        # This has been solved by adding an arbitrary button to load data - which was abandoned again
         shiny::conditionalPanel(
-          # condition = "output.uploaded=='yes'",
-          condition = "input.load_data",
+          condition = "output.uploaded=='yes'",
+          # condition = "input.load_data",
          #  shiny::helpText("Below you can download the dataset formatted for upload and the
          # corresponding data dictionary for a new data base, if you want to upload manually."),
           # Button

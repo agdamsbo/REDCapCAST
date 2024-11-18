@@ -32,6 +32,11 @@ server <- function(input, output, session) {
   #   return(!is.null(getData()))
   # })
 
+  dd <- shiny::reactive({
+    shiny::req(input$ds)
+    v$file <- "loaded"
+    ds2dd_detailed(data = dat())
+  })
 
   output$uploaded <- shiny::reactive({
     if (is.null(v$file)) {
@@ -42,12 +47,6 @@ server <- function(input, output, session) {
   })
 
   shiny::outputOptions(output, "uploaded", suspendWhenHidden = FALSE)
-
-  dd <- shiny::reactive({
-    shiny::req(input$ds)
-    v$file <- "loaded"
-    ds2dd_detailed(data = dat())
-  })
 
   output$data.tbl <- gt::render_gt(
     dd() |>
