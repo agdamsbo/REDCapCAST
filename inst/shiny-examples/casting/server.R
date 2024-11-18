@@ -1,32 +1,63 @@
-server <- function(input, output, session) {
-  require(REDCapCAST)
+library(REDCapCAST)
+library(bslib)
+library(shiny)
+library(openxlsx2)
+library(haven)
+library(readODS)
+library(readr)
+library(dplyr)
+library(here)
 
-  # bslib::bs_themer()
+server <- function(input, output, session) {
+
+  v <- shiny::reactiveValues(
+    file = NULL
+  )
 
   dat <- shiny::reactive({
     shiny::req(input$ds)
 
-    output_staging$file <- "loaded"
     read_input(input$ds$datapath)
   })
 
+  # getData <- reactive({
+  #   if(is.null(input$ds$datapath)) return(NULL)
+  # })
+  # output$uploaded <- reactive({
+  #   return(!is.null(getData()))
+  # })
+
+
+  output$uploaded <- shiny::reactive({
+    if (is.null(v$file)) {
+      "no"
+    } else {
+      "yes"
+    }
+  })
+
+  shiny::outputOptions(output, "uploaded", suspendWhenHidden = FALSE)
+
   dd <- shiny::reactive({
+    shiny::req(input$ds)
+    v$file <- "loaded"
     ds2dd_detailed(data = dat())
   })
 
-
-  output$data.tbl <- shiny::renderTable({
+  output$data.tbl <- gt::render_gt(
     dd() |>
       purrr::pluck("data") |>
       head(20) |>
-      dplyr::tibble()
-  })
+      dplyr::tibble() |>
+      gt::gt()
+  )
 
-  output$meta.tbl <- shiny::renderTable({
+  output$meta.tbl <- gt::render_gt(
     dd() |>
       purrr::pluck("meta") |>
-      dplyr::tibble()
-  })
+      dplyr::tibble() |>
+      gt::gt()
+  )
 
   # Downloadable csv of dataset ----
   output$downloadData <- shiny::downloadHandler(
@@ -53,17 +84,8 @@ server <- function(input, output, session) {
   )
 
   output_staging <- shiny::reactiveValues()
-  output_staging$meta <- output_staging$data <- output_staging$file <- NA
 
-  output$uploaded <- shiny::reactive({
-    if (is.na(output_staging$file)) {
-      "no"
-    } else {
-      "yes"
-    }
-  })
-
-  shiny::outputOptions(output, "uploaded", suspendWhenHidden = FALSE)
+  output_staging$meta <- output_staging$data <- NA
 
   shiny::observeEvent(input$upload.meta,{  upload_meta()  })
 

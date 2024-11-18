@@ -1,6 +1,6 @@
 Package: REDCapCAST
-Title: REDCap Castellated Data Handling And Metadata Casting
-Version: 24.11.1
+Title: REDCap Castellated Data Handling and Metadata Casting
+Version: 24.11.2
 Authors@R: c(
     person("Andreas Gammelgaard", "Damsbo", email = "agdamsbo@clin.au.dk", 
     role = c("aut", "cre"),comment = c(ORCID = "0000-0002-7559-1154")), 
