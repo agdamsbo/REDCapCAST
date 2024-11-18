@@ -1,4 +1,3 @@
-library(REDCapCAST)
 library(bslib)
 library(shiny)
 library(openxlsx2)
@@ -7,9 +6,14 @@ library(readODS)
 library(readr)
 library(dplyr)
 library(here)
+library(devtools)
+if (!requireNamespace("REDCapCAST")){
+  devtools::install_github("agdamsbo/REDCapCAST", quiet = TRUE, upgrade = "never")
+}
+library(REDCapCAST)
+
 
 server <- function(input, output, session) {
-
   v <- shiny::reactiveValues(
     file = NULL
   )
@@ -64,7 +68,7 @@ server <- function(input, output, session) {
   output$downloadData <- shiny::downloadHandler(
     filename = "data_ready.csv",
     content = function(file) {
-      write.csv(purrr::pluck(dd(), "data"), file, row.names = FALSE,na = "")
+      write.csv(purrr::pluck(dd(), "data"), file, row.names = FALSE, na = "")
     }
   )
 
@@ -72,13 +76,13 @@ server <- function(input, output, session) {
   output$downloadMeta <- shiny::downloadHandler(
     filename = "datadictionary_ready.csv",
     content = function(file) {
-      write.csv(purrr::pluck(dd(), "meta"), file, row.names = FALSE,na = "")
+      write.csv(purrr::pluck(dd(), "meta"), file, row.names = FALSE, na = "")
     }
   )
 
   # Downloadable .zip of instrument ----
   output$downloadInstrument <- shiny::downloadHandler(
-    filename = paste0("REDCapCAST_instrument",Sys.Date(),".zip"),
+    filename = paste0("REDCapCAST_instrument", Sys.Date(), ".zip"),
     content = function(file) {
       export_redcap_instrument(purrr::pluck(dd(), "meta"), file)
     }
@@ -88,12 +92,15 @@ server <- function(input, output, session) {
 
   output_staging$meta <- output_staging$data <- NA
 
-  shiny::observeEvent(input$upload.meta,{  upload_meta()  })
+  shiny::observeEvent(input$upload.meta, {
+    upload_meta()
+  })
 
-  shiny::observeEvent(input$upload.data,{  upload_data()  })
+  shiny::observeEvent(input$upload.data, {
+    upload_data()
+  })
 
-  upload_meta <- function(){
-
+  upload_meta <- function() {
     shiny::req(input$uri)
 
     shiny::req(input$api)
@@ -102,11 +109,10 @@ server <- function(input, output, session) {
       ds = purrr::pluck(dd(), "meta"),
       redcap_uri = input$uri,
       token = input$api
-    )|> purrr::pluck("success")
+    ) |> purrr::pluck("success")
   }
 
-  upload_data <- function(){
-
+  upload_data <- function() {
     shiny::req(input$uri)
 
     shiny::req(input$api)
@@ -122,4 +128,8 @@ server <- function(input, output, session) {
 
   output$upload.data.print <- renderText(output_staging$data)
 
+  # session$onSessionEnded(function() {
+  #   # cat("Session Ended\n")
+  #   unlink("www",recursive = TRUE)
+  # })
 }

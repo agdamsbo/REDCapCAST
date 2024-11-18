@@ -23,25 +23,70 @@ REDCapCAST::shiny_cast()
 The app primarily wraps one function: `ds2dd_detailed()`.
 
 ```{r}
-REDCap_split(
+library(REDCapCAST)
+ds <- REDCap_split(
     records = redcapcast_data,
     metadata = redcapcast_meta,
     forms = "all"
   ) |> 
-  sanitize_split() |> 
-  redcap_wider() |> 
+  sanitize_split() |>
+  redcap_wider() 
+str(ds)
+```
+
+```{r}
+ds|> 
   ds2dd_detailed()|>  
   purrr::pluck("data") |> 
-  readr::type_convert( 
-      col_types = readr::cols(.default = readr::col_guess()))
+  str()
+```
+
+```{r}
+ds|> 
+  ds2dd_detailed()|>  
+  purrr::pluck("meta") |> 
+  head(10)
+```
+
+Different data formats are accepted, which all mostly implements the `readr::col_guess()` functionality to parse column classes.
+
+To ensure uniformity in data import this parsing has been implemented on its own to use with `ds2dd_detailed()` or any other data set for that matter:
+
+```{r}
+ds_parsed <- redcapcast_data |> 
+  dplyr::mutate(dplyr::across(dplyr::everything(),as.character)) |> 
+  parse_data()
+str(ds_parsed)
+```
+
+It will ignore specified columns, which is neat for numeric-looking strings like cpr-with a leading 0:
+
+```{r}
+redcapcast_data |> 
+  dplyr::mutate(dplyr::across(dplyr::everything(),as.character)) |> 
+  parse_data(ignore.vars = c("record_id","cpr")) |> 
+  str()
 ```
 
 
 ```{r}
-redcapcast_data |> 
-  dplyr::mutate(dplyr::across(dplyr::everything(),as.character)) |>  
-  readr::type_convert( 
-      col_types = readr::cols(.default = readr::col_guess()))
+
 ```
 
 
+Column classes can be passed to `parse_data()`.
+
+Making a few crude assumption for factorising data, `numchar2fct()` factorises numerical and character vectors based on a set threshold for unique values:
+
+```{r}
+mtcars |> str()
+mtcars |>
+  numchar2fct(numeric.threshold = 6) |>
+  str()
+```
+
+```{r}
+ds_parsed|>
+  numchar2fct(numeric.threshold = 2) |>
+  str()
+```

@@ -31,11 +31,13 @@ shiny_cast <- function(...) {
 #'
 #' @examples
 #' file_extension(list.files(here::here(""))[[2]])[[1]]
-#' file_extension(c("file.cd..ks","file"))
+#' file_extension(c("file.cd..ks", "file"))
 file_extension <- function(filenames) {
-  sub(pattern = "^(.*\\.|[^.]+)(?=[^.]*)", replacement = "",
-      filenames,
-      perl = TRUE)
+  sub(
+    pattern = "^(.*\\.|[^.]+)(?=[^.]*)", replacement = "",
+    filenames,
+    perl = TRUE
+  )
 }
 
 #' Flexible file import based on extension
@@ -74,4 +76,3 @@ read_input <- function(file, consider.na = c("NA", '""', "")) {
 
   df
 }
-

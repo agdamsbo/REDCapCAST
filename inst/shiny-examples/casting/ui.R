@@ -19,20 +19,27 @@ ui <-
             ".ods"
           )
         ),
-        shiny::helpText("Have a look at the preview panels to show download options."),
+        shiny::actionButton(
+          inputId = "load_data",
+          label = "Load data",
+          icon = shiny::icon("circle-down")
+        ),
+        shiny::helpText("Have a look at the preview panels to validate the data dictionary and imported data."),
         # For some odd reason this only unfolds when the preview panel is shown..
+        # This has been solved by adding an arbitrary button to load data
         shiny::conditionalPanel(
-          condition = "output.uploaded=='yes'",
-          shiny::helpText("Below you can download the dataset formatted for upload and the
-         corresponding data dictionary for a new data base, if you want to upload manually."),
+          # condition = "output.uploaded=='yes'",
+          condition = "input.load_data",
+         #  shiny::helpText("Below you can download the dataset formatted for upload and the
+         # corresponding data dictionary for a new data base, if you want to upload manually."),
           # Button
-          shiny::downloadButton("downloadData", "Download renamed data"),
+          shiny::downloadButton(outputId = "downloadData", label = "Download renamed data"),
 
           # Button
-          shiny::downloadButton("downloadMeta", "Download data dictionary"),
+          shiny::downloadButton(outputId = "downloadMeta", label = "Download data dictionary"),
 
           # Button
-          shiny::downloadButton("downloadInstrument", "Download as instrument"),
+          shiny::downloadButton(outputId = "downloadInstrument", label = "Download as instrument"),
 
           # Horizontal line ----
           shiny::tags$hr(),
@@ -108,3 +115,4 @@ ui <-
       )
     )
   )
+

@@ -17,5 +17,5 @@ DEPRECATED Helper to import files correctly
 }
 \examples{
 file_extension(list.files(here::here(""))[[2]])[[1]]
-file_extension(c("file.cd..ks","file"))
+file_extension(c("file.cd..ks", "file"))
 }
