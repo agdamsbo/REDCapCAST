@@ -3,7 +3,9 @@ Title: REDCap Castellated Data Handling and Metadata Casting
 Version: 24.11.2
 Authors@R: c(
     person("Andreas Gammelgaard", "Damsbo", email = "agdamsbo@clin.au.dk", 
-    role = c("aut", "cre"),comment = c(ORCID = "0000-0002-7559-1154")))
+    role = c("aut", "cre"),comment = c(ORCID = "0000-0002-7559-1154")), 
+    person("Paul", "Egeler", email = "paulegeler@gmail.com", role = c("aut"), 
+    comment = c(ORCID = "0000-0001-6948-9498")))
 Description: Casting metadata for REDCap database creation and handling of 
     castellated data using repeated instruments and longitudinal projects in 
     'REDCap'. Keeps a focused data export approach, by allowing to only export 
