@@ -6,7 +6,7 @@ ui <-
       title = "Easy REDCap database creation",
       sidebar = bslib::sidebar(
         width = 300,
-        shiny::h5("1) Database meta data"),
+        shiny::h5("Metadata casting"),
         shiny::fileInput(
           inputId = "ds",
           label = "Upload spreadsheet",
@@ -16,6 +16,7 @@ ui <-
             ".xls",
             ".xlsx",
             ".dta",
+            ".rds",
             ".ods"
           )
         ),
@@ -29,6 +30,20 @@ ui <-
         # This has been solved by adding an arbitrary button to load data - which was abandoned again
         shiny::conditionalPanel(
           condition = "output.uploaded=='yes'",
+          shiny::radioButtons(
+            inputId = "specify_factors",
+            label = "Specify categorical variables?",
+            selected = "no",
+            inline = TRUE,
+            choices = list(
+              "No" = "no",
+              "Yes" = "yes"
+            )
+          ),
+          shiny::conditionalPanel(
+            condition = "input.specify_factors=='yes'",
+            uiOutput("factor_vars")
+          ),
           # condition = "input.load_data",
          #  shiny::helpText("Below you can download the dataset formatted for upload and the
          # corresponding data dictionary for a new data base, if you want to upload manually."),

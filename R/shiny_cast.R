@@ -62,10 +62,12 @@ read_input <- function(file, consider.na = c("NA", '""', "")) {
       } else if (ext == "dta") {
         df <- haven::read_dta(file = file)
       } else if (ext == "ods") {
-        df <- readODS::read_ods(file = file)
-      } else {
+        df <- readODS::read_ods(path = file)
+      } else if (ext == "rds") {
+        df <- readr::read_rds(file = file)
+      }else {
         stop("Input file format has to be on of:
-             '.csv', '.xls', '.xlsx', '.dta' or '.ods'")
+             '.csv', '.xls', '.xlsx', '.dta', '.rds' or '.ods'")
       }
     },
     error = function(e) {

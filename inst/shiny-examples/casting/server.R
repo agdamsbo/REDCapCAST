@@ -7,7 +7,7 @@ library(readr)
 library(dplyr)
 library(here)
 library(devtools)
-if (!requireNamespace("REDCapCAST")){
+if (!requireNamespace("REDCapCAST")) {
   devtools::install_github("agdamsbo/REDCapCAST", quiet = TRUE, upgrade = "never")
 }
 library(REDCapCAST)
@@ -21,8 +21,35 @@ server <- function(input, output, session) {
   dat <- shiny::reactive({
     shiny::req(input$ds)
 
-    read_input(input$ds$datapath) |>
-      parse_data()
+    out <- read_input(input$ds$datapath)
+
+    # Saves labels to reapply later
+    labels <- lapply(out, get_attr)
+
+    out <- out |>
+      ## Parses data with readr functions
+      parse_data() |>
+      ## Converts logical to factor, which overwrites attributes
+      ##
+      dplyr::mutate(dplyr::across(dplyr::where(is.logical), forcats::as_factor))
+
+    if (!is.null(input$factor_vars)) {
+      out <- out |>
+        dplyr::mutate(
+          dplyr::across(
+            dplyr::all_of(input$factor_vars),
+            forcats::as_factor
+          )
+        )
+    }
+
+    # Old attributes are appended
+    out <- purrr::imap(out,\(.x,.i){
+      set_attr(.x,labels[[.i]])
+    }) |>
+      dplyr::bind_cols()
+
+    out
   })
 
   # getData <- reactive({
@@ -48,19 +75,66 @@ server <- function(input, output, session) {
 
   shiny::outputOptions(output, "uploaded", suspendWhenHidden = FALSE)
 
+  output$factor_vars <- shiny::renderUI({
+    shiny::req(input$ds)
+    selectizeInput(
+      inputId = "factor_vars",
+      selected = colnames(dat())[sapply(dat(), is.factor)],
+      label = "Covariables to format as categorical",
+      choices = colnames(dat()),
+      multiple = TRUE
+    )
+  })
+
   output$data.tbl <- gt::render_gt(
     dd() |>
       purrr::pluck("data") |>
       head(20) |>
-      dplyr::tibble() |>
-      gt::gt()
+      # dplyr::tibble() |>
+      gt::gt() |>
+      gt::tab_style(
+        style = gt::cell_text(weight = "bold"),
+        locations = gt::cells_column_labels(dplyr::everything())
+      ) |>
+      gt::tab_header(
+        title = "Imported data preview",
+        subtitle = "The first 20 subjects of the supplied dataset for reference."
+      )
   )
 
   output$meta.tbl <- gt::render_gt(
     dd() |>
       purrr::pluck("meta") |>
-      dplyr::tibble() |>
-      gt::gt()
+      # dplyr::tibble() |>
+      dplyr::mutate(
+        dplyr::across(
+          dplyr::everything(),
+          \(.x) {
+            .x[is.na(.x)] <- ""
+            return(.x)
+          }
+        )
+      ) |>
+      dplyr::select(1:8) |>
+      gt::gt() |>
+      gt::tab_style(
+        style = gt::cell_text(weight = "bold"),
+        locations = gt::cells_column_labels(dplyr::everything())
+      ) |>
+      gt::tab_header(
+        title = "Generated metadata",
+        subtitle = "Only the first 8 columns are modified using REDCapCAST. Download the metadata to see everything."
+      ) |>
+      gt::tab_style(
+        style = gt::cell_borders(
+          sides = c("left", "right"),
+          color = "grey80",
+          weight = gt::px(1)
+        ),
+        locations = gt::cells_body(
+          columns = dplyr::everything()
+        )
+      )
   )
 
   # Downloadable csv of dataset ----
@@ -73,7 +147,7 @@ server <- function(input, output, session) {
 
   # Downloadable csv of data dictionary ----
   output$downloadMeta <- shiny::downloadHandler(
-    filename = "datadictionary_ready.csv",
+    filename = paste0("REDCapCAST_DataDictionary_", Sys.Date(), ".csv"),
     content = function(file) {
       write.csv(purrr::pluck(dd(), "meta"), file, row.names = FALSE, na = "")
     }
