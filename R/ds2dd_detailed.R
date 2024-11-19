@@ -135,6 +135,7 @@ hms2character <- function(data) {
 #' file with `haven::read_dta()`).
 #' @param metadata redcap metadata headings. Default is
 #' REDCapCAST:::metadata_names.
+#' @param convert.logicals convert logicals to factor. Default is TRUE.
 #'
 #' @return list of length 2
 #' @export
@@ -166,7 +167,28 @@ ds2dd_detailed <- function(data,
                            field.label = NULL,
                            field.label.attr = "label",
                            field.validation = NULL,
-                           metadata = names(REDCapCAST::redcapcast_meta)) {
+                           metadata = names(REDCapCAST::redcapcast_meta),
+                           convert.logicals = TRUE) {
+
+  if (convert.logicals) {
+    # Labels/attributes are saved
+    labels <- lapply(data, \(.x){
+      get_attr(.x, attr = NULL)
+    })
+
+    no_attr <- data |>
+      ## Converts logical to factor, which overwrites attributes
+      dplyr::mutate(dplyr::across(dplyr::where(is.logical), forcats::as_factor))
+
+    # Old attributes are appended
+    data <- purrr::imap(no_attr,\(.x,.i){
+      attributes(.x) <- c(attributes(.x),labels[[.i]])
+      .x
+    }) |>
+      dplyr::bind_cols()
+
+  }
+
   ## Handles the odd case of no id column present
   if (add.auto.id) {
     data <- dplyr::tibble(
@@ -224,15 +246,9 @@ ds2dd_detailed <- function(data,
 
   if (is.null(field.label)) {
     dd$field_label <- data |>
-      lapply(function(x) {
-        if (haven::is.labelled(x)) {
-          att <- haven_all_levels(x)
-          names(att)
-        } else {
-          NA
-        }
-      }) |>
-      (\(x)do.call(c, x))()
+      sapply(function(x) {
+        get_attr(x, attr = field.label.attr)
+      })
 
     dd <-
       dd |> dplyr::mutate(field_label = dplyr::if_else(is.na(field_label),
@@ -353,6 +369,8 @@ ds2dd_detailed <- function(data,
 #'   labels = c(Unknown = 9, Refused = 10),
 #'   class = "haven_labelled"
 #' )
+#' labelled::is.labelled(ds)
+#' attributes(ds)
 #' ds |> haven_all_levels()
 haven_all_levels <- function(data) {
   stopifnot(haven::is.labelled(data))
@@ -548,3 +566,51 @@ numchar2fct <- function(data, numeric.threshold = 6, character.throshold = 6) {
       )
     )
 }
+
+#' Extract attribute. Returns NA if none
+#'
+#' @param data vector
+#' @param attr attribute name
+#'
+#' @return character vector
+#' @export
+#'
+#' @examples
+#' attr(mtcars$mpg, "label") <- "testing"
+#' sapply(mtcars, get_attr)
+#' lapply(mtcars, \(.x)get_attr(.x, NULL))
+#' mtcars |>
+#'   numchar2fct(numeric.threshold = 6) |>
+#'   ds2dd_detailed()
+get_attr <- function(data, attr = NULL) {
+  if (is.null(attr)) {
+    attributes(data)
+  } else {
+    a <- attr(data, attr, exact = TRUE)
+    if (is.null(a)) {
+      NA
+    } else {
+      a
+    }
+  }
+}
+
+
+#' Set attributes for named attribute. Appends if attr is NULL
+#'
+#' @param data vector
+#' @param label label
+#' @param attr attribute name
+#'
+#' @return vector with attribute
+#' @export
+#'
+set_attr <- function(data, label, attr = NULL) {
+  if (is.null(attr)) {
+    attributes(data) <- c(attributes(data),label)
+  } else {
+    attr(data, attr) <- label
+  }
+  data
+}
+

@@ -15,7 +15,8 @@ ds2dd_detailed(
   field.label = NULL,
   field.label.attr = "label",
   field.validation = NULL,
-  metadata = names(REDCapCAST::redcapcast_meta)
+  metadata = names(REDCapCAST::redcapcast_meta),
+  convert.logicals = TRUE
 )
 }
 \arguments{
@@ -55,6 +56,8 @@ file with `haven::read_dta()`).}
 
 \item{metadata}{redcap metadata headings. Default is
 REDCapCAST:::metadata_names.}
+
+\item{convert.logicals}{convert logicals to factor. Default is TRUE.}
 }
 \value{
 list of length 2
