@@ -20,7 +20,7 @@ ds <- structure(c(1, 2, 3, 2, 10, 9),
   labels = c(Unknown = 9, Refused = 10),
   class = "haven_labelled"
 )
-labelled::is.labelled(ds)
+haven::is.labelled(ds)
 attributes(ds)
 ds |> haven_all_levels()
 }

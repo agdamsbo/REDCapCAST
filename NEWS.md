@@ -2,7 +2,7 @@
 
 24.11.1 was rejected on CRAN based on wrong title capitalisation. This was an opportunity to extend the package overhaul.
 
-Documentation has been updated. Data parser functions have been added (based on readr) and separated from the ds2dd_detailed().
+Documentation has been updated. Data parser functions have been added (based on readr) and separated from the ds2dd_detailed(). Now also includes conversion of logicals to factor as REDCap truefalse class follows different naming conversion compared to R. Also correct support for variable labels as field labels (use .rds formatted data and label with labelled::var_label())
 
 Vignettes and documentation have been restructured.
 

@@ -369,7 +369,7 @@ ds2dd_detailed <- function(data,
 #'   labels = c(Unknown = 9, Refused = 10),
 #'   class = "haven_labelled"
 #' )
-#' labelled::is.labelled(ds)
+#' haven::is.labelled(ds)
 #' attributes(ds)
 #' ds |> haven_all_levels()
 haven_all_levels <- function(data) {
