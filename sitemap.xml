@@ -27,6 +27,7 @@
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/focused_metadata.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/format_subheader.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/get_api_key.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/get_attr.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/get_id_name.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/guess_time_only.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/guess_time_only_filter.html</loc></url>
@@ -54,6 +55,7 @@
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/redcapcast_meta.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/replace_curly_quote.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/sanitize_split.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/set_attr.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/shiny_cast.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/split_non_repeating_forms.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/strsplitx.html</loc></url>

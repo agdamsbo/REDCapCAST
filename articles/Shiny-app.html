@@ -178,8 +178,8 @@ and launch the app as follows:</p>
 <span><span class="co">#&gt;  $ mrs_complete_inclusion      : chr [1:6] "Incomplete" "Incomplete" NA NA ...</span></span>
 <span><span class="co">#&gt;  $ mrs_complete_follow1        : chr [1:6] NA "Incomplete" "Incomplete" NA ...</span></span>
 <span><span class="co">#&gt;  $ mrs_complete_follow2        : chr [1:6] NA NA "Incomplete" NA ...</span></span>
-<span><span class="co">#&gt;  $ con_mrs                     : logi [1:6] NA NA NA NA NA NA</span></span>
-<span><span class="co">#&gt;  $ con_calc                    : logi [1:6] NA NA NA NA NA NA</span></span>
+<span><span class="co">#&gt;  $ con_mrs                     : Factor w/ 2 levels "FALSE","TRUE": NA NA NA NA NA NA</span></span>
+<span><span class="co">#&gt;  $ con_calc                    : Factor w/ 2 levels "FALSE","TRUE": NA NA NA NA NA NA</span></span>
 <span><span class="co">#&gt;  $ consensus_complete          : chr [1:6] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ event_datetime_1_follow1    : POSIXct[1:6], format: NA "2024-01-18 12:49:42" ...</span></span>
 <span><span class="co">#&gt;  $ event_datetime_1_follow2    : POSIXct[1:6], format: NA NA ...</span></span>
@@ -223,7 +223,7 @@ and launch the app as follows:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> sex            data      <span style="color: #BB0000;">NA</span>             text       sex           </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> cohabitation   data      <span style="color: #BB0000;">NA</span>             text       cohabitation  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> hypertension   data      <span style="color: #BB0000;">NA</span>             text       hypertension  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;lgl&gt;, field_note &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;chr&gt;, field_note &lt;lgl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   text_validation_min &lt;lgl&gt;, text_validation_max &lt;lgl&gt;, identifier &lt;lgl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   branching_logic &lt;lgl&gt;, required_field &lt;lgl&gt;, custom_alignment &lt;lgl&gt;,</span></span></span>

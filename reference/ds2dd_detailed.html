@@ -55,7 +55,8 @@
 <span>  field.label <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  field.label.attr <span class="op">=</span> <span class="st">"label"</span>,</span>
 <span>  field.validation <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  metadata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">REDCapCAST</span><span class="fu">::</span><span class="va"><a href="redcapcast_meta.html">redcapcast_meta</a></span><span class="op">)</span></span>
+<span>  metadata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">REDCapCAST</span><span class="fu">::</span><span class="va"><a href="redcapcast_meta.html">redcapcast_meta</a></span><span class="op">)</span>,</span>
+<span>  convert.logicals <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -121,6 +122,10 @@ file with `haven::read_dta()`).</p></dd>
 <dd><p>redcap metadata headings. Default is
 REDCapCAST:::metadata_names.</p></dd>
 
+
+<dt id="arg-convert-logicals">convert.logicals<a class="anchor" aria-label="anchor" href="#arg-convert-logicals"></a></dt>
+<dd><p>convert logicals to factor. Default is TRUE.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -158,7 +163,7 @@ Please, do always inspect the data dictionary before upload.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dob &lt;date&gt;, age &lt;dbl&gt;, age_integer &lt;dbl&gt;, sex &lt;chr&gt;, cohabitation &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   hypertension &lt;chr&gt;, diabetes &lt;chr&gt;, region &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   baseline_data_start_complete &lt;chr&gt;, mrs_assessed &lt;chr&gt;, mrs_date &lt;date&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mrs_score &lt;dbl&gt;, mrs_complete &lt;chr&gt;, con_mrs &lt;lgl&gt;, con_calc &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mrs_score &lt;dbl&gt;, mrs_complete &lt;chr&gt;, con_mrs &lt;fct&gt;, con_calc &lt;fct&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   consensus_complete &lt;chr&gt;, event_datetime &lt;dttm&gt;, event_age &lt;dbl&gt;, …</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $meta</span>
@@ -176,7 +181,7 @@ Please, do always inspect the data dictionary before upload.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> age                      data      <span style="color: #BB0000;">NA</span>             text       age             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> age_integer              data      <span style="color: #BB0000;">NA</span>             text       age_integer     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;lgl&gt;, field_note &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;chr&gt;, field_note &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_min &lt;lgl&gt;, text_validation_max &lt;lgl&gt;, identifier &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   branching_logic &lt;lgl&gt;, required_field &lt;lgl&gt;, custom_alignment &lt;lgl&gt;,</span></span>
