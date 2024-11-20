@@ -11,6 +11,7 @@
 <url><loc>https://agdamsbo.github.io/REDCapCAST/news/index.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/REDCapCAST-package.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/REDCap_split.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/as_factor.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/case_match_regex_list.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/char2choice.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/char2cond.html</loc></url>
@@ -23,6 +24,7 @@
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/ds2dd_detailed.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/easy_redcap.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/export_redcap_instrument.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/fct2num.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/file_extension.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/focused_metadata.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/format_subheader.html</loc></url>
@@ -40,6 +42,7 @@
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/mark_complete.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/match_fields_to_form.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/mtcars_redcap.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/named_levels.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/numchar2fct.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/parse_data.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.character.html</loc></url>
