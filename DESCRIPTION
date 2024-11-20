@@ -60,12 +60,14 @@ Imports:
     assertthat,
     openxlsx2,
     readODS,
-    forcats
+    forcats,
+    rlang
 Collate: 
     'REDCapCAST-package.R'
     'utils.r'
     'process_user_input.r'
     'REDCap_split.r'
+    'as_factor.R'
     'doc2dd.R'
     'ds2dd.R'
     'ds2dd_detailed.R'
