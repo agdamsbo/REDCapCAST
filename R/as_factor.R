@@ -56,10 +56,13 @@ as_factor.numeric <- function(x, ...) {
 #' @export
 as_factor.character <- function(x, ...) {
   labels <- get_attr(x)
+  if (is.roman(x)){
+    x <- factor(x)
+  } else {
   x <- structure(
     forcats::fct_inorder(x),
     label = attr(x, "label", exact = TRUE)
-  )
+  )}
   set_attr(x, labels, overwrite = FALSE)
 }
 
@@ -218,13 +221,14 @@ named_levels <- function(data, label = "labels", na.label = NULL, na.value = 99)
   out <- stats::setNames(d$value, d$name)
   ## Sort if levels are numeric
   ## Else, they appear in order of appearance
-  if (identical(
-    levels(data),
-    suppressWarnings(as.character(as.numeric(levels(data))))
-  )) {
+  if (possibly_numeric(levels(data))) {
     out <- out |> sort()
   }
   out
+}
+
+is.roman <- function(data){
+  identical(data,as.character(utils::as.roman(data)))
 }
 
 
@@ -277,13 +281,13 @@ fct2num <- function(data) {
 
   ## If no NA on numeric coercion, of original names, then return
   ## original numeric names, else values
-  if (possible_numeric(out)) {
+  if (possibly_numeric(out)) {
     out <- as.numeric(names(out))
   }
   unname(out)
 }
 
-possible_numeric <- function(data){
+possibly_numeric <- function(data){
   length(stats::na.omit(suppressWarnings(as.numeric(names(data))))) ==
     length(data)
 }
