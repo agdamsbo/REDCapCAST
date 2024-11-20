@@ -24,30 +24,30 @@ server <- function(input, output, session) {
     out <- read_input(input$ds$datapath)
 
     # Saves labels to reapply later
-    labels <- lapply(out, get_attr)
+    # labels <- lapply(out, get_attr)
 
     out <- out |>
       ## Parses data with readr functions
       parse_data() |>
       ## Converts logical to factor, which overwrites attributes
       ##
-      dplyr::mutate(dplyr::across(dplyr::where(is.logical), forcats::as_factor))
+      dplyr::mutate(dplyr::across(dplyr::where(is.logical), as_factor))
 
     if (!is.null(input$factor_vars)) {
       out <- out |>
         dplyr::mutate(
           dplyr::across(
             dplyr::all_of(input$factor_vars),
-            forcats::as_factor
+            as_factor
           )
         )
     }
 
     # Old attributes are appended
-    out <- purrr::imap(out,\(.x,.i){
-      set_attr(.x,labels[[.i]])
-    }) |>
-      dplyr::bind_cols()
+    # out <- purrr::imap(out,\(.x,.i){
+    #   set_attr(.x,labels[[.i]])
+    # }) |>
+    #   dplyr::bind_cols()
 
     out
   })
@@ -62,7 +62,10 @@ server <- function(input, output, session) {
   dd <- shiny::reactive({
     shiny::req(input$ds)
     v$file <- "loaded"
-    ds2dd_detailed(data = dat())
+    ds2dd_detailed(
+      data = dat(),
+      add.auto.id = input$add_id=="yes"
+        )
   })
 
   output$uploaded <- shiny::reactive({
@@ -85,6 +88,18 @@ server <- function(input, output, session) {
       multiple = TRUE
     )
   })
+
+  ## Specify ID if necessary
+  # output$id_var <- shiny::renderUI({
+  #   shiny::req(input$ds)
+  #   selectizeInput(
+  #     inputId = "id_var",
+  #     selected = colnames(dat())[1],
+  #     label = "ID variable",
+  #     choices = colnames(dat())[-match(colnames(dat()),input$factor_vars)],
+  #     multiple = FALSE
+  #   )
+  # })
 
   output$data.tbl <- gt::render_gt(
     dd() |>
@@ -157,7 +172,9 @@ server <- function(input, output, session) {
   output$downloadInstrument <- shiny::downloadHandler(
     filename = paste0("REDCapCAST_instrument", Sys.Date(), ".zip"),
     content = function(file) {
-      export_redcap_instrument(purrr::pluck(dd(), "meta"), file)
+      export_redcap_instrument(purrr::pluck(dd(), "meta"),
+                               file = file,
+                               record.id = ifelse(input$add_id=="none",NA,names(dat())[1]))
     }
   )
 

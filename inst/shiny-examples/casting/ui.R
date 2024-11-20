@@ -31,6 +31,17 @@ ui <-
         shiny::conditionalPanel(
           condition = "output.uploaded=='yes'",
           shiny::radioButtons(
+            inputId = "add_id",
+            label = "Add ID, or use first column?",
+            selected = "no",
+            inline = TRUE,
+            choices = list(
+              "First column" = "no",
+              "Add ID" = "yes",
+              "No ID" = "none"
+            )
+          ),
+          shiny::radioButtons(
             inputId = "specify_factors",
             label = "Specify categorical variables?",
             selected = "no",
