@@ -48,7 +48,7 @@ export_redcap_instrument <- function(data,
          ideas on exporting multiple instruments.")
   }
 
-  if (record.id %in% data[["field_name"]]){
+  if (!is.na(record.id) && record.id %in% data[["field_name"]]){
     data <- data[-match(record.id,data[["field_name"]]),]
   }
 
