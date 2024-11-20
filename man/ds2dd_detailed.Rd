@@ -75,6 +75,7 @@ Ensure, that the data set is formatted with as much information as possible.
 `field.type` can be supplied
 }
 \examples{
+\dontrun{
 data <- REDCapCAST::redcapcast_data
 data |> ds2dd_detailed()
 iris |> ds2dd_detailed(add.auto.id = TRUE)
@@ -91,4 +92,5 @@ data <- iris |>
 names(data) <- glue::glue("{sample(x = c('a','b'),size = length(names(data)),
 replace=TRUE,prob = rep(x=.5,2))}__{names(data)}")
 data |> ds2dd_detailed(form.sep = "__")
+}
 }

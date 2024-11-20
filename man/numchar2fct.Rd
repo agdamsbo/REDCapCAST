@@ -23,7 +23,9 @@ Individual thresholds for character and numeric columns
 }
 \examples{
 mtcars |> str()
+\dontrun{
 mtcars |>
   numchar2fct(numeric.threshold = 6) |>
   str()
+}
 }

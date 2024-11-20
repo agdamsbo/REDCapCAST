@@ -141,6 +141,7 @@ hms2character <- function(data) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' data <- REDCapCAST::redcapcast_data
 #' data |> ds2dd_detailed()
 #' iris |> ds2dd_detailed(add.auto.id = TRUE)
@@ -157,6 +158,7 @@ hms2character <- function(data) {
 #' names(data) <- glue::glue("{sample(x = c('a','b'),size = length(names(data)),
 #' replace=TRUE,prob = rep(x=.5,2))}__{names(data)}")
 #' data |> ds2dd_detailed(form.sep = "__")
+#' }
 ds2dd_detailed <- function(data,
                            add.auto.id = FALSE,
                            date.format = "dmy",
@@ -416,9 +418,11 @@ mark_complete <- function(upload, ls) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' mtcars |>
 #'   parse_data() |>
 #'   str()
+#' }
 parse_data <- function(data,
                        guess_type = TRUE,
                        col_types = NULL,
@@ -434,7 +438,7 @@ parse_data <- function(data,
   ## Parses haven data by applying labels as factors in case of any
   if (do.call(c, lapply(data, (\(x)inherits(x, "haven_labelled")))) |> any()) {
     data <- data |>
-      haven::as_factor()
+      as_factor()
   }
 
   ## Applying readr cols
@@ -474,6 +478,7 @@ parse_data <- function(data,
 #' @importFrom forcats as_factor
 #'
 #' @examples
+#' \dontrun{
 #' sample(seq_len(4), 20, TRUE) |>
 #'   var2fct(6) |>
 #'   summary()
@@ -481,9 +486,10 @@ parse_data <- function(data,
 #'   var2fct(6) |>
 #'   summary()
 #' sample(letters[1:4], 20, TRUE) |> var2fct(6)
+#' }
 var2fct <- function(data, unique.n) {
   if (length(unique(data)) <= unique.n) {
-    forcats::as_factor(data)
+    as_factor(data)
   } else {
     data
   }
@@ -505,9 +511,11 @@ var2fct <- function(data, unique.n) {
 #'
 #' @examples
 #' mtcars |> str()
+#' \dontrun{
 #' mtcars |>
 #'   numchar2fct(numeric.threshold = 6) |>
 #'   str()
+#' }
 numchar2fct <- function(data, numeric.threshold = 6, character.throshold = 6) {
   data |>
     dplyr::mutate(

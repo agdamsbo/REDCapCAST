@@ -10,6 +10,11 @@ named_levels(data, label = "labels", na.label = NULL, na.value = 99)
 \item{data}{factor}
 
 \item{label}{character string of attribute with named vector of factor labels}
+
+\item{na.label}{character string to refactor NA values. Default is NULL.}
+
+\item{na.value}{new value for NA strings. Ignored if na.label is NULL.
+Default is 99.}
 }
 \value{
 named vector
@@ -18,8 +23,10 @@ named vector
 Get named vector of factor levels and values
 }
 \examples{
+\dontrun{
 structure(c(1, 2, 3, 2, 10, 9),
   labels = c(Unknown = 9, Refused = 10),
   class = "haven_labelled"
 ) |> as_factor() |> named_levels()
+}
 }

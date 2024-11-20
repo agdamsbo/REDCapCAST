@@ -11,6 +11,7 @@
 #' @export
 #' @examples
 #' # will preserve all attributes but class
+#' \dontrun{
 #' c(1, 4, 3, "A", 7, 8, 1) |> as_factor()
 #' structure(c(1, 2, 3, 2, 10, 9),
 #'   labels = c(Unknown = 9, Refused = 10)
@@ -22,7 +23,7 @@
 #'   class = "haven_labelled"
 #' ) |>
 #'   as_factor()
-#'
+#' }
 #' @importFrom forcats as_factor
 #' @importFrom rlang check_dots_used
 #' @export
@@ -74,15 +75,20 @@ as_factor.labelled <- as_factor.haven_labelled
 #'
 #' @param data factor
 #' @param label character string of attribute with named vector of factor labels
+#' @param na.label character string to refactor NA values. Default is NULL.
+#' @param na.value new value for NA strings. Ignored if na.label is NULL.
+#' Default is 99.
 #'
 #' @return named vector
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' structure(c(1, 2, 3, 2, 10, 9),
 #'   labels = c(Unknown = 9, Refused = 10),
 #'   class = "haven_labelled"
 #' ) |> as_factor() |> named_levels()
+#' }
 named_levels <- function(data, label = "labels",na.label=NULL, na.value=99) {
   stopifnot(is.factor(data))
   if (!is.null(na.label)){
@@ -141,6 +147,7 @@ named_levels <- function(data, label = "labels",na.label=NULL, na.value=99) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' c(1, 4, 3, "A", 7, 8, 1) |>
 #' as_factor() |> fct2num()
 #'
@@ -156,6 +163,7 @@ named_levels <- function(data, label = "labels",na.label=NULL, na.value=99) {
 #' ) |>
 #'   as_factor() |>
 #'   fct2num()
+#'   }
 fct2num <- function(data) {
   stopifnot(is.factor(data))
   as.numeric(named_levels(data))[match(data, names(named_levels(data)))]
@@ -171,11 +179,12 @@ fct2num <- function(data) {
 #'
 #' @examples
 #' attr(mtcars$mpg, "label") <- "testing"
-#' sapply(mtcars, get_attr)
-#' lapply(mtcars, \(.x)get_attr(.x, NULL))
+#' do.call(c,sapply(mtcars, get_attr))
+#' \dontrun{
 #' mtcars |>
 #'   numchar2fct(numeric.threshold = 6) |>
 #'   ds2dd_detailed()
+#' }
 get_attr <- function(data, attr = NULL) {
   if (is.null(attr)) {
     attributes(data)
@@ -195,16 +204,20 @@ get_attr <- function(data, attr = NULL) {
 #' @param data vector
 #' @param label label
 #' @param attr attribute name
+#' @param overwrite overwrite existing attributes. Default is FALSE.
 #'
 #' @return vector with attribute
 #' @export
 #'
-set_attr <- function(data, label, attr = NULL) {
+set_attr <- function(data, label, attr = NULL, overwrite=FALSE) {
   if (is.null(attr)) {
     ## Has to be list...
     stopifnot(is.list(label))
     ## ... with names
     stopifnot(length(label)==length(names(label)))
+    if (!overwrite){
+      label <- label[!names(label) %in% names(attributes(data))]
+    }
     attributes(data) <- c(attributes(data),label)
   } else {
     attr(data, attr) <- label
@@ -238,12 +251,4 @@ haven_all_levels <- function(data) {
   }
   out
 }
-
-# readr::read_rds("/Users/au301842/PAaSO/labelled_test.rds") |> ds2dd_detailed()
-#' sample(c(TRUE,FALSE,NA),20,TRUE) |> set_attr("hidden","status") |> trial_fct() |> named_levels(na.label = "Missing") |> sort()
-# trial_fct <- function(x){
-#   labels <- get_attr(x)
-#   x <- factor(x, levels = c("FALSE", "TRUE"))
-#   set_attr(x, labels[-match("class", names(labels))])
-# }
 

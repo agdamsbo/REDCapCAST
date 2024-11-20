@@ -4,7 +4,7 @@
 \alias{set_attr}
 \title{Set attributes for named attribute. Appends if attr is NULL}
 \usage{
-set_attr(data, label, attr = NULL)
+set_attr(data, label, attr = NULL, overwrite = FALSE)
 }
 \arguments{
 \item{data}{vector}
@@ -12,6 +12,8 @@ set_attr(data, label, attr = NULL)
 \item{label}{label}
 
 \item{attr}{attribute name}
+
+\item{overwrite}{overwrite existing attributes. Default is FALSE.}
 }
 \value{
 vector with attribute

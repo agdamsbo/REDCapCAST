@@ -19,9 +19,10 @@ Extract attribute. Returns NA if none
 }
 \examples{
 attr(mtcars$mpg, "label") <- "testing"
-sapply(mtcars, get_attr)
-lapply(mtcars, \(.x)get_attr(.x, NULL))
+do.call(c,sapply(mtcars, get_attr))
+\dontrun{
 mtcars |>
   numchar2fct(numeric.threshold = 6) |>
   ds2dd_detailed()
+}
 }

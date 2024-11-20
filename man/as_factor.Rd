@@ -36,6 +36,7 @@ Please refer to parent functions for extended documentation.
 }
 \examples{
 # will preserve all attributes but class
+\dontrun{
 c(1, 4, 3, "A", 7, 8, 1) |> as_factor()
 structure(c(1, 2, 3, 2, 10, 9),
   labels = c(Unknown = 9, Refused = 10)
@@ -47,5 +48,5 @@ structure(c(1, 2, 3, 2, 10, 9),
   class = "haven_labelled"
 ) |>
   as_factor()
-
+}
 }

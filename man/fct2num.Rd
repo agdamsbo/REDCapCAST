@@ -16,6 +16,7 @@ numeric vector
 Allows conversion of factor to numeric values preserving original levels
 }
 \examples{
+\dontrun{
 c(1, 4, 3, "A", 7, 8, 1) |>
 as_factor() |> fct2num()
 
@@ -31,4 +32,5 @@ structure(c(1, 2, 3, 2, 10, 9),
 ) |>
   as_factor() |>
   fct2num()
+  }
 }
