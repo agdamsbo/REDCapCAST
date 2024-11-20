@@ -16,9 +16,9 @@ numeric vector
 Allows conversion of factor to numeric values preserving original levels
 }
 \examples{
-\dontrun{
 c(1, 4, 3, "A", 7, 8, 1) |>
-as_factor() |> fct2num()
+  as_factor() |>
+  fct2num()
 
 structure(c(1, 2, 3, 2, 10, 9),
   labels = c(Unknown = 9, Refused = 10),
@@ -28,9 +28,21 @@ structure(c(1, 2, 3, 2, 10, 9),
   fct2num()
 
 structure(c(1, 2, 3, 2, 10, 9),
-  labels = c(Unknown = 9, Refused = 10)
+  labels = c(Unknown = 9, Refused = 10),
+  class = "labelled"
 ) |>
   as_factor() |>
   fct2num()
-  }
+
+# Outlier with labels, but no class of origin, handled like numeric vector
+# structure(c(1, 2, 3, 2, 10, 9),
+#   labels = c(Unknown = 9, Refused = 10)
+# ) |>
+#   as_factor() |>
+#   fct2num()
+
+v <- sample(6:19,20,TRUE) |> factor()
+dput(v)
+named_levels(v)
+fct2num(v)
 }

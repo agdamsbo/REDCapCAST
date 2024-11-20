@@ -5,70 +5,145 @@
 #' ta loss in case of rich formatted and labelled data.
 #'
 #' Please refer to parent functions for extended documentation.
+#' To avoid redundancy calls and errors, functions are copy-pasted here
 #'
 #' @param x Object to coerce to a factor.
 #' @param ... Other arguments passed down to method.
 #' @export
 #' @examples
-#' # will preserve all attributes but class
-#' \dontrun{
+#' # will preserve all attributes
 #' c(1, 4, 3, "A", 7, 8, 1) |> as_factor()
 #' structure(c(1, 2, 3, 2, 10, 9),
 #'   labels = c(Unknown = 9, Refused = 10)
 #' ) |>
-#'   as_factor()
+#'   as_factor() |> dput()
 #'
 #' structure(c(1, 2, 3, 2, 10, 9),
 #'   labels = c(Unknown = 9, Refused = 10),
 #'   class = "haven_labelled"
 #' ) |>
 #'   as_factor()
-#' }
 #' @importFrom forcats as_factor
-#' @importFrom rlang check_dots_used
 #' @export
 #' @name as_factor
 as_factor <- function(x, ...) {
-  rlang::check_dots_used()
   UseMethod("as_factor")
+}
+
+#' @rdname as_factor
+#' @export
+as_factor.factor <- function(x, ...) {
+  x
 }
 
 #' @rdname as_factor
 #' @export
 as_factor.logical <- function(x, ...) {
   labels <- get_attr(x)
-  x <- forcats::as_factor(x, ...)
-  set_attr(x, labels[-match("class", names(labels))])
+  x <- factor(x, levels = c("FALSE", "TRUE"))
+  set_attr(x, labels, overwrite = FALSE)
 }
 
 #' @rdname as_factor
 #' @export
 as_factor.numeric <- function(x, ...) {
   labels <- get_attr(x)
-  x <- forcats::as_factor(x, ...)
-  set_attr(x, labels[-match("class", names(labels))])
+  x <- factor(x)
+  set_attr(x, labels, overwrite = FALSE)
 }
 
 #' @rdname as_factor
 #' @export
 as_factor.character <- function(x, ...) {
   labels <- get_attr(x)
-  x <- forcats::as_factor(x, ...)
-  set_attr(x, labels[-match("class", names(labels))])
+  x <- structure(
+    forcats::fct_inorder(x),
+    label = attr(x, "label", exact = TRUE)
+  )
+  set_attr(x, labels, overwrite = FALSE)
 }
 
+#' @param ordered If `TRUE` create an ordered (ordinal) factor, if
+#'   `FALSE` (the default) create a regular (nominal) factor.
+#' @param levels How to create the levels of the generated factor:
+#'
+#'   * "default": uses labels where available, otherwise the values.
+#'     Labels are sorted by value.
+#'   * "both": like "default", but pastes together the level and value
+#'   * "label": use only the labels; unlabelled values become `NA`
+#'   * "values": use only the values
 #' @rdname as_factor
 #' @export
-as_factor.haven_labelled <- function(x, ...) {
-  labels <- get_attr(x)
-  x <- haven::as_factor(x, ...)
-  set_attr(x, labels[-match("class", names(labels))])
+as_factor.haven_labelled <- function(x, levels = c("default", "labels", "values", "both"),
+                                     ordered = FALSE, ...) {
+  labels_all <- get_attr(x)
+
+  levels <- match.arg(levels)
+  label <- attr(x, "label", exact = TRUE)
+  labels <- attr(x, "labels")
+
+  if (levels %in% c("default", "both")) {
+    if (levels == "both") {
+      names(labels) <- paste0("[", labels, "] ", names(labels))
+    }
+
+    # Replace each value with its label
+    vals <- unique(vctrs::vec_data(x))
+    levs <- replace_with(vals, unname(labels), names(labels))
+    # Ensure all labels are preserved
+    levs <- sort(c(stats::setNames(vals, levs), labels), na.last = TRUE)
+    levs <- unique(names(levs))
+
+    x <- replace_with(vctrs::vec_data(x), unname(labels), names(labels))
+
+    x <- factor(x, levels = levs, ordered = ordered)
+  } else if (levels == "labels") {
+    levs <- unname(labels)
+    labs <- names(labels)
+    x <- replace_with(vctrs::vec_data(x), levs, labs)
+    x <- factor(x, unique(labs), ordered = ordered)
+  } else if (levels == "values") {
+    if (all(x %in% labels)) {
+      levels <- unname(labels)
+    } else {
+      levels <- sort(unique(vctrs::vec_data(x)))
+    }
+    x <- factor(vctrs::vec_data(x), levels, ordered = ordered)
+  }
+
+  x <- structure(x, label = label)
+
+  set_attr(x, labels_all, overwrite = FALSE)
 }
 
 #' @export
 #' @rdname as_factor
 as_factor.labelled <- as_factor.haven_labelled
 
+replace_with <- function(x, from, to) {
+  stopifnot(length(from) == length(to))
+
+  out <- x
+  # First replace regular values
+  matches <- match(x, from, incomparables = NA)
+  if (anyNA(matches)) {
+    out[!is.na(matches)] <- to[matches[!is.na(matches)]]
+  } else {
+    out <- to[matches]
+  }
+
+  # Then tagged missing values
+  tagged <- haven::is_tagged_na(x)
+  if (!any(tagged)) {
+    return(out)
+  }
+
+  matches <- match(haven::na_tag(x), haven::na_tag(from), incomparables = NA)
+
+  # Could possibly be faster to use anyNA(matches)
+  out[!is.na(matches)] <- to[matches[!is.na(matches)]]
+  out
+}
 
 
 #' Get named vector of factor levels and values
@@ -87,11 +162,13 @@ as_factor.labelled <- as_factor.haven_labelled
 #' structure(c(1, 2, 3, 2, 10, 9),
 #'   labels = c(Unknown = 9, Refused = 10),
 #'   class = "haven_labelled"
-#' ) |> as_factor() |> named_levels()
+#' ) |>
+#'   as_factor() |>
+#'   named_levels()
 #' }
-named_levels <- function(data, label = "labels",na.label=NULL, na.value=99) {
+named_levels <- function(data, label = "labels", na.label = NULL, na.value = 99) {
   stopifnot(is.factor(data))
-  if (!is.null(na.label)){
+  if (!is.null(na.label)) {
     attrs <- attributes(data)
     lvls <- as.character(data)
     lvls[is.na(lvls)] <- na.label
@@ -101,17 +178,24 @@ named_levels <- function(data, label = "labels",na.label=NULL, na.value=99) {
     lbls <- data.frame(
       name = lvls,
       value = vals
-    ) |> unique() |>
+    ) |>
+      unique() |>
       (\(d){
         stats::setNames(d$value, d$name)
       })() |>
       sort()
 
-    data <- do.call(structure,
-            c(list(.Data=match(vals,lbls)),
-              attrs[-match("levels", names(attrs))],
-              list(levels=names(lbls),
-                   labels=lbls)))
+    data <- do.call(
+      structure,
+      c(
+        list(.Data = match(vals, lbls)),
+        attrs[-match("levels", names(attrs))],
+        list(
+          levels = names(lbls),
+          labels = lbls
+        )
+      )
+    )
   }
 
   d <- data.frame(
@@ -123,7 +207,12 @@ named_levels <- function(data, label = "labels",na.label=NULL, na.value=99) {
   ## Applying labels
   attr_l <- attr(x = data, which = label, exact = TRUE)
   if (length(attr_l) != 0) {
-    d$value[match(names(attr_l), d$name)] <- unname(attr_l)
+    if (all(names(attr_l) %in% d$name)){
+      d$value[match(names(attr_l), d$name)] <- unname(attr_l)
+    }else {
+      d$name[match(attr_l, d$name)] <- names(attr_l)
+      d$value[match(names(attr_l), d$name)] <- unname(attr_l)
+    }
   }
 
   out <- stats::setNames(d$value, d$name)
@@ -147,9 +236,9 @@ named_levels <- function(data, label = "labels",na.label=NULL, na.value=99) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' c(1, 4, 3, "A", 7, 8, 1) |>
-#' as_factor() |> fct2num()
+#'   as_factor() |>
+#'   fct2num()
 #'
 #' structure(c(1, 2, 3, 2, 10, 9),
 #'   labels = c(Unknown = 9, Refused = 10),
@@ -159,14 +248,44 @@ named_levels <- function(data, label = "labels",na.label=NULL, na.value=99) {
 #'   fct2num()
 #'
 #' structure(c(1, 2, 3, 2, 10, 9),
-#'   labels = c(Unknown = 9, Refused = 10)
+#'   labels = c(Unknown = 9, Refused = 10),
+#'   class = "labelled"
 #' ) |>
 #'   as_factor() |>
 #'   fct2num()
-#'   }
+#'
+#' # Outlier with labels, but no class of origin, handled like numeric vector
+#' # structure(c(1, 2, 3, 2, 10, 9),
+#' #   labels = c(Unknown = 9, Refused = 10)
+#' # ) |>
+#' #   as_factor() |>
+#' #   fct2num()
+#'
+#' v <- sample(6:19,20,TRUE) |> factor()
+#' dput(v)
+#' named_levels(v)
+#' fct2num(v)
 fct2num <- function(data) {
   stopifnot(is.factor(data))
-  as.numeric(named_levels(data))[match(data, names(named_levels(data)))]
+  if (is.character(named_levels(data))){
+    values <- as.numeric(named_levels(data))
+  } else {
+    values <- named_levels(data)
+  }
+
+  out <- values[match(data, names(named_levels(data)))]
+
+  ## If no NA on numeric coercion, of original names, then return
+  ## original numeric names, else values
+  if (possible_numeric(out)) {
+    out <- as.numeric(names(out))
+  }
+  unname(out)
+}
+
+possible_numeric <- function(data){
+  length(stats::na.omit(suppressWarnings(as.numeric(names(data))))) ==
+    length(data)
 }
 
 #' Extract attribute. Returns NA if none
@@ -179,7 +298,7 @@ fct2num <- function(data) {
 #'
 #' @examples
 #' attr(mtcars$mpg, "label") <- "testing"
-#' do.call(c,sapply(mtcars, get_attr))
+#' do.call(c, sapply(mtcars, get_attr))
 #' \dontrun{
 #' mtcars |>
 #'   numchar2fct(numeric.threshold = 6) |>
@@ -209,16 +328,22 @@ get_attr <- function(data, attr = NULL) {
 #' @return vector with attribute
 #' @export
 #'
-set_attr <- function(data, label, attr = NULL, overwrite=FALSE) {
+set_attr <- function(data, label, attr = NULL, overwrite = FALSE) {
+  # browser()
   if (is.null(attr)) {
-    ## Has to be list...
-    stopifnot(is.list(label))
-    ## ... with names
-    stopifnot(length(label)==length(names(label)))
-    if (!overwrite){
+    ## Has to be a named list
+    ## Will not fail, but just return original data
+    if (!is.list(label) | length(label) != length(names(label))) {
+      return(data)
+    }
+    ## Only include named labels
+    label <- label[!is.na(names(label))]
+
+    if (!overwrite) {
       label <- label[!names(label) %in% names(attributes(data))]
     }
-    attributes(data) <- c(attributes(data),label)
+    attributes(data) <- c(attributes(data), label)
+
   } else {
     attr(data, attr) <- label
   }
@@ -251,4 +376,3 @@ haven_all_levels <- function(data) {
   }
   out
 }
-

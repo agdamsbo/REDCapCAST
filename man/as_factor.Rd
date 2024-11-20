@@ -2,6 +2,7 @@
 % Please edit documentation in R/as_factor.R
 \name{as_factor}
 \alias{as_factor}
+\alias{as_factor.factor}
 \alias{as_factor.logical}
 \alias{as_factor.numeric}
 \alias{as_factor.character}
@@ -11,20 +12,43 @@
 \usage{
 as_factor(x, ...)
 
+\method{as_factor}{factor}(x, ...)
+
 \method{as_factor}{logical}(x, ...)
 
 \method{as_factor}{numeric}(x, ...)
 
 \method{as_factor}{character}(x, ...)
 
-\method{as_factor}{haven_labelled}(x, ...)
+\method{as_factor}{haven_labelled}(
+  x,
+  levels = c("default", "labels", "values", "both"),
+  ordered = FALSE,
+  ...
+)
 
-\method{as_factor}{labelled}(x, ...)
+\method{as_factor}{labelled}(
+  x,
+  levels = c("default", "labels", "values", "both"),
+  ordered = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{Object to coerce to a factor.}
 
 \item{...}{Other arguments passed down to method.}
+
+\item{levels}{How to create the levels of the generated factor:
+
+  * "default": uses labels where available, otherwise the values.
+    Labels are sorted by value.
+  * "both": like "default", but pastes together the level and value
+  * "label": use only the labels; unlabelled values become `NA`
+  * "values": use only the values}
+
+\item{ordered}{If `TRUE` create an ordered (ordinal) factor, if
+`FALSE` (the default) create a regular (nominal) factor.}
 }
 \description{
 This extends [forcats::as_factor()] as well as [haven::as_factor()], by appending
@@ -33,20 +57,19 @@ ta loss in case of rich formatted and labelled data.
 }
 \details{
 Please refer to parent functions for extended documentation.
+To avoid redundancy calls and errors, functions are copy-pasted here
 }
 \examples{
-# will preserve all attributes but class
-\dontrun{
+# will preserve all attributes
 c(1, 4, 3, "A", 7, 8, 1) |> as_factor()
 structure(c(1, 2, 3, 2, 10, 9),
   labels = c(Unknown = 9, Refused = 10)
 ) |>
-  as_factor()
+  as_factor() |> dput()
 
 structure(c(1, 2, 3, 2, 10, 9),
   labels = c(Unknown = 9, Refused = 10),
   class = "haven_labelled"
 ) |>
   as_factor()
-}
 }

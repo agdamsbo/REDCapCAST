@@ -61,7 +61,7 @@ Imports:
     openxlsx2,
     readODS,
     forcats,
-    rlang
+    vctrs
 Collate: 
     'REDCapCAST-package.R'
     'utils.r'

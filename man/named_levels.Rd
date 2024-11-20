@@ -27,6 +27,8 @@ Get named vector of factor levels and values
 structure(c(1, 2, 3, 2, 10, 9),
   labels = c(Unknown = 9, Refused = 10),
   class = "haven_labelled"
-) |> as_factor() |> named_levels()
+) |>
+  as_factor() |>
+  named_levels()
 }
 }
