@@ -65,6 +65,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="st">"A"</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">fct2num</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid roman numeral: A</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5 6 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">10</span>, <span class="fl">9</span><span class="op">)</span>,</span></span>
@@ -96,8 +97,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8L, 3L, 3L, 9L, 10L, 1L, 4L, 2L), levels = c("7", "9", "10", </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "11", "12", "13", "14", "16", "17", "18", "19"), class = "factor")</span>
 <span class="r-in"><span><span class="fu"><a href="named_levels.html">named_levels</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7  9 10 11 12 13 14 16 17 18 19 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1  2  3  4  5  6  7  8  9 10 11 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9 11 14 10 13 18  7 19 12 16 17 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2  4  7  3  6 10  1 11  5  8  9 </span>
 <span class="r-in"><span><span class="fu">fct2num</span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  9 11 14 10 10 13 18  7 19 12 16 19 16 10 10 17 18  7 11  9</span>
 </code></pre></div>

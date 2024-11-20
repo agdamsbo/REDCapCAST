@@ -344,6 +344,12 @@ based on a set threshold for unique values:</p>
 <code class="sourceCode R"><span><span class="va">ds_parsed</span><span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/numchar2fct.html">numchar2fct</a></span><span class="op">(</span>numeric.threshold <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: There were 13 warnings in `dplyr::mutate()`.</span></span>
+<span><span class="co">#&gt; The first warning was:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `dplyr::across(...)`.</span></span>
+<span><span class="co">#&gt; Caused by warning in `.roman2numeric()`:</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> invalid roman numerals: inclusion inclusion follow1 follow1 inclusion follow1 follow2 follow1 follow1 follow2 follow2 follow2 inclusion follow1 follow2 follow1 follow1 follow2 follow2 follow2 inclusion follow1 follow1 follow1 inclusion</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 12 remaining warnings.</span></span>
 <span><span class="co">#&gt; tibble [25 × 27] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ record_id                   : num [1:25] 1 2 2 2 3 3 3 3 3 3 ...</span></span>
 <span><span class="co">#&gt;  $ redcap_event_name           : Factor w/ 3 levels "inclusion","follow1",..: 1 1 2 2 1 2 3 2 2 3 ...</span></span>
