@@ -24,7 +24,7 @@ server <- function(input, output, session) {
     out <- read_input(input$ds$datapath)
 
     # Saves labels to reapply later
-    labels <- lapply(out, get_attr)
+    # labels <- lapply(out, get_attr)
 
     out <- out |>
       ## Parses data with readr functions
@@ -44,10 +44,10 @@ server <- function(input, output, session) {
     }
 
     # Old attributes are appended
-    out <- purrr::imap(out,\(.x,.i){
-      set_attr(.x,labels[[.i]])
-    }) |>
-      dplyr::bind_cols()
+    # out <- purrr::imap(out,\(.x,.i){
+    #   set_attr(.x,labels[[.i]])
+    # }) |>
+    #   dplyr::bind_cols()
 
     out
   })
