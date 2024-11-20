@@ -5,6 +5,6 @@ account: agdamsbo
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11351429
-bundleId: 9392220
+bundleId: 9392320
 url: https://agdamsbo.shinyapps.io/redcapcast/
 version: 1
