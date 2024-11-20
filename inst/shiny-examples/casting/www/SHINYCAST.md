@@ -22,13 +22,15 @@ On the left, you initially just find one single option to upload a spreadsheet. 
 
 ### REDCap database files creation
 
-The spreadsheet column names will be adjusted to comply with REDCap naming criteria, and a renamed (adjusted) spreadsheet can be downloaded.
+The spreadsheet column names will be adjusted to comply with REDCap naming criteria, and a renamed (adjusted) spreadsheet can be downloaded. If your spreadsheet columns are labelled (exported from stata or labelled in R, these labels will be used for the visible field names (field label) i REDCap).
 
-Based on the uploaded spreadsheet, the app will make a qualified guess on data classes and if the data is labelled (like .rda or .dta) all this information will be included in the data dictionary file. The default data format is "text".
+Based on the uploaded spreadsheet, the app will make a qualified guess on data classes and if the data is labelled (like .rda or .dta) all this information will be included in the data dictionary file. The default data format is "text". In addition categorical variables can be specified manually, and you caon add an ID column , or assume the first column is the ID (please reorder before export).
 
-If you want to add data to an existing database, an instrument can be created. This metadata file is identical to a data dictionary, but does not include a "record_id" field and is packaged as a .zip file, which is uploaded in the "Designer" interface in REDCap.
+If you want to add data to an existing database, an instrument can be created. This metadata file is identical to a data dictionary, but does not include the ID field (if included or added) and is packaged as a .zip file, which is uploaded in the "Designer" interface in REDCap.
 
 ### Transferring directly to a REDCap database
+
+This feature is mainly a show-case. Use it if you like, but most will feel more secure doing manual uploads.
 
 Based on the API-functions in REDCap, you can upload your data dictionary and renamed data directly from this interface (no data is stored on the server, but consider launching this shiny app on your own machine after having installed the [REDCapCAST package](https://agdamsbo.github.io/REDCapCAST/#installation) in R). Launch a local instance of this app with:
 
@@ -56,10 +58,10 @@ This app and package can be cited using the following bibtex citation or by refe
 
 ```
   @agdamsboREDCapCAST{,
-    title = {REDCapCAST: REDCap Castellated Data Handling And Metadata Casting},
-    author = {Andreas Gammelgaard Damsbo and Paul Egeler},
+    title = {REDCapCAST: REDCap Castellated Data Handling and Metadata Casting},
+    author = {Andreas Gammelgaard Damsbo},
     year = {2024},
-    note = {R package version 24.11.1, https://agdamsbo.github.io/REDCapCAST/},
+    note = {R package version 24.11.2, https://agdamsbo.github.io/REDCapCAST/},
     url = {https://github.com/agdamsbo/REDCapCAST},
     doi = {10.5281/zenodo.8013984},
   }
