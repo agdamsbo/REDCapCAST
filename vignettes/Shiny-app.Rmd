@@ -69,11 +69,6 @@ redcapcast_data |>
 ```
 
 
-```{r}
-
-```
-
-
 Column classes can be passed to `parse_data()`.
 
 Making a few crude assumption for factorising data, `numchar2fct()` factorises numerical and character vectors based on a set threshold for unique values:
