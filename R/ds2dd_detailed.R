@@ -172,20 +172,20 @@ ds2dd_detailed <- function(data,
 
   if (convert.logicals) {
     # Labels/attributes are saved
-    labels <- lapply(data, \(.x){
-      get_attr(.x, attr = NULL)
-    })
+    # labels <- lapply(data, \(.x){
+    #   get_attr(.x, attr = NULL)
+    # })
 
-    no_attr <- data |>
+    data <- data |>
       ## Converts logical to factor, which overwrites attributes
-      dplyr::mutate(dplyr::across(dplyr::where(is.logical), forcats::as_factor))
+      dplyr::mutate(dplyr::across(dplyr::where(is.logical), as_factor))
 
     # Old attributes are appended
-    data <- purrr::imap(no_attr,\(.x,.i){
-      attributes(.x) <- c(attributes(.x),labels[[.i]])
-      .x
-    }) |>
-      dplyr::bind_cols()
+    # data <- purrr::imap(no_attr,\(.x,.i){
+    #   attributes(.x) <- c(attributes(.x),labels[[.i]])
+    #   .x
+    # }) |>
+    #   dplyr::bind_cols()
 
   }
 
@@ -262,7 +262,6 @@ ds2dd_detailed <- function(data,
     }
   }
 
-
   data_classes <- do.call(c, lapply(data, \(.x)class(.x)[1]))
 
   ## field_type
@@ -308,27 +307,15 @@ ds2dd_detailed <- function(data,
 
   ## choices
 
-  if (any(do.call(c, lapply(data, haven::is.labelled)))) {
-    factor_levels <- data |>
-      lapply(function(x) {
-        if (haven::is.labelled(x)) {
-          att <- haven_all_levels(x)
-          paste(paste(att, names(att), sep = ", "), collapse = " | ")
-        } else {
-          NA
-        }
-      }) |>
-      (\(x)do.call(c, x))()
-  } else {
-    factor_levels <- data |>
+  factor_levels <- data |>
       lapply(function(x) {
         if (is.factor(x)) {
-          ## Re-factors to avoid confusion with missing levels
-          ## Assumes all relevant levels are represented in the data
-          re_fac <- factor(x)
+          ## Custom function to ensure factor order and keep original values
+          ## Avoiding refactoring to keep as much information as possible
+          lvls <- sort(named_levels(x))
           paste(
-            paste(seq_along(levels(re_fac)),
-              levels(re_fac),
+            paste(lvls,
+              names(lvls),
               sep = ", "
             ),
             collapse = " | "
@@ -338,7 +325,6 @@ ds2dd_detailed <- function(data,
         }
       }) |>
       (\(x)do.call(c, x))()
-  }
 
   dd <-
     dd |> dplyr::mutate(
@@ -355,33 +341,6 @@ ds2dd_detailed <- function(data,
       stats::setNames(dd$field_name),
     meta = dd
   )
-}
-
-#' Finish incomplete haven attributes substituting missings with values
-#'
-#' @param data haven labelled variable
-#'
-#' @return named vector
-#' @export
-#'
-#' @examples
-#' ds <- structure(c(1, 2, 3, 2, 10, 9),
-#'   labels = c(Unknown = 9, Refused = 10),
-#'   class = "haven_labelled"
-#' )
-#' haven::is.labelled(ds)
-#' attributes(ds)
-#' ds |> haven_all_levels()
-haven_all_levels <- function(data) {
-  stopifnot(haven::is.labelled(data))
-  if (length(attributes(data)$labels) == length(unique(data))) {
-    out <- attributes(data)$labels
-  } else {
-    att <- attributes(data)$labels
-    out <- c(unique(data[!data %in% att]), att) |>
-      stats::setNames(c(unique(data[!data %in% att]), names(att)))
-  }
-  out
 }
 
 
@@ -567,50 +526,6 @@ numchar2fct <- function(data, numeric.threshold = 6, character.throshold = 6) {
     )
 }
 
-#' Extract attribute. Returns NA if none
-#'
-#' @param data vector
-#' @param attr attribute name
-#'
-#' @return character vector
-#' @export
-#'
-#' @examples
-#' attr(mtcars$mpg, "label") <- "testing"
-#' sapply(mtcars, get_attr)
-#' lapply(mtcars, \(.x)get_attr(.x, NULL))
-#' mtcars |>
-#'   numchar2fct(numeric.threshold = 6) |>
-#'   ds2dd_detailed()
-get_attr <- function(data, attr = NULL) {
-  if (is.null(attr)) {
-    attributes(data)
-  } else {
-    a <- attr(data, attr, exact = TRUE)
-    if (is.null(a)) {
-      NA
-    } else {
-      a
-    }
-  }
-}
 
 
-#' Set attributes for named attribute. Appends if attr is NULL
-#'
-#' @param data vector
-#' @param label label
-#' @param attr attribute name
-#'
-#' @return vector with attribute
-#' @export
-#'
-set_attr <- function(data, label, attr = NULL) {
-  if (is.null(attr)) {
-    attributes(data) <- c(attributes(data),label)
-  } else {
-    attr(data, attr) <- label
-  }
-  data
-}
 
