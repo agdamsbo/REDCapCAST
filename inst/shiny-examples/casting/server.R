@@ -103,53 +103,12 @@ server <- function(input, output, session) {
 
   output$data.tbl <- gt::render_gt(
     dd() |>
-      purrr::pluck("data") |>
-      head(20) |>
-      # dplyr::tibble() |>
-      gt::gt() |>
-      gt::tab_style(
-        style = gt::cell_text(weight = "bold"),
-        locations = gt::cells_column_labels(dplyr::everything())
-      ) |>
-      gt::tab_header(
-        title = "Imported data preview",
-        subtitle = "The first 20 subjects of the supplied dataset for reference."
-      )
+      cast_data_overview()
   )
 
   output$meta.tbl <- gt::render_gt(
     dd() |>
-      purrr::pluck("meta") |>
-      # dplyr::tibble() |>
-      dplyr::mutate(
-        dplyr::across(
-          dplyr::everything(),
-          \(.x) {
-            .x[is.na(.x)] <- ""
-            return(.x)
-          }
-        )
-      ) |>
-      dplyr::select(1:8) |>
-      gt::gt() |>
-      gt::tab_style(
-        style = gt::cell_text(weight = "bold"),
-        locations = gt::cells_column_labels(dplyr::everything())
-      ) |>
-      gt::tab_header(
-        title = "Generated metadata",
-        subtitle = "Only the first 8 columns are modified using REDCapCAST. Download the metadata to see everything."
-      ) |>
-      gt::tab_style(
-        style = gt::cell_borders(
-          sides = c("left", "right"),
-          color = "grey80",
-          weight = gt::px(1)
-        ),
-        locations = gt::cells_body(
-          columns = dplyr::everything()
-        )
-      )
+      cast_meta_overview()
   )
 
   # Downloadable csv of dataset ----

@@ -78,3 +78,69 @@ read_input <- function(file, consider.na = c("NA", '""', "")) {
 
   df
 }
+
+#' Overview of REDCapCAST data for shiny
+#'
+#' @param data list with class 'REDCapCAST'
+#'
+#' @return gt object
+#' @export
+cast_data_overview <- function(data){
+  stopifnot("REDCapCAST" %in% class(data))
+  data |>
+    purrr::pluck("data") |>
+    head(20) |>
+    # dplyr::tibble() |>
+    gt::gt() |>
+    gt::tab_style(
+      style = gt::cell_text(weight = "bold"),
+      locations = gt::cells_column_labels(dplyr::everything())
+    ) |>
+    gt::tab_header(
+      title = "Imported data preview",
+      subtitle = "The first 20 subjects of the supplied dataset for reference."
+    )
+}
+
+
+#' Overview of REDCapCAST meta data for shiny
+#'
+#' @param data list with class 'REDCapCAST'
+#'
+#' @return gt object
+#' @export
+cast_meta_overview <- function(data){
+  stopifnot("REDCapCAST" %in% class(data))
+  data |>
+    purrr::pluck("meta") |>
+    # dplyr::tibble() |>
+    dplyr::mutate(
+      dplyr::across(
+        dplyr::everything(),
+        \(.x) {
+          .x[is.na(.x)] <- ""
+          return(.x)
+        }
+      )
+    ) |>
+    dplyr::select(1:8) |>
+    gt::gt() |>
+    gt::tab_style(
+      style = gt::cell_text(weight = "bold"),
+      locations = gt::cells_column_labels(dplyr::everything())
+    ) |>
+    gt::tab_header(
+      title = "Generated metadata",
+      subtitle = "Only the first 8 columns are modified using REDCapCAST. Download the metadata to see everything."
+    ) |>
+    gt::tab_style(
+      style = gt::cell_borders(
+        sides = c("left", "right"),
+        color = "grey80",
+        weight = gt::px(1)
+      ),
+      locations = gt::cells_body(
+        columns = dplyr::everything()
+      )
+    )
+}

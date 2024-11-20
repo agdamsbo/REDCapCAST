@@ -197,6 +197,8 @@ ds2dd_detailed <- function(data,
       record_id = seq_len(nrow(data)),
       data
     )
+    # set_attr(data$record_id,label="ID",attr="label")
+
     message("A default id column has been added")
   }
 
@@ -337,12 +339,15 @@ ds2dd_detailed <- function(data,
       )
     )
 
-  list(
+  out <- list(
     data = data |>
       hms2character() |>
       stats::setNames(dd$field_name),
     meta = dd
   )
+
+  class(out) <- c("REDCapCAST",class(out))
+  out
 }
 
 

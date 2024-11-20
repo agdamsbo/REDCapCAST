@@ -29,7 +29,6 @@ Suggests:
     Hmisc,
     knitr,
     rmarkdown,
-    gt,
     ggplot2,
     here,
     styler,
@@ -61,7 +60,8 @@ Imports:
     openxlsx2,
     readODS,
     forcats,
-    vctrs
+    vctrs,
+    gt
 Collate: 
     'REDCapCAST-package.R'
     'utils.r'
