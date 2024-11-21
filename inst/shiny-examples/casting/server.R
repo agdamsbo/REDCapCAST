@@ -17,20 +17,22 @@ server <- function(input, output, session) {
     file = NULL
   )
 
-  dat <- shiny::reactive({
+  ds <- shiny::reactive({
     shiny::req(input$ds)
 
     out <- read_input(input$ds$datapath)
 
-    # Saves labels to reapply later
-    # labels <- lapply(out, get_attr)
-
     out <- out |>
       ## Parses data with readr functions
       parse_data() |>
-      ## Converts logical to factor, which overwrites attributes
-      ##
+      ## Converts logical to factor, preserving attributes with own function
       dplyr::mutate(dplyr::across(dplyr::where(is.logical), as_factor))
+
+    out
+  })
+
+  dat <- shiny::reactive({
+    out <- ds()
 
     if (!is.null(input$factor_vars)) {
       out <- out |>
@@ -41,12 +43,6 @@ server <- function(input, output, session) {
           )
         )
     }
-
-    # Old attributes are appended
-    # out <- purrr::imap(out,\(.x,.i){
-    #   set_attr(.x,labels[[.i]])
-    # }) |>
-    #   dplyr::bind_cols()
 
     out
   })

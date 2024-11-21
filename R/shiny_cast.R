@@ -50,7 +50,7 @@ file_extension <- function(filenames) {
 #' @examples
 #' read_input("https://raw.githubusercontent.com/agdamsbo/cognitive.index.lookup/main/data/sample.csv")
 read_input <- function(file, consider.na = c("NA", '""', "")) {
-  ext <- tools::file_ext(file)
+  ext <- tolower(tools::file_ext(file))
 
   tryCatch(
     {
@@ -66,7 +66,7 @@ read_input <- function(file, consider.na = c("NA", '""', "")) {
         df <- readr::read_rds(file = file)
       }else {
         stop("Input file format has to be on of:
-             '.csv', '.xls', '.xlsx', '.dta', '.rds' or '.ods'")
+             '.csv', '.xls', '.xlsx', '.dta', '.ods' or '.rds'")
       }
     },
     error = function(e) {
