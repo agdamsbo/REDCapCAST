@@ -63,8 +63,8 @@ server <- function(input, output, session) {
     v$file <- "loaded"
     ds2dd_detailed(
       data = dat(),
-      add.auto.id = input$add_id=="yes"
-        )
+      add.auto.id = input$add_id == "yes"
+    )
   })
 
   output$uploaded <- shiny::reactive({
@@ -131,8 +131,9 @@ server <- function(input, output, session) {
     filename = paste0("REDCapCAST_instrument", Sys.Date(), ".zip"),
     content = function(file) {
       export_redcap_instrument(purrr::pluck(dd(), "meta"),
-                               file = file,
-                               record.id = ifelse(input$add_id=="none",NA,names(dat())[1]))
+        file = file,
+        record.id = ifelse(input$add_id == "none", NA, names(dat())[1])
+      )
     }
   )
 

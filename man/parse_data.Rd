@@ -33,9 +33,7 @@ data.frame or tibble
 Helper to auto-parse un-formatted data with haven and readr
 }
 \examples{
-\dontrun{
 mtcars |>
   parse_data() |>
   str()
-}
 }

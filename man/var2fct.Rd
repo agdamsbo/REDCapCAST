@@ -19,7 +19,6 @@ This is a wrapper of forcats::as_factor, which sorts numeric vectors before
 factoring, but levels character vectors in order of appearance.
 }
 \examples{
-\dontrun{
 sample(seq_len(4), 20, TRUE) |>
   var2fct(6) |>
   summary()
@@ -27,5 +26,4 @@ sample(letters, 20) |>
   var2fct(6) |>
   summary()
 sample(letters[1:4], 20, TRUE) |> var2fct(6)
-}
 }

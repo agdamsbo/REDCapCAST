@@ -141,10 +141,15 @@ hms2character <- function(data) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' data <- REDCapCAST::redcapcast_data
-#' data |> ds2dd_detailed()
+#' ## Basic parsing with default options
+#' REDCapCAST::redcapcast_data |>
+#'   dplyr::select(-dplyr::starts_with("redcap_")) |>
+#'   ds2dd_detailed()
+#'
+#' ## Adding a record_id field
 #' iris |> ds2dd_detailed(add.auto.id = TRUE)
+#'
+#' ## Passing form name information to function
 #' iris |>
 #'   ds2dd_detailed(
 #'     add.auto.id = TRUE,
@@ -152,13 +157,14 @@ hms2character <- function(data) {
 #'   ) |>
 #'   purrr::pluck("meta")
 #' mtcars |> ds2dd_detailed(add.auto.id = TRUE)
+#'
+#' ## Using column name suffix to carry form name
 #' data <- iris |>
 #'   ds2dd_detailed(add.auto.id = TRUE) |>
 #'   purrr::pluck("data")
 #' names(data) <- glue::glue("{sample(x = c('a','b'),size = length(names(data)),
 #' replace=TRUE,prob = rep(x=.5,2))}__{names(data)}")
 #' data |> ds2dd_detailed(form.sep = "__")
-#' }
 ds2dd_detailed <- function(data,
                            add.auto.id = FALSE,
                            date.format = "dmy",
@@ -171,24 +177,18 @@ ds2dd_detailed <- function(data,
                            field.validation = NULL,
                            metadata = names(REDCapCAST::redcapcast_meta),
                            convert.logicals = TRUE) {
+  # Repair empty columns
+  # These where sometimes classed as factors or
+  # if (any(sapply(data,all_na))){
+  #   data <- data |>
+  #     ## Converts logical to factor, which overwrites attributes
+  #     dplyr::mutate(dplyr::across(dplyr::where(all_na), as.character))
+  # }
 
   if (convert.logicals) {
-    # Labels/attributes are saved
-    # labels <- lapply(data, \(.x){
-    #   get_attr(.x, attr = NULL)
-    # })
-
     data <- data |>
       ## Converts logical to factor, which overwrites attributes
       dplyr::mutate(dplyr::across(dplyr::where(is.logical), as_factor))
-
-    # Old attributes are appended
-    # data <- purrr::imap(no_attr,\(.x,.i){
-    #   attributes(.x) <- c(attributes(.x),labels[[.i]])
-    #   .x
-    # }) |>
-    #   dplyr::bind_cols()
-
   }
 
   ## Handles the odd case of no id column present
@@ -197,9 +197,6 @@ ds2dd_detailed <- function(data,
       record_id = seq_len(nrow(data)),
       data
     )
-    # set_attr(data$record_id,label="ID",attr="label")
-
-    message("A default id column has been added")
   }
 
   ## ---------------------------------------
@@ -227,6 +224,9 @@ ds2dd_detailed <- function(data,
         dd$form_name <- clean_redcap_name(Reduce(c, lapply(parts, \(.x) .x[[length(.x)]])))
         dd$field_name <- Reduce(c, lapply(parts, \(.x) paste(.x[seq_len(length(.x) - 1)], collapse = form.sep)))
       }
+      ## To preserve original
+      colnames(data) <- dd$field_name
+      dd$field_name <- tolower(dd$field_name)
     } else {
       dd$form_name <- "data"
       dd$field_name <- gsub(" ", "_", tolower(colnames(data)))
@@ -251,14 +251,20 @@ ds2dd_detailed <- function(data,
   if (is.null(field.label)) {
     dd$field_label <- data |>
       sapply(function(x) {
-        get_attr(x, attr = field.label.attr)
+        get_attr(x, attr = field.label.attr) |>
+          compact_vec()
       })
 
     dd <-
-      dd |> dplyr::mutate(field_label = dplyr::if_else(is.na(field_label),
-        field_name, field_label
-      ))
+      dd |>
+      dplyr::mutate(
+        field_label = dplyr::if_else(is.na(field_label),
+          colnames(data),
+          field_label
+        )
+      )
   } else {
+    ## It really should be unique for each: same length as number of variables
     if (length(field.label) == 1 || length(field.label) == nrow(dd)) {
       dd$field_label <- field.label
     } else {
@@ -312,23 +318,16 @@ ds2dd_detailed <- function(data,
   ## choices
 
   factor_levels <- data |>
-      lapply(function(x) {
-        if (is.factor(x)) {
-          ## Custom function to ensure factor order and keep original values
-          ## Avoiding refactoring to keep as much information as possible
-          lvls <- sort(named_levels(x))
-          paste(
-            paste(lvls,
-              names(lvls),
-              sep = ", "
-            ),
-            collapse = " | "
-          )
-        } else {
-          NA
-        }
-      }) |>
-      (\(x)do.call(c, x))()
+    sapply(function(x) {
+      if (is.factor(x)) {
+        ## Custom function to ensure factor order and keep original values
+        ## Avoiding refactoring to keep as much information as possible
+        sort(named_levels(x)) |>
+          vec2choice()
+      } else {
+        NA
+      }
+    })
 
   dd <-
     dd |> dplyr::mutate(
@@ -346,10 +345,22 @@ ds2dd_detailed <- function(data,
     meta = dd
   )
 
-  class(out) <- c("REDCapCAST",class(out))
+  class(out) <- c("REDCapCAST", class(out))
   out
 }
 
+#' Check if vector is all NA
+#'
+#' @param data vector of data.frame
+#'
+#' @return logical
+#' @export
+#'
+#' @examples
+#' rep(NA,4) |> all_na()
+all_na <- function(data){
+  all(is.na(data))
+}
 
 #' Guess time variables based on naming pattern
 #'
@@ -423,11 +434,9 @@ mark_complete <- function(upload, ls) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' mtcars |>
 #'   parse_data() |>
 #'   str()
-#' }
 parse_data <- function(data,
                        guess_type = TRUE,
                        col_types = NULL,
@@ -483,7 +492,6 @@ parse_data <- function(data,
 #' @importFrom forcats as_factor
 #'
 #' @examples
-#' \dontrun{
 #' sample(seq_len(4), 20, TRUE) |>
 #'   var2fct(6) |>
 #'   summary()
@@ -491,7 +499,6 @@ parse_data <- function(data,
 #'   var2fct(6) |>
 #'   summary()
 #' sample(letters[1:4], 20, TRUE) |> var2fct(6)
-#' }
 var2fct <- function(data, unique.n) {
   if (length(unique(data)) <= unique.n) {
     as_factor(data)
@@ -540,5 +547,59 @@ numchar2fct <- function(data, numeric.threshold = 6, character.throshold = 6) {
 }
 
 
+#' Named vector to REDCap choices (`wrapping compact_vec()`)
+#'
+#' @param data named vector
+#'
+#' @return character string
+#' @export
+#'
+#' @examples
+#' sample(seq_len(4), 20, TRUE) |>
+#'   as_factor() |>
+#'   named_levels() |>
+#'   sort() |>
+#'   vec2choice()
+vec2choice <- function(data) {
+  compact_vec(data,nm.sep = ", ",val.sep = " | ")
+}
 
+#' Compacting a vector of any length with or without names
+#'
+#' @param data vector, optionally named
+#' @param nm.sep string separating name from value if any
+#' @param val.sep string separating values
+#'
+#' @return character string
+#' @export
+#'
+#' @examples
+#' sample(seq_len(4), 20, TRUE) |>
+#'   as_factor() |>
+#'   named_levels() |>
+#'   sort() |>
+#'   compact_vec()
+#' 1:6 |> compact_vec()
+#' "test" |> compact_vec()
+#' sample(letters[1:9], 20, TRUE) |> compact_vec()
+compact_vec <- function(data,nm.sep=": ",val.sep="; ") {
+  # browser()
+  if (all(is.na(data))) {
+    return(data)
+  }
 
+  if (length(names(data)) > 0) {
+    paste(
+      paste(data,
+        names(data),
+        sep = nm.sep
+      ),
+      collapse = val.sep
+    )
+  } else {
+    paste(
+      data,
+      collapse = val.sep
+    )
+  }
+}

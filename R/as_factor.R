@@ -56,13 +56,14 @@ as_factor.numeric <- function(x, ...) {
 #' @export
 as_factor.character <- function(x, ...) {
   labels <- get_attr(x)
-  if (is.roman(x)){
+  if (possibly_roman(x)){
     x <- factor(x)
   } else {
   x <- structure(
     forcats::fct_inorder(x),
     label = attr(x, "label", exact = TRUE)
-  )}
+  )
+  }
   set_attr(x, labels, overwrite = FALSE)
 }
 
@@ -201,11 +202,19 @@ named_levels <- function(data, label = "labels", na.label = NULL, na.value = 99)
     )
   }
 
-  d <- data.frame(
-    name = levels(data)[data],
-    value = as.numeric(data)
-  ) |>
-    unique()
+  # Handle empty factors
+  if (all_na(data)){
+    d <- data.frame(
+      name = levels(data),
+      value = seq_along(levels(data))
+    )
+  } else {
+    d <- data.frame(
+      name = levels(data)[data],
+      value = as.numeric(data)
+    ) |>
+      unique()
+  }
 
   ## Applying labels
   attr_l <- attr(x = data, which = label, exact = TRUE)
@@ -227,8 +236,21 @@ named_levels <- function(data, label = "labels", na.label = NULL, na.value = 99)
   out
 }
 
-is.roman <- function(data){
-  identical(data,as.character(utils::as.roman(data)))
+#' Test if vector can be interpreted as roman numerals
+#'
+#' @param data character vector
+#'
+#' @return logical
+#' @export
+#'
+#' @examples
+#' sample(1:100,10) |> as.roman() |> possibly_roman()
+#' sample(c(TRUE,FALSE),10,TRUE)|> possibly_roman()
+#' rep(NA,10)|> possibly_roman()
+possibly_roman <- function(data){
+  # browser()
+  if (all(is.na(data))) return(FALSE)
+  identical(as.character(data),as.character(utils::as.roman(data)))
 }
 
 

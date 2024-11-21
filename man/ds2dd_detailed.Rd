@@ -75,10 +75,15 @@ Ensure, that the data set is formatted with as much information as possible.
 `field.type` can be supplied
 }
 \examples{
-\dontrun{
-data <- REDCapCAST::redcapcast_data
-data |> ds2dd_detailed()
+## Basic parsing with default options
+REDCapCAST::redcapcast_data |>
+  dplyr::select(-dplyr::starts_with("redcap_")) |>
+  ds2dd_detailed()
+
+## Adding a record_id field
 iris |> ds2dd_detailed(add.auto.id = TRUE)
+
+## Passing form name information to function
 iris |>
   ds2dd_detailed(
     add.auto.id = TRUE,
@@ -86,11 +91,12 @@ iris |>
   ) |>
   purrr::pluck("meta")
 mtcars |> ds2dd_detailed(add.auto.id = TRUE)
+
+## Using column name suffix to carry form name
 data <- iris |>
   ds2dd_detailed(add.auto.id = TRUE) |>
   purrr::pluck("data")
 names(data) <- glue::glue("{sample(x = c('a','b'),size = length(names(data)),
 replace=TRUE,prob = rep(x=.5,2))}__{names(data)}")
 data |> ds2dd_detailed(form.sep = "__")
-}
 }

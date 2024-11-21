@@ -21,7 +21,6 @@ shiny_cast <- function(...) {
 }
 
 
-
 #' DEPRECATED Helper to import files correctly
 #'
 #' @param filenames file names
