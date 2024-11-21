@@ -93,14 +93,14 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">19</span>,<span class="fl">20</span>,<span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dput.html" class="external-link">dput</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> structure(c(2L, 4L, 7L, 3L, 3L, 6L, 10L, 1L, 11L, 5L, 8L, 11L, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8L, 3L, 3L, 9L, 10L, 1L, 4L, 2L), levels = c("7", "9", "10", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> "11", "12", "13", "14", "16", "17", "18", "19"), class = "factor")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> structure(c(10L, 9L, 3L, 2L, 6L, 9L, 3L, 5L, 4L, 9L, 1L, 6L, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5L, 5L, 3L, 8L, 2L, 7L, 1L, 11L), levels = c("6", "7", "8", "9", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> "11", "12", "13", "14", "15", "16", "17"), class = "factor")</span>
 <span class="r-in"><span><span class="fu"><a href="named_levels.html">named_levels</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9 11 14 10 13 18  7 19 12 16 17 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2  4  7  3  6 10  1 11  5  8  9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16 15  8  7 12 11  9  6 14 13 17 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  9  3  2  6  5  4  1  8  7 11 </span>
 <span class="r-in"><span><span class="fu">fct2num</span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  9 11 14 10 10 13 18  7 19 12 16 19 16 10 10 17 18  7 11  9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 16 15  8  7 12 15  8 11  9 15  6 12 11 11  8 14  7 13  6 17</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
