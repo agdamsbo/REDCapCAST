@@ -1,12 +1,12 @@
 # REDCapCAST 24.11.2
 
-24.11.1 was rejected on CRAN based on wrong title capitalisation. This was an opportunity to extend the package overhaul.
+24.11.1 was rejected on CRAN based on wrong title capitalisation. This was an opportunity to extend the package overhaul. And this actually turned out to be a major step towards a very usable shiny app which have received most of the focus.
 
-Documentation has been updated. Data parser functions have been added (based on readr) and separated from the ds2dd_detailed(). Now also includes conversion of logicals to factor as REDCap truefalse class follows different naming conversion compared to R. Also correct support for variable labels as field labels (use .rds formatted data and label with labelled::var_label())
+I have implemented option to specify categorical variables to factorize, but doing this with a modified version of {forcats} and {haven}'s `as_factor()`, that will preserve any attributes applied to the data to be able to upload and cast REDCap meta data from richly formatted data (use .rds). No matter the input type, all input is parsed using the default options from  the {readr} package. Also to avoid mis-labelling, logicals are converted to factors as REDCap truefalse class follows different naming conversion compared to R. Also correct support for variable labels as field labels (use .rds formatted data and label with labelled::var_label())
 
 Vignettes and documentation have been restructured.
 
-This package has been detached from the REDCapRITS, which it was originally forked from. The data split function will be kept, while testing will be rewritten. This projects has evolved away from the original fork, so I think this detachment is fair.
+This package has been detached from the REDCapRITS, which it was originally forked from. The data split function will be kept, while testing will be rewritten. This projects has evolved away from the original fork.
 
 # REDCapCAST 24.11.1
 
