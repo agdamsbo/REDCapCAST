@@ -39,10 +39,10 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="24.11.2" id="redcapcast-24112">REDCapCAST 24.11.2<a class="anchor" aria-label="anchor" href="#redcapcast-24112"></a></h2>
-<p>24.11.1 was rejected on CRAN based on wrong title capitalisation. This was an opportunity to extend the package overhaul.</p>
-<p>Documentation has been updated. Data parser functions have been added (based on readr) and separated from the ds2dd_detailed(). Now also includes conversion of logicals to factor as REDCap truefalse class follows different naming conversion compared to R. Also correct support for variable labels as field labels (use .rds formatted data and label with labelled::var_label())</p>
+<p>24.11.1 was rejected on CRAN based on wrong title capitalisation. This was an opportunity to extend the package overhaul. And this actually turned out to be a major step towards a very usable shiny app which have received most of the focus.</p>
+<p>I have implemented option to specify categorical variables to factorize, but doing this with a modified version of {forcats} and {haven}’s <code><a href="../reference/as_factor.html">as_factor()</a></code>, that will preserve any attributes applied to the data to be able to upload and cast REDCap meta data from richly formatted data (use .rds). No matter the input type, all input is parsed using the default options from the {readr} package. Also to avoid mis-labelling, logicals are converted to factors as REDCap truefalse class follows different naming conversion compared to R. Also correct support for variable labels as field labels (use .rds formatted data and label with labelled::var_label())</p>
 <p>Vignettes and documentation have been restructured.</p>
-<p>This package has been detached from the REDCapRITS, which it was originally forked from. The data split function will be kept, while testing will be rewritten. This projects has evolved away from the original fork, so I think this detachment is fair.</p>
+<p>This package has been detached from the REDCapRITS, which it was originally forked from. The data split function will be kept, while testing will be rewritten. This projects has evolved away from the original fork.</p>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="24.11.1" id="redcapcast-24111">REDCapCAST 24.11.1<a class="anchor" aria-label="anchor" href="#redcapcast-24111"></a></h2>
