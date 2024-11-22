@@ -38,7 +38,7 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="24.11.2" id="redcapcast-24112">REDCapCAST 24.11.2<a class="anchor" aria-label="anchor" href="#redcapcast-24112"></a></h2>
+<h2 class="pkg-version" data-toc-text="24.11.2" id="redcapcast-24112">REDCapCAST 24.11.2<a class="anchor" aria-label="anchor" href="#redcapcast-24112"></a></h2><p class="text-muted">CRAN release: 2024-11-22</p>
 <p>24.11.1 was rejected on CRAN based on wrong title capitalisation. This was an opportunity to extend the package overhaul. And this actually turned out to be a major step towards a very usable shiny app which have received most of the focus.</p>
 <p>I have implemented option to specify categorical variables to factorize, but doing this with a modified version of {forcats} and {haven}’s <code><a href="../reference/as_factor.html">as_factor()</a></code>, that will preserve any attributes applied to the data to be able to upload and cast REDCap meta data from richly formatted data (use .rds). No matter the input type, all input is parsed using the default options from the {readr} package. Also to avoid mis-labelling, logicals are converted to factors as REDCap truefalse class follows different naming conversion compared to R. Also correct support for variable labels as field labels (use .rds formatted data and label with labelled::var_label())</p>
 <p>Vignettes and documentation have been restructured.</p>
