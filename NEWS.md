@@ -1,3 +1,8 @@
+# REDCapCAST 24.11.3
+
+* BUG: shiny_cast() fails to load as I missed loading REDCapCAST library in ui.r. Fixed. Tests would be great.
+
+
 # REDCapCAST 24.11.2
 
 24.11.1 was rejected on CRAN based on wrong title capitalisation. This was an opportunity to extend the package overhaul. And this actually turned out to be a major step towards a very usable shiny app which have received most of the focus.
