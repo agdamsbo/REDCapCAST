@@ -8,7 +8,6 @@ library(dplyr)
 library(devtools)
 if (!requireNamespace("REDCapCAST")) {
   devtools::install_github("agdamsbo/REDCapCAST", quiet = TRUE, upgrade = "never")
-  # install.packages("REDCapCAST")
 }
 library(REDCapCAST)
 
