@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">REDCapCAST</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.11.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.11.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Extract data from stata file for data dictionary</h1>
-      <small class="dont-index">Source: <a href="https://github.com/agdamsbo/REDCapCAST/blob/v24.11.3/R/ds2dd_detailed.R" class="external-link"><code>R/ds2dd_detailed.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/agdamsbo/REDCapCAST/blob/main/R/ds2dd_detailed.R" class="external-link"><code>R/ds2dd_detailed.R</code></a></small>
       <div class="d-none name"><code>ds2dd_detailed.Rd</code></div>
     </div>
 
@@ -55,7 +55,7 @@
 <span>  field.label <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  field.label.attr <span class="op">=</span> <span class="st">"label"</span>,</span>
 <span>  field.validation <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  metadata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">REDCapCAST</span><span class="fu">::</span><span class="va"><a href="redcapcast_meta.html">redcapcast_meta</a></span><span class="op">)</span>,</span>
+<span>  metadata <span class="op">=</span> <span class="fu">REDCapCAST</span><span class="fu">::</span><span class="fu"><a href="redcap_meta_default.html">redcap_meta_default</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  convert.logicals <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -120,7 +120,7 @@ file with `haven::read_dta()`).</p></dd>
 
 <dt id="arg-metadata">metadata<a class="anchor" aria-label="anchor" href="#arg-metadata"></a></dt>
 <dd><p>redcap metadata headings. Default is
-REDCapCAST:::metadata_names.</p></dd>
+REDCapCAST::redcap_meta_default().</p></dd>
 
 
 <dt id="arg-convert-logicals">convert.logicals<a class="anchor" aria-label="anchor" href="#arg-convert-logicals"></a></dt>
@@ -143,7 +143,8 @@ Please, do always inspect the data dictionary before upload.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Basic parsing with default options</span></span></span>
-<span class="r-in"><span><span class="fu">REDCapCAST</span><span class="fu">::</span><span class="va"><a href="redcapcast_data.html">redcapcast_data</a></span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"REDCapCAST"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">redcapcast_data</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"redcap_"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">ds2dd_detailed</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
@@ -322,12 +323,12 @@ Please, do always inspect the data dictionary before upload.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 18</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   field_name   form_name section_header field_type field_label </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> record_id    a         <span style="color: #BB0000;">NA</span>             text       record_id   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> record_id    b         <span style="color: #BB0000;">NA</span>             text       record_id   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> sepal.length a         <span style="color: #BB0000;">NA</span>             text       sepal.length</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> sepal.width  a         <span style="color: #BB0000;">NA</span>             text       sepal.width </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> petal.length b         <span style="color: #BB0000;">NA</span>             text       petal.length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> sepal.width  b         <span style="color: #BB0000;">NA</span>             text       sepal.width </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> petal.length a         <span style="color: #BB0000;">NA</span>             text       petal.length</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> petal.width  b         <span style="color: #BB0000;">NA</span>             text       petal.width </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> species      b         <span style="color: #BB0000;">NA</span>             radio      species     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> species      a         <span style="color: #BB0000;">NA</span>             radio      species     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;chr&gt;, field_note &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_min &lt;lgl&gt;, text_validation_max &lt;lgl&gt;, identifier &lt;lgl&gt;,</span></span>

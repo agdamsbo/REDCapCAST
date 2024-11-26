@@ -9,7 +9,7 @@ for a more advanced function."><meta property="og:image" content="https://agdams
 
     <a class="navbar-brand me-2" href="../index.html">REDCapCAST</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.11.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.11.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@ for a more advanced function."><meta property="og:image" content="https://agdams
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>(DEPRECATED) Data set to data dictionary function</h1>
-      <small class="dont-index">Source: <a href="https://github.com/agdamsbo/REDCapCAST/blob/v24.11.3/R/ds2dd.R" class="external-link"><code>R/ds2dd.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/agdamsbo/REDCapCAST/blob/main/R/ds2dd_detailed.R" class="external-link"><code>R/ds2dd_detailed.R</code></a></small>
       <div class="d-none name"><code>ds2dd.Rd</code></div>
     </div>
 
@@ -54,7 +54,7 @@ for a more advanced function.</p>
 <span>  field.type <span class="op">=</span> <span class="st">"text"</span>,</span>
 <span>  field.label <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  include.column.names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  metadata <span class="op">=</span> <span class="va">metadata_names</span></span>
+<span>  metadata <span class="op">=</span> <span class="fu">REDCapCAST</span><span class="fu">::</span><span class="fu"><a href="redcap_meta_default.html">redcap_meta_default</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -94,7 +94,7 @@ column names for original data set for upload.</p></dd>
 
 <dt id="arg-metadata">metadata<a class="anchor" aria-label="anchor" href="#arg-metadata"></a></dt>
 <dd><p>Metadata column names. Default is the included
-REDCapCAST::metadata_names.</p></dd>
+REDCapCAST::redcap_meta_default.</p></dd>
 
 </dl></div>
     <div class="section level2">

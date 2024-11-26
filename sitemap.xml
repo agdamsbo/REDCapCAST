@@ -18,6 +18,7 @@
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/cast_meta_overview.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/char2choice.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/char2cond.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/clean_field_label.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/clean_redcap_name.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/compact_vec.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/create_html_table.html</loc></url>
@@ -58,7 +59,9 @@
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/process_user_input.response.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/read_input.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/read_redcap_instrument.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/read_redcap_labelled.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/read_redcap_tables.html</loc></url>
+<url><loc>https://agdamsbo.github.io/REDCapCAST/reference/redcap_meta_default.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/redcap_wider.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/redcapcast_data.html</loc></url>
 <url><loc>https://agdamsbo.github.io/REDCapCAST/reference/redcapcast_meta.html</loc></url>

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">REDCapCAST</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.11.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.11.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Allows conversion of factor to numeric values preserving original levels</h1>
-      <small class="dont-index">Source: <a href="https://github.com/agdamsbo/REDCapCAST/blob/v24.11.3/R/as_factor.R" class="external-link"><code>R/as_factor.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/agdamsbo/REDCapCAST/blob/main/R/as_factor.R" class="external-link"><code>R/as_factor.R</code></a></small>
       <div class="d-none name"><code>fct2num.Rd</code></div>
     </div>
 
@@ -91,16 +91,16 @@
 <span class="r-in"><span><span class="co">#   as_factor() |&gt;</span></span></span>
 <span class="r-in"><span><span class="co">#   fct2num()</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">19</span>,<span class="fl">20</span>,<span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">19</span>, <span class="fl">20</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dput.html" class="external-link">dput</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> structure(c(10L, 9L, 3L, 2L, 6L, 9L, 3L, 5L, 4L, 9L, 1L, 6L, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5L, 5L, 3L, 8L, 2L, 7L, 1L, 11L), levels = c("6", "7", "8", "9", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> "11", "12", "13", "14", "15", "16", "17"), class = "factor")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> structure(c(7L, 1L, 10L, 3L, 10L, 10L, 9L, 8L, 3L, 2L, 6L, 8L, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3L, 5L, 4L, 8L, 1L, 6L, 5L, 5L), levels = c("6", "7", "8", "9", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> "11", "12", "13", "15", "16", "17"), class = "factor")</span>
 <span class="r-in"><span><span class="fu"><a href="named_levels.html">named_levels</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 15  8  7 12 11  9  6 14 13 17 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  9  3  2  6  5  4  1  8  7 11 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  6 17  8 16 15  7 12 11  9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7  1 10  3  9  8  2  6  5  4 </span>
 <span class="r-in"><span><span class="fu">fct2num</span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 16 15  8  7 12 15  8 11  9 15  6 12 11 11  8 14  7 13  6 17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 13  6 17  8 17 17 16 15  8  7 12 15  8 11  9 15  6 12 11 11</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
