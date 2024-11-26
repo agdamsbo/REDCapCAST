@@ -13,3 +13,5 @@ drafting
 cran-comments.md
 ~/REDCapCAST/inst/shiny-examples/casting/rsconnect
 ~/REDCapCAST/inst/shiny-examples/casting/rsconnect/
+inst/shiny-examples/casting/functions.R
+functions.R

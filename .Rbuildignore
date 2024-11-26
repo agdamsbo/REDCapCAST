@@ -20,3 +20,5 @@ app
 ^\.lintr$
 ^CODE_OF_CONDUCT\.md$
 ^~/REDCapCAST/inst/shiny-examples/casting/rsconnect$
+^inst/shiny-examples/casting/functions\.R$
+^functions\.R$
