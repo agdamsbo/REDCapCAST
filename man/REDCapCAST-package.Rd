@@ -4,7 +4,7 @@
 \name{REDCapCAST-package}
 \alias{REDCapCAST}
 \alias{REDCapCAST-package}
-\title{REDCapCAST: REDCap Castellated Data Handling and Metadata Casting}
+\title{REDCapCAST: REDCap Metadata Casting and Castellated Data Handling}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 

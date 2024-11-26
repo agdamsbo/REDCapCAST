@@ -16,5 +16,5 @@ logical
 Check if vector is all NA
 }
 \examples{
-rep(NA,4) |> all_na()
+rep(NA, 4) |> all_na()
 }

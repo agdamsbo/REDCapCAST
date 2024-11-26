@@ -65,7 +65,8 @@ c(1, 4, 3, "A", 7, 8, 1) |> as_factor()
 structure(c(1, 2, 3, 2, 10, 9),
   labels = c(Unknown = 9, Refused = 10)
 ) |>
-  as_factor() |> dput()
+  as_factor() |>
+  dput()
 
 structure(c(1, 2, 3, 2, 10, 9),
   labels = c(Unknown = 9, Refused = 10),
