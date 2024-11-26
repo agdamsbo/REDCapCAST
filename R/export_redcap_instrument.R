@@ -17,7 +17,7 @@
 #' @export
 #'
 #' @examples
-#' #iris |>
+#' # iris |>
 #' #  ds2dd_detailed(
 #' #    add.auto.id = TRUE,
 #' #    form.name = sample(c("b", "c"), size = 6, replace = TRUE, prob = rep(.5, 2))
@@ -30,7 +30,7 @@
 #' #  export_redcap_instrument(.x,file=here::here(paste0(.i,Sys.Date(),".zip")))
 #' #  })
 #'
-#' #iris |>
+#' # iris |>
 #' #  ds2dd_detailed(
 #' #    add.auto.id = TRUE
 #' #  ) |>
@@ -38,18 +38,18 @@
 #' #  export_redcap_instrument(file=here::here(paste0("instrument",Sys.Date(),".zip")))
 export_redcap_instrument <- function(data,
                                      file,
-                                     force=FALSE,
+                                     force = FALSE,
                                      record.id = "record_id") {
   # Ensure form name is the same
-  if (force){
+  if (force) {
     data$form_name <- data$form_name[1]
-  } else if (length(unique(data$form_name))!=1){
+  } else if (length(unique(data$form_name)) != 1) {
     stop("Please provide metadata for a single form only. See examples for
          ideas on exporting multiple instruments.")
   }
 
-  if (!is.na(record.id) && record.id %in% data[["field_name"]]){
-    data <- data[-match(record.id,data[["field_name"]]),]
+  if (!is.na(record.id) && record.id %in% data[["field_name"]]) {
+    data <- data[-match(record.id, data[["field_name"]]), ]
   }
 
   temp_dir <- tempdir()
@@ -82,6 +82,7 @@ export_redcap_instrument <- function(data,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' data <- iris |>
 #'   ds2dd_detailed(
 #'     add.auto.id = TRUE,
@@ -100,9 +101,10 @@ export_redcap_instrument <- function(data,
 #'   setNames(glue::glue("{sample(x = c('a','b'),size = length(ncol(iris)),
 #' replace=TRUE,prob = rep(x=.5,2))}__{names(iris)}")) |>
 #'   ds2dd_detailed(form.sep = "__")
-#' # data |>
-#' #   purrr::pluck("meta") |>
-#' #   create_instrument_meta(record.id = FALSE)
+#' data |>
+#'   purrr::pluck("meta") |>
+#'   create_instrument_meta(record.id = FALSE)
+#' }
 create_instrument_meta <- function(data,
                                    dir = here::here(""),
                                    record.id = TRUE) {

@@ -7,9 +7,9 @@
 #   "matrix_ranking", "field_annotation"
 # )
 
-metadata_names <- REDCapR::redcap_metadata_read(
-  redcap_uri = keyring::key_get("DB_URI"),
-  token = keyring::key_get("cast_api")
-)$data |> names()
-
-usethis::use_data(metadata_names, overwrite = TRUE, internal = TRUE)
+# metadata_names <- REDCapR::redcap_metadata_read(
+#   redcap_uri = keyring::key_get("DB_URI"),
+#   token = keyring::key_get("cast_api")
+# )$data |> names()
+#
+# usethis::use_data(metadata_names, overwrite = TRUE, internal = TRUE)

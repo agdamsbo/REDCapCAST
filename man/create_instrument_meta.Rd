@@ -26,6 +26,7 @@ function can be used to create (an) instrument(s) to add to a project in
 production.
 }
 \examples{
+\dontrun{
 data <- iris |>
   ds2dd_detailed(
     add.auto.id = TRUE,
@@ -44,7 +45,8 @@ iris |>
   setNames(glue::glue("{sample(x = c('a','b'),size = length(ncol(iris)),
 replace=TRUE,prob = rep(x=.5,2))}__{names(iris)}")) |>
   ds2dd_detailed(form.sep = "__")
-# data |>
-#   purrr::pluck("meta") |>
-#   create_instrument_meta(record.id = FALSE)
+data |>
+  purrr::pluck("meta") |>
+  create_instrument_meta(record.id = FALSE)
+}
 }

@@ -1,6 +1,6 @@
 #' REDCap metadata from data base
 #'
-#' This metadata dataset from a REDCap database is for demonstrational purposes.
+#' This metadata dataset from a REDCap database is for demonstration purposes.
 #'
 #' @format A data frame with 22 variables:
 #' \describe{

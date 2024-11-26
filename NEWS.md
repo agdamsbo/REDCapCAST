@@ -1,3 +1,9 @@
+# REDCapCAST 24.11.4
+
+The hosting on shinyapps.io has given a lot of trouble recently. Modyfied package structure a little around the `shiny_cast()`, to accommodate an alternative hosting approach with all package functions included in a script instead of requiring the package.
+
+* read_readcap_labelled(): 
+
 # REDCapCAST 24.11.3
 
 * BUG: shiny_cast() fails to load as I missed loading REDCapCAST library in ui.r. Fixed. Tests would be great.

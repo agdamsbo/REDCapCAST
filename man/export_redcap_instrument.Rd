@@ -27,7 +27,7 @@ function can be used to create (an) instrument(s) to add to a project in
 production.
 }
 \examples{
-#iris |>
+# iris |>
 #  ds2dd_detailed(
 #    add.auto.id = TRUE,
 #    form.name = sample(c("b", "c"), size = 6, replace = TRUE, prob = rep(.5, 2))
@@ -40,7 +40,7 @@ production.
 #  export_redcap_instrument(.x,file=here::here(paste0(.i,Sys.Date(),".zip")))
 #  })
 
-#iris |>
+# iris |>
 #  ds2dd_detailed(
 #    add.auto.id = TRUE
 #  ) |>

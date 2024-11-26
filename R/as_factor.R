@@ -16,7 +16,8 @@
 #' structure(c(1, 2, 3, 2, 10, 9),
 #'   labels = c(Unknown = 9, Refused = 10)
 #' ) |>
-#'   as_factor() |> dput()
+#'   as_factor() |>
+#'   dput()
 #'
 #' structure(c(1, 2, 3, 2, 10, 9),
 #'   labels = c(Unknown = 9, Refused = 10),
@@ -56,13 +57,13 @@ as_factor.numeric <- function(x, ...) {
 #' @export
 as_factor.character <- function(x, ...) {
   labels <- get_attr(x)
-  if (possibly_roman(x)){
+  if (possibly_roman(x)) {
     x <- factor(x)
   } else {
-  x <- structure(
-    forcats::fct_inorder(x),
-    label = attr(x, "label", exact = TRUE)
-  )
+    x <- structure(
+      forcats::fct_inorder(x),
+      label = attr(x, "label", exact = TRUE)
+    )
   }
   set_attr(x, labels, overwrite = FALSE)
 }
@@ -202,8 +203,9 @@ named_levels <- function(data, label = "labels", na.label = NULL, na.value = 99)
     )
   }
 
+
   # Handle empty factors
-  if (all_na(data)){
+  if (all_na(data)) {
     d <- data.frame(
       name = levels(data),
       value = seq_along(levels(data))
@@ -213,15 +215,19 @@ named_levels <- function(data, label = "labels", na.label = NULL, na.value = 99)
       name = levels(data)[data],
       value = as.numeric(data)
     ) |>
-      unique()
+      unique() |>
+      stats::na.omit()
   }
 
   ## Applying labels
   attr_l <- attr(x = data, which = label, exact = TRUE)
   if (length(attr_l) != 0) {
-    if (all(names(attr_l) %in% d$name)){
+    if (all(names(attr_l) %in% d$name)) {
       d$value[match(names(attr_l), d$name)] <- unname(attr_l)
-    }else {
+    } else if (all(d$name %in% names(attr_l)) && nrow(d) < length(attr_l)){
+      d <- data.frame(name = names(attr_l),
+                      value=unname(attr_l))
+    } else {
       d$name[match(attr_l, d$name)] <- names(attr_l)
       d$value[match(names(attr_l), d$name)] <- unname(attr_l)
     }
@@ -244,13 +250,17 @@ named_levels <- function(data, label = "labels", na.label = NULL, na.value = 99)
 #' @export
 #'
 #' @examples
-#' sample(1:100,10) |> as.roman() |> possibly_roman()
-#' sample(c(TRUE,FALSE),10,TRUE)|> possibly_roman()
-#' rep(NA,10)|> possibly_roman()
-possibly_roman <- function(data){
+#' sample(1:100, 10) |>
+#'   as.roman() |>
+#'   possibly_roman()
+#' sample(c(TRUE, FALSE), 10, TRUE) |> possibly_roman()
+#' rep(NA, 10) |> possibly_roman()
+possibly_roman <- function(data) {
   # browser()
-  if (all(is.na(data))) return(FALSE)
-  identical(as.character(data),as.character(utils::as.roman(data)))
+  if (all(is.na(data))) {
+    return(FALSE)
+  }
+  identical(as.character(data), as.character(utils::as.roman(data)))
 }
 
 
@@ -287,13 +297,13 @@ possibly_roman <- function(data){
 #' #   as_factor() |>
 #' #   fct2num()
 #'
-#' v <- sample(6:19,20,TRUE) |> factor()
+#' v <- sample(6:19, 20, TRUE) |> factor()
 #' dput(v)
 #' named_levels(v)
 #' fct2num(v)
 fct2num <- function(data) {
   stopifnot(is.factor(data))
-  if (is.character(named_levels(data))){
+  if (is.character(named_levels(data))) {
     values <- as.numeric(named_levels(data))
   } else {
     values <- named_levels(data)
@@ -309,7 +319,7 @@ fct2num <- function(data) {
   unname(out)
 }
 
-possibly_numeric <- function(data){
+possibly_numeric <- function(data) {
   length(stats::na.omit(suppressWarnings(as.numeric(names(data))))) ==
     length(data)
 }
@@ -369,7 +379,6 @@ set_attr <- function(data, label, attr = NULL, overwrite = FALSE) {
       label <- label[!names(label) %in% names(attributes(data))]
     }
     attributes(data) <- c(attributes(data), label)
-
   } else {
     attr(data, attr) <- label
   }

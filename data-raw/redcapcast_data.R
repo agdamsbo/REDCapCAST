@@ -12,4 +12,4 @@ redcapcast_data <- REDCapR::redcap_read(
 
 usethis::use_data(redcapcast_data, overwrite = TRUE)
 
-write.csv(redcapcast_data,here::here("data/redcapcast_data.csv"),row.names = FALSE)
+# write.csv(redcapcast_data,here::here("data/redcapcast_data.csv"),row.names = FALSE)

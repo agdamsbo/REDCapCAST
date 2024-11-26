@@ -15,7 +15,7 @@ ds2dd_detailed(
   field.label = NULL,
   field.label.attr = "label",
   field.validation = NULL,
-  metadata = names(REDCapCAST::redcapcast_meta),
+  metadata = REDCapCAST::redcap_meta_default(),
   convert.logicals = TRUE
 )
 }
@@ -55,7 +55,7 @@ or attribute `factor.labels.attr` for haven_labelled data set (imported .dta
 file with `haven::read_dta()`).}
 
 \item{metadata}{redcap metadata headings. Default is
-REDCapCAST:::metadata_names.}
+REDCapCAST::redcap_meta_default().}
 
 \item{convert.logicals}{convert logicals to factor. Default is TRUE.}
 }
@@ -76,7 +76,8 @@ Ensure, that the data set is formatted with as much information as possible.
 }
 \examples{
 ## Basic parsing with default options
-REDCapCAST::redcapcast_data |>
+requireNamespace("REDCapCAST")
+redcapcast_data |>
   dplyr::select(-dplyr::starts_with("redcap_")) |>
   ds2dd_detailed()
 

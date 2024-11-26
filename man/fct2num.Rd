@@ -41,7 +41,7 @@ structure(c(1, 2, 3, 2, 10, 9),
 #   as_factor() |>
 #   fct2num()
 
-v <- sample(6:19,20,TRUE) |> factor()
+v <- sample(6:19, 20, TRUE) |> factor()
 dput(v)
 named_levels(v)
 fct2num(v)

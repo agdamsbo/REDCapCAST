@@ -16,7 +16,9 @@ logical
 Test if vector can be interpreted as roman numerals
 }
 \examples{
-sample(1:100,10) |> as.roman() |> possibly_roman()
-sample(c(TRUE,FALSE),10,TRUE)|> possibly_roman()
-rep(NA,10)|> possibly_roman()
+sample(1:100, 10) |>
+  as.roman() |>
+  possibly_roman()
+sample(c(TRUE, FALSE), 10, TRUE) |> possibly_roman()
+rep(NA, 10) |> possibly_roman()
 }

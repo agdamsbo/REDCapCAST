@@ -32,7 +32,7 @@ In the following I will try to come with a few suggestions on how to use these a
 
 The first iteration of a dataset to data dictionary function is the `ds2dd()`, which creates a very basic data dictionary with all variables stored as text. This is sufficient for just storing old datasets/spreadsheets securely in REDCap.
 
-```{r eval=TRUE}
+```{r eval=FALSE}
 d1 <- mtcars |>
   dplyr::mutate(record_id = seq_len(dplyr::n())) |>
   ds2dd() 

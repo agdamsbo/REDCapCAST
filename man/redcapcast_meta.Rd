@@ -31,6 +31,6 @@ A data frame with 22 variables:
 data(redcapcast_meta)
 }
 \description{
-This metadata dataset from a REDCap database is for demonstrational purposes.
+This metadata dataset from a REDCap database is for demonstration purposes.
 }
 \keyword{datasets}
