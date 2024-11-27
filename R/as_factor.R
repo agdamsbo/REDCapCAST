@@ -9,6 +9,7 @@
 #'
 #' @param x Object to coerce to a factor.
 #' @param ... Other arguments passed down to method.
+#' @param only_labelled Only apply to labelled columns?
 #' @export
 #' @examples
 #' # will preserve all attributes
@@ -125,6 +126,45 @@ as_factor.haven_labelled <- function(x, levels = c("default", "labels", "values"
 #' @rdname as_factor
 as_factor.labelled <- as_factor.haven_labelled
 
+#' @export
+#' @rdname as_factor
+as_factor.redcapcast_labelled <- as_factor.haven_labelled
+
+#' @rdname as_factor
+#' @export
+as_factor.data.frame <- function(x, ..., only_labelled = TRUE) {
+  if (only_labelled) {
+    labelled <- vapply(x, is.labelled, logical(1))
+    x[labelled] <- lapply(x[labelled], as_factor, ...)
+  } else {
+    x[] <- lapply(x, as_factor, ...)
+  }
+
+  x
+}
+
+#' Tests for multiple label classes
+#'
+#' @param x data
+#' @param classes classes to test
+#'
+#' @return logical
+#' @export
+#'
+#' @examples
+#' structure(c(1, 2, 3, 2, 10, 9),
+#'   labels = c(Unknown = 9, Refused = 10),
+#'   class = "haven_labelled"
+#' ) |> is.labelled()
+is.labelled <- function(x, classes = c("redcapcast_labelled", "haven_labelled", "labelled")) {
+  classes |>
+    sapply(\(.class){
+      inherits(x, .class)
+    }) |>
+    any()
+}
+
+
 replace_with <- function(x, from, to) {
   stopifnot(length(from) == length(to))
 
@@ -224,9 +264,11 @@ named_levels <- function(data, label = "labels", na.label = NULL, na.value = 99)
   if (length(attr_l) != 0) {
     if (all(names(attr_l) %in% d$name)) {
       d$value[match(names(attr_l), d$name)] <- unname(attr_l)
-    } else if (all(d$name %in% names(attr_l)) && nrow(d) < length(attr_l)){
-      d <- data.frame(name = names(attr_l),
-                      value=unname(attr_l))
+    } else if (all(d$name %in% names(attr_l)) && nrow(d) < length(attr_l)) {
+      d <- data.frame(
+        name = names(attr_l),
+        value = unname(attr_l)
+      )
     } else {
       d$name[match(attr_l, d$name)] <- names(attr_l)
       d$value[match(names(attr_l), d$name)] <- unname(attr_l)
