@@ -46,6 +46,8 @@ as_factor.logical <- function(x, ...) {
   set_attr(x, labels, overwrite = FALSE)
 }
 
+
+
 #' @rdname as_factor
 #' @export
 as_factor.numeric <- function(x, ...) {
@@ -298,11 +300,11 @@ named_levels <- function(data, label = "labels", na.label = NULL, na.value = 99)
 #' sample(c(TRUE, FALSE), 10, TRUE) |> possibly_roman()
 #' rep(NA, 10) |> possibly_roman()
 possibly_roman <- function(data) {
-  # browser()
   if (all(is.na(data))) {
     return(FALSE)
   }
-  identical(as.character(data), as.character(utils::as.roman(data)))
+  identical(as.character(data),
+            as.character(suppressWarnings(utils::as.roman(data))))
 }
 
 
