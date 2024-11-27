@@ -11,7 +11,15 @@
 #' @param fields fields to download
 #' @param events events to download
 #' @param forms forms to download
-#' @param raw_or_label raw or label tags
+#' @param raw_or_label raw or label tags. Can be
+#'
+#'   * "raw": Standard [REDCapR] method to get raw values.
+#'   * "label": Standard [REDCapR] method to get label values.
+#'   * "both": Get raw values with REDCap labels applied as labels. Use
+#'   [as_factor()] to format factors with original labels and use the
+#'   [gtsummary] package to easily get beautiful tables with original labels
+#'   from REDCap. Use [fct_drop()] to drop empty levels.
+#'
 #' @param split_forms Whether to split "repeating" or "all" forms, default is
 #' all.
 #'
@@ -70,6 +78,12 @@ read_redcap_tables <- function(uri,
     }
   }
 
+  if (raw_or_label=="both"){
+    rorl <- "raw"
+  } else {
+    rorl <- raw_or_label
+  }
+
   # Getting dataset
   d <- REDCapR::redcap_read(
     redcap_uri = uri,
@@ -78,8 +92,15 @@ read_redcap_tables <- function(uri,
     events = events,
     forms = forms,
     records = records,
-    raw_or_label = raw_or_label
+    raw_or_label = rorl
   )[["data"]]
+
+  if (raw_or_label=="both"){
+    d <- apply_field_label(data=d,meta=m)
+
+    d <- apply_factor_labels(data=d,meta=m)
+  }
+
 
   # Process repeat instrument naming
   # Removes any extra characters other than a-z, 0-9 and "_", to mimic raw
@@ -100,4 +121,85 @@ read_redcap_tables <- function(uri,
   )
 
   sanitize_split(out)
+}
+
+
+#' Very simple function to remove rich text formatting from field label
+#' and save the first paragraph ('<p>...</p>').
+#'
+#' @param data field label
+#'
+#' @return character vector
+#' @export
+#'
+#' @examples
+#' clean_field_label("<div class=\"rich-text-field-label\"><p>Fazekas score</p></div>")
+clean_field_label <- function(data) {
+  out <- data |>
+    lapply(\(.x){
+      unlist(strsplit(.x, "</"))[1]
+    }) |>
+    lapply(\(.x){
+      splt <- unlist(strsplit(.x, ">"))
+      splt[length(splt)]
+    })
+  Reduce(c, out)
+}
+
+
+format_redcap_factor <- function(data, meta) {
+  lvls <- strsplit(meta, " | ", fixed = TRUE) |>
+    unlist() |>
+    lapply(\(.x){
+      splt <- unlist(strsplit(.x, ", "))
+      stats::setNames(splt[1], nm = paste(splt[-1], collapse = ", "))
+    }) |>
+    (\(.x){
+      Reduce(c, .x)
+    })()
+  set_attr(data, label = lvls, attr = "labels") |>
+    set_attr(data, label = "redcapcast_labelled", attr = "class")
+}
+
+
+
+#' Apply REDCap filed labels to data frame
+#'
+#' @param data REDCap exported data set
+#' @param meta REDCap data dictionary
+#'
+#' @return data.frame
+#' @export
+#'
+apply_field_label <- function(data,meta){
+  purrr::imap(data, \(.x, .i){
+    if (.i %in% meta$field_name) {
+      # Does not handle checkboxes
+      out <- set_attr(.x,
+                      label = clean_field_label(meta$field_label[meta$field_name == .i]),
+                      attr = "label"
+      )
+      out
+    } else {
+      .x
+    }
+  }) |> dplyr::bind_cols()
+}
+
+#' Preserve all factor levels from REDCap data dictionary in data export
+#'
+#' @param data REDCap exported data set
+#' @param meta REDCap data dictionary
+#'
+#' @return data.frame
+#' @export
+#'
+apply_factor_labels <- function(data,meta){
+  purrr::imap(data, \(.x, .i){
+    if (any(c("radio", "dropdown") %in% meta$field_type[meta$field_name == .i])) {
+      format_redcap_factor(.x, meta$select_choices_or_calculations[meta$field_name == .i])
+    } else {
+      .x
+    }
+  }) |> dplyr::bind_cols()
 }

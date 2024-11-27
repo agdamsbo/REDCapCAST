@@ -8,6 +8,8 @@
 \alias{as_factor.character}
 \alias{as_factor.haven_labelled}
 \alias{as_factor.labelled}
+\alias{as_factor.redcapcast_labelled}
+\alias{as_factor.data.frame}
 \title{Convert labelled vectors to factors while preserving attributes}
 \usage{
 as_factor(x, ...)
@@ -33,6 +35,15 @@ as_factor(x, ...)
   ordered = FALSE,
   ...
 )
+
+\method{as_factor}{redcapcast_labelled}(
+  x,
+  levels = c("default", "labels", "values", "both"),
+  ordered = FALSE,
+  ...
+)
+
+\method{as_factor}{data.frame}(x, ..., only_labelled = TRUE)
 }
 \arguments{
 \item{x}{Object to coerce to a factor.}
@@ -49,6 +60,8 @@ as_factor(x, ...)
 
 \item{ordered}{If `TRUE` create an ordered (ordinal) factor, if
 `FALSE` (the default) create a regular (nominal) factor.}
+
+\item{only_labelled}{Only apply to labelled columns?}
 }
 \description{
 This extends [forcats::as_factor()] as well as [haven::as_factor()], by appending

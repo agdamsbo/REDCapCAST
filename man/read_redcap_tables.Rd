@@ -28,7 +28,14 @@ read_redcap_tables(
 
 \item{forms}{forms to download}
 
-\item{raw_or_label}{raw or label tags}
+\item{raw_or_label}{raw or label tags. Can be
+
+  * "raw": Standard [REDCapR] method to get raw values.
+  * "label": Standard [REDCapR] method to get label values.
+  * "both": Get raw values with REDCap labels applied as labels. Use
+  [as_factor()] to format factors with original labels and use the
+  [gtsummary] package to easily get beautiful tables with original labels
+  from REDCap. Use [fct_drop()] to drop empty levels.}
 
 \item{split_forms}{Whether to split "repeating" or "all" forms, default is
 all.}

@@ -11,7 +11,7 @@ ds2dd(
   field.type = "text",
   field.label = NULL,
   include.column.names = FALSE,
-  metadata = REDCapCAST::redcap_meta_default()
+  metadata = names(REDCapCAST::redcapcast_meta)
 )
 }
 \arguments{
@@ -34,7 +34,7 @@ names.}
 column names for original data set for upload.}
 
 \item{metadata}{Metadata column names. Default is the included
-REDCapCAST::redcap_meta_default.}
+names(REDCapCAST::redcapcast_meta).}
 }
 \value{
 data.frame or list of data.frame and vector

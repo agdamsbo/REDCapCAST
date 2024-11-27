@@ -36,14 +36,14 @@ str(ds)
 
 ```{r}
 ds|> 
-  ds2dd_detailed()|>  
+  ds2dd_detailed(metadata = names(REDCapCAST::redcapcast_meta))|>  
   purrr::pluck("data") |> 
   str()
 ```
 
 ```{r}
 ds|> 
-  ds2dd_detailed()|>  
+  ds2dd_detailed(metadata = names(REDCapCAST::redcapcast_meta))|>  
   purrr::pluck("meta") |> 
   head(10)
 ```
