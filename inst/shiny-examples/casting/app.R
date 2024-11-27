@@ -11,7 +11,7 @@ library(devtools)
 # if (!requireNamespace("REDCapCAST")) {
 #   install.packages("REDCapCAST")
 # }
-library(REDCapCAST)
+# library(REDCapCAST)
 
 ## Load merged files for shinyapps.io hosting
 if (file.exists(here::here("functions.R"))) {

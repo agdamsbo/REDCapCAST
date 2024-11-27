@@ -41,6 +41,7 @@ dmy
 docx
 doi
 dplyr
+droplevels
 ds
 dta
 et
@@ -49,6 +50,7 @@ factorising
 fct
 forcats
 github
+gtsummary
 gues
 hms
 https
@@ -77,6 +79,7 @@ rds
 readr
 realising
 redcapAPI
+redcapcast
 renv
 runApp
 sel
