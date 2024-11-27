@@ -99,26 +99,6 @@ hms2character <- function(data) {
 }
 
 
-#' Default column names of a REDCap data dictionary
-#'
-#' @param ... ignored for now
-#'
-#' @return character vector
-#' @export
-#'
-#' @examples
-#' dput(redcap_meta_default())
-redcap_meta_default <- function(...) {
-  c(
-    "field_name", "form_name", "section_header", "field_type",
-    "field_label", "select_choices_or_calculations", "field_note",
-    "text_validation_type_or_show_slider_number", "text_validation_min",
-    "text_validation_max", "identifier", "branching_logic", "required_field",
-    "custom_alignment", "question_number", "matrix_group_name", "matrix_ranking",
-    "field_annotation"
-  )
-}
-
 #' (DEPRECATED) Data set to data dictionary function
 #'
 #' @description
@@ -141,7 +121,7 @@ redcap_meta_default <- function(...) {
 #' @param include.column.names Flag to give detailed output including new
 #' column names for original data set for upload.
 #' @param metadata Metadata column names. Default is the included
-#' REDCapCAST::redcap_meta_default.
+#' names(REDCapCAST::redcapcast_meta).
 #'
 #' @return data.frame or list of data.frame and vector
 #' @export
@@ -157,7 +137,7 @@ ds2dd <-
            field.type = "text",
            field.label = NULL,
            include.column.names = FALSE,
-           metadata = REDCapCAST::redcap_meta_default()
+           metadata = names(REDCapCAST::redcapcast_meta)
            ) {
     dd <- data.frame(matrix(ncol = length(metadata), nrow = ncol(ds)))
     colnames(dd) <- metadata
@@ -244,7 +224,7 @@ ds2dd <-
 #' or attribute `factor.labels.attr` for haven_labelled data set (imported .dta
 #' file with `haven::read_dta()`).
 #' @param metadata redcap metadata headings. Default is
-#' REDCapCAST::redcap_meta_default().
+#' names(REDCapCAST::redcapcast_meta).
 #' @param convert.logicals convert logicals to factor. Default is TRUE.
 #'
 #' @return list of length 2
@@ -286,7 +266,7 @@ ds2dd_detailed <- function(data,
                            field.label = NULL,
                            field.label.attr = "label",
                            field.validation = NULL,
-                           metadata = REDCapCAST::redcap_meta_default(),
+                           metadata = names(REDCapCAST::redcapcast_meta),
                            convert.logicals = TRUE) {
 
   if (convert.logicals) {

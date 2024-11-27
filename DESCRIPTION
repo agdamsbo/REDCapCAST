@@ -71,6 +71,7 @@ Collate:
     'ds2dd_detailed.R'
     'easy_redcap.R'
     'export_redcap_instrument.R'
+    'fct_drop.R'
     'html_styling.R'
     'mtcars_redcap.R'
     'read_redcap_instrument.R'

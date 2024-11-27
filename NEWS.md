@@ -2,7 +2,11 @@
 
 The hosting on shinyapps.io has given a lot of trouble recently. Modyfied package structure a little around the `shiny_cast()`, to accommodate an alternative hosting approach with all package functions included in a script instead of requiring the package.
 
-* read_readcap_labelled(): 
+* NEW: A new option to `raw_or_label` in `read_readcap_tables()` has been added: "both". Get raw values with REDCap labels applied as labels. Use `as_factor()` to format factors with original labels and use the `gtsummary` package to easily get beautiful tables with original labels from REDCap. Use `fct_drop()` to drop empty levels.
+
+* NEW: fct_drop() has been added with an extension to `forcats::fct_drop()`, that works across data.frames. Use as `fct_drop()`.
+
+* CHANGE: the default data export method of `easy_redcap()` has been changed to use the new labelled data export with `read_readcap_tables()`.
 
 # REDCapCAST 24.11.3
 
