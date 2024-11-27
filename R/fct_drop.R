@@ -15,7 +15,7 @@ NULL
 #' @rdname fct_drop
 #' @export
 fct_drop.data.frame <- function(x, ...) {
-  purrr::map(\(.x){
+  purrr::map(x, \(.x){
     if (is.factor(.x)){
       forcats::fct_drop(.x)
     } else {
