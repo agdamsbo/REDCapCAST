@@ -97,7 +97,13 @@ instruments.</p>
 
 
 <dt id="arg-raw-or-label">raw_or_label<a class="anchor" aria-label="anchor" href="#arg-raw-or-label"></a></dt>
-<dd><p>raw or label tags</p></dd>
+<dd><p>raw or label tags. Can be</p>
+<p>* "raw": Standard [REDCapR] method to get raw values.
+  * "label": Standard [REDCapR] method to get label values.
+  * "both": Get raw values with REDCap labels applied as labels. Use
+  [as_factor()] to format factors with original labels and use the
+  [gtsummary] package to easily get beautiful tables with original labels
+  from REDCap. Use [fct_drop()] to drop empty levels.</p></dd>
 
 
 <dt id="arg-split-forms">split_forms<a class="anchor" aria-label="anchor" href="#arg-split-forms"></a></dt>
