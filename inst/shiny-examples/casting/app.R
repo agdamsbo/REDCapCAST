@@ -8,10 +8,10 @@ library(dplyr)
 library(gt)
 library(devtools)
 
-if (!requireNamespace("REDCapCAST")) {
-  install.packages("REDCapCAST")
-}
-library(REDCapCAST)
+# if (!requireNamespace("REDCapCAST")) {
+#   install.packages("REDCapCAST")
+# }
+# library(REDCapCAST)
 
 ## Load merged files for shinyapps.io hosting
 if (file.exists(here::here("functions.R"))) {

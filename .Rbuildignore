@@ -16,7 +16,6 @@
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 drafting
-app
 ^\.lintr$
 ^CODE_OF_CONDUCT\.md$
 ^~/REDCapCAST/inst/shiny-examples/casting/rsconnect$
