@@ -4,7 +4,13 @@
 \alias{named_levels}
 \title{Get named vector of factor levels and values}
 \usage{
-named_levels(data, label = "labels", na.label = NULL, na.value = 99)
+named_levels(
+  data,
+  label = "labels",
+  na.label = NULL,
+  na.value = 99,
+  sort.numeric = TRUE
+)
 }
 \arguments{
 \item{data}{factor}
@@ -15,6 +21,8 @@ named_levels(data, label = "labels", na.label = NULL, na.value = 99)
 
 \item{na.value}{new value for NA strings. Ignored if na.label is NULL.
 Default is 99.}
+
+\item{sort.numeric}{sort factor levels if levels are numeric. Default is TRUE}
 }
 \value{
 named vector
@@ -23,12 +31,16 @@ named vector
 Get named vector of factor levels and values
 }
 \examples{
-\dontrun{
 structure(c(1, 2, 3, 2, 10, 9),
   labels = c(Unknown = 9, Refused = 10),
   class = "haven_labelled"
 ) |>
   as_factor() |>
   named_levels()
-}
+structure(c(1, 2, 3, 2, 10, 9),
+  labels = c(Unknown = 9, Refused = 10),
+  class = "labelled"
+) |>
+  as_factor() |>
+  named_levels()
 }

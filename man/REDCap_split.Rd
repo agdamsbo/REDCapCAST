@@ -21,8 +21,7 @@ call.}
 JSON from an API call.}
 
 \item{primary_table_name}{Name given to the list element for the primary
-output table (as described in \emph{README.md}). Ignored if
-\code{forms = 'all'}.}
+output table. Ignored if \code{forms = 'all'}.}
 
 \item{forms}{Indicate whether to create separate tables for repeating
 instruments only or for all forms.}
@@ -66,7 +65,7 @@ metadata <- postForm(
 )
 
 # Convert exported JSON strings into a list of data.frames
-REDCapRITS::REDCap_split(records, metadata)
+REDCapCAST::REDCap_split(records, metadata)
 
 # Using a raw data export -------------------------------------------------
 
@@ -79,7 +78,7 @@ metadata <- read.csv(
 )
 
 # Split the tables
-REDCapRITS::REDCap_split(records, metadata)
+REDCapCAST::REDCap_split(records, metadata)
 
 # In conjunction with the R export script ---------------------------------
 
@@ -96,10 +95,10 @@ source("ExampleProject_R_2018-06-03_1700.r")
 metadata <- read.csv("ExampleProject_DataDictionary_2018-06-03.csv")
 
 # Split the tables
-REDCapRITS::REDCap_split(data, metadata)
+REDCapCAST::REDCap_split(data, metadata)
 setwd(old)
 }
 }
 \author{
-Paul W. Egeler, M.S., GStat
+Paul W. Egeler
 }

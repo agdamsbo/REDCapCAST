@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap_wider.R
 \name{redcap_wider}
 \alias{redcap_wider}
-\title{Redcap Wider}
+\title{Transforms list of REDCap data.frames to a single wide data.frame}
 \usage{
 redcap_wider(
   data,
@@ -11,18 +11,20 @@ redcap_wider(
 )
 }
 \arguments{
-\item{data}{A list of data frames.}
+\item{data}{A list of data frames}
 
-\item{event.glue}{A dplyr::glue string for repeated events naming}
+\item{event.glue}{A \link[glue]{glue} string for repeated events naming}
 
-\item{inst.glue}{A dplyr::glue string for repeated instruments naming}
+\item{inst.glue}{A \link[glue]{glue} string for repeated instruments naming}
 }
 \value{
-The list of data frames in wide format.
+data.frame in wide format
 }
 \description{
-Converts a list of REDCap data frames from long to wide format.
-Handles longitudinal projects, but not yet repeated instruments.
+Converts a list of REDCap data.frames from long to wide format.
+In essence it is a wrapper for the \link[tidyr]{pivot_wider} function applied
+on a REDCap output (from \link[REDCapCAST]{read_redcap_tables}) or manually
+split by \link[REDCapCAST]{REDCap_split}.
 }
 \examples{
 # Longitudinal

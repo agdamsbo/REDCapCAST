@@ -7,13 +7,20 @@
 sanitize_split(
   l,
   generic.names = c("redcap_event_name", "redcap_repeat_instrument",
-    "redcap_repeat_instance")
+    "redcap_repeat_instance"),
+  drop.complete = TRUE,
+  drop.empty = TRUE
 )
 }
 \arguments{
 \item{l}{A list of data frames.}
 
 \item{generic.names}{A vector of generic names to be excluded.}
+
+\item{drop.complete}{logical to remove genric REDCap variables indicating
+instrument completion. Default is TRUE.}
+
+\item{drop.empty}{logical to remove variables with only NAs Default is TRUE.}
 }
 \value{
 A list of data frames with generic names excluded.

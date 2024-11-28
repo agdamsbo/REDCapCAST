@@ -4,10 +4,7 @@
 \alias{is.labelled}
 \title{Tests for multiple label classes}
 \usage{
-is.labelled(
-  x,
-  classes = c("redcapcast_labelled", "haven_labelled", "labelled")
-)
+is.labelled(x, classes = c("haven_labelled", "labelled"))
 }
 \arguments{
 \item{x}{data}

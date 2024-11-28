@@ -4,14 +4,20 @@ utils::globalVariables(c(
   "inst.glue"
 ))
 
-#' @title Redcap Wider
-#' @description Converts a list of REDCap data frames from long to wide format.
-#' Handles longitudinal projects, but not yet repeated instruments.
-#' @param data A list of data frames.
-#' @param event.glue A dplyr::glue string for repeated events naming
-#' @param inst.glue A dplyr::glue string for repeated instruments naming
-#' @return The list of data frames in wide format.
+#' Transforms list of REDCap data.frames to a single wide data.frame
+#'
+#' @description Converts a list of REDCap data.frames from long to wide format.
+#' In essence it is a wrapper for the \link[tidyr]{pivot_wider} function applied
+#' on a REDCap output (from \link[REDCapCAST]{read_redcap_tables}) or manually
+#' split by \link[REDCapCAST]{REDCap_split}.
+#'
+#' @param data A list of data frames
+#' @param event.glue A \link[glue]{glue} string for repeated events naming
+#' @param inst.glue A \link[glue]{glue} string for repeated instruments naming
+#'
+#' @return data.frame in wide format
 #' @export
+#'
 #' @importFrom tidyr pivot_wider
 #' @importFrom tidyselect all_of
 #' @importFrom purrr reduce
@@ -77,6 +83,7 @@ redcap_wider <-
   function(data,
            event.glue = "{.value}_{redcap_event_name}",
            inst.glue = "{.value}_{redcap_repeat_instance}") {
+    # browser()
     if (!is_repeated_longitudinal(data)) {
       if (is.list(data)) {
         if (length(data) == 1) {
@@ -91,6 +98,7 @@ redcap_wider <-
       id.name <- do.call(c, lapply(data, names))[[1]]
 
       l <- lapply(data, function(i) {
+        # browser()
         rep_inst <- "redcap_repeat_instrument" %in% names(i)
 
         if (rep_inst) {
@@ -111,7 +119,15 @@ redcap_wider <-
             )
             s[!colnames(s) %in% c("redcap_repeat_instrument")]
           })
-          i <- Reduce(dplyr::bind_rows, k)
+
+          # Labels are removed and restored after bind_rows as class "labelled"
+          # is not supported
+          i <- remove_labelled(k) |>
+            dplyr::bind_rows()
+
+          all_labels <- save_labels(data)
+
+          i <- restore_labels(i, all_labels)
         }
 
         event <- "redcap_event_name" %in% names(i)
@@ -141,8 +157,51 @@ redcap_wider <-
         }
       })
 
-      out <- data.frame(Reduce(f = dplyr::full_join, x = l))
+      # out <- Reduce(f = dplyr::full_join, x = l)
+      out <- purrr::reduce(.x = l, .f = dplyr::full_join)
     }
 
     out
   }
+
+# Applies list of attributes to data.frame
+restore_labels <- function(data, labels) {
+  stopifnot(is.list(labels))
+  stopifnot(is.data.frame(data))
+  for (ndx in names(labels)) {
+    data <- purrr::imap(data, \(.y, .j){
+      if (startsWith(.j, ndx)) {
+        set_attr(.y, labels[[ndx]])
+      } else {
+        .y
+      }
+    }) |> dplyr::bind_cols()
+  }
+  return(data)
+}
+
+# Extract unique variable attributes from list of data.frames
+save_labels <- function(data) {
+  stopifnot(is.list(data))
+  out <- list()
+  for (j in seq_along(data)) {
+    out <- c(out, lapply(data[[j]], get_attr))
+  }
+
+  out[!duplicated(names(out))]
+}
+
+# Removes class attributes of class "labelled" or "haven_labelled"
+remove_labelled <- function(data){
+  stopifnot(is.list(data))
+  lapply(data, \(.x) {
+    lapply(.x, \(.y) {
+      if (REDCapCAST::is.labelled(.y)) {
+        set_attr(.y, label = NULL, attr = "class")
+      } else {
+        .y
+      }
+    }) |>
+      dplyr::bind_cols()
+  })
+}

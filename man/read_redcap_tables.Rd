@@ -11,8 +11,9 @@ read_redcap_tables(
   fields = NULL,
   events = NULL,
   forms = NULL,
-  raw_or_label = "label",
-  split_forms = "all"
+  raw_or_label = c("raw", "label", "both"),
+  split_forms = "all",
+  ...
 )
 }
 \arguments{
@@ -28,27 +29,32 @@ read_redcap_tables(
 
 \item{forms}{forms to download}
 
-\item{raw_or_label}{raw or label tags. Can be
+\item{raw_or_label}{raw or label tags. Can be "raw", "label" or "both".
 
-  * "raw": Standard [REDCapR] method to get raw values.
-  * "label": Standard [REDCapR] method to get label values.
+  * "raw": Standard \link[REDCapR]{redcap_read} method to get raw values.
+  * "label": Standard \link[REDCapR]{redcap_read} method to get label values.
   * "both": Get raw values with REDCap labels applied as labels. Use
-  [as_factor()] to format factors with original labels and use the
-  [gtsummary] package to easily get beautiful tables with original labels
-  from REDCap. Use [fct_drop()] to drop empty levels.}
+  \link[REDCapCAST]{as_factor} to format factors with original labels and use
+  the  `gtsummary` package functions like \link[gtsummary]{tbl_summary} to
+  easily get beautiful tables with original labels from REDCap. Use
+  \link[REDCapCAST]{fct_drop} to drop empty levels.}
 
 \item{split_forms}{Whether to split "repeating" or "all" forms, default is
 all.}
+
+\item{...}{passed on to \link[REDCapR]{redcap_read}}
 }
 \value{
 list of instruments
 }
 \description{
-Implementation of REDCap_split with a focused data acquisition approach using
-REDCapR::redcap_read and only downloading specified fields, forms and/or
-events using the built-in focused_metadata including some clean-up.
+Implementation of passed on to \link[REDCapCAST]{REDCap_split} with a focused
+data acquisition approach using passed on to \link[REDCapR]{redcap_read} and
+only downloading specified fields, forms and/or events using the built-in
+focused_metadata including some clean-up.
 Works with classical and longitudinal projects with or without repeating
 instruments.
+Will preserve metadata in the data.frames as labels.
 }
 \examples{
 # Examples will be provided later

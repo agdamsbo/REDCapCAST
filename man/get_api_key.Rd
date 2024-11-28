@@ -4,14 +4,18 @@
 \alias{get_api_key}
 \title{Retrieve project API key if stored, if not, set and retrieve}
 \usage{
-get_api_key(key.name)
+get_api_key(key.name, ...)
 }
 \arguments{
 \item{key.name}{character vector of key name}
+
+\item{...}{passed to \link[keyring]{key_set}}
 }
 \value{
 character vector
 }
 \description{
-Retrieve project API key if stored, if not, set and retrieve
+Attempting to make secure API key storage so simple, that no other way makes
+sense. Wrapping \link[keyring]{key_get} and \link[keyring]{key_set} using the
+\link[keyring]{key_list} to check if key is in storage already.
 }

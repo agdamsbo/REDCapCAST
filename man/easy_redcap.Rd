@@ -8,17 +8,22 @@ easy_redcap(project.name, widen.data = TRUE, uri, ...)
 }
 \arguments{
 \item{project.name}{The name of the current project (for key storage with
-`keyring::key_set()`, using the default keyring)}
+\link[keyring]{key_set}, using the default keyring)}
 
 \item{widen.data}{argument to widen the exported data}
 
 \item{uri}{REDCap database API uri}
 
-\item{...}{arguments passed on to `REDCapCAST::read_redcap_tables()`}
+\item{...}{arguments passed on to \link[REDCapCAST]{read_redcap_tables}.}
 }
 \value{
 data.frame or list depending on widen.data
 }
 \description{
 Secure API key storage and data acquisition in one
+}
+\examples{
+\dontrun{
+easy_redcap("My_new_project",fields=c("record_id","age","hypertension"))
+}
 }

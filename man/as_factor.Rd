@@ -8,7 +8,6 @@
 \alias{as_factor.character}
 \alias{as_factor.haven_labelled}
 \alias{as_factor.labelled}
-\alias{as_factor.redcapcast_labelled}
 \alias{as_factor.data.frame}
 \title{Convert labelled vectors to factors while preserving attributes}
 \usage{
@@ -36,13 +35,6 @@ as_factor(x, ...)
   ...
 )
 
-\method{as_factor}{redcapcast_labelled}(
-  x,
-  levels = c("default", "labels", "values", "both"),
-  ordered = FALSE,
-  ...
-)
-
 \method{as_factor}{data.frame}(x, ..., only_labelled = TRUE)
 }
 \arguments{
@@ -64,7 +56,7 @@ as_factor(x, ...)
 \item{only_labelled}{Only apply to labelled columns?}
 }
 \description{
-This extends [forcats::as_factor()] as well as [haven::as_factor()], by appending
+This extends \link[forcats]{as_factor} as well as \link[haven]{as_factor}, by appending
 original attributes except for "class" after converting to factor to avoid
 ta loss in case of rich formatted and labelled data.
 }
