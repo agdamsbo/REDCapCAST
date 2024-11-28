@@ -5,7 +5,6 @@ Codecov
 DEPRICATED
 DOI
 DataDictionary
-GStat
 Gammelgaard
 Github
 GithubActions
@@ -15,8 +14,6 @@ METACRAN
 Nav
 ORCID
 POSIXct
-Pivotting
-README
 REDCap
 REDCapR
 REDCapRITS
@@ -41,6 +38,7 @@ dmy
 docx
 doi
 dplyr
+dropdown
 droplevels
 ds
 dta
@@ -61,7 +59,6 @@ labelled
 labelling
 mRS
 matadata
-md
 mdy
 mis
 mrs

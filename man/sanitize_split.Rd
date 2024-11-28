@@ -17,7 +17,7 @@ sanitize_split(
 
 \item{generic.names}{A vector of generic names to be excluded.}
 
-\item{drop.complete}{logical to remove genric REDCap variables indicating
+\item{drop.complete}{logical to remove generic REDCap variables indicating
 instrument completion. Default is TRUE.}
 
 \item{drop.empty}{logical to remove variables with only NAs Default is TRUE.}

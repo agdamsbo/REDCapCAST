@@ -117,7 +117,7 @@ clean_redcap_name <- function(x) {
 #'
 #' @param l A list of data frames.
 #' @param generic.names A vector of generic names to be excluded.
-#' @param drop.complete logical to remove genric REDCap variables indicating
+#' @param drop.complete logical to remove generic REDCap variables indicating
 #' instrument completion. Default is TRUE.
 #' @param drop.empty logical to remove variables with only NAs Default is TRUE.
 #'
