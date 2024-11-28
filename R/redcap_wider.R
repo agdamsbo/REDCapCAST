@@ -81,8 +81,8 @@ utils::globalVariables(c(
 #' redcap_wider(list4)
 redcap_wider <-
   function(data,
-           event.glue = "{.value}_{redcap_event_name}",
-           inst.glue = "{.value}_{redcap_repeat_instance}") {
+           event.glue = "{.value}____{redcap_event_name}",
+           inst.glue = "{.value}____{redcap_repeat_instance}") {
     # browser()
     if (!is_repeated_longitudinal(data)) {
       if (is.list(data)) {
@@ -192,7 +192,7 @@ save_labels <- function(data) {
 }
 
 # Removes class attributes of class "labelled" or "haven_labelled"
-remove_labelled <- function(data){
+remove_labelled <- function(data) {
   stopifnot(is.list(data))
   lapply(data, \(.x) {
     lapply(.x, \(.y) {
@@ -204,4 +204,35 @@ remove_labelled <- function(data){
     }) |>
       dplyr::bind_cols()
   })
+}
+
+#' Transfer variable name suffix to label in widened data
+#'
+#' @param data data.frame
+#' @param suffix.sep string to split suffix(es). Passed to \link[base]{strsplit}
+#' @param attr label attribute. Default is "label"
+#' @param glue.str glue string for new label. Available variables are "label"
+#' and "suffixes"
+#'
+#' @return data.frame
+#' @export
+#'
+suffix2label <- function(data,
+                         suffix.sep = "____",
+                         attr = "label",
+                         glue.str="{label} ({paste(suffixes,collapse=', ')})") {
+  data |>
+    purrr::imap(\(.d, .i){
+      suffixes <- unlist(strsplit(.i, suffix.sep))[-1]
+      if (length(suffixes) > 0) {
+        label <- get_attr(.d, attr = attr)
+        set_attr(.d,
+          glue::glue(glue.str),
+          attr = attr
+        )
+      } else {
+        .d
+      }
+    }) |>
+    dplyr::bind_cols()
 }

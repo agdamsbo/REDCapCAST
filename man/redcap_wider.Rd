@@ -6,8 +6,8 @@
 \usage{
 redcap_wider(
   data,
-  event.glue = "{.value}_{redcap_event_name}",
-  inst.glue = "{.value}_{redcap_repeat_instance}"
+  event.glue = "{.value}____{redcap_event_name}",
+  inst.glue = "{.value}____{redcap_repeat_instance}"
 )
 }
 \arguments{

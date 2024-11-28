@@ -1,16 +1,16 @@
-library(testthat)
+# library(testthat)
 test_that("redcap_wider() returns expected output", {
   list <-
     list(
-      data.frame(
+      dplyr::tibble(
         record_id = c(1, 2, 1, 2),
         redcap_event_name = c("baseline", "baseline", "followup", "followup"),
         age = c(25, 26, 27, 28)
       ),
-      data.frame(
+      dplyr::tibble(
         record_id = c(1, 2),
         redcap_event_name = c("baseline", "baseline"),
-        gender = c("male", "female")
+        sex = c("male", "female")
       )
     )
 
@@ -18,9 +18,9 @@ test_that("redcap_wider() returns expected output", {
     redcap_wider(list),
     dplyr::tibble(
       record_id = c(1, 2),
-      age_baseline = c(25, 26),
-      age_followup = c(27, 28),
-      gender = c("male", "female")
+      age____baseline = c(25, 26),
+      age____followup = c(27, 28),
+      sex = c("male", "female")
     )
   )
 })
@@ -29,6 +29,7 @@ test_that("redcap_wider() returns expected output", {
 # Using test data
 
 # Set up the path and data -------------------------------------------------
+
 file_paths <- lapply(
   c(records = "WARRIORtestForSoftwa_DATA_2018-06-21_1431.csv",
     metadata = "WARRIORtestForSoftwareUpgrades_DataDictionary_2018-06-21.csv"),

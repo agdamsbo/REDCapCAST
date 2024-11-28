@@ -44,10 +44,12 @@ This function includes a few convenience features to ease your further work.
 If your project uses repeating instruments possible as a longitudinal project, you can choose to widen the data. If not, the result will be a list of each instrument you have chosen to extract data from. Make sure to specify only the fields or instruments you need, and avoid to save any of the data locally, but always source from REDCap to avoid possibly insecure local storage of sensitive data.
 
 ```{r eval=FALSE}
-easy_redcap(uri = "YOUR URI", 
-            project.name = "MY_PROJECT", 
-            widen.data = TRUE,
-            fields = c("record_id", "OTHER FIELDS"))
+easy_redcap(
+  uri = "YOUR URI",
+  project.name = "MY_PROJECT",
+  widen.data = TRUE,
+  fields = c("record_id", "OTHER FIELDS")
+)
 ```
 
 ## Splitting the dataset
@@ -67,10 +69,12 @@ redcapcast_meta |> gt::gt()
 To save the metadata as labels in the dataset, we can save field labels and the choices from radio buttons and dropdown features:
 
 ```{r}
-labelled_data <- 
-  apply_field_label(data=redcapcast_data,
-                       meta=redcapcast_meta) |> 
-  apply_factor_labels(meta=redcapcast_meta)
+labelled_data <-
+  apply_field_label(
+    data = redcapcast_data,
+    meta = redcapcast_meta
+  ) |>
+  apply_factor_labels(meta = redcapcast_meta)
 ```
 
 The `REDCap_split` function splits the data set into a list of data.frames.
@@ -81,7 +85,7 @@ list <-
     records = labelled_data,
     metadata = redcapcast_meta,
     forms = "all"
-  ) |> 
+  ) |>
   # Next steps cleans up and removes generic columns
   sanitize_split()
 str(list)
@@ -90,15 +94,23 @@ str(list)
 The `easy_redcap()` will then (optionally) continue to widen the data, by transforming the list of data.frames to a single data.frame with one row for each subject/record_id (wide data format):
 
 ```{r}
-wide_data <- redcap_wider(list) 
+wide_data <- redcap_wider(list,
+  event.glue = "{.value}____{redcap_event_name}",
+  inst.glue = "{.value}____{redcap_repeat_instance}"
+)
 wide_data |> str()
+```
+
+Transfer suffixes to labels:
+
+```{r}
+wide_data_suffixes <- wide_data |> suffix2label()
 ```
 
 ## Creating a nice table
 
 ```{r}
-wide_data |> 
-  dplyr::select(sex,hypertension, diabetes) |> 
+wide_data_suffixes |>
+  dplyr::select(sex, hypertension, diabetes,mrs_score____follow2) |>
   gtsummary::tbl_summary()
 ```
-

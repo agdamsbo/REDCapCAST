@@ -49,7 +49,9 @@ easy_redcap <- function(project.name, widen.data = TRUE, uri, ...) {
   )
 
   if (widen.data) {
-    out <- out |> redcap_wider()
+    out <- out |>
+      redcap_wider() |>
+      suffix2label()
   }
 
   out
