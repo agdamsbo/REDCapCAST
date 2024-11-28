@@ -114,8 +114,12 @@ clean_redcap_name <- function(x) {
 #' Sanitize list of data frames
 #'
 #' Removing empty rows
+#'
 #' @param l A list of data frames.
 #' @param generic.names A vector of generic names to be excluded.
+#' @param drop.complete logical to remove genric REDCap variables indicating
+#' instrument completion. Default is TRUE.
+#' @param drop.empty logical to remove variables with only NAs Default is TRUE.
 #'
 #' @return A list of data frames with generic names excluded.
 #'
@@ -127,21 +131,34 @@ sanitize_split <- function(l,
                              "redcap_event_name",
                              "redcap_repeat_instrument",
                              "redcap_repeat_instance"
-                           )) {
+                           ),
+                           drop.complete=TRUE,
+                           drop.empty=TRUE) {
   generic.names <- c(
     get_id_name(l),
-    generic.names,
-    paste0(names(l), "_complete")
+    generic.names
   )
 
-  lapply(l, function(i) {
+  if (drop.complete){
+    generic.names <- c(
+      generic.names,
+      paste0(names(l), "_complete")
+    )
+  }
+
+  out <- lapply(l, function(i) {
     if (ncol(i) > 2) {
-      s <- data.frame(i[, !colnames(i) %in% generic.names])
+      s <- i[!colnames(i) %in% generic.names]
+      if (drop.empty){
       i[!apply(is.na(s), MARGIN = 1, FUN = all), ]
+        }
     } else {
       i
     }
   })
+
+  # On removing empty variables, a list may end up empty
+  out[sapply(out,nrow)>0]
 }
 
 
@@ -496,5 +513,8 @@ is_repeated_longitudinal <- function(data, generics = c(
 }
 
 
-
-
+dummy_fun <- function(...){
+  list(
+    gtsummary::add_difference()
+  )
+}
