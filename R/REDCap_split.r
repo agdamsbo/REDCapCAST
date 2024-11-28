@@ -11,11 +11,10 @@
 #'   \code{data.frame}, \code{response}, or \code{character} vector containing
 #'   JSON from an API call.
 #' @param primary_table_name Name given to the list element for the primary
-#'   output table (as described in \emph{README.md}). Ignored if
-#'   \code{forms = 'all'}.
+#'   output table. Ignored if \code{forms = 'all'}.
 #' @param forms Indicate whether to create separate tables for repeating
 #'   instruments only or for all forms.
-#' @author Paul W. Egeler, M.S., GStat
+#' @author Paul W. Egeler
 #' @examples
 #' \dontrun{
 #' # Using an API call -------------------------------------------------------
@@ -40,7 +39,7 @@
 #' )
 #'
 #' # Convert exported JSON strings into a list of data.frames
-#' REDCapRITS::REDCap_split(records, metadata)
+#' REDCapCAST::REDCap_split(records, metadata)
 #'
 #' # Using a raw data export -------------------------------------------------
 #'
@@ -53,7 +52,7 @@
 #' )
 #'
 #' # Split the tables
-#' REDCapRITS::REDCap_split(records, metadata)
+#' REDCapCAST::REDCap_split(records, metadata)
 #'
 #' # In conjunction with the R export script ---------------------------------
 #'
@@ -70,7 +69,7 @@
 #' metadata <- read.csv("ExampleProject_DataDictionary_2018-06-03.csv")
 #'
 #' # Split the tables
-#' REDCapRITS::REDCap_split(data, metadata)
+#' REDCapCAST::REDCap_split(data, metadata)
 #' setwd(old)
 #' }
 #' @return A list of \code{"data.frame"}s. The number of tables will differ
