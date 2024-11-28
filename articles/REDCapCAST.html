@@ -108,10 +108,12 @@ to specify only the fields or instruments you need, and avoid to save
 any of the data locally, but always source from REDCap to avoid possibly
 insecure local storage of sensitive data.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/easy_redcap.html">easy_redcap</a></span><span class="op">(</span>uri <span class="op">=</span> <span class="st">"YOUR URI"</span>, </span>
-<span>            project.name <span class="op">=</span> <span class="st">"MY_PROJECT"</span>, </span>
-<span>            widen.data <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>            fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"OTHER FIELDS"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/easy_redcap.html">easy_redcap</a></span><span class="op">(</span></span>
+<span>  uri <span class="op">=</span> <span class="st">"YOUR URI"</span>,</span>
+<span>  project.name <span class="op">=</span> <span class="st">"MY_PROJECT"</span>,</span>
+<span>  widen.data <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"OTHER FIELDS"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="splitting-the-dataset">Splitting the dataset<a class="anchor" aria-label="anchor" href="#splitting-the-dataset"></a>
@@ -2232,10 +2234,12 @@ Note: as opposed to the build in datediff() this handles counting years as integ
 <p>To save the metadata as labels in the dataset, we can save field
 labels and the choices from radio buttons and dropdown features:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">labelled_data</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="../reference/apply_field_label.html">apply_field_label</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">redcapcast_data</span>,</span>
-<span>                       meta<span class="op">=</span><span class="va">redcapcast_meta</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/apply_factor_labels.html">apply_factor_labels</a></span><span class="op">(</span>meta<span class="op">=</span><span class="va">redcapcast_meta</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">labelled_data</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/apply_field_label.html">apply_field_label</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="va">redcapcast_data</span>,</span>
+<span>    meta <span class="op">=</span> <span class="va">redcapcast_meta</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/apply_factor_labels.html">apply_factor_labels</a></span><span class="op">(</span>meta <span class="op">=</span> <span class="va">redcapcast_meta</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>REDCap_split</code> function splits the data set into a
 list of data.frames.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -2244,7 +2248,7 @@ list of data.frames.</p>
 <span>    records <span class="op">=</span> <span class="va">labelled_data</span>,</span>
 <span>    metadata <span class="op">=</span> <span class="va">redcapcast_meta</span>,</span>
 <span>    forms <span class="op">=</span> <span class="st">"all"</span></span>
-<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># Next steps cleans up and removes generic columns</span></span>
 <span>  <span class="fu"><a href="../reference/sanitize_split.html">sanitize_split</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">list</span><span class="op">)</span></span>
@@ -2315,127 +2319,133 @@ widen the data, by transforming the list of data.frames to a single
 data.frame with one row for each subject/record_id (wide data
 format):</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wide_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_wider.html">redcap_wider</a></span><span class="op">(</span><span class="va">list</span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="va">wide_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_wider.html">redcap_wider</a></span><span class="op">(</span><span class="va">list</span>,</span>
+<span>  event.glue <span class="op">=</span> <span class="st">"{.value}____{redcap_event_name}"</span>,</span>
+<span>  inst.glue <span class="op">=</span> <span class="st">"{.value}____{redcap_repeat_instance}"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(record_id)`</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(record_id)`</span></span>
 <span><span class="va">wide_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [6 × 49] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ record_id                   : num [1:6] 1 2 3 4 5 6</span></span>
+<span><span class="co">#&gt;  $ record_id                         : num [1:6] 1 2 3 4 5 6</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "ID"</span></span>
-<span><span class="co">#&gt;  $ cpr                         : chr [1:6] "1203401OB4" "0102342303" "2301569823" "0204051342" ...</span></span>
+<span><span class="co">#&gt;  $ cpr                               : chr [1:6] "1203401OB4" "0102342303" "2301569823" "0204051342" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "CPR (Danish civil registration number)"</span></span>
-<span><span class="co">#&gt;  $ inclusion                   : Date[1:6], format: "2023-03-13" "2023-03-01" ...</span></span>
-<span><span class="co">#&gt;  $ inclusion_time              : 'hms' num [1:6] 12:38:49 10:38:57 12:01:07 20:39:19 ...</span></span>
+<span><span class="co">#&gt;  $ inclusion                         : Date[1:6], format: "2023-03-13" "2023-03-01" ...</span></span>
+<span><span class="co">#&gt;  $ inclusion_time                    : 'hms' num [1:6] 12:38:49 10:38:57 12:01:07 20:39:19 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "units")= chr "secs"</span></span>
-<span><span class="co">#&gt;  $ dob                         : Date[1:6], format: "1940-03-12" "1934-02-01" ...</span></span>
-<span><span class="co">#&gt;  $ age                         : num [1:6] 83 89.1 66.1 117.9 126.2 ...</span></span>
+<span><span class="co">#&gt;  $ dob                               : Date[1:6], format: "1940-03-12" "1934-02-01" ...</span></span>
+<span><span class="co">#&gt;  $ age                               : num [1:6] 83 89.1 66.1 117.9 126.2 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Age\r\nNote: Apparently, the build in datediff() function does not handle counting whole years. This results in"| __truncated__</span></span>
-<span><span class="co">#&gt;  $ age_integer                 : num [1:6] 83 89 66 117 126 91</span></span>
+<span><span class="co">#&gt;  $ age_integer                       : num [1:6] 83 89 66 117 126 91</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Age integer\r\nNote: as opposed to the build in datediff() this handles counting years as integers very well. C"| __truncated__</span></span>
-<span><span class="co">#&gt;  $ sex                         : chr [1:6] "female" "male" "male" "female" ...</span></span>
+<span><span class="co">#&gt;  $ sex                               : chr [1:6] "female" "male" "male" "female" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Legal sex"</span></span>
-<span><span class="co">#&gt;  $ cohabitation                : 'labelled' chr [1:6] "Yes" "Yes" "No" NA ...</span></span>
+<span><span class="co">#&gt;  $ cohabitation                      : 'labelled' chr [1:6] "Yes" "Yes" "No" NA ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Cohabitation"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:2] "1" "2"</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:2] "Yes" "No"</span></span>
-<span><span class="co">#&gt;  $ hypertension                : 'labelled' chr [1:6] "No" "No" "Yes" NA ...</span></span>
+<span><span class="co">#&gt;  $ hypertension                      : 'labelled' chr [1:6] "No" "No" "Yes" NA ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Hypertension"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:2] "1" "2"</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:2] "Yes" "No"</span></span>
-<span><span class="co">#&gt;  $ diabetes                    : 'labelled' chr [1:6] "Yes" "No" "Yes" NA ...</span></span>
+<span><span class="co">#&gt;  $ diabetes                          : 'labelled' chr [1:6] "Yes" "No" "Yes" NA ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Diabetes"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:2] "1" "2"</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:2] "Yes" "No"</span></span>
-<span><span class="co">#&gt;  $ region                      : 'labelled' chr [1:6] "East" "South" "North" NA ...</span></span>
+<span><span class="co">#&gt;  $ region                            : 'labelled' chr [1:6] "East" "South" "North" NA ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Region"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:4] "1" "2" "3" "4"</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:4] "North" "East" "South" "West"</span></span>
-<span><span class="co">#&gt;  $ baseline_data_start_complete: chr [1:6] "Incomplete" "Incomplete" "Incomplete" "Incomplete" ...</span></span>
-<span><span class="co">#&gt;  $ mrs_assessed_inclusion      : 'labelled' chr [1:6] "Yes" "Yes" NA NA ...</span></span>
+<span><span class="co">#&gt;  $ baseline_data_start_complete      : chr [1:6] "Incomplete" "Incomplete" "Incomplete" "Incomplete" ...</span></span>
+<span><span class="co">#&gt;  $ mrs_assessed____inclusion         : 'labelled' chr [1:6] "Yes" "Yes" NA NA ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Assesed"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:2] "1" "2"</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:2] "Yes" "No"</span></span>
-<span><span class="co">#&gt;  $ mrs_assessed_follow1        : 'labelled' chr [1:6] NA "Yes" "Yes" NA ...</span></span>
+<span><span class="co">#&gt;  $ mrs_assessed____follow1           : 'labelled' chr [1:6] NA "Yes" "Yes" NA ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Assesed"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:2] "1" "2"</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:2] "Yes" "No"</span></span>
-<span><span class="co">#&gt;  $ mrs_assessed_follow2        : 'labelled' chr [1:6] NA NA "Yes" NA ...</span></span>
+<span><span class="co">#&gt;  $ mrs_assessed____follow2           : 'labelled' chr [1:6] NA NA "Yes" NA ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Assesed"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:2] "1" "2"</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:2] "Yes" "No"</span></span>
-<span><span class="co">#&gt;  $ mrs_date_inclusion          : Date[1:6], format: "2023-03-13" "2023-03-07" ...</span></span>
-<span><span class="co">#&gt;  $ mrs_date_follow1            : Date[1:6], format: NA "2023-03-09" ...</span></span>
-<span><span class="co">#&gt;  $ mrs_date_follow2            : Date[1:6], format: NA NA ...</span></span>
-<span><span class="co">#&gt;  $ mrs_score_inclusion         : 'labelled' num [1:6] 1 1 NA NA NA NA</span></span>
+<span><span class="co">#&gt;  $ mrs_date____inclusion             : Date[1:6], format: "2023-03-13" "2023-03-07" ...</span></span>
+<span><span class="co">#&gt;  $ mrs_date____follow1               : Date[1:6], format: NA "2023-03-09" ...</span></span>
+<span><span class="co">#&gt;  $ mrs_date____follow2               : Date[1:6], format: NA NA ...</span></span>
+<span><span class="co">#&gt;  $ mrs_score____inclusion            : 'labelled' num [1:6] 1 1 NA NA NA NA</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "mRS score"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:6] "0" "1" "2" "3" ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:6] "0" "1" "2" "3" ...</span></span>
-<span><span class="co">#&gt;  $ mrs_score_follow1           : 'labelled' num [1:6] NA 3 2 NA NA NA</span></span>
+<span><span class="co">#&gt;  $ mrs_score____follow1              : 'labelled' num [1:6] NA 3 2 NA NA NA</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "mRS score"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:6] "0" "1" "2" "3" ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:6] "0" "1" "2" "3" ...</span></span>
-<span><span class="co">#&gt;  $ mrs_score_follow2           : 'labelled' num [1:6] NA NA 1 NA NA NA</span></span>
+<span><span class="co">#&gt;  $ mrs_score____follow2              : 'labelled' num [1:6] NA NA 1 NA NA NA</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "mRS score"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:6] "0" "1" "2" "3" ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:6] "0" "1" "2" "3" ...</span></span>
-<span><span class="co">#&gt;  $ mrs_complete_inclusion      : chr [1:6] "Incomplete" "Incomplete" NA NA ...</span></span>
-<span><span class="co">#&gt;  $ mrs_complete_follow1        : chr [1:6] NA "Incomplete" "Incomplete" NA ...</span></span>
-<span><span class="co">#&gt;  $ mrs_complete_follow2        : chr [1:6] NA NA "Incomplete" NA ...</span></span>
-<span><span class="co">#&gt;  $ event_datetime_1_follow1    : POSIXct[1:6], format: NA "2024-01-18 12:49:42" ...</span></span>
-<span><span class="co">#&gt;  $ event_datetime_1_follow2    : POSIXct[1:6], format: NA NA ...</span></span>
-<span><span class="co">#&gt;  $ event_age_1_follow1         : num [1:6] NA NA NA 96 127 NA</span></span>
+<span><span class="co">#&gt;  $ mrs_complete____inclusion         : chr [1:6] "Incomplete" "Incomplete" NA NA ...</span></span>
+<span><span class="co">#&gt;  $ mrs_complete____follow1           : chr [1:6] NA "Incomplete" "Incomplete" NA ...</span></span>
+<span><span class="co">#&gt;  $ mrs_complete____follow2           : chr [1:6] NA NA "Incomplete" NA ...</span></span>
+<span><span class="co">#&gt;  $ event_datetime____1____follow1    : POSIXct[1:6], format: NA "2024-01-18 12:49:42" ...</span></span>
+<span><span class="co">#&gt;  $ event_datetime____1____follow2    : POSIXct[1:6], format: NA NA ...</span></span>
+<span><span class="co">#&gt;  $ event_age____1____follow1         : num [1:6] NA NA NA 96 127 NA</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Age at event"</span></span>
-<span><span class="co">#&gt;  $ event_age_1_follow2         : num [1:6] NA NA NA 118 NA NA</span></span>
+<span><span class="co">#&gt;  $ event_age____1____follow2         : num [1:6] NA NA NA 118 NA NA</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Age at event"</span></span>
-<span><span class="co">#&gt;  $ event_type_1_follow1        : 'labelled' chr [1:6] NA "TIA" "AIS" "TIA" ...</span></span>
+<span><span class="co">#&gt;  $ event_type____1____follow1        : 'labelled' chr [1:6] NA "TIA" "AIS" "TIA" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Neurovascular event"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:5] "1" "2" "3" "4" ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:5] "TIA" "AIS" "ICH" "SAH" ...</span></span>
-<span><span class="co">#&gt;  $ event_type_1_follow2        : 'labelled' chr [1:6] NA NA "ICH" "AIS" ...</span></span>
+<span><span class="co">#&gt;  $ event_type____1____follow2        : 'labelled' chr [1:6] NA NA "ICH" "AIS" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Neurovascular event"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:5] "1" "2" "3" "4" ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:5] "TIA" "AIS" "ICH" "SAH" ...</span></span>
-<span><span class="co">#&gt;  $ new_event_complete_1_follow1: chr [1:6] NA "Incomplete" "Incomplete" "Complete" ...</span></span>
-<span><span class="co">#&gt;  $ new_event_complete_1_follow2: chr [1:6] NA NA "Incomplete" "Complete" ...</span></span>
-<span><span class="co">#&gt;  $ event_datetime_2_follow1    : POSIXct[1:6], format: NA NA ...</span></span>
-<span><span class="co">#&gt;  $ event_datetime_2_follow2    : POSIXct[1:6], format: NA NA ...</span></span>
-<span><span class="co">#&gt;  $ event_datetime_3_follow1    : POSIXct[1:6], format: NA NA ...</span></span>
-<span><span class="co">#&gt;  $ event_datetime_3_follow2    : POSIXct[1:6], format: NA NA ...</span></span>
-<span><span class="co">#&gt;  $ event_age_2_follow1         : num [1:6] NA NA NA 105 127 NA</span></span>
+<span><span class="co">#&gt;  $ new_event_complete____1____follow1: chr [1:6] NA "Incomplete" "Incomplete" "Complete" ...</span></span>
+<span><span class="co">#&gt;  $ new_event_complete____1____follow2: chr [1:6] NA NA "Incomplete" "Complete" ...</span></span>
+<span><span class="co">#&gt;  $ event_datetime____2____follow1    : POSIXct[1:6], format: NA NA ...</span></span>
+<span><span class="co">#&gt;  $ event_datetime____2____follow2    : POSIXct[1:6], format: NA NA ...</span></span>
+<span><span class="co">#&gt;  $ event_datetime____3____follow1    : POSIXct[1:6], format: NA NA ...</span></span>
+<span><span class="co">#&gt;  $ event_datetime____3____follow2    : POSIXct[1:6], format: NA NA ...</span></span>
+<span><span class="co">#&gt;  $ event_age____2____follow1         : num [1:6] NA NA NA 105 127 NA</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Age at event"</span></span>
-<span><span class="co">#&gt;  $ event_age_2_follow2         : num [1:6] NA NA NA 118 NA NA</span></span>
+<span><span class="co">#&gt;  $ event_age____2____follow2         : num [1:6] NA NA NA 118 NA NA</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Age at event"</span></span>
-<span><span class="co">#&gt;  $ event_age_3_follow1         : num [1:6] NA NA NA NA NA NA</span></span>
+<span><span class="co">#&gt;  $ event_age____3____follow1         : num [1:6] NA NA NA NA NA NA</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Age at event"</span></span>
-<span><span class="co">#&gt;  $ event_age_3_follow2         : num [1:6] NA NA NA 118 NA NA</span></span>
+<span><span class="co">#&gt;  $ event_age____3____follow2         : num [1:6] NA NA NA 118 NA NA</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Age at event"</span></span>
-<span><span class="co">#&gt;  $ event_type_2_follow1        : 'labelled' chr [1:6] NA NA "ICH" "TIA" ...</span></span>
+<span><span class="co">#&gt;  $ event_type____2____follow1        : 'labelled' chr [1:6] NA NA "ICH" "TIA" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Neurovascular event"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:5] "1" "2" "3" "4" ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:5] "TIA" "AIS" "ICH" "SAH" ...</span></span>
-<span><span class="co">#&gt;  $ event_type_2_follow2        : 'labelled' chr [1:6] NA NA "TIA" "ICH" ...</span></span>
+<span><span class="co">#&gt;  $ event_type____2____follow2        : 'labelled' chr [1:6] NA NA "TIA" "ICH" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Neurovascular event"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:5] "1" "2" "3" "4" ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:5] "TIA" "AIS" "ICH" "SAH" ...</span></span>
-<span><span class="co">#&gt;  $ event_type_3_follow1        : 'labelled' chr [1:6] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ event_type____3____follow1        : 'labelled' chr [1:6] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Neurovascular event"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:5] "1" "2" "3" "4" ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:5] "TIA" "AIS" "ICH" "SAH" ...</span></span>
-<span><span class="co">#&gt;  $ event_type_3_follow2        : 'labelled' chr [1:6] NA NA "AIS" "Unknown" ...</span></span>
+<span><span class="co">#&gt;  $ event_type____3____follow2        : 'labelled' chr [1:6] NA NA "AIS" "Unknown" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "label")= chr "Neurovascular event"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "labels")= Named chr [1:5] "1" "2" "3" "4" ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:5] "TIA" "AIS" "ICH" "SAH" ...</span></span>
-<span><span class="co">#&gt;  $ new_event_complete_2_follow1: chr [1:6] NA NA "Incomplete" "Complete" ...</span></span>
-<span><span class="co">#&gt;  $ new_event_complete_2_follow2: chr [1:6] NA NA "Incomplete" "Incomplete" ...</span></span>
-<span><span class="co">#&gt;  $ new_event_complete_3_follow1: chr [1:6] NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ new_event_complete_3_follow2: chr [1:6] NA NA "Incomplete" "Complete" ...</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ new_event_complete____2____follow1: chr [1:6] NA NA "Incomplete" "Complete" ...</span></span>
+<span><span class="co">#&gt;  $ new_event_complete____2____follow2: chr [1:6] NA NA "Incomplete" "Incomplete" ...</span></span>
+<span><span class="co">#&gt;  $ new_event_complete____3____follow1: chr [1:6] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ new_event_complete____3____follow2: chr [1:6] NA NA "Incomplete" "Complete" ...</span></span></code></pre></div>
+<p>Transfer suffixes to labels:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">wide_data_suffixes</span> <span class="op">&lt;-</span> <span class="va">wide_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/suffix2label.html">suffix2label</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="creating-a-nice-table">Creating a nice table<a class="anchor" aria-label="anchor" href="#creating-a-nice-table"></a>
 </h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wide_data</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sex</span>,<span class="va">hypertension</span>, <span class="va">diabetes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">wide_data_suffixes</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">hypertension</span>, <span class="va">diabetes</span>,<span class="va">mrs_score____follow2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html" class="external-link">tbl_summary</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="ulbfdpbcyv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#ulbfdpbcyv table {
@@ -2937,6 +2947,18 @@ format):</p>
 <tr>
 <td headers="label" class="gt_row gt_left">    Unknown</td>
 <td headers="stat_0" class="gt_row gt_center">1</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">mRS score (follow2)</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    1</td>
+<td headers="stat_0" class="gt_row gt_center">1 (100%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    Unknown</td>
+<td headers="stat_0" class="gt_row gt_center">5</td>
 </tr>
 </tbody>
 <tfoot class="gt_footnotes"><tr>
