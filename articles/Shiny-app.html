@@ -91,68 +91,65 @@ and launch the app as follows:</p>
 <span>  <span class="fu"><a href="../reference/redcap_wider.html">redcap_wider</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; Joining with `by = join_by(record_id)`</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(record_id)`</span></span>
-<span><span class="co">#&gt; Joining with `by = join_by(record_id)`</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 'data.frame':    6 obs. of  52 variables:</span></span>
-<span><span class="co">#&gt;  $ record_id                   : num  1 2 3 4 5 6</span></span>
-<span><span class="co">#&gt;  $ cpr                         : chr  "1203401OB4" "0102342303" "2301569823" "0204051342" ...</span></span>
-<span><span class="co">#&gt;  $ inclusion                   : Date, format: "2023-03-13" "2023-03-01" ...</span></span>
-<span><span class="co">#&gt;  $ inclusion_time              : 'hms' num  12:38:49 10:38:57 12:01:07 20:39:19 ...</span></span>
+<span><span class="co">#&gt; tibble [6 × 49] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ record_id                   : num [1:6] 1 2 3 4 5 6</span></span>
+<span><span class="co">#&gt;  $ cpr                         : chr [1:6] "1203401OB4" "0102342303" "2301569823" "0204051342" ...</span></span>
+<span><span class="co">#&gt;  $ inclusion                   : Date[1:6], format: "2023-03-13" "2023-03-01" ...</span></span>
+<span><span class="co">#&gt;  $ inclusion_time              : 'hms' num [1:6] 12:38:49 10:38:57 12:01:07 20:39:19 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "units")= chr "secs"</span></span>
-<span><span class="co">#&gt;  $ dob                         : Date, format: "1940-03-12" "1934-02-01" ...</span></span>
-<span><span class="co">#&gt;  $ age                         : num  83 89.1 66.1 117.9 126.2 ...</span></span>
-<span><span class="co">#&gt;  $ age_integer                 : num  83 89 66 117 126 91</span></span>
-<span><span class="co">#&gt;  $ sex                         : chr  "female" "male" "male" "female" ...</span></span>
-<span><span class="co">#&gt;  $ cohabitation                : chr  "Yes" "Yes" "No" NA ...</span></span>
-<span><span class="co">#&gt;  $ hypertension                : chr  "No" "No" "Yes" NA ...</span></span>
-<span><span class="co">#&gt;  $ diabetes                    : chr  "Yes" "No" "Yes" NA ...</span></span>
-<span><span class="co">#&gt;  $ region                      : chr  "East" "South" "North" NA ...</span></span>
-<span><span class="co">#&gt;  $ baseline_data_start_complete: chr  "Incomplete" "Incomplete" "Incomplete" "Incomplete" ...</span></span>
-<span><span class="co">#&gt;  $ mrs_assessed_inclusion      : chr  "Yes" "Yes" NA NA ...</span></span>
-<span><span class="co">#&gt;  $ mrs_assessed_follow1        : chr  NA "Yes" "Yes" NA ...</span></span>
-<span><span class="co">#&gt;  $ mrs_assessed_follow2        : chr  NA NA "Yes" NA ...</span></span>
-<span><span class="co">#&gt;  $ mrs_date_inclusion          : Date, format: "2023-03-13" "2023-03-07" ...</span></span>
-<span><span class="co">#&gt;  $ mrs_date_follow1            : Date, format: NA "2023-03-09" ...</span></span>
-<span><span class="co">#&gt;  $ mrs_date_follow2            : Date, format: NA NA ...</span></span>
-<span><span class="co">#&gt;  $ mrs_score_inclusion         : num  1 1 NA NA NA NA</span></span>
-<span><span class="co">#&gt;  $ mrs_score_follow1           : num  NA 3 2 NA NA NA</span></span>
-<span><span class="co">#&gt;  $ mrs_score_follow2           : num  NA NA 1 NA NA NA</span></span>
-<span><span class="co">#&gt;  $ mrs_complete_inclusion      : chr  "Incomplete" "Incomplete" NA NA ...</span></span>
-<span><span class="co">#&gt;  $ mrs_complete_follow1        : chr  NA "Incomplete" "Incomplete" NA ...</span></span>
-<span><span class="co">#&gt;  $ mrs_complete_follow2        : chr  NA NA "Incomplete" NA ...</span></span>
-<span><span class="co">#&gt;  $ con_mrs                     : logi  NA NA NA NA NA NA</span></span>
-<span><span class="co">#&gt;  $ con_calc                    : logi  NA NA NA NA NA NA</span></span>
-<span><span class="co">#&gt;  $ consensus_complete          : chr  NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ event_datetime_1_follow1    : POSIXct, format: NA "2024-01-18 12:49:42" ...</span></span>
-<span><span class="co">#&gt;  $ event_datetime_1_follow2    : POSIXct, format: NA NA ...</span></span>
-<span><span class="co">#&gt;  $ event_age_1_follow1         : num  NA NA NA 96 127 NA</span></span>
-<span><span class="co">#&gt;  $ event_age_1_follow2         : num  NA NA NA 118 NA NA</span></span>
-<span><span class="co">#&gt;  $ event_type_1_follow1        : chr  NA "TIA" "AIS" "TIA" ...</span></span>
-<span><span class="co">#&gt;  $ event_type_1_follow2        : chr  NA NA "ICH" "AIS" ...</span></span>
-<span><span class="co">#&gt;  $ new_event_complete_1_follow1: chr  NA "Incomplete" "Incomplete" "Complete" ...</span></span>
-<span><span class="co">#&gt;  $ new_event_complete_1_follow2: chr  NA NA "Incomplete" "Complete" ...</span></span>
-<span><span class="co">#&gt;  $ event_datetime_2_follow1    : POSIXct, format: NA NA ...</span></span>
-<span><span class="co">#&gt;  $ event_datetime_2_follow2    : POSIXct, format: NA NA ...</span></span>
-<span><span class="co">#&gt;  $ event_datetime_3_follow1    : POSIXct, format: NA NA ...</span></span>
-<span><span class="co">#&gt;  $ event_datetime_3_follow2    : POSIXct, format: NA NA ...</span></span>
-<span><span class="co">#&gt;  $ event_age_2_follow1         : num  NA NA NA 105 127 NA</span></span>
-<span><span class="co">#&gt;  $ event_age_2_follow2         : num  NA NA NA 118 NA NA</span></span>
-<span><span class="co">#&gt;  $ event_age_3_follow1         : num  NA NA NA NA NA NA</span></span>
-<span><span class="co">#&gt;  $ event_age_3_follow2         : num  NA NA NA 118 NA NA</span></span>
-<span><span class="co">#&gt;  $ event_type_2_follow1        : chr  NA NA "ICH" "TIA" ...</span></span>
-<span><span class="co">#&gt;  $ event_type_2_follow2        : chr  NA NA "TIA" "ICH" ...</span></span>
-<span><span class="co">#&gt;  $ event_type_3_follow1        : chr  NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ event_type_3_follow2        : chr  NA NA "AIS" "Unknown" ...</span></span>
-<span><span class="co">#&gt;  $ new_event_complete_2_follow1: chr  NA NA "Incomplete" "Complete" ...</span></span>
-<span><span class="co">#&gt;  $ new_event_complete_2_follow2: chr  NA NA "Incomplete" "Incomplete" ...</span></span>
-<span><span class="co">#&gt;  $ new_event_complete_3_follow1: chr  NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ new_event_complete_3_follow2: chr  NA NA "Incomplete" "Complete" ...</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ dob                         : Date[1:6], format: "1940-03-12" "1934-02-01" ...</span></span>
+<span><span class="co">#&gt;  $ age                         : num [1:6] 83 89.1 66.1 117.9 126.2 ...</span></span>
+<span><span class="co">#&gt;  $ age_integer                 : num [1:6] 83 89 66 117 126 91</span></span>
+<span><span class="co">#&gt;  $ sex                         : chr [1:6] "female" "male" "male" "female" ...</span></span>
+<span><span class="co">#&gt;  $ cohabitation                : chr [1:6] "Yes" "Yes" "No" NA ...</span></span>
+<span><span class="co">#&gt;  $ hypertension                : chr [1:6] "No" "No" "Yes" NA ...</span></span>
+<span><span class="co">#&gt;  $ diabetes                    : chr [1:6] "Yes" "No" "Yes" NA ...</span></span>
+<span><span class="co">#&gt;  $ region                      : chr [1:6] "East" "South" "North" NA ...</span></span>
+<span><span class="co">#&gt;  $ baseline_data_start_complete: chr [1:6] "Incomplete" "Incomplete" "Incomplete" "Incomplete" ...</span></span>
+<span><span class="co">#&gt;  $ mrs_assessed_inclusion      : chr [1:6] "Yes" "Yes" NA NA ...</span></span>
+<span><span class="co">#&gt;  $ mrs_assessed_follow1        : chr [1:6] NA "Yes" "Yes" NA ...</span></span>
+<span><span class="co">#&gt;  $ mrs_assessed_follow2        : chr [1:6] NA NA "Yes" NA ...</span></span>
+<span><span class="co">#&gt;  $ mrs_date_inclusion          : Date[1:6], format: "2023-03-13" "2023-03-07" ...</span></span>
+<span><span class="co">#&gt;  $ mrs_date_follow1            : Date[1:6], format: NA "2023-03-09" ...</span></span>
+<span><span class="co">#&gt;  $ mrs_date_follow2            : Date[1:6], format: NA NA ...</span></span>
+<span><span class="co">#&gt;  $ mrs_score_inclusion         : num [1:6] 1 1 NA NA NA NA</span></span>
+<span><span class="co">#&gt;  $ mrs_score_follow1           : num [1:6] NA 3 2 NA NA NA</span></span>
+<span><span class="co">#&gt;  $ mrs_score_follow2           : num [1:6] NA NA 1 NA NA NA</span></span>
+<span><span class="co">#&gt;  $ mrs_complete_inclusion      : chr [1:6] "Incomplete" "Incomplete" NA NA ...</span></span>
+<span><span class="co">#&gt;  $ mrs_complete_follow1        : chr [1:6] NA "Incomplete" "Incomplete" NA ...</span></span>
+<span><span class="co">#&gt;  $ mrs_complete_follow2        : chr [1:6] NA NA "Incomplete" NA ...</span></span>
+<span><span class="co">#&gt;  $ event_datetime_1_follow1    : POSIXct[1:6], format: NA "2024-01-18 12:49:42" ...</span></span>
+<span><span class="co">#&gt;  $ event_datetime_1_follow2    : POSIXct[1:6], format: NA NA ...</span></span>
+<span><span class="co">#&gt;  $ event_age_1_follow1         : num [1:6] NA NA NA 96 127 NA</span></span>
+<span><span class="co">#&gt;  $ event_age_1_follow2         : num [1:6] NA NA NA 118 NA NA</span></span>
+<span><span class="co">#&gt;  $ event_type_1_follow1        : chr [1:6] NA "TIA" "AIS" "TIA" ...</span></span>
+<span><span class="co">#&gt;  $ event_type_1_follow2        : chr [1:6] NA NA "ICH" "AIS" ...</span></span>
+<span><span class="co">#&gt;  $ new_event_complete_1_follow1: chr [1:6] NA "Incomplete" "Incomplete" "Complete" ...</span></span>
+<span><span class="co">#&gt;  $ new_event_complete_1_follow2: chr [1:6] NA NA "Incomplete" "Complete" ...</span></span>
+<span><span class="co">#&gt;  $ event_datetime_2_follow1    : POSIXct[1:6], format: NA NA ...</span></span>
+<span><span class="co">#&gt;  $ event_datetime_2_follow2    : POSIXct[1:6], format: NA NA ...</span></span>
+<span><span class="co">#&gt;  $ event_datetime_3_follow1    : POSIXct[1:6], format: NA NA ...</span></span>
+<span><span class="co">#&gt;  $ event_datetime_3_follow2    : POSIXct[1:6], format: NA NA ...</span></span>
+<span><span class="co">#&gt;  $ event_age_2_follow1         : num [1:6] NA NA NA 105 127 NA</span></span>
+<span><span class="co">#&gt;  $ event_age_2_follow2         : num [1:6] NA NA NA 118 NA NA</span></span>
+<span><span class="co">#&gt;  $ event_age_3_follow1         : num [1:6] NA NA NA NA NA NA</span></span>
+<span><span class="co">#&gt;  $ event_age_3_follow2         : num [1:6] NA NA NA 118 NA NA</span></span>
+<span><span class="co">#&gt;  $ event_type_2_follow1        : chr [1:6] NA NA "ICH" "TIA" ...</span></span>
+<span><span class="co">#&gt;  $ event_type_2_follow2        : chr [1:6] NA NA "TIA" "ICH" ...</span></span>
+<span><span class="co">#&gt;  $ event_type_3_follow1        : chr [1:6] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ event_type_3_follow2        : chr [1:6] NA NA "AIS" "Unknown" ...</span></span>
+<span><span class="co">#&gt;  $ new_event_complete_2_follow1: chr [1:6] NA NA "Incomplete" "Complete" ...</span></span>
+<span><span class="co">#&gt;  $ new_event_complete_2_follow2: chr [1:6] NA NA "Incomplete" "Incomplete" ...</span></span>
+<span><span class="co">#&gt;  $ new_event_complete_3_follow1: chr [1:6] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ new_event_complete_3_follow2: chr [1:6] NA NA "Incomplete" "Complete" ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "problems")=&lt;externalptr&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds</span><span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/ds2dd_detailed.html">ds2dd_detailed</a></span><span class="op">(</span>metadata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">REDCapCAST</span><span class="fu">::</span><span class="va"><a href="../reference/redcapcast_meta.html">redcapcast_meta</a></span><span class="op">)</span><span class="op">)</span><span class="op">|&gt;</span>  </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="st">"data"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [6 × 52] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [6 × 49] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ record_id                   : num [1:6] 1 2 3 4 5 6</span></span>
 <span><span class="co">#&gt;  $ cpr                         : chr [1:6] "1203401OB4" "0102342303" "2301569823" "0204051342" ...</span></span>
 <span><span class="co">#&gt;  $ inclusion                   : Date[1:6], format: "2023-03-13" "2023-03-01" ...</span></span>
@@ -178,9 +175,6 @@ and launch the app as follows:</p>
 <span><span class="co">#&gt;  $ mrs_complete_inclusion      : chr [1:6] "Incomplete" "Incomplete" NA NA ...</span></span>
 <span><span class="co">#&gt;  $ mrs_complete_follow1        : chr [1:6] NA "Incomplete" "Incomplete" NA ...</span></span>
 <span><span class="co">#&gt;  $ mrs_complete_follow2        : chr [1:6] NA NA "Incomplete" NA ...</span></span>
-<span><span class="co">#&gt;  $ con_mrs                     : Factor w/ 2 levels "FALSE","TRUE": NA NA NA NA NA NA</span></span>
-<span><span class="co">#&gt;  $ con_calc                    : Factor w/ 2 levels "FALSE","TRUE": NA NA NA NA NA NA</span></span>
-<span><span class="co">#&gt;  $ consensus_complete          : chr [1:6] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ event_datetime_1_follow1    : POSIXct[1:6], format: NA "2024-01-18 12:49:42" ...</span></span>
 <span><span class="co">#&gt;  $ event_datetime_1_follow2    : POSIXct[1:6], format: NA NA ...</span></span>
 <span><span class="co">#&gt;  $ event_age_1_follow1         : num [1:6] NA NA NA 96 127 NA</span></span>
@@ -223,7 +217,7 @@ and launch the app as follows:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> sex            data      <span style="color: #BB0000;">NA</span>             text       sex           </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> cohabitation   data      <span style="color: #BB0000;">NA</span>             text       cohabitation  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> hypertension   data      <span style="color: #BB0000;">NA</span>             text       hypertension  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;chr&gt;, field_note &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;lgl&gt;, field_note &lt;lgl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   text_validation_min &lt;lgl&gt;, text_validation_max &lt;lgl&gt;, identifier &lt;lgl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   branching_logic &lt;lgl&gt;, required_field &lt;lgl&gt;, custom_alignment &lt;lgl&gt;,</span></span></span>

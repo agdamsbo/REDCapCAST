@@ -83,23 +83,12 @@
 <span class="r-in"><span>  <span class="fu">fct2num</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1  2  3  2 10  9</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Outlier with labels, but no class of origin, handled like numeric vector</span></span></span>
-<span class="r-in"><span><span class="co"># structure(c(1, 2, 3, 2, 10, 9),</span></span></span>
-<span class="r-in"><span><span class="co">#   labels = c(Unknown = 9, Refused = 10)</span></span></span>
-<span class="r-in"><span><span class="co"># ) |&gt;</span></span></span>
-<span class="r-in"><span><span class="co">#   as_factor() |&gt;</span></span></span>
-<span class="r-in"><span><span class="co">#   fct2num()</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">19</span>, <span class="fl">20</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dput.html" class="external-link">dput</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> structure(c(7L, 1L, 10L, 3L, 10L, 10L, 9L, 8L, 3L, 2L, 6L, 8L, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3L, 5L, 4L, 8L, 1L, 6L, 5L, 5L), levels = c("6", "7", "8", "9", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> "11", "12", "13", "15", "16", "17"), class = "factor")</span>
-<span class="r-in"><span><span class="fu"><a href="named_levels.html">named_levels</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  6 17  8 16 15  7 12 11  9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7  1 10  3  9  8  2  6  5  4 </span>
-<span class="r-in"><span><span class="fu">fct2num</span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 13  6 17  8 17 17 16 15  8  7 12 15  8 11  9 15  6 12 11 11</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">10</span>, <span class="fl">9</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Unknown <span class="op">=</span> <span class="fl">9</span>, Refused <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">fct2num</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1  2  3  2 NA NA</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -47,7 +47,9 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sanitize_split</span><span class="op">(</span></span>
 <span>  <span class="va">l</span>,</span>
 <span>  generic.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"redcap_event_name"</span>, <span class="st">"redcap_repeat_instrument"</span>,</span>
-<span>    <span class="st">"redcap_repeat_instance"</span><span class="op">)</span></span>
+<span>    <span class="st">"redcap_repeat_instance"</span><span class="op">)</span>,</span>
+<span>  drop.complete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  drop.empty <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -61,6 +63,15 @@
 
 <dt id="arg-generic-names">generic.names<a class="anchor" aria-label="anchor" href="#arg-generic-names"></a></dt>
 <dd><p>A vector of generic names to be excluded.</p></dd>
+
+
+<dt id="arg-drop-complete">drop.complete<a class="anchor" aria-label="anchor" href="#arg-drop-complete"></a></dt>
+<dd><p>logical to remove genric REDCap variables indicating
+instrument completion. Default is TRUE.</p></dd>
+
+
+<dt id="arg-drop-empty">drop.empty<a class="anchor" aria-label="anchor" href="#arg-drop-empty"></a></dt>
+<dd><p>logical to remove variables with only NAs Default is TRUE.</p></dd>
 
 </dl></div>
     <div class="section level2">
