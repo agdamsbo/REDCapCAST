@@ -1,3 +1,4 @@
+library(testthat)
 test_that("redcap_wider() returns expected output", {
   list <-
     list(
@@ -15,7 +16,7 @@ test_that("redcap_wider() returns expected output", {
 
   expect_equal(
     redcap_wider(list),
-    data.frame(
+    dplyr::tibble(
       record_id = c(1, 2),
       age_baseline = c(25, 26),
       age_followup = c(27, 28),
