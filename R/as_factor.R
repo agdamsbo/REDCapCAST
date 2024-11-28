@@ -1,6 +1,6 @@
 #' Convert labelled vectors to factors while preserving attributes
 #'
-#' This extends [forcats::as_factor()] as well as [haven::as_factor()], by appending
+#' This extends \link[forcats]{as_factor} as well as \link[haven]{as_factor}, by appending
 #' original attributes except for "class" after converting to factor to avoid
 #' ta loss in case of rich formatted and labelled data.
 #'
@@ -128,10 +128,6 @@ as_factor.haven_labelled <- function(x, levels = c("default", "labels", "values"
 #' @rdname as_factor
 as_factor.labelled <- as_factor.haven_labelled
 
-#' @export
-#' @rdname as_factor
-as_factor.redcapcast_labelled <- as_factor.haven_labelled
-
 #' @rdname as_factor
 #' @export
 as_factor.data.frame <- function(x, ..., only_labelled = TRUE) {
@@ -158,14 +154,13 @@ as_factor.data.frame <- function(x, ..., only_labelled = TRUE) {
 #'   labels = c(Unknown = 9, Refused = 10),
 #'   class = "haven_labelled"
 #' ) |> is.labelled()
-is.labelled <- function(x, classes = c("redcapcast_labelled", "haven_labelled", "labelled")) {
+is.labelled <- function(x, classes = c("haven_labelled", "labelled")) {
   classes |>
     sapply(\(.class){
       inherits(x, .class)
     }) |>
     any()
 }
-
 
 replace_with <- function(x, from, to) {
   stopifnot(length(from) == length(to))
@@ -200,20 +195,25 @@ replace_with <- function(x, from, to) {
 #' @param na.label character string to refactor NA values. Default is NULL.
 #' @param na.value new value for NA strings. Ignored if na.label is NULL.
 #' Default is 99.
+#' @param sort.numeric sort factor levels if levels are numeric. Default is TRUE
 #'
 #' @return named vector
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' structure(c(1, 2, 3, 2, 10, 9),
 #'   labels = c(Unknown = 9, Refused = 10),
 #'   class = "haven_labelled"
 #' ) |>
 #'   as_factor() |>
 #'   named_levels()
-#' }
-named_levels <- function(data, label = "labels", na.label = NULL, na.value = 99) {
+#' structure(c(1, 2, 3, 2, 10, 9),
+#'   labels = c(Unknown = 9, Refused = 10),
+#'   class = "labelled"
+#' ) |>
+#'   as_factor() |>
+#'   named_levels()
+named_levels <- function(data, label = "labels", na.label = NULL, na.value = 99, sort.numeric=TRUE) {
   stopifnot(is.factor(data))
   if (!is.null(na.label)) {
     attrs <- attributes(data)
@@ -244,7 +244,6 @@ named_levels <- function(data, label = "labels", na.label = NULL, na.value = 99)
       )
     )
   }
-
 
   # Handle empty factors
   if (all_na(data)) {
@@ -280,7 +279,7 @@ named_levels <- function(data, label = "labels", na.label = NULL, na.value = 99)
   out <- stats::setNames(d$value, d$name)
   ## Sort if levels are numeric
   ## Else, they appear in order of appearance
-  if (possibly_numeric(levels(data))) {
+  if (possibly_numeric(levels(data)) && sort.numeric) {
     out <- out |> sort()
   }
   out
@@ -334,19 +333,14 @@ possibly_roman <- function(data) {
 #'   as_factor() |>
 #'   fct2num()
 #'
-#' # Outlier with labels, but no class of origin, handled like numeric vector
-#' # structure(c(1, 2, 3, 2, 10, 9),
-#' #   labels = c(Unknown = 9, Refused = 10)
-#' # ) |>
-#' #   as_factor() |>
-#' #   fct2num()
-#'
-#' v <- sample(6:19, 20, TRUE) |> factor()
-#' dput(v)
-#' named_levels(v)
-#' fct2num(v)
+#' structure(c(1, 2, 3, 2, 10, 9),
+#'   labels = c(Unknown = 9, Refused = 10)
+#' ) |>
+#'   as_factor() |>
+#'   fct2num()
 fct2num <- function(data) {
   stopifnot(is.factor(data))
+
   if (is.character(named_levels(data))) {
     values <- as.numeric(named_levels(data))
   } else {
@@ -357,15 +351,28 @@ fct2num <- function(data) {
 
   ## If no NA on numeric coercion, of original names, then return
   ## original numeric names, else values
-  if (possibly_numeric(out)) {
+  if (possibly_numeric(names(out))) {
     out <- as.numeric(names(out))
   }
   unname(out)
 }
 
+#' Tests if vector can be interpreted as numeric without introducing NAs by
+#' coercion
+#'
+#' @param data vector
+#'
+#' @return logical
+#' @export
+#'
+#' @examples
+#' c("1","5") |> possibly_numeric()
+#' c("1","5","e") |> possibly_numeric()
 possibly_numeric <- function(data) {
-  length(stats::na.omit(suppressWarnings(as.numeric(names(data))))) ==
+  suppressWarnings(
+  length(stats::na.omit(as.numeric(data))) ==
     length(data)
+  )
 }
 
 #' Extract attribute. Returns NA if none

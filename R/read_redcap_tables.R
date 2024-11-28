@@ -1,27 +1,33 @@
 #' Download REDCap data
 #'
-#' Implementation of REDCap_split with a focused data acquisition approach using
-#' REDCapR::redcap_read and only downloading specified fields, forms and/or
-#' events using the built-in focused_metadata including some clean-up.
+#' @description
+#' Implementation of passed on to \link[REDCapCAST]{REDCap_split} with a focused
+#' data acquisition approach using passed on to \link[REDCapR]{redcap_read} and
+#' only downloading specified fields, forms and/or events using the built-in
+#' focused_metadata including some clean-up.
 #' Works with classical and longitudinal projects with or without repeating
 #' instruments.
+#' Will preserve metadata in the data.frames as labels.
+#'
 #' @param uri REDCap database API uri
 #' @param token API token
 #' @param records records to download
 #' @param fields fields to download
 #' @param events events to download
 #' @param forms forms to download
-#' @param raw_or_label raw or label tags. Can be
+#' @param raw_or_label raw or label tags. Can be "raw", "label" or "both".
 #'
-#'   * "raw": Standard [REDCapR] method to get raw values.
-#'   * "label": Standard [REDCapR] method to get label values.
+#'   * "raw": Standard \link[REDCapR]{redcap_read} method to get raw values.
+#'   * "label": Standard \link[REDCapR]{redcap_read} method to get label values.
 #'   * "both": Get raw values with REDCap labels applied as labels. Use
-#'   [as_factor()] to format factors with original labels and use the
-#'   [gtsummary] package to easily get beautiful tables with original labels
-#'   from REDCap. Use [fct_drop()] to drop empty levels.
+#'   \link[REDCapCAST]{as_factor} to format factors with original labels and use
+#'   the  `gtsummary` package functions like \link[gtsummary]{tbl_summary} to
+#'   easily get beautiful tables with original labels from REDCap. Use
+#'   \link[REDCapCAST]{fct_drop} to drop empty levels.
 #'
 #' @param split_forms Whether to split "repeating" or "all" forms, default is
 #' all.
+#' @param ... passed on to \link[REDCapR]{redcap_read}
 #'
 #' @return list of instruments
 #' @importFrom REDCapR redcap_metadata_read redcap_read redcap_event_instruments
@@ -36,8 +42,12 @@ read_redcap_tables <- function(uri,
                                fields = NULL,
                                events = NULL,
                                forms = NULL,
-                               raw_or_label = "label",
-                               split_forms = "all") {
+                               raw_or_label = c("raw","label","both"),
+                               split_forms = "all",
+                               ...) {
+
+  raw_or_label <- match.arg(raw_or_label, c("raw","label","both"))
+
   # Getting metadata
   m <-
     REDCapR::redcap_metadata_read(redcap_uri = uri, token = token)[["data"]]
@@ -92,7 +102,8 @@ read_redcap_tables <- function(uri,
     events = events,
     forms = forms,
     records = records,
-    raw_or_label = rorl
+    raw_or_label = rorl,
+    ...
   )[["data"]]
 
   if (raw_or_label=="both"){
@@ -147,6 +158,20 @@ clean_field_label <- function(data) {
 }
 
 
+#' Converts REDCap choices to factor levels and stores in labels attribute
+#'
+#' @description
+#' Applying \link[REDCapCAST]{as_factor} to the data.frame or variable, will
+#' coerce to a factor.
+#'
+#' @param data vector
+#' @param meta vector of REDCap choices
+#'
+#' @return vector of class "labelled" with a "labels" attribute
+#' @export
+#'
+#' @examples
+#' format_redcap_factor(sample(1:3,20,TRUE),"1, First. | 2, second | 3, THIRD")
 format_redcap_factor <- function(data, meta) {
   lvls <- strsplit(meta, " | ", fixed = TRUE) |>
     unlist() |>
@@ -158,7 +183,7 @@ format_redcap_factor <- function(data, meta) {
       Reduce(c, .x)
     })()
   set_attr(data, label = lvls, attr = "labels") |>
-    set_attr(data, label = "redcapcast_labelled", attr = "class")
+    set_attr(data, label = "labelled", attr = "class")
 }
 
 
