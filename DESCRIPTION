@@ -61,7 +61,8 @@ Imports:
     gt,
     bslib,
     here,
-    glue
+    glue,
+    gtsummary
 Collate: 
     'REDCapCAST-package.R'
     'utils.r'

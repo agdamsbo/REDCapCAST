@@ -18,11 +18,43 @@ knitr::opts_chunk$set(
 library(REDCapCAST)
 ```
 
-This vignette covers the included functions and basic functionality.
+This vignette covers the basics to get you started with the two basic features of REDCapCAST:
 
-A dataset and a meta data file are provided with the package for demonstration of the functions.
+-   Casting REDCap metadata to create a new REDCap database or extend an existing with a new instrument
+
+-   Reading REDCap data in a convenient and focused way, by only getting the data you need, while preserving as much metadata as possible.
+
+## Casting meta data
+
+The easiest way is to use the `shiny_cast()`. You can access a [hosted version here](https://agdamsbo.shinyapps.io/redcapcast/) or launch it locally like this:
+
+```{r eval=FALSE}
+shiny_cast()
+```
+
+
+## Reading data from REDCap
+
+To get you started, the easiest way possible, you can use the `easy_redcap()` function (example below).
+
+You will need an API-key for your REDCap server, the uri/URL/address for the API connection (usually "<https://redcap.YOUR-institution.site/api/>").
+
+This function includes a few convenience features to ease your further work.
+
+If your project uses repeating instruments possible as a longitudinal project, you can choose to widen the data. If not, the result will be a list of each instrument you have chosen to extract data from. Make sure to specify only the fields or instruments you need, and avoid to save any of the data locally, but always source from REDCap to avoid possibly insecure local storage of sensitive data.
+
+```{r eval=FALSE}
+easy_redcap(uri = "YOUR URI", 
+            project.name = "MY_PROJECT", 
+            widen.data = TRUE,
+            fields = c("record_id", "OTHER FIELDS"))
+```
 
 ## Splitting the dataset
+
+The `easy_redcap()` function does a few things under the hood. Below are a few examples to show how the nicely formatted output is achieved.
+
+A sample dataset and Data Dictionary/metadata is provided for this demonstration:
 
 ```{r}
 redcapcast_data |> gt::gt()
@@ -32,29 +64,41 @@ redcapcast_data |> gt::gt()
 redcapcast_meta |> gt::gt()
 ```
 
+To save the metadata as labels in the dataset, we can save field labels and the choices from radio buttons and dropdown features:
+
+```{r}
+labelled_data <- 
+  apply_field_label(data=redcapcast_data,
+                       meta=redcapcast_meta) |> 
+  apply_factor_labels(meta=redcapcast_meta)
+```
+
+The `REDCap_split` function splits the data set into a list of data.frames.
+
 ```{r}
 list <-
   REDCap_split(
-    records = redcapcast_data,
+    records = labelled_data,
     metadata = redcapcast_meta,
     forms = "all"
   ) |> 
+  # Next steps cleans up and removes generic columns
   sanitize_split()
 str(list)
 ```
 
-## Reading data from REDCap
-
-This function wraps all the above demonstrated function to get the dataset, the metadata, apply the `REDCap_split`function and then a bit of cleaning. It just cuts outs all the steps for an easier approach.
-
-The function works very similar to the `REDCapR::redcap_read()` in allowing to specify fields, events and forms for export instead of exporting the whole database and filtering afterwards. I believe this is a better and safer, focused approach. 
-
-```{r eval=FALSE}
-# read_redcap_tables(uri = "YOUR URI", token = "YOUR TOKEN")
-```
-
-## Pivotting to wider format
+The `easy_redcap()` will then (optionally) continue to widen the data, by transforming the list of data.frames to a single data.frame with one row for each subject/record_id (wide data format):
 
 ```{r}
-redcap_wider(list) |> str()
+wide_data <- redcap_wider(list) 
+wide_data |> str()
 ```
+
+## Creating a nice table
+
+```{r}
+wide_data |> 
+  dplyr::select(sex,hypertension, diabetes) |> 
+  gtsummary::tbl_summary()
+```
+
