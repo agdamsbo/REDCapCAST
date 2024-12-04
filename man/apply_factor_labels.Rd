@@ -4,7 +4,7 @@
 \alias{apply_factor_labels}
 \title{Preserve all factor levels from REDCap data dictionary in data export}
 \usage{
-apply_factor_labels(data, meta)
+apply_factor_labels(data, meta = NULL)
 }
 \arguments{
 \item{data}{REDCap exported data set}

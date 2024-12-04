@@ -220,7 +220,7 @@ apply_field_label <- function(data,meta){
 #' @export
 #'
 apply_factor_labels <- function(data,meta=NULL){
-  if (is.list(data)){
+  if (is.list(data) && !is.data.frame(data)){
     meta <- data$meta
     data <- data$data
   } else if (is.null(meta)) {
