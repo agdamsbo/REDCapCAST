@@ -66,7 +66,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>REDCapCAST</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/agdamsbo/REDCapCAST/blob/v24.12.1/vignettes/REDCapCAST.Rmd" class="external-link"><code>vignettes/REDCapCAST.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/agdamsbo/REDCapCAST/blob/main/vignettes/REDCapCAST.Rmd" class="external-link"><code>vignettes/REDCapCAST.Rmd</code></a></small>
       <div class="d-none name"><code>REDCapCAST.Rmd</code></div>
     </div>
 
@@ -2445,9 +2445,10 @@ format):</p>
 <h2 id="creating-a-nice-table">Creating a nice table<a class="anchor" aria-label="anchor" href="#creating-a-nice-table"></a>
 </h2>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wide_data_suffixes</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">wide_data_suffixes</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span><span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">hypertension</span>, <span class="va">diabetes</span>,<span class="va">mrs_score____follow2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html" class="external-link">tbl_summary</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html" class="external-link">tbl_summary</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/select_helpers.html" class="external-link">all_dichotomous</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="st">"categorical"</span><span class="op">)</span></span></code></pre></div>
 <div id="ulbfdpbcyv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#ulbfdpbcyv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -2922,12 +2923,12 @@ format):</p>
 <td headers="stat_0" class="gt_row gt_center"><br></td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left">    No</td>
-<td headers="stat_0" class="gt_row gt_center">2 (40%)</td>
-</tr>
-<tr>
 <td headers="label" class="gt_row gt_left">    Yes</td>
 <td headers="stat_0" class="gt_row gt_center">3 (60%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    No</td>
+<td headers="stat_0" class="gt_row gt_center">2 (40%)</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Unknown</td>
@@ -2938,12 +2939,12 @@ format):</p>
 <td headers="stat_0" class="gt_row gt_center"><br></td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left">    No</td>
-<td headers="stat_0" class="gt_row gt_center">2 (40%)</td>
-</tr>
-<tr>
 <td headers="label" class="gt_row gt_left">    Yes</td>
 <td headers="stat_0" class="gt_row gt_center">3 (60%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    No</td>
+<td headers="stat_0" class="gt_row gt_center">2 (40%)</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Unknown</td>
@@ -2954,8 +2955,28 @@ format):</p>
 <td headers="stat_0" class="gt_row gt_center"><br></td>
 </tr>
 <tr>
+<td headers="label" class="gt_row gt_left">    0</td>
+<td headers="stat_0" class="gt_row gt_center">0 (0%)</td>
+</tr>
+<tr>
 <td headers="label" class="gt_row gt_left">    1</td>
 <td headers="stat_0" class="gt_row gt_center">1 (100%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    2</td>
+<td headers="stat_0" class="gt_row gt_center">0 (0%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    3</td>
+<td headers="stat_0" class="gt_row gt_center">0 (0%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    4</td>
+<td headers="stat_0" class="gt_row gt_center">0 (0%)</td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left">    5</td>
+<td headers="stat_0" class="gt_row gt_center">0 (0%)</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Unknown</td>
