@@ -50,6 +50,14 @@ server <- function(input, output, session) {
         )
     }
 
+    if (input$factorize == "yes") {
+      out <- out |>
+        (\(.x){
+          suppressWarnings(
+            numchar2fct(.x)
+          )
+        })()
+    }
     out
   })
 
@@ -76,16 +84,6 @@ server <- function(input, output, session) {
       )
     )
   })
-
-  output$uploaded <- shiny::reactive({
-    if (is.null(v$file)) {
-      "no"
-    } else {
-      "yes"
-    }
-  })
-
-  shiny::outputOptions(output, "uploaded", suspendWhenHidden = FALSE)
 
   output$factor_vars <- shiny::renderUI({
     shiny::req(input$ds)
@@ -176,16 +174,30 @@ server <- function(input, output, session) {
 
     shiny::req(input$api)
 
-    output_staging$data <- REDCapR::redcap_write(
-      ds = purrr::pluck(dd(), "data"),
-      redcap_uri = input$uri,
-      token = input$api
-    ) |> purrr::pluck("success")
+    output_staging$data <- dd() |>
+      apply_factor_labels() |>
+      REDCapR::redcap_write(
+        redcap_uri = input$uri,
+        token = input$api
+      ) |>
+      purrr::pluck("success")
   }
 
   output$upload.meta.print <- renderText(output_staging$meta)
 
   output$upload.data.print <- renderText(output_staging$data)
+
+  output$uploaded <- shiny::reactive({
+    if (is.null(v$file)) {
+      "no"
+    } else {
+      "yes"
+    }
+  })
+
+  shiny::outputOptions(output, "uploaded", suspendWhenHidden = FALSE)
+
+  output$data.load <- shiny::renderText(expr = nrow(dat()))
 
   # session$onSessionEnded(function() {
   #   # cat("Session Ended\n")
@@ -238,13 +250,23 @@ ui <-
             )
           ),
           shiny::radioButtons(
+            inputId = "factorize",
+            label = "Factorize variables with few levels?",
+            selected = "yes",
+            inline = TRUE,
+            choices = list(
+              "Yes" = "yes",
+              "No" = "no"
+            )
+          ),
+          shiny::radioButtons(
             inputId = "specify_factors",
             label = "Specify categorical variables?",
             selected = "no",
             inline = TRUE,
             choices = list(
-              "No" = "no",
-              "Yes" = "yes"
+              "Yes" = "yes",
+              "No" = "no"
             )
           ),
           shiny::conditionalPanel(
@@ -254,25 +276,27 @@ ui <-
           # condition = "input.load_data",
           #  shiny::helpText("Below you can download the dataset formatted for upload and the
           # corresponding data dictionary for a new data base, if you want to upload manually."),
+          shiny::tags$hr(),
+          shiny::h4("Download data for manual upload"),
+          shiny::helpText("Look further down for direct upload option"),
           # Button
           shiny::downloadButton(outputId = "downloadData", label = "Download renamed data"),
-
+          shiny::em("and then"),
           # Button
           shiny::downloadButton(outputId = "downloadMeta", label = "Download data dictionary"),
-
-          # Button
+          shiny::em("or"),
           shiny::downloadButton(outputId = "downloadInstrument", label = "Download as instrument"),
 
           # Horizontal line ----
           shiny::tags$hr(),
           shiny::radioButtons(
             inputId = "upload_redcap",
-            label = "Upload directly to REDCap server?",
+            label = "Upload directly to a REDCap server?",
             selected = "no",
             inline = TRUE,
             choices = list(
-              "No" = "no",
-              "Yes" = "yes"
+              "Yes" = "yes",
+              "No" = "no"
             )
           ),
           shiny::conditionalPanel(
@@ -315,7 +339,8 @@ ui <-
       bslib::nav_panel(
         title = "Intro",
         shiny::markdown(readLines("www/SHINYCAST.md")),
-        shiny::br()
+        shiny::br(),
+        shiny::textOutput(outputId = "data.load")
       ),
       # bslib::nav_spacer(),
       bslib::nav_panel(

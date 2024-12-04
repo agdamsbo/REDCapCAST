@@ -219,12 +219,20 @@ apply_field_label <- function(data,meta){
 #' @return data.frame
 #' @export
 #'
-apply_factor_labels <- function(data,meta){
+apply_factor_labels <- function(data,meta=NULL){
+  if (is.list(data)){
+    meta <- data$meta
+    data <- data$data
+  } else if (is.null(meta)) {
+    stop("Please provide a data frame for meta")
+  }
   purrr::imap(data, \(.x, .i){
-    if (any(c("radio", "dropdown") %in% meta$field_type[meta$field_name == .i])) {
+    if (any(c("radio", "dropdown") %in% meta$field_type[meta$field_name == .i]) || is.factor(.x)) {
       format_redcap_factor(.x, meta$select_choices_or_calculations[meta$field_name == .i])
     } else {
       .x
     }
   }) |> dplyr::bind_cols()
 }
+
+
