@@ -187,6 +187,22 @@
       ],
       "Hash": "cd9a672193789068eb5a2aad65a0dedf"
     },
+    "cards": {
+      "Package": "cards",
+      "Version": "0.4.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "cli",
+        "dplyr",
+        "glue",
+        "rlang",
+        "tidyr",
+        "tidyselect"
+      ],
+      "Hash": "2cd0d1966092de416f9b7fa1e88b6132"
+    },
     "cellranger": {
       "Package": "cellranger",
       "Version": "1.1.0",
@@ -455,6 +471,25 @@
         "xml2"
       ],
       "Hash": "3170d1f0f45e531c241179ab57cd30bd"
+    },
+    "gtsummary": {
+      "Package": "gtsummary",
+      "Version": "2.0.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "cards",
+        "cli",
+        "dplyr",
+        "glue",
+        "gt",
+        "lifecycle",
+        "rlang",
+        "tidyr",
+        "vctrs"
+      ],
+      "Hash": "cd4d593e8ce0ad4e5c2c0acc50ce7330"
     },
     "haven": {
       "Package": "haven",

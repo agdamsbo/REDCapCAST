@@ -3,9 +3,14 @@
 \name{fct_drop}
 \alias{fct_drop}
 \alias{fct_drop.data.frame}
+\alias{fct_drop.factor}
 \title{Drop unused levels preserving label data}
 \usage{
-fct_drop.data.frame(x, ...)
+fct_drop(x, ...)
+
+\method{fct_drop}{data.frame}(x, ...)
+
+\method{fct_drop}{factor}(x, ...)
 }
 \arguments{
 \item{x}{Factor to drop unused levels}
@@ -14,5 +19,13 @@ fct_drop.data.frame(x, ...)
 }
 \description{
 This extends [forcats::fct_drop()] to natively work across a data.frame and
-replace [base::droplevels()].
+replaces [base::droplevels()].
+}
+\examples{
+mtcars |>
+  numchar2fct() |>
+  fct_drop()
+mtcars |>
+  numchar2fct() |>
+  dplyr::mutate(vs = fct_drop(vs))
 }

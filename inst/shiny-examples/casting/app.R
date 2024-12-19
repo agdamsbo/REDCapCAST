@@ -61,6 +61,10 @@ server <- function(input, output, session) {
     out
   })
 
+  shiny::eventReactive(input$load_data, {
+    v$file <- "loaded"
+  })
+
   # getData <- reactive({
   #   if(is.null(input$ds$datapath)) return(NULL)
   # })
@@ -70,7 +74,7 @@ server <- function(input, output, session) {
 
   dd <- shiny::reactive({
     shiny::req(input$ds)
-    v$file <- "loaded"
+    # v$file <- "loaded"
     ds2dd_detailed(
       data = dat(),
       add.auto.id = input$add_id == "yes",
@@ -228,16 +232,17 @@ ui <-
             ".ods"
           )
         ),
-        # shiny::actionButton(
-        #   inputId = "load_data",
-        #   label = "Load data",
-        #   icon = shiny::icon("circle-down")
-        # ),
-        shiny::helpText("Have a look at the preview panels to validate the data dictionary and imported data."),
+        shiny::actionButton(
+          inputId = "options",
+          label = "Show options",
+          icon = shiny::icon("wrench")
+        ),
+        shiny::helpText("Choose and upload a dataset, then press the button for data modification and options for data download or upload."),
         # For some odd reason this only unfolds when the preview panel is shown..
         # This has been solved by adding an arbitrary button to load data - which was abandoned again
         shiny::conditionalPanel(
-          condition = "output.uploaded=='yes'",
+          # condition = "output.uploaded=='yes'",
+          condition = "input.options > 0",
           shiny::radioButtons(
             inputId = "add_id",
             label = "Add ID, or use first column?",

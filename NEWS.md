@@ -1,4 +1,8 @@
-# REDCapCAST 24.11.4
+# REDCapCAST 24.12.2
+
+The newly introduced extension of `forcats::fct_drop()` has been corrected to work as intended as a method.
+
+# REDCapCAST 24.12.1
 
 This release attempts to solve problems hosting the shiny_cast app, while also implementing functions to preserve as much meta data as possible from the REDCap database when exporting data.
 
