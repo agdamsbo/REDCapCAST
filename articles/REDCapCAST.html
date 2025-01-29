@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">REDCapCAST</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">24.12.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">25.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,8 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>REDCapCAST</h1>
+
+      <h1>REDCapCAST</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/agdamsbo/REDCapCAST/blob/main/vignettes/REDCapCAST.Rmd" class="external-link"><code>vignettes/REDCapCAST.Rmd</code></a></small>
@@ -73,9 +74,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/agdamsbo/REDCapCAST" class="external-link">REDCapCAST</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in get(paste0(generic, ".", class), envir = get_method_env()) : </span></span>
-<span><span class="co">#&gt;   object 'type_sum.accel' not found</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/agdamsbo/REDCapCAST" class="external-link">REDCapCAST</a></span><span class="op">)</span></span></code></pre></div>
 <p>This vignette covers the basics to get you started with the two basic
 features of REDCapCAST:</p>
 <ul>
@@ -100,8 +99,8 @@ version here</a> or launch it locally like this:</p>
 <p>To get you started, the easiest way possible, you can use the
 <code><a href="../reference/easy_redcap.html">easy_redcap()</a></code> function (example below).</p>
 <p>You will need an API-key for your REDCap server, the uri/URL/address
-for the API connection (usually the adress used for accessing your
-institutions REDCap servar, with an appended “/api/”).</p>
+for the API connection (usually the address used for accessing your
+institutions REDCap server, with an appended “/api/”).</p>
 <p>This function includes a few convenience features to ease your
 further work.</p>
 <p>If your project uses repeating instruments possible as a longitudinal
