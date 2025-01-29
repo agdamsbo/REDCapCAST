@@ -34,7 +34,8 @@ Suggests:
     roxygen2,
     spelling,
     rhub,
-    rsconnect
+    rsconnect,
+    pkgconfig
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
@@ -50,24 +51,26 @@ Imports:
     purrr,
     readr,
     stats,
-    shiny,
-    haven,
     zip,
     assertthat,
-    openxlsx2,
-    readODS,
     forcats,
     vctrs,
     gt,
     bslib,
     here,
     glue,
-    gtsummary
+    gtsummary,
+    shiny,
+    haven,
+    openxlsx2,
+    readODS
+Language: en-US
+VignetteBuilder: knitr
 Collate: 
     'REDCapCAST-package.R'
-    'utils.R'
-    'process_user_input.R'
-    'REDCap_split.R'
+    'utils.r'
+    'process_user_input.r'
+    'REDCap_split.r'
     'as_factor.R'
     'doc2dd.R'
     'ds2dd_detailed.R'
@@ -82,5 +85,3 @@ Collate:
     'redcapcast_data.R'
     'redcapcast_meta.R'
     'shiny_cast.R'
-Language: en-US
-VignetteBuilder: knitr

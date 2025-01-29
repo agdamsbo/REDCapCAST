@@ -47,6 +47,12 @@ file_extension <- function(filenames) {
 #' @return tibble
 #' @export
 #'
+#' @importFrom openxlsx2 read_xlsx
+#' @importFrom haven read_dta
+#' @importFrom readODS read_ods
+#' @importFrom readr read_csv read_rds
+#'
+#'
 #' @examples
 #' read_input("https://raw.githubusercontent.com/agdamsbo/cognitive.index.lookup/main/data/sample.csv")
 read_input <- function(file, consider.na = c("NA", '""', "")) {
@@ -55,15 +61,15 @@ read_input <- function(file, consider.na = c("NA", '""', "")) {
   tryCatch(
     {
       if (ext == "csv") {
-        df <- readr::read_csv(file = file, na = consider.na)
+        df <- read_csv(file = file, na = consider.na)
       } else if (ext %in% c("xls", "xlsx")) {
-        df <- openxlsx2::read_xlsx(file = file, na.strings = consider.na)
+        df <- read_xlsx(file = file, na.strings = consider.na)
       } else if (ext == "dta") {
-        df <- haven::read_dta(file = file)
+        df <- read_dta(file = file)
       } else if (ext == "ods") {
-        df <- readODS::read_ods(path = file)
+        df <- read_ods(path = file)
       } else if (ext == "rds") {
-        df <- readr::read_rds(file = file)
+        df <- read_rds(file = file)
       }else {
         stop("Input file format has to be on of:
              '.csv', '.xls', '.xlsx', '.dta', '.ods' or '.rds'")
