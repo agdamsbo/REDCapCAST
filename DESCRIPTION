@@ -1,6 +1,6 @@
 Package: REDCapCAST
 Title: REDCap Metadata Casting and Castellated Data Handling
-Version: 24.12.1
+Version: 25.1.1
 Authors@R: c(
     person("Andreas Gammelgaard", "Damsbo", email = "agdamsbo@clin.au.dk", 
     role = c("aut", "cre"),comment = c(ORCID = "0000-0002-7559-1154")), 
@@ -65,9 +65,9 @@ Imports:
     gtsummary
 Collate: 
     'REDCapCAST-package.R'
-    'utils.r'
-    'process_user_input.r'
-    'REDCap_split.r'
+    'utils.R'
+    'process_user_input.R'
+    'REDCap_split.R'
     'as_factor.R'
     'doc2dd.R'
     'ds2dd_detailed.R'

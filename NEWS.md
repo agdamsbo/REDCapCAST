@@ -1,6 +1,12 @@
-# REDCapCAST 24.12.2
+# REDCapCAST 25.1.1
 
 The newly introduced extension of `forcats::fct_drop()` has been corrected to work as intended as a method.
+
+Conversion of column names to `field_names` are aligning better with REDCap naming.
+
+Shorten variable names above 100 characters (REDCap criteria; note recommended variable name length is <26)
+
+Fixed a params conflict in easy_redcap() when specifying raw_or_label.
 
 # REDCapCAST 24.12.1
 
@@ -8,11 +14,11 @@ This release attempts to solve problems hosting the shiny_cast app, while also i
 
 The hosting on shinyapps.io has given a lot of trouble recently. Modified package structure a little around the `shiny_cast()`, to accommodate an alternative hosting approach with all package functions included in a script instead of requiring the package.
 
-* NEW: A new option to `raw_or_label` in `read_readcap_tables()` has been added: "both". Get raw values with REDCap labels applied as labels. Use `as_factor()` to format factors with original labels and use the `gtsummary` package to easily get beautiful tables with original labels from REDCap. Use `fct_drop()` to drop empty levels.
+* NEW: A new option to `raw_or_label` in `read_redcap_tables()` has been added: "both". Get raw values with REDCap labels applied as labels. Use `as_factor()` to format factors with original labels and use the `gtsummary` package to easily get beautiful tables with original labels from REDCap. Use `fct_drop()` to drop empty levels.
 
 * NEW: fct_drop() has been added with an extension to `forcats::fct_drop()`, that works across data.frames. Use as `fct_drop()`.
 
-* CHANGE: the default data export method of `easy_redcap()` has been changed to use the new labelled data export with `read_readcap_tables()`.
+* CHANGE: the default data export method of `easy_redcap()` has been changed to use the new labelled data export with `read_redcap_tables()`.
 
 # REDCapCAST 24.11.3
 
@@ -165,7 +171,7 @@ The main goal this package is to keep the option to only export a defined subset
 
 ### Functions:
 
-* `read_redcap_tables()` **NEW**: this function is mainly an implementation of the combined use of `REDCapR::readcap_read()` and `REDCap_split()` to maintain the focused nature of `REDCapR::readcap_read()`, to only download the specified data. Also implements tests of valid form names and event names. The usual fall-back solution was to get all data.
+* `read_redcap_tables()` **NEW**: this function is mainly an implementation of the combined use of `REDCapR::redcap_read()` and `REDCap_split()` to maintain the focused nature of `REDCapR::redcap_read()`, to only download the specified data. Also implements tests of valid form names and event names. The usual fall-back solution was to get all data.
 
 * `redcap_wider()` **NEW**: this function pivots the long data frames from `read_redcap_tables()` using `tidyr::pivot_wider()`.
 

@@ -97,7 +97,10 @@ focused_metadata <- function(metadata, vars_in_data) {
 #' @return vector or data frame, same format as input
 #' @export
 #'
+#' @examples
+#' "Research!, ne:ws? and c;l-.ls" |> clean_redcap_name()
 clean_redcap_name <- function(x) {
+  gsub("[,.;:?!@]","",
   gsub(
     " ", "_",
     gsub(
@@ -107,6 +110,7 @@ clean_redcap_name <- function(x) {
         tolower(x)
       )
     )
+  )
   )
 }
 
@@ -517,4 +521,23 @@ dummy_fun <- function(...){
   list(
     gtsummary::add_difference()
   )
+}
+
+
+#' Cut string to desired length
+#'
+#' @param data data
+#' @param l length
+#'
+#' @returns character string of length l
+#' @export
+#'
+#' @examples
+#' "length" |> cut_string_length(l=3)
+cut_string_length <- function(data,l=100){
+  if (nchar(data)>=l){
+    substr(data,1,l)
+  } else {
+    data
+  }
 }

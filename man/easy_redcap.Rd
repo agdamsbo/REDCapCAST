@@ -4,7 +4,7 @@
 \alias{easy_redcap}
 \title{Secure API key storage and data acquisition in one}
 \usage{
-easy_redcap(project.name, widen.data = TRUE, uri, ...)
+easy_redcap(project.name, widen.data = TRUE, uri, raw_or_label = "both", ...)
 }
 \arguments{
 \item{project.name}{The name of the current project (for key storage with
@@ -13,6 +13,10 @@ easy_redcap(project.name, widen.data = TRUE, uri, ...)
 \item{widen.data}{argument to widen the exported data}
 
 \item{uri}{REDCap database API uri}
+
+\item{raw_or_label}{argument passed on to
+\link[REDCapCAST]{read_redcap_tables}. Default is "both" to get labelled
+data.}
 
 \item{...}{arguments passed on to \link[REDCapCAST]{read_redcap_tables}.}
 }
@@ -24,6 +28,6 @@ Secure API key storage and data acquisition in one
 }
 \examples{
 \dontrun{
-easy_redcap("My_new_project",fields=c("record_id","age","hypertension"))
+easy_redcap("My_new_project", fields = c("record_id", "age", "hypertension"))
 }
 }

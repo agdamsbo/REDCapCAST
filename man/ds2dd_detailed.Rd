@@ -91,7 +91,7 @@ iris |>
     form.name = sample(c("b", "c"), size = 6, replace = TRUE, prob = rep(.5, 2))
   ) |>
   purrr::pluck("meta")
-mtcars |> ds2dd_detailed(add.auto.id = TRUE)
+mtcars |> numchar2fct() |> ds2dd_detailed(add.auto.id = TRUE)
 
 ## Using column name suffix to carry form name
 data <- iris |>

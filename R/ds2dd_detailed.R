@@ -1,5 +1,4 @@
 utils::globalVariables(c(
-  "stats::setNames",
   "field_name",
   "field_type",
   "select_choices_or_calculations",
@@ -247,7 +246,7 @@ ds2dd <-
 #'     form.name = sample(c("b", "c"), size = 6, replace = TRUE, prob = rep(.5, 2))
 #'   ) |>
 #'   purrr::pluck("meta")
-#' mtcars |> ds2dd_detailed(add.auto.id = TRUE)
+#' mtcars |> numchar2fct() |> ds2dd_detailed(add.auto.id = TRUE)
 #'
 #' ## Using column name suffix to carry form name
 #' data <- iris |>
@@ -268,6 +267,10 @@ ds2dd_detailed <- function(data,
                            field.validation = NULL,
                            metadata = names(REDCapCAST::redcapcast_meta),
                            convert.logicals = TRUE) {
+
+  short_names <- colnames(data) |> lapply(\(.x) cut_string_length(.x,l=90)) |> purrr::reduce(c)
+
+  data <- stats::setNames(data,short_names)
 
   if (convert.logicals) {
     data <- data |>
@@ -294,7 +297,6 @@ ds2dd_detailed <- function(data,
     dplyr::tibble()
 
   ## form_name and field_name
-
   if (!is.null(form.sep)) {
     if (form.sep != "") {
       parts <- strsplit(names(data), split = form.sep)
@@ -313,11 +315,14 @@ ds2dd_detailed <- function(data,
       dd$field_name <- tolower(dd$field_name)
     } else {
       dd$form_name <- "data"
-      dd$field_name <- gsub(" ", "_", tolower(colnames(data)))
+
+      # dd$field_name <- gsub(" ", "_", tolower(colnames(data)))
+      dd$field_name <- clean_redcap_name(colnames(data))
     }
   } else {
     ## if no form name prefix, the colnames are used as field_names
-    dd$field_name <- gsub(" ", "_", tolower(colnames(data)))
+    # dd$field_name <- gsub(" ", "_", tolower(colnames(data)))
+    dd$field_name <- clean_redcap_name(colnames(data))
 
     if (is.null(form.name)) {
       dd$form_name <- "data"
@@ -425,7 +430,14 @@ ds2dd_detailed <- function(data,
   out <- list(
     data = data |>
       hms2character() |>
-      stats::setNames(dd$field_name),
+      stats::setNames(dd$field_name) |>
+      lapply(\(.x){
+        if (identical("factor",class(.x))){
+          as.numeric(.x)
+        } else {
+          .x
+        }
+      }) |> dplyr::bind_cols(),
     meta = dd
   )
 

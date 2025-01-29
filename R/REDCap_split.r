@@ -80,7 +80,7 @@
 #'     \item \code{'all'}: a data.frame for each instrument, regardless of
 #'     whether it is a repeating instrument or not.
 #'   }
-#' @include process_user_input.r utils.r
+#' @include process_user_input.R utils.R
 #' @export
 REDCap_split <- function(records,
                          metadata,

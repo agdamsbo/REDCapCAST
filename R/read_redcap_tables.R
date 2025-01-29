@@ -31,7 +31,7 @@
 #'
 #' @return list of instruments
 #' @importFrom REDCapR redcap_metadata_read redcap_read redcap_event_instruments
-#' @include utils.r
+#' @include utils.R
 #' @export
 #'
 #' @examples

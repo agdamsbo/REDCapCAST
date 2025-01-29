@@ -37,7 +37,7 @@ shiny_cast()
 
 To get you started, the easiest way possible, you can use the `easy_redcap()` function (example below).
 
-You will need an API-key for your REDCap server, the uri/URL/address for the API connection (usually the adress used for accessing your institutions REDCap servar, with an appended "/api/").
+You will need an API-key for your REDCap server, the uri/URL/address for the API connection (usually the address used for accessing your institutions REDCap server, with an appended "/api/").
 
 This function includes a few convenience features to ease your further work.
 

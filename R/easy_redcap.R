@@ -28,6 +28,9 @@ get_api_key <- function(key.name, ...) {
 #' \link[keyring]{key_set}, using the default keyring)
 #' @param widen.data argument to widen the exported data
 #' @param uri REDCap database API uri
+#' @param raw_or_label argument passed on to
+#' \link[REDCapCAST]{read_redcap_tables}. Default is "both" to get labelled
+#' data.
 #' @param ... arguments passed on to \link[REDCapCAST]{read_redcap_tables}.
 #'
 #' @return data.frame or list depending on widen.data
@@ -35,16 +38,22 @@ get_api_key <- function(key.name, ...) {
 #'
 #' @examples
 #' \dontrun{
-#' easy_redcap("My_new_project",fields=c("record_id","age","hypertension"))
+#' easy_redcap("My_new_project", fields = c("record_id", "age", "hypertension"))
 #' }
-easy_redcap <- function(project.name, widen.data = TRUE, uri, ...) {
-  key <- get_api_key(key.name = paste0(project.name, "_REDCAP_API"),
-                     prompt = "Provide REDCap API key:")
+easy_redcap <- function(project.name,
+                        widen.data = TRUE,
+                        uri,
+                        raw_or_label = "both",
+                        ...) {
+  key <- get_api_key(
+    key.name = paste0(project.name, "_REDCAP_API"),
+    prompt = "Provide REDCap API key:"
+  )
 
   out <- read_redcap_tables(
     uri = uri,
     token = key,
-    raw_or_label = "both",
+    raw_or_label = raw_or_label,
     ...
   )
 
