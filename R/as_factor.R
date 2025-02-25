@@ -7,6 +7,8 @@
 #' Please refer to parent functions for extended documentation.
 #' To avoid redundancy calls and errors, functions are copy-pasted here
 #'
+#' Empty variables with empty levels attribute are interpreted as logicals
+#'
 #' @param x Object to coerce to a factor.
 #' @param ... Other arguments passed down to method.
 #' @param only_labelled Only apply to labelled columns?
@@ -24,7 +26,14 @@
 #'   labels = c(Unknown = 9, Refused = 10),
 #'   class = "haven_labelled"
 #' ) |>
-#'   as_factor()
+#'   as_factor() |> class()
+#' structure(rep(NA,10),
+#'   class = c("labelled")
+#' ) |>
+#'   as_factor() |> summary()
+#'
+#' rep(NA,10) |> as_factor()
+#'
 #' @importFrom forcats as_factor
 #' @export
 #' @name as_factor
@@ -45,8 +54,6 @@ as_factor.logical <- function(x, ...) {
   x <- factor(x, levels = c("FALSE", "TRUE"))
   set_attr(x, labels, overwrite = FALSE)
 }
-
-
 
 #' @rdname as_factor
 #' @export
@@ -121,7 +128,13 @@ as_factor.haven_labelled <- function(x, levels = c("default", "labels", "values"
 
   x <- structure(x, label = label)
 
-  set_attr(x, labels_all, overwrite = FALSE)
+  out <- set_attr(x, labels_all, overwrite = FALSE)
+
+  if (all_na(out) & length(levels(out))==0){
+    as_factor.logical(out)
+  } else {
+    out
+  }
 }
 
 #' @export

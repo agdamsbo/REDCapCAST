@@ -63,6 +63,8 @@ ta loss in case of rich formatted and labelled data.
 \details{
 Please refer to parent functions for extended documentation.
 To avoid redundancy calls and errors, functions are copy-pasted here
+
+Empty variables with empty levels attribute are interpreted as logicals
 }
 \examples{
 # will preserve all attributes
@@ -77,5 +79,12 @@ structure(c(1, 2, 3, 2, 10, 9),
   labels = c(Unknown = 9, Refused = 10),
   class = "haven_labelled"
 ) |>
-  as_factor()
+  as_factor() |> class()
+structure(rep(NA,10),
+  class = c("labelled")
+) |>
+  as_factor() |> summary()
+
+rep(NA,10) |> as_factor()
+
 }

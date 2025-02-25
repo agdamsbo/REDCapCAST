@@ -1,3 +1,7 @@
+# REDCapCAST 25.2.1
+
+* FIX: `as_factor()` now interprets empty variables with empty levels attribute as logicals to avoid returning factors with empty levels.
+
 # REDCapCAST 25.1.1
 
 The newly introduced extension of `forcats::fct_drop()` has been corrected to work as intended as a method.
