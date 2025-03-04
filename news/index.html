@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">REDCapCAST</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">25.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">25.3.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,8 +39,9 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="25.2.1" id="redcapcast-2521">REDCapCAST 25.2.1<a class="anchor" aria-label="anchor" href="#redcapcast-2521"></a></h2>
-<ul><li>FIX: <code><a href="../reference/as_factor.html">as_factor()</a></code> now interprets empty variables with empty levels attribute as logicals to avoid returning factors with empty levels.</li>
+<h2 class="pkg-version" data-toc-text="25.3.1" id="redcapcast-2531">REDCapCAST 25.3.1<a class="anchor" aria-label="anchor" href="#redcapcast-2531"></a></h2>
+<ul><li><p>FIX: <code><a href="../reference/as_factor.html">as_factor()</a></code> now interprets empty variables with empty levels attribute as logicals to avoid returning factors with empty levels.</p></li>
+<li><p>NEW: <code><a href="../reference/as_logical.html">as_logical()</a></code>: interprets vectors with two levels as logical if values matches supplied list of logical pairs like “TRUE”/“FALSE”, “Yes”/“No” or 1/2. Eases interpretation of data from databases with minimal metadata.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="25.1.1" id="redcapcast-2511">REDCapCAST 25.1.1<a class="anchor" aria-label="anchor" href="#redcapcast-2511"></a></h2><p class="text-muted">CRAN release: 2025-01-29</p>
