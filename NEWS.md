@@ -2,7 +2,7 @@
 
 * FIX: `as_factor()` now interprets empty variables with empty levels attribute as logicals to avoid returning factors with empty levels.
 
-* NEW: `as_logical()`: interprets vectors with two levels as logical if values matches supplied list of logical pairs like "TRUE"/"FALSE", "Yes"/"No" or 1/2. Eases interpretation of data from databases with minimal metadata.
+* NEW: `as_logical()`: interprets vectors with two levels as logical if values matches supplied list of logical pairs like "TRUE"/"FALSE", "Yes"/"No" or 1/2. Eases interpretation of data from databases with minimal metadata. Works on vectors and for data.frames. Interprets vectors with single value also matching to any of supplied levels (Chooses first match pair if several matches).
 
 # REDCapCAST 25.1.1
 

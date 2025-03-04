@@ -22,6 +22,9 @@
 #'   as_logical() |>
 #'   sapply(class)
 #' ds$A |> class()
+#' sample(c("TRUE",NA), 20, TRUE) |>
+#'   as_logical()
+#' as_logical(0)
 #' @name as_logical
 as_logical <- function(x,
                        values = list(
@@ -69,17 +72,29 @@ as_logical.default <- function(x,
       "factor",
       "numeric"
     ) %in% class(x)
-  ) &&
-    length(unique(x[!is.na(x)])) == 2) {
-    if (is.factor(x)) {
-      match_index <- which(sapply(values, \(.x){
-        all(.x %in% levels(x))
-      }))
-    } else {
-      match_index <- which(sapply(values, \(.x){
-        all(.x %in% x)
-      }))
-    }
+  )){
+   if (length(unique(x[!is.na(x)])) == 2) {
+     if (is.factor(x)) {
+       match_index <- which(sapply(values, \(.x){
+         all(.x %in% levels(x))
+       }))
+     } else {
+       match_index <- which(sapply(values, \(.x){
+         all(.x %in% x)
+       }))
+     }
+   } else if (length(unique(x[!is.na(x)])) == 1){
+     if (is.factor(x)) {
+       match_index <- which(sapply(values, \(.x){
+         any(.x %in% levels(x))
+       }))
+     } else {
+       match_index <- which(sapply(values, \(.x){
+         any(.x %in% x)
+       }))
+     }
+  }
+
     if (length(match_index) == 1) {
       out <- x == values[[match_index]][1]
     } else if (length(match_index) > 1) {
