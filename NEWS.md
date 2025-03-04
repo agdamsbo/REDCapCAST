@@ -1,6 +1,8 @@
-# REDCapCAST 25.2.1
+# REDCapCAST 25.3.1
 
 * FIX: `as_factor()` now interprets empty variables with empty levels attribute as logicals to avoid returning factors with empty levels.
+
+* NEW: `as_logical()`: interprets vectors with two levels as logical if values matches supplied list of logical pairs like "TRUE"/"FALSE", "Yes"/"No" or 1/2. Eases interpretation of data from databases with minimal metadata.
 
 # REDCapCAST 25.1.1
 
