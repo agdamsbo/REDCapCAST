@@ -93,6 +93,8 @@ as_logical.default <- function(x,
          any(.x %in% x)
        }))
      }
+   } else {
+     match_index <- c()
   }
 
     if (length(match_index) == 1) {
