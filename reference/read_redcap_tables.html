@@ -71,7 +71,7 @@ Will preserve metadata in the data.frames as labels.</p>
 <span>  events <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  forms <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  raw_or_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"raw"</span>, <span class="st">"label"</span>, <span class="st">"both"</span><span class="op">)</span>,</span>
-<span>  split_forms <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  split_forms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"repeating"</span>, <span class="st">"none"</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -117,7 +117,7 @@ Will preserve metadata in the data.frames as labels.</p>
 
 <dt id="arg-split-forms">split_forms<a class="anchor" aria-label="anchor" href="#arg-split-forms"></a></dt>
 <dd><p>Whether to split "repeating" or "all" forms, default is
-all.</p></dd>
+all. Give "none" to export native semi-long REDCap format</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
