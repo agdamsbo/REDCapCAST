@@ -86,6 +86,11 @@ REDCap_split <- function(records,
                          metadata,
                          primary_table_name = "",
                          forms = c("repeating", "all")) {
+
+  # Processing metadata to reflect focused dataset
+  # metadata <- focused_metadata(metadata, names(records))
+  # Requires new testing setup. Not doing that now.
+
   # Process user input
   records <- process_user_input(records)
   metadata <-
