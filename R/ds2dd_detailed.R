@@ -127,8 +127,7 @@ hms2character <- function(data) {
 #'
 #' @examples
 #' redcapcast_data$record_id <- seq_len(nrow(redcapcast_data))
-#' ds2dd(redcapcast_data, include.column.names=TRUE)
-
+#' ds2dd(redcapcast_data, include.column.names = TRUE)
 ds2dd <-
   function(ds,
            record.id = "record_id",
@@ -136,8 +135,7 @@ ds2dd <-
            field.type = "text",
            field.label = NULL,
            include.column.names = FALSE,
-           metadata = names(REDCapCAST::redcapcast_meta)
-           ) {
+           metadata = names(REDCapCAST::redcapcast_meta)) {
     dd <- data.frame(matrix(ncol = length(metadata), nrow = ncol(ds)))
     colnames(dd) <- metadata
 
@@ -178,12 +176,15 @@ ds2dd <-
 
     if (is.null(field.label)) {
       dd[, "field_label"] <- dd[, "field_name"]
-    } else
+    } else {
       dd[, "field_label"] <- field.label
+    }
 
-    if (include.column.names){
-      list("DataDictionary"=dd,"Column names"=field.name)
-    } else dd
+    if (include.column.names) {
+      list("DataDictionary" = dd, "Column names" = field.name)
+    } else {
+      dd
+    }
   }
 
 
@@ -246,7 +247,10 @@ ds2dd <-
 #'     form.name = sample(c("b", "c"), size = 6, replace = TRUE, prob = rep(.5, 2))
 #'   ) |>
 #'   purrr::pluck("meta")
-#' mtcars |> numchar2fct() |> ds2dd_detailed(add.auto.id = TRUE)
+#' mtcars |>
+#'   dplyr::mutate(unknown = NA) |>
+#'   numchar2fct() |>
+#'   ds2dd_detailed(add.auto.id = TRUE)
 #'
 #' ## Using column name suffix to carry form name
 #' data <- iris |>
@@ -266,16 +270,21 @@ ds2dd_detailed <- function(data,
                            field.label.attr = "label",
                            field.validation = NULL,
                            metadata = names(REDCapCAST::redcapcast_meta),
-                           convert.logicals = TRUE) {
+                           convert.logicals = FALSE) {
+  short_names <- colnames(data) |>
+    lapply(\(.x) cut_string_length(.x, l = 90)) |>
+    purrr::reduce(c)
 
-  short_names <- colnames(data) |> lapply(\(.x) cut_string_length(.x,l=90)) |> purrr::reduce(c)
-
-  data <- stats::setNames(data,short_names)
+  data <- stats::setNames(data, short_names)
 
   if (convert.logicals) {
     data <- data |>
       ## Converts logical to factor, which overwrites attributes
       dplyr::mutate(dplyr::across(dplyr::where(is.logical), as_factor))
+    ## Problematic example:
+    ## as.logical(sample(0:1,10,TRUE)) |> as.factor() |> as.numeric()
+    ## Possible solution would be to subtract values by 1, so
+    ## "0, FALSE | 1, TRUE" like native REDCap
   }
 
   ## Handles the odd case of no id column present
@@ -369,9 +378,14 @@ ds2dd_detailed <- function(data,
     dd$field_type <- "text"
 
     dd <-
-      dd |> dplyr::mutate(field_type = dplyr::if_else(data_classes == "factor",
-        "radio", field_type
-      ))
+      dd |> dplyr::mutate(
+        field_type = dplyr::case_match(
+          data_classes,
+          "factor"~"radio",
+          "logical"~"truefalse",
+          .default = field_type
+        )
+        )
   } else {
     if (length(field.type) == 1 || length(field.type) == nrow(dd)) {
       dd$field_type <- field.type
@@ -432,7 +446,7 @@ ds2dd_detailed <- function(data,
       hms2character() |>
       stats::setNames(dd$field_name) |>
       lapply(\(.x){
-        if (identical("factor",class(.x))){
+        if (identical("factor", class(.x))) {
           as.numeric(.x)
         } else {
           .x
@@ -679,7 +693,6 @@ vec2choice <- function(data) {
 #' "test" |> compact_vec()
 #' sample(letters[1:9], 20, TRUE) |> compact_vec()
 compact_vec <- function(data, nm.sep = ": ", val.sep = "; ") {
-  # browser()
   if (all(is.na(data))) {
     return(data)
   }
