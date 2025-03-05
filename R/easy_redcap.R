@@ -26,11 +26,13 @@ get_api_key <- function(key.name, ...) {
 #'
 #' @param project.name The name of the current project (for key storage with
 #' \link[keyring]{key_set}, using the default keyring)
-#' @param widen.data argument to widen the exported data
+#' @param widen.data argument to widen the exported data. [DEPRECATED], use
+#' `data_format`instead
 #' @param uri REDCap database API uri
 #' @param raw_or_label argument passed on to
 #' \link[REDCapCAST]{read_redcap_tables}. Default is "both" to get labelled
 #' data.
+#' @param data_format Choose the data
 #' @param ... arguments passed on to \link[REDCapCAST]{read_redcap_tables}.
 #'
 #' @return data.frame or list depending on widen.data
@@ -41,27 +43,54 @@ get_api_key <- function(key.name, ...) {
 #' easy_redcap("My_new_project", fields = c("record_id", "age", "hypertension"))
 #' }
 easy_redcap <- function(project.name,
-                        widen.data = TRUE,
                         uri,
                         raw_or_label = "both",
+                        data_format = c("wide", "list", "redcap", "long"),
+                        widen.data = NULL,
                         ...) {
+  data_format <- match.arg(data_format)
+
+  # Interpretation of "widen.data" is kept and will override "data_format"
+  # for legacy sake
+  if (isTRUE(widen.data)) {
+    data_format <- "wide"
+  }
+
+  if (data_format %in% c("wide", "list")) {
+    split_action <- "all"
+  } else {
+    split_action <- "none"
+  }
+
   key <- get_api_key(
     key.name = paste0(project.name, "_REDCAP_API"),
     prompt = "Provide REDCap API key:"
   )
 
-  out <- read_redcap_tables(
+  redcap_data <- read_redcap_tables(
     uri = uri,
     token = key,
     raw_or_label = raw_or_label,
+    split_forms = split_action,
     ...
   )
 
-  if (widen.data) {
-    out <- out |>
+  # For now, long data format is just legacy REDCap
+  # All options are written out for future improvements
+  if (data_format == "wide") {
+    out <- redcap_data |>
       redcap_wider() |>
       suffix2label()
+  } else if (data_format == "list") {
+    # The read_redcap_tables() output is a list of tables (forms)
+    out <- redcap_data
+  } else if (data_format == "long") {
+    out <- redcap_data
+  } else if (data_format == "redcap") {
+    out <- redcap_data
   }
 
   out
 }
+
+
