@@ -26,7 +26,7 @@
 #'   \link[REDCapCAST]{fct_drop} to drop empty levels.
 #'
 #' @param split_forms Whether to split "repeating" or "all" forms, default is
-#' all.
+#' all. Give "none" to export native semi-long REDCap format
 #' @param ... passed on to \link[REDCapR]{redcap_read}
 #'
 #' @return list of instruments
@@ -42,22 +42,24 @@ read_redcap_tables <- function(uri,
                                fields = NULL,
                                events = NULL,
                                forms = NULL,
-                               raw_or_label = c("raw","label","both"),
-                               split_forms = "all",
+                               raw_or_label = c("raw", "label", "both"),
+                               split_forms = c("all", "repeating", "none"),
                                ...) {
-
-  raw_or_label <- match.arg(raw_or_label, c("raw","label","both"))
+  raw_or_label <- match.arg(raw_or_label, c("raw", "label", "both"))
+  split_forms <- match.arg(split_forms)
 
   # Getting metadata
   m <-
     REDCapR::redcap_metadata_read(redcap_uri = uri, token = token)[["data"]]
 
   if (!is.null(fields)) {
-    fields_test <- fields %in% c(m$field_name,paste0(unique(m$form_name),"_complete"))
+    fields_test <- fields %in% c(m$field_name, paste0(unique(m$form_name), "_complete"))
 
     if (any(!fields_test)) {
-      print(paste0("The following field names are invalid: ",
-                   paste(fields[!fields_test], collapse = ", "), "."))
+      print(paste0(
+        "The following field names are invalid: ",
+        paste(fields[!fields_test], collapse = ", "), "."
+      ))
       stop("Not all supplied field names are valid")
     }
   }
@@ -67,8 +69,10 @@ read_redcap_tables <- function(uri,
     forms_test <- forms %in% unique(m$form_name)
 
     if (any(!forms_test)) {
-      print(paste0("The following form names are invalid: ",
-                   paste(forms[!forms_test], collapse = ", "), "."))
+      print(paste0(
+        "The following form names are invalid: ",
+        paste(forms[!forms_test], collapse = ", "), "."
+      ))
       stop("Not all supplied form names are valid")
     }
   }
@@ -82,13 +86,15 @@ read_redcap_tables <- function(uri,
     event_test <- events %in% unique(arm_event_inst$data$unique_event_name)
 
     if (any(!event_test)) {
-      print(paste0("The following event names are invalid: ",
-                   paste(events[!event_test], collapse = ", "), "."))
+      print(paste0(
+        "The following event names are invalid: ",
+        paste(events[!event_test], collapse = ", "), "."
+      ))
       stop("Not all supplied event names are valid")
     }
   }
 
-  if (raw_or_label=="both"){
+  if (raw_or_label == "both") {
     rorl <- "raw"
   } else {
     rorl <- raw_or_label
@@ -106,10 +112,10 @@ read_redcap_tables <- function(uri,
     ...
   )[["data"]]
 
-  if (raw_or_label=="both"){
-    d <- apply_field_label(data=d,meta=m)
+  if (raw_or_label == "both") {
+    d <- apply_field_label(data = d, meta = m)
 
-    d <- apply_factor_labels(data=d,meta=m)
+    d <- apply_factor_labels(data = d, meta = m)
   }
 
 
@@ -123,15 +129,16 @@ read_redcap_tables <- function(uri,
   # Processing metadata to reflect focused dataset
   m <- focused_metadata(m, names(d))
 
-
   # Splitting
-  out <- REDCap_split(d,
-    m,
-    forms = split_forms,
-    primary_table_name = ""
-  )
-
-  sanitize_split(out)
+  if (split_forms != "none") {
+    REDCap_split(d,
+      m,
+      forms = split_forms,
+      primary_table_name = ""
+    ) |> sanitize_split()
+  } else {
+    d
+  }
 }
 
 
@@ -171,7 +178,7 @@ clean_field_label <- function(data) {
 #' @export
 #'
 #' @examples
-#' format_redcap_factor(sample(1:3,20,TRUE),"1, First. | 2, second | 3, THIRD")
+#' format_redcap_factor(sample(1:3, 20, TRUE), "1, First. | 2, second | 3, THIRD")
 format_redcap_factor <- function(data, meta) {
   lvls <- strsplit(meta, " | ", fixed = TRUE) |>
     unlist() |>
@@ -196,13 +203,13 @@ format_redcap_factor <- function(data, meta) {
 #' @return data.frame
 #' @export
 #'
-apply_field_label <- function(data,meta){
+apply_field_label <- function(data, meta) {
   purrr::imap(data, \(.x, .i){
     if (.i %in% meta$field_name) {
       # Does not handle checkboxes
       out <- set_attr(.x,
-                      label = clean_field_label(meta$field_label[meta$field_name == .i]),
-                      attr = "label"
+        label = clean_field_label(meta$field_label[meta$field_name == .i]),
+        attr = "label"
       )
       out
     } else {
@@ -219,8 +226,8 @@ apply_field_label <- function(data,meta){
 #' @return data.frame
 #' @export
 #'
-apply_factor_labels <- function(data,meta=NULL){
-  if (is.list(data) && !is.data.frame(data)){
+apply_factor_labels <- function(data, meta = NULL) {
+  if (is.list(data) && !is.data.frame(data)) {
     meta <- data$meta
     data <- data$data
   } else if (is.null(meta)) {
@@ -234,5 +241,3 @@ apply_factor_labels <- function(data,meta=NULL){
     }
   }) |> dplyr::bind_cols()
 }
-
-
