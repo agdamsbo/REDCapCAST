@@ -19,5 +19,5 @@ Applying \link[REDCapCAST]{as_factor} to the data.frame or variable, will
 coerce to a factor.
 }
 \examples{
-format_redcap_factor(sample(1:3,20,TRUE),"1, First. | 2, second | 3, THIRD")
+format_redcap_factor(sample(1:3, 20, TRUE), "1, First. | 2, second | 3, THIRD")
 }

@@ -52,4 +52,7 @@ ds |>
   as_logical() |>
   sapply(class)
 ds$A |> class()
+sample(c("TRUE",NA), 20, TRUE) |>
+  as_logical()
+as_logical(0)
 }

@@ -4,6 +4,10 @@
 
 * NEW: `as_logical()`: interprets vectors with two levels as logical if values matches supplied list of logical pairs like "TRUE"/"FALSE", "Yes"/"No" or 1/2. Eases interpretation of data from databases with minimal metadata. Works on vectors and for data.frames. Interprets vectors with single value also matching to any of supplied levels (Chooses first match pair if several matches).
 
+* NEW: `easy_redcap()`: new parameter `data_format` to specify data format as c("wide", "list", "redcap", "long"). For now "redcap" and "long" is treated equally. This was added to ease MMRM analyses. In that case, missing baseline values can be carried forward as "last observation carried forward" using the `tidyr::fill()` function specifying variables to fill. Interesting discussion on filling data [here on Stackoverflow](https://stackoverflow.com/a/13810615). `redcap_read_tables()` now has the option "none" for the `split_forms` parameter to allow not splitting the data.
+
+* FIX: `ds2dd_detailed()`: The `convert_logicals` parameter has been turned off by default and logicals are now interpreted as field type "truefalse". Converting logicals to factors would result in the numeric values being 1 for FALSE and 2 for TRUE, which is opposite of the traditional notation and could lead to serous problems if not handled correctly. This should solve it.
+
 # REDCapCAST 25.1.1
 
 The newly introduced extension of `forcats::fct_drop()` has been corrected to work as intended as a method.

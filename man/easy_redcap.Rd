@@ -4,19 +4,29 @@
 \alias{easy_redcap}
 \title{Secure API key storage and data acquisition in one}
 \usage{
-easy_redcap(project.name, widen.data = TRUE, uri, raw_or_label = "both", ...)
+easy_redcap(
+  project.name,
+  uri,
+  raw_or_label = "both",
+  data_format = c("wide", "list", "redcap", "long"),
+  widen.data = NULL,
+  ...
+)
 }
 \arguments{
 \item{project.name}{The name of the current project (for key storage with
 \link[keyring]{key_set}, using the default keyring)}
-
-\item{widen.data}{argument to widen the exported data}
 
 \item{uri}{REDCap database API uri}
 
 \item{raw_or_label}{argument passed on to
 \link[REDCapCAST]{read_redcap_tables}. Default is "both" to get labelled
 data.}
+
+\item{data_format}{Choose the data}
+
+\item{widen.data}{argument to widen the exported data. [DEPRECATED], use
+`data_format`instead}
 
 \item{...}{arguments passed on to \link[REDCapCAST]{read_redcap_tables}.}
 }

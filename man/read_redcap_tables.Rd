@@ -12,7 +12,7 @@ read_redcap_tables(
   events = NULL,
   forms = NULL,
   raw_or_label = c("raw", "label", "both"),
-  split_forms = "all",
+  split_forms = c("all", "repeating", "none"),
   ...
 )
 }
@@ -40,7 +40,7 @@ read_redcap_tables(
   \link[REDCapCAST]{fct_drop} to drop empty levels.}
 
 \item{split_forms}{Whether to split "repeating" or "all" forms, default is
-all.}
+all. Give "none" to export native semi-long REDCap format}
 
 \item{...}{passed on to \link[REDCapR]{redcap_read}}
 }

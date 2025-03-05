@@ -49,5 +49,5 @@ Migrated from stRoke ds2dd(). Fits better with the functionality of
 }
 \examples{
 redcapcast_data$record_id <- seq_len(nrow(redcapcast_data))
-ds2dd(redcapcast_data, include.column.names=TRUE)
+ds2dd(redcapcast_data, include.column.names = TRUE)
 }
