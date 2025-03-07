@@ -83,4 +83,27 @@ list4 <- list(
   )
 )
 redcap_wider(list4)
+
+list5 <- list(
+  data.frame(
+    record_id = c(1, 2, 1, 2),
+    redcap_event_name = c("baseline", "baseline", "followup", "followup")
+  ),
+  data.frame(
+    record_id = c(1, 1, 1, 1, 2, 2, 2, 2),
+    redcap_event_name = c(
+      "baseline", "baseline", "followup", "followup",
+      "baseline", "baseline", "followup", "followup"
+    ),
+    redcap_repeat_instrument = "walk",
+    redcap_repeat_instance = c(1, 2, 1, 2, 1, 2, 1, 2),
+    dist = c(40, 32, 25, 33, 28, 24, 23, 36)
+  ),
+  data.frame(
+    record_id = c(1, 2),
+    redcap_event_name = c("baseline", "baseline"),
+    gender = c("male", "female")
+  )
+)
+redcap_wider(list5)
 }

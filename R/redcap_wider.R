@@ -79,11 +79,35 @@ utils::globalVariables(c(
 #'   )
 #' )
 #' redcap_wider(list4)
+#'
+#' list5 <- list(
+#'   data.frame(
+#'     record_id = c(1, 2, 1, 2),
+#'     redcap_event_name = c("baseline", "baseline", "followup", "followup")
+#'   ),
+#'   data.frame(
+#'     record_id = c(1, 1, 1, 1, 2, 2, 2, 2),
+#'     redcap_event_name = c(
+#'       "baseline", "baseline", "followup", "followup",
+#'       "baseline", "baseline", "followup", "followup"
+#'     ),
+#'     redcap_repeat_instrument = "walk",
+#'     redcap_repeat_instance = c(1, 2, 1, 2, 1, 2, 1, 2),
+#'     dist = c(40, 32, 25, 33, 28, 24, 23, 36)
+#'   ),
+#'   data.frame(
+#'     record_id = c(1, 2),
+#'     redcap_event_name = c("baseline", "baseline"),
+#'     gender = c("male", "female")
+#'   )
+#' )
+#' redcap_wider(list5)
 redcap_wider <-
   function(data,
            event.glue = "{.value}____{redcap_event_name}",
            inst.glue = "{.value}____{redcap_repeat_instance}") {
-    # browser()
+
+
     if (!is_repeated_longitudinal(data)) {
       if (is.list(data)) {
         if (length(data) == 1) {
@@ -95,22 +119,37 @@ redcap_wider <-
         out <- data
       }
     } else {
-      id.name <- do.call(c, lapply(data, names))[[1]]
+
+      ## Cleaning instrument list to only include instruments holding other data
+      ## than ID and generic columns
+      ## This is to mitigate an issue when not exporting fields from the first
+      ## instrument.
+      ## Not taking this step would throw an error when pivoting.
+      instrument_names <- lapply(data, names)
+
+      id.name <- do.call(c, instrument_names)[[1]]
+
+      generic_names <- c(
+        id.name,
+        "redcap_event_name",
+        "redcap_repeat_instrument",
+        "redcap_repeat_instance"
+      )
+
+      semi_empty <- lapply(instrument_names,\(.x){
+        all(.x %in% generic_names)
+      }) |> unlist()
+
+      data <- data[!semi_empty]
 
       l <- lapply(data, function(i) {
-        # browser()
         rep_inst <- "redcap_repeat_instrument" %in% names(i)
 
         if (rep_inst) {
           k <- lapply(split(i, f = i[[id.name]]), function(j) {
             cname <- colnames(j)
             vals <-
-              cname[!cname %in% c(
-                id.name,
-                "redcap_event_name",
-                "redcap_repeat_instrument",
-                "redcap_repeat_instance"
-              )]
+              cname[!cname %in% generic_names]
             s <- tidyr::pivot_wider(
               j,
               names_from = "redcap_repeat_instance",

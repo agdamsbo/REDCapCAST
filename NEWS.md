@@ -1,3 +1,7 @@
+# REDCapCAST 25.3.2
+
+* FIX: exporting no fields from the first instrument in a REDCap database would throw an error from `tidyr::pivot_wider()` in `redcap_wider()`.
+
 # REDCapCAST 25.3.1
 
 * FIX: `as_factor()` now interprets empty variables with empty levels attribute as logicals to avoid returning factors with empty levels.
