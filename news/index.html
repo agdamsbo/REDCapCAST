@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">REDCapCAST</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">25.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">25.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="25.3.2" id="redcapcast-2532">REDCapCAST 25.3.2<a class="anchor" aria-label="anchor" href="#redcapcast-2532"></a></h2>
-<ul><li>FIX: exporting no fields from the first instrument in a REDCap database would throw an error from <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">tidyr::pivot_wider()</a></code> in <code><a href="../reference/redcap_wider.html">redcap_wider()</a></code>.</li>
+<ul><li>BUG: The <code><a href="../reference/redcap_wider.html">redcap_wider()</a></code> function would attempt to pivot empty selection of columns from list, and failing, causing all functions relying on this to fail. Fixed by filtering out data.frames in list with no additional columns than the “generics”.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="25.3.1" id="redcapcast-2531">REDCapCAST 25.3.1<a class="anchor" aria-label="anchor" href="#redcapcast-2531"></a></h2><p class="text-muted">CRAN release: 2025-03-05</p>
