@@ -1,6 +1,6 @@
 # REDCapCAST 25.3.2
 
-* FIX: exporting no fields from the first instrument in a REDCap database would throw an error from `tidyr::pivot_wider()` in `redcap_wider()`.
+* BUG: The `redcap_wider()` function would attempt to pivot empty selection of columns from list, and failing, causing all functions relying on this to fail. Fixed by filtering out data.frames in list with no additional columns than the "generics". 
 
 # REDCapCAST 25.3.1
 
