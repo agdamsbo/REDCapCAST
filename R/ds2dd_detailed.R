@@ -446,7 +446,7 @@ ds2dd_detailed <- function(data,
       hms2character() |>
       stats::setNames(dd$field_name) |>
       lapply(\(.x){
-        if (identical("factor", class(.x))) {
+        if (identical("factor", class(.x)) | identical("logical", class(.x))) {
           as.numeric(.x)
         } else {
           .x
