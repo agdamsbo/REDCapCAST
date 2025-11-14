@@ -99,18 +99,29 @@ focused_metadata <- function(metadata, vars_in_data) {
 #'
 #' @examples
 #' "Research!, ne:ws? and c;l-.ls" |> clean_redcap_name()
+#' "8_new_TEST_" |> clean_redcap_name()
 clean_redcap_name <- function(x) {
-  gsub("[,.;:?!@]","",
   gsub(
-    " ", "_",
+    "[,.;:?!@]", "",
     gsub(
-      "[' ']$", "",
+      " ", "_",
       gsub(
-        "[^a-z0-9' '_]", "",
-        tolower(x)
+        "__", "_",
+        gsub(
+          "*_$", "",
+          gsub(
+            "^_*", "",
+            gsub(
+              "[' ']$", "",
+              gsub(
+                "[^a-z0-9' '_]", "",
+                tolower(x)
+              )
+            )
+          )
+        )
       )
     )
-  )
   )
 }
 
@@ -136,14 +147,14 @@ sanitize_split <- function(l,
                              "redcap_repeat_instrument",
                              "redcap_repeat_instance"
                            ),
-                           drop.complete=TRUE,
-                           drop.empty=TRUE) {
+                           drop.complete = TRUE,
+                           drop.empty = TRUE) {
   generic.names <- c(
     get_id_name(l),
     generic.names
   )
 
-  if (drop.complete){
+  if (drop.complete) {
     generic.names <- c(
       generic.names,
       paste0(names(l), "_complete")
@@ -153,16 +164,16 @@ sanitize_split <- function(l,
   out <- lapply(l, function(i) {
     if (ncol(i) > 2) {
       s <- i[!colnames(i) %in% generic.names]
-      if (drop.empty){
-      i[!apply(is.na(s), MARGIN = 1, FUN = all), ]
-        }
+      if (drop.empty) {
+        i[!apply(is.na(s), MARGIN = 1, FUN = all), ]
+      }
     } else {
       i
     }
   })
 
   # On removing empty variables, a list may end up empty
-  out[sapply(out,nrow)>0]
+  out[sapply(out, nrow) > 0]
 }
 
 
@@ -357,8 +368,10 @@ split_non_repeating_forms <-
 #' @export
 #'
 #' @examples
-#' test <- c("12 months follow-up", "3 steps", "mRS 6 weeks",
-#' "Counting to 231 now")
+#' test <- c(
+#'   "12 months follow-up", "3 steps", "mRS 6 weeks",
+#'   "Counting to 231 now"
+#' )
 #' strsplitx(test, "[0-9]", type = "around")
 strsplitx <- function(x,
                       split,
@@ -517,7 +530,7 @@ is_repeated_longitudinal <- function(data, generics = c(
 }
 
 
-dummy_fun <- function(...){
+dummy_fun <- function(...) {
   list(
     gtsummary::add_difference()
   )
@@ -533,10 +546,10 @@ dummy_fun <- function(...){
 #' @export
 #'
 #' @examples
-#' "length" |> cut_string_length(l=3)
-cut_string_length <- function(data,l=100){
-  if (nchar(data)>=l){
-    substr(data,1,l)
+#' "length" |> cut_string_length(l = 3)
+cut_string_length <- function(data, l = 100) {
+  if (nchar(data) >= l) {
+    substr(data, 1, l)
   } else {
     data
   }
