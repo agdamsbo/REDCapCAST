@@ -1,0 +1,40 @@
+# REDCapCAST: REDCap Metadata Casting and Castellated Data Handling
+
+Casting metadata for REDCap database creation and handling of
+castellated data using repeated instruments and longitudinal projects in
+'REDCap'. Keeps a focused data export approach, by allowing to only
+export required data from the database. Also for casting new REDCap
+databases based on datasets from other sources. Originally forked from
+the R part of 'REDCapRITS' by Paul Egeler. See
+<https://github.com/pegeler/REDCapRITS>. 'REDCap' (Research Electronic
+Data Capture) is a secure, web-based software platform designed to
+support data capture for research studies, providing 1) an intuitive
+interface for validated data capture; 2) audit trails for tracking data
+manipulation and export procedures; 3) automated export procedures for
+seamless data downloads to common statistical packages; and 4)
+procedures for data integration and interoperability with external
+sources (Harris et al (2009)
+[doi:10.1016/j.jbi.2008.08.010](https://doi.org/10.1016/j.jbi.2008.08.010)
+; Harris et al (2019)
+[doi:10.1016/j.jbi.2019.103208](https://doi.org/10.1016/j.jbi.2019.103208)
+).
+
+## See also
+
+Useful links:
+
+- <https://github.com/agdamsbo/REDCapCAST>
+
+- <https://agdamsbo.github.io/REDCapCAST/>
+
+- Report bugs at <https://github.com/agdamsbo/REDCapCAST/issues>
+
+## Author
+
+**Maintainer**: Andreas Gammelgaard Damsbo <agdamsbo@clin.au.dk>
+([ORCID](https://orcid.org/0000-0002-7559-1154))
+
+Authors:
+
+- Paul Egeler <paulegeler@gmail.com>
+  ([ORCID](https://orcid.org/0000-0001-6948-9498))

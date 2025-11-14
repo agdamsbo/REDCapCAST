@@ -1,0 +1,117 @@
+# Database-creation
+
+``` r
+library(REDCapCAST)
+```
+
+## Two different ways to create a data base
+
+`REDCapCAST` provides two approaches to creating a data dictionary aimed
+at helping out in two different cases:
+
+1.  Easily create a REDCap data base from an existing data set.
+
+2.  Create a table in Word describing a variables in a data base and use
+    this to create a data base.
+
+In the following I will try to come with a few suggestions on how to use
+these approaches.
+
+### Easy data set to data base workflow
+
+The first iteration of a dataset to data dictionary function is the
+[`ds2dd()`](https://agdamsbo.github.io/REDCapCAST/reference/ds2dd.md),
+which creates a very basic data dictionary with all variables stored as
+text. This is sufficient for just storing old datasets/spreadsheets
+securely in REDCap.
+
+``` r
+d1 <- mtcars |>
+  dplyr::mutate(record_id = seq_len(dplyr::n())) |>
+  ds2dd() 
+
+d1 |>
+  gt::gt()
+```
+
+The more advanced
+[`ds2dd_detailed()`](https://agdamsbo.github.io/REDCapCAST/reference/ds2dd_detailed.md)
+is a natural development. It will try to apply the most common data
+classes for data validation and will assume that the first column is the
+id number. It outputs a list with the dataset with modified variable
+names to comply with REDCap naming conventions and a data dictionary.
+
+The dataset should be correctly formatted for the data dictionary to
+preserve as much information as possible.
+
+``` r
+d2 <- REDCapCAST::redcapcast_data |> 
+  dplyr::mutate(record_id = seq_len(dplyr::n()),
+                region=factor(region)) |>
+  dplyr::select(record_id, dplyr::everything()) |>
+  (\(.x){
+    .x[!grepl("_complete$",names(.x))]
+  })() |> 
+  (\(.x){
+    .x[!grepl("^redcap",names(.x))]
+  })() |>  
+  ds2dd_detailed() |> 
+  purrr::pluck("meta") 
+
+d2 |> 
+  gt::gt()
+```
+
+Additional specifications to the DataDictionary can be made manually, or
+it can be uploaded and modified manually in the graphical user interface
+on the REDCap server.
+
+### Data base from table
+
+…instructions and examples are coming…
+
+### Meta data and data upload
+
+Now the DataDictionary can be exported as a spreadsheet and uploaded or
+it can be uploaded using the `REDCapR` package (only projects with
+“Development” status).
+
+Use one of the two approaches below:
+
+#### Manual upload
+
+``` r
+write.csv(dd_ls$meta, "datadictionary.csv")
+```
+
+#### Upload with `REDCapR`
+
+``` r
+REDCapR::redcap_metadata_write(
+  dd_ls$meta,
+  redcap_uri = keyring::key_get("DB_URI"),
+  token = keyring::key_get("DB_TOKEN")
+)
+```
+
+In the [“REDCap R
+Handbook”](https://agdamsbo.github.io/redcap-r-handbook/) more is
+written on interfacing with REDCap in R using the
+[`library(keyring)`](https://keyring.r-lib.org/)to store credentials in
+[chapter
+1.1](https://agdamsbo.github.io/redcap-r-handbook/doc/access.html#sec-getting-access).
+
+### Step 4 - Data upload
+
+The same two options are available for data upload as meta data upload:
+manual or through `REDCapR`.
+
+Only the latter is shown here.
+
+``` r
+REDCapR::redcap_write(
+  dd_ls$data,
+  redcap_uri = keyring::key_get("DB_URI"),
+  token = keyring::key_get("DB_TOKEN")
+)
+```

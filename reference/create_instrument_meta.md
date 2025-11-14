@@ -1,0 +1,61 @@
+# DEPRICATED Create zips file with necessary content based on data set
+
+Metadata can be added by editing the data dictionary of a project in the
+initial design phase. If you want to later add new instruments, this
+function can be used to create (an) instrument(s) to add to a project in
+production.
+
+## Usage
+
+``` r
+create_instrument_meta(data, dir = here::here(""), record.id = TRUE)
+```
+
+## Arguments
+
+- data:
+
+  metadata for the relevant instrument. Could be from
+  \`ds2dd_detailed()\`
+
+- dir:
+
+  destination dir for the instrument zip. Default is the current WD.
+
+- record.id:
+
+  flag to omit the first row of the data dictionary assuming this is the
+  record_id field which should not be included in the instrument.
+  Default is TRUE.
+
+## Value
+
+list
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+data <- iris |>
+  ds2dd_detailed(
+    add.auto.id = TRUE,
+    form.name = sample(c("b", "c"),
+      size = 6,
+      replace = TRUE, prob = rep(.5, 2)
+    )
+  ) |>
+  purrr::pluck("meta")
+# data |> create_instrument_meta()
+
+data <- iris |>
+  ds2dd_detailed(add.auto.id = FALSE) |>
+  purrr::pluck("data")
+iris |>
+  setNames(glue::glue("{sample(x = c('a','b'),size = length(ncol(iris)),
+replace=TRUE,prob = rep(x=.5,2))}__{names(iris)}")) |>
+  ds2dd_detailed(form.sep = "__")
+data |>
+  purrr::pluck("meta") |>
+  create_instrument_meta(record.id = FALSE)
+} # }
+```
