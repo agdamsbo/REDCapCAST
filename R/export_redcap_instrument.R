@@ -53,7 +53,11 @@ export_redcap_instrument <- function(data,
   }
 
   temp_dir <- tempdir()
-  utils::write.csv(data, paste0(temp_dir, "/instrument.csv"), row.names = FALSE, na = "")
+  readr::write_csv(
+    x = data,
+    file = paste0(temp_dir, "/instrument.csv"),
+    na = "")
+  # utils::write.csv(data, paste0(temp_dir, "/instrument.csv"), row.names = FALSE, na = "")
   writeLines("REDCapCAST", paste0(temp_dir, "/origin.txt"))
   zip::zip(
     zipfile = file,

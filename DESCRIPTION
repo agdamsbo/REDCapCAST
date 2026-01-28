@@ -23,19 +23,12 @@ Description: Casting metadata for REDCap database creation and handling of
     Harris et al (2019) <doi:10.1016/j.jbi.2019.103208>).
 Depends: R (>= 4.1.0)
 Suggests:
-    httr,
-    jsonlite,
-    testthat,
     Hmisc,
     knitr,
     rmarkdown,
-    styler,
     devtools,
     roxygen2,
-    spelling,
-    rhub,
-    rsconnect,
-    pkgconfig
+    spelling
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

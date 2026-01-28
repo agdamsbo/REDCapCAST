@@ -126,7 +126,11 @@ server <- function(input, output, session) {
   output$downloadData <- shiny::downloadHandler(
     filename = "data_ready.csv",
     content = function(file) {
-      write.csv(purrr::pluck(dd(), "data"), file, row.names = FALSE, na = "")
+      readr::write_csv(
+        x = purrr::pluck(dd(), "data"),
+        file = file,
+        na = "")
+      # write.csv(purrr::pluck(dd(), "data"), file, row.names = FALSE, na = "")
     }
   )
 
@@ -134,7 +138,11 @@ server <- function(input, output, session) {
   output$downloadMeta <- shiny::downloadHandler(
     filename = paste0("REDCapCAST_DataDictionary_", Sys.Date(), ".csv"),
     content = function(file) {
-      write.csv(purrr::pluck(dd(), "meta"), file, row.names = FALSE, na = "")
+      readr::write_csv(
+        x = purrr::pluck(dd(), "meta"),
+        file = file,
+        na = "")
+      # write.csv(purrr::pluck(dd(), "meta"), file, row.names = FALSE, na = "")
     }
   )
 
