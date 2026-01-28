@@ -1,10 +1,20 @@
 # Changelog
 
+## REDCapCAST 26.1.1
+
+25.11.1 was never pushed to CRAN, so this fills in for that.
+
+- FIX: spelling
+
+- FIX: Suggested dependencies were trimmed including {styler}.
+
 ## REDCapCAST 25.11.1
 
-- FIX: logiccals exported as numeric for data upload
+- FIX: logicals exported as numeric for data upload
 
 - FIX: improved name cleaning
+
+- FIX: use the more robust readr::write_csv() to export data.
 
 ## REDCapCAST 25.3.2
 

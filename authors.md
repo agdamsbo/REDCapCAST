@@ -12,14 +12,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/agdamsbo/REDCapCAST/blob/main/DESCRIPTION)
 
-Damsbo A, Egeler P (2025). *REDCapCAST: REDCap Metadata Casting and
+Damsbo A, Egeler P (2026). *REDCapCAST: REDCap Metadata Casting and
 Castellated Data Handling*. R package version 25.11.1,
 <https://github.com/agdamsbo/REDCapCAST>.
 
     @Manual{,
       title = {REDCapCAST: REDCap Metadata Casting and Castellated Data Handling},
       author = {Andreas Gammelgaard Damsbo and Paul Egeler},
-      year = {2025},
+      year = {2026},
       note = {R package version 25.11.1},
       url = {https://github.com/agdamsbo/REDCapCAST},
     }
