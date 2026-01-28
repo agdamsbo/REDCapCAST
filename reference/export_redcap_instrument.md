@@ -8,7 +8,12 @@ production.
 ## Usage
 
 ``` r
-export_redcap_instrument(data, file, force = FALSE, record.id = "record_id")
+export_redcap_instrument(
+  data,
+  file = here::here(paste0("instrument_", Sys.Date(), ".zip")),
+  force = FALSE,
+  record.id = "record_id"
+)
 ```
 
 ## Arguments
