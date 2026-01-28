@@ -36,10 +36,16 @@
 #' #  ) |>
 #' #  purrr::pluck("meta") |>
 #' #  export_redcap_instrument(file=here::here(paste0("instrument",Sys.Date(),".zip")))
-export_redcap_instrument <- function(data,
-                                     file,
+export_redcap_instrument <- function(
+    data,
+                                     file=here::here(paste0("instrument_",Sys.Date(),".zip")),
                                      force = FALSE,
                                      record.id = "record_id") {
+  # Ensure file name ends with .zip
+  if (!isTRUE(endsWith(file,".zip"))){
+    file <- paste0(file,".zip")
+  }
+
   # Ensure form name is the same
   if (force) {
     data$form_name <- data$form_name[1]
@@ -67,9 +73,10 @@ export_redcap_instrument <- function(data,
 }
 
 
-#' DEPRICATED Create zips file with necessary content based on data set
+#' DEPRECATED Create zips file with necessary content based on data set
 #'
 #' @description
+#' Use export_redcap_instrument()
 #' Metadata can be added by editing the data dictionary of a project in the
 #' initial design phase. If you want to later add new instruments, this
 #' function can be used to create (an) instrument(s) to add to a project in

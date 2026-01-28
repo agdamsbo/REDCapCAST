@@ -4,7 +4,12 @@
 \alias{export_redcap_instrument}
 \title{Creates zip-file with necessary content to manually add instrument to database}
 \usage{
-export_redcap_instrument(data, file, force = FALSE, record.id = "record_id")
+export_redcap_instrument(
+  data,
+  file = here::here(paste0("instrument_", Sys.Date(), ".zip")),
+  force = FALSE,
+  record.id = "record_id"
+)
 }
 \arguments{
 \item{data}{metadata for the relevant instrument.
