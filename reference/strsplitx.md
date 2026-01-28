@@ -38,8 +38,10 @@ list
 ## Examples
 
 ``` r
-test <- c("12 months follow-up", "3 steps", "mRS 6 weeks",
-"Counting to 231 now")
+test <- c(
+  "12 months follow-up", "3 steps", "mRS 6 weeks",
+  "Counting to 231 now"
+)
 strsplitx(test, "[0-9]", type = "around")
 #> [[1]]
 #> [1] "1"                 "2"                 " months follow-up"

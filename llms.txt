@@ -119,7 +119,7 @@ contributing to this project, you agree to abide by its terms.
 - [`create_html_table()`](https://agdamsbo.github.io/REDCapCAST/reference/create_html_table.md)
   : Create two-column HTML table for data piping in REDCap instruments
 - [`create_instrument_meta()`](https://agdamsbo.github.io/REDCapCAST/reference/create_instrument_meta.md)
-  : DEPRICATED Create zips file with necessary content based on data set
+  : DEPRECATED Create zips file with necessary content based on data set
 - [`cut_string_length()`](https://agdamsbo.github.io/REDCapCAST/reference/cut_string_length.md)
   : Cut string to desired length
 - [`d2w()`](https://agdamsbo.github.io/REDCapCAST/reference/d2w.md) :

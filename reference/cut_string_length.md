@@ -25,6 +25,6 @@ character string of length l
 ## Examples
 
 ``` r
-"length" |> cut_string_length(l=3)
+"length" |> cut_string_length(l = 3)
 #> [1] "len"
 ```

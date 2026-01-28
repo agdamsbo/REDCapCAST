@@ -25,4 +25,6 @@ vector or data frame, same format as input
 ``` r
 "Research!, ne:ws? and c;l-.ls" |> clean_redcap_name()
 #> [1] "research_news_and_clls"
+"8_new_TEST_" |> clean_redcap_name()
+#> [1] "8_new_test"
 ```

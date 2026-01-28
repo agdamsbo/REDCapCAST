@@ -8,6 +8,10 @@
 
 - FIX: Suggested dependencies were trimmed including {styler}.
 
+- FIX: export_redcap_instrument was updated to include default file name
+  for the instrument zip. Ensures custom names has correct file
+  extension.
+
 ## REDCapCAST 25.11.1
 
 - FIX: logicals exported as numeric for data upload
