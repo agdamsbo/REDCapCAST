@@ -19,4 +19,5 @@ Trying to make up for different naming conventions.
 }
 \examples{
 "Research!, ne:ws? and c;l-.ls" |> clean_redcap_name()
+"8_new_TEST_" |> clean_redcap_name()
 }

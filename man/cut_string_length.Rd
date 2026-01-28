@@ -18,5 +18,5 @@ character string of length l
 Cut string to desired length
 }
 \examples{
-"length" |> cut_string_length(l=3)
+"length" |> cut_string_length(l = 3)
 }

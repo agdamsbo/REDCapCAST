@@ -2,7 +2,7 @@
 % Please edit documentation in R/export_redcap_instrument.R
 \name{create_instrument_meta}
 \alias{create_instrument_meta}
-\title{DEPRICATED Create zips file with necessary content based on data set}
+\title{DEPRECATED Create zips file with necessary content based on data set}
 \usage{
 create_instrument_meta(data, dir = here::here(""), record.id = TRUE)
 }
@@ -20,6 +20,7 @@ Default is TRUE.}
 list
 }
 \description{
+Use export_redcap_instrument()
 Metadata can be added by editing the data dictionary of a project in the
 initial design phase. If you want to later add new instruments, this
 function can be used to create (an) instrument(s) to add to a project in
