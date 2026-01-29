@@ -2,7 +2,7 @@ Package: REDCapCAST
 Title: REDCap Metadata Casting and Castellated Data Handling
 Version: 26.1.1
 Authors@R: c(
-    person("Andreas Gammelgaard", "Damsbo", email = "agdamsbo@clin.au.dk", 
+    person("Andreas Gammelgaard", "Damsbo", email = "andreas@gdamsbo.dk", 
     role = c("aut", "cre"),comment = c(ORCID = "0000-0002-7559-1154")), 
     person("Paul", "Egeler", email = "paulegeler@gmail.com", role = c("aut"), 
     comment = c(ORCID = "0000-0001-6948-9498")))
