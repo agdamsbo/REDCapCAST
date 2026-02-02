@@ -2,6 +2,8 @@
 
 ## REDCapCAST 26.1.1
 
+CRAN release: 2026-01-29
+
 25.11.1 was never pushed to CRAN, so this fills in for that.
 
 - FIX: spelling

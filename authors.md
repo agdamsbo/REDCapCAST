@@ -10,7 +10,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/agdamsbo/REDCapCAST/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/agdamsbo/REDCapCAST/blob/v26.1.1/DESCRIPTION)
 
 Damsbo A, Egeler P (2026). *REDCapCAST: REDCap Metadata Casting and
 Castellated Data Handling*. R package version 26.1.1,
