@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Andreas Gammelgaard Damsbo \email{agdamsbo@clin.au.dk} (\href{https://orcid.org/0000-0002-7559-1154}{ORCID})
+\strong{Maintainer}: Andreas Gammelgaard Damsbo \email{andreas@gdamsbo.dk} (\href{https://orcid.org/0000-0002-7559-1154}{ORCID})
 
 Authors:
 \itemize{
