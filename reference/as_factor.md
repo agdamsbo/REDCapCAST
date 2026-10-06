@@ -105,7 +105,7 @@ structure(rep(NA,10),
   class = c("labelled")
 ) |>
   as_factor() |> summary()
-#> FALSE  TRUE  NA's 
+#> FALSE  TRUE   NAs 
 #>     0     0    10 
 
 rep(NA,10) |> as_factor()

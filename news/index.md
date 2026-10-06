@@ -1,5 +1,27 @@
 # Changelog
 
+## REDCapCAST 26.10.1
+
+- NEW: New flag added to ds2dd_detailed() to allow for using the first
+  row of a dataset as field labels or explaining notes in the REDCap
+  instrument(s). When the data set starts of as a simple flat
+  spreadsheet, this is a practical approach to adding explaining notes
+  on each variable/column.
+
+## REDCapCAST 26.3.1
+
+- NEW: topological_sort() function allows for guessing the event names
+  and the correct order when creating an events overview based on long
+  data format of longitudinal REDCap data with event nae column being a
+  character. This be used for implementing support for creating data
+  bases for longitudinal projects. API support and other steps are still
+  needed, but the first steps have been taken in the latest REDCap
+  version. This function was developed with Claude to allow for this
+  support. The REDCapCAST interface will also support option to reorder
+  the event names before creating database metadata, which will be
+  shared from the FreesearchR project. This will be implemented
+  eventually when the need and time is there.
+
 ## REDCapCAST 26.1.1
 
 CRAN release: 2026-01-29
@@ -251,7 +273,7 @@ CRAN release: 2024-06-07
   formatting. One interesting function is
   [`case_match_regex_list()`](https://agdamsbo.github.io/REDCapCAST/reference/case_match_regex_list.md),
   which allows for a dynamic
-  [`dplyr::case_when()`](https://dplyr.tidyverse.org/reference/case_when.html)-like
+  [`dplyr::case_when()`](https://dplyr.tidyverse.org/reference/case-and-replace-when.html)-like
   approach for regex-matching. I think it is neat at least.
 
 #### Documentation and more

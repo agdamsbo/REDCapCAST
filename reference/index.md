@@ -133,6 +133,8 @@
   : REDCap metadata from data base
 - [`replace_curly_quote()`](https://agdamsbo.github.io/REDCapCAST/reference/replace_curly_quote.md)
   : Replace curly apostrophes and quotes from word
+- [`safe_topological_sort()`](https://agdamsbo.github.io/REDCapCAST/reference/safe_topological_sort.md)
+  : Safe Wrapper for Topological Sort
 - [`sanitize_split()`](https://agdamsbo.github.io/REDCapCAST/reference/sanitize_split.md)
   : Sanitize list of data frames
 - [`set_attr()`](https://agdamsbo.github.io/REDCapCAST/reference/set_attr.md)
@@ -147,6 +149,8 @@
   : Transfer variable name suffix to label in widened data
 - [`time_only_correction()`](https://agdamsbo.github.io/REDCapCAST/reference/time_only_correction.md)
   : Correction based on time_only_filter function
+- [`topological_sort()`](https://agdamsbo.github.io/REDCapCAST/reference/topological_sort.md)
+  : Topological Sort of Ordered Element Lists
 - [`var2fct()`](https://agdamsbo.github.io/REDCapCAST/reference/var2fct.md)
   : Convert vector to factor based on threshold of number of unique
   levels

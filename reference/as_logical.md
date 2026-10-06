@@ -66,8 +66,8 @@ ds$A |> class()
 #> [1] "factor"
 sample(c("TRUE",NA), 20, TRUE) |>
   as_logical()
-#>  [1] TRUE TRUE TRUE   NA TRUE TRUE TRUE TRUE   NA TRUE TRUE TRUE   NA   NA TRUE
-#> [16] TRUE TRUE TRUE   NA TRUE
+#>  [1]   NA   NA TRUE   NA   NA   NA   NA   NA TRUE TRUE TRUE   NA TRUE TRUE TRUE
+#> [16] TRUE   NA TRUE TRUE TRUE
 as_logical(0)
 #> [1] FALSE
 ```

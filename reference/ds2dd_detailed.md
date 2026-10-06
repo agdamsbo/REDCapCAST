@@ -15,6 +15,7 @@ ds2dd_detailed(
   field.type = NULL,
   field.label = NULL,
   field.label.attr = "label",
+  field.label.row = FALSE,
   field.validation = NULL,
   metadata = names(REDCapCAST::redcapcast_meta),
   convert.logicals = FALSE
@@ -68,6 +69,11 @@ ds2dd_detailed(
 
   attribute name for named labels for haven_labelled data set (imported
   .dta file with \`haven::read_dta()\`. Default is "label"
+
+- field.label.row:
+
+  Use the first row as field label. Setting this to TRUE will overwrite
+  any attributes. Default is FALSE.
 
 - field.validation:
 
@@ -202,12 +208,12 @@ iris |>
 #> # A tibble: 6 × 18
 #>   field_name  form_name section_header field_type field_label 
 #>   <chr>       <chr>     <lgl>          <chr>      <chr>       
-#> 1 record_id   c         NA             text       record_id   
+#> 1 record_id   b         NA             text       record_id   
 #> 2 sepallength b         NA             text       Sepal.Length
 #> 3 sepalwidth  c         NA             text       Sepal.Width 
-#> 4 petallength b         NA             text       Petal.Length
-#> 5 petalwidth  c         NA             text       Petal.Width 
-#> 6 species     b         NA             radio      Species     
+#> 4 petallength c         NA             text       Petal.Length
+#> 5 petalwidth  b         NA             text       Petal.Width 
+#> 6 species     c         NA             radio      Species     
 #> # ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <lgl>,
 #> #   text_validation_type_or_show_slider_number <chr>,
 #> #   text_validation_min <lgl>, text_validation_max <lgl>, identifier <lgl>,
@@ -289,10 +295,10 @@ data |> ds2dd_detailed(form.sep = "__")
 #> # A tibble: 6 × 18
 #>   field_name  form_name section_header field_type field_label
 #>   <chr>       <chr>     <lgl>          <chr>      <chr>      
-#> 1 record_id   b         NA             text       record_id  
+#> 1 record_id   a         NA             text       record_id  
 #> 2 sepallength a         NA             text       sepallength
-#> 3 sepalwidth  a         NA             text       sepalwidth 
-#> 4 petallength a         NA             text       petallength
+#> 3 sepalwidth  b         NA             text       sepalwidth 
+#> 4 petallength b         NA             text       petallength
 #> 5 petalwidth  a         NA             text       petalwidth 
 #> 6 species     a         NA             text       species    
 #> # ℹ 13 more variables: select_choices_or_calculations <lgl>, field_note <lgl>,

@@ -31,7 +31,7 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Andreas Gammelgaard Damsbo <agdamsbo@clin.au.dk>
+**Maintainer**: Andreas Gammelgaard Damsbo <andreas@gdamsbo.dk>
 ([ORCID](https://orcid.org/0000-0002-7559-1154))
 
 Authors:

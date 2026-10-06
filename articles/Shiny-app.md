@@ -6,6 +6,7 @@ the casting of a data dictionary and data upload. Install the package
 and launch the app as follows:
 
 ``` r
+
 REDCapCAST::shiny_cast()
 ```
 
@@ -13,6 +14,7 @@ The app primarily wraps one function:
 [`ds2dd_detailed()`](https://agdamsbo.github.io/REDCapCAST/reference/ds2dd_detailed.md).
 
 ``` r
+
 library(REDCapCAST)
 ds <- REDCap_split(
     records = redcapcast_data,
@@ -75,10 +77,11 @@ str(ds)
 #>  $ new_event_complete____2____follow2: chr [1:6] NA NA "Incomplete" "Incomplete" ...
 #>  $ new_event_complete____3____follow1: chr [1:6] NA NA NA NA ...
 #>  $ new_event_complete____3____follow2: chr [1:6] NA NA "Incomplete" "Complete" ...
-#>  - attr(*, "problems")=<externalptr>
+#>  - attr(*, "problems")=<pointer: (nil)>
 ```
 
 ``` r
+
 ds|> 
   ds2dd_detailed(metadata = names(REDCapCAST::redcapcast_meta))|>  
   purrr::pluck("data") |> 
@@ -136,6 +139,7 @@ ds|>
 ```
 
 ``` r
+
 ds|> 
   ds2dd_detailed(metadata = names(REDCapCAST::redcapcast_meta))|>  
   purrr::pluck("meta") |> 
@@ -171,6 +175,7 @@ its own to use with
 or any other data set for that matter:
 
 ``` r
+
 ds_parsed <- redcapcast_data |> 
   dplyr::mutate(dplyr::across(dplyr::everything(),as.character)) |> 
   parse_data()
@@ -204,13 +209,14 @@ str(ds_parsed)
 #>  $ event_age                   : num [1:25] NA NA NA NA NA NA NA NA NA NA ...
 #>  $ event_type                  : chr [1:25] NA NA NA "TIA" ...
 #>  $ new_event_complete          : chr [1:25] NA NA NA "Incomplete" ...
-#>  - attr(*, "problems")=<externalptr>
+#>  - attr(*, "problems")=<pointer: (nil)>
 ```
 
 It will ignore specified columns, which is neat for numeric-looking
 strings like cpr-with a leading 0:
 
 ``` r
+
 redcapcast_data |> 
   dplyr::mutate(dplyr::across(dplyr::everything(),as.character)) |> 
   parse_data(ignore.vars = c("record_id","cpr")) |> 
@@ -244,7 +250,7 @@ redcapcast_data |>
 #>  $ event_age                   : num [1:25] NA NA NA NA NA NA NA NA NA NA ...
 #>  $ event_type                  : chr [1:25] NA NA NA "TIA" ...
 #>  $ new_event_complete          : chr [1:25] NA NA NA "Incomplete" ...
-#>  - attr(*, "problems")=<externalptr>
+#>  - attr(*, "problems")=<pointer: (nil)>
 ```
 
 Column classes can be passed to
@@ -256,6 +262,7 @@ factorises numerical and character vectors based on a set threshold for
 unique values:
 
 ``` r
+
 mtcars |> str()
 #> 'data.frame':    32 obs. of  11 variables:
 #>  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
@@ -287,6 +294,7 @@ mtcars |>
 ```
 
 ``` r
+
 ds_parsed|>
   numchar2fct(numeric.threshold = 2) |>
   str()
@@ -319,5 +327,5 @@ ds_parsed|>
 #>  $ event_age                   : num [1:25] NA NA NA NA NA NA NA NA NA NA ...
 #>  $ event_type                  : Factor w/ 4 levels "TIA","AIS","ICH",..: NA NA NA 1 NA NA NA 2 3 3 ...
 #>  $ new_event_complete          : Factor w/ 2 levels "Incomplete","Complete": NA NA NA 1 NA NA NA 1 1 1 ...
-#>  - attr(*, "problems")=<externalptr>
+#>  - attr(*, "problems")=<pointer: (nil)>
 ```

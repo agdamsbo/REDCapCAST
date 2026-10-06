@@ -40,5 +40,5 @@ sample(seq_len(4), 20, TRUE) |>
 "test" |> compact_vec()
 #> [1] "test"
 sample(letters[1:9], 20, TRUE) |> compact_vec()
-#> [1] "g; e; d; a; c; g; a; f; g; h; f; a; d; b; f; e; c; d; f; b"
+#> [1] "i; e; c; b; g; d; d; b; i; b; c; c; a; g; e; d; a; c; g; a"
 ```
