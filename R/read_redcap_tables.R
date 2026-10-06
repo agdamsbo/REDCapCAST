@@ -234,6 +234,7 @@ apply_factor_labels <- function(data, meta = NULL) {
     stop("Please provide a data frame for meta")
   }
   purrr::imap(data, \(.x, .i){
+    # browser()
     if (any(c("radio", "dropdown") %in% meta$field_type[meta$field_name == .i]) || is.factor(.x)) {
       format_redcap_factor(.x, meta$select_choices_or_calculations[meta$field_name == .i])
     } else {
@@ -241,3 +242,6 @@ apply_factor_labels <- function(data, meta = NULL) {
     }
   }) |> dplyr::bind_cols()
 }
+
+
+
