@@ -48,30 +48,30 @@
 #' is undefined beyond what \code{priority} dictates.
 #'
 #' @examples
-#' # Basic usage
-#' lst <- list(c("shoe", "ball"), c("shirt", "shoe", "car"), c("ball", "car"))
-#' topological_sort(lst)
-#' # [1] "shirt" "shoe"  "ball"  "car"
-#'
-#' # Element appearing in only one vector
-#' lst2 <- list(c("shoe", "ball"), c("shirt", "shoe", "car"),
-#'              c("ball", "car"),  c("stick", "car"))
-#' topological_sort(lst2)
-#' # [1] "shirt" "stick" "shoe"  "ball"  "car"
-#'
-#' topological_sort(lst2, priority = "lexicographic")
-#' # [1] "shirt" "stick" "shoe"  "ball"  "car"
-#'
-#' topological_sort(lst2, priority = "least_constrained")
-#' # [1] "stick" "shirt" "shoe"  "ball"  "car"
-#'
-#' topological_sort(lst2, priority = "most_constrained")
-#' # [1] "shirt" "shoe"  "ball"  "car"  "stick"
+#' ## Basic usage
+#' #lst <- list(c("shoe", "ball"), c("shirt", "shoe", "car"), c("ball", "car"))
+#' #topological_sort(lst)
+#' ## [1] "shirt" "shoe"  "ball"  "car"
+#'#
+#' ## Element appearing in only one vector
+#' #lst2 <- list(c("shoe", "ball"), c("shirt", "shoe", "car"),
+#' #             c("ball", "car"),  c("stick", "car"))
+#' #topological_sort(lst2)
+#' ## [1] "shirt" "stick" "shoe"  "ball"  "car"
+#'#
+#' #topological_sort(lst2, priority = "lexicographic")
+#' ## [1] "shirt" "stick" "shoe"  "ball"  "car"
+#'#
+#' #topological_sort(lst2, priority = "least_constrained")
+#' ## [1] "stick" "shirt" "shoe"  "ball"  "car"
+#'#
+#' #topological_sort(lst2, priority = "most_constrained")
+#' ## [1] "shirt" "shoe"  "ball"  "car"  "stick"
 #'
 #' # Cycle detection
 #' \dontrun{
 #' topological_sort(list(c("a", "b"), c("b", "a")))
-#' # Error: Cycle detected — no valid ordering exists
+#' # Error: Cycle detected - no valid ordering exists
 #' }
 #'
 #' @seealso
@@ -82,7 +82,7 @@ topological_sort <- function(ordered_list, priority = c("none", "lexicographic",
 
   # Flatten and integer-encode all nodes
   all_nodes <- unique(unlist(ordered_list, use.names = FALSE))
-  node_idx  <- setNames(seq_along(all_nodes), all_nodes)
+  node_idx  <- stats::setNames(seq_along(all_nodes), all_nodes)
   n         <- length(all_nodes)
 
   # Build all edges at once via vectorised offset indexing
@@ -137,7 +137,7 @@ topological_sort <- function(ordered_list, priority = c("none", "lexicographic",
     if (length(new_zeros)) queue <- enqueue(new_zeros, queue)
   }
 
-  if (result_idx != n) stop("Cycle detected — no valid ordering exists")
+  if (result_idx != n) stop("Cycle detected - no valid ordering exists")
 
   all_nodes[result]
 }

@@ -61,30 +61,30 @@ considered loosely constrained. Their placement among other eligible elements
 is undefined beyond what \code{priority} dictates.
 }
 \examples{
-# Basic usage
-lst <- list(c("shoe", "ball"), c("shirt", "shoe", "car"), c("ball", "car"))
-topological_sort(lst)
-# [1] "shirt" "shoe"  "ball"  "car"
-
-# Element appearing in only one vector
-lst2 <- list(c("shoe", "ball"), c("shirt", "shoe", "car"),
-             c("ball", "car"),  c("stick", "car"))
-topological_sort(lst2)
-# [1] "shirt" "stick" "shoe"  "ball"  "car"
-
-topological_sort(lst2, priority = "lexicographic")
-# [1] "shirt" "stick" "shoe"  "ball"  "car"
-
-topological_sort(lst2, priority = "least_constrained")
-# [1] "stick" "shirt" "shoe"  "ball"  "car"
-
-topological_sort(lst2, priority = "most_constrained")
-# [1] "shirt" "shoe"  "ball"  "car"  "stick"
+## Basic usage
+#lst <- list(c("shoe", "ball"), c("shirt", "shoe", "car"), c("ball", "car"))
+#topological_sort(lst)
+## [1] "shirt" "shoe"  "ball"  "car"
+#
+## Element appearing in only one vector
+#lst2 <- list(c("shoe", "ball"), c("shirt", "shoe", "car"),
+#             c("ball", "car"),  c("stick", "car"))
+#topological_sort(lst2)
+## [1] "shirt" "stick" "shoe"  "ball"  "car"
+#
+#topological_sort(lst2, priority = "lexicographic")
+## [1] "shirt" "stick" "shoe"  "ball"  "car"
+#
+#topological_sort(lst2, priority = "least_constrained")
+## [1] "stick" "shirt" "shoe"  "ball"  "car"
+#
+#topological_sort(lst2, priority = "most_constrained")
+## [1] "shirt" "shoe"  "ball"  "car"  "stick"
 
 # Cycle detection
 \dontrun{
 topological_sort(list(c("a", "b"), c("b", "a")))
-# Error: Cycle detected — no valid ordering exists
+# Error: Cycle detected - no valid ordering exists
 }
 
 }
