@@ -4,12 +4,16 @@
 \alias{read_input}
 \title{Flexible file import based on extension}
 \usage{
-read_input(file, consider.na = c("NA", "\\"\\"", ""))
+read_input(file, consider.na = c("NA", "\\"\\"", ""), sheet = 1, ...)
 }
 \arguments{
 \item{file}{file name}
 
 \item{consider.na}{character vector of strings to consider as NAs}
+
+\item{sheet}{sheet number}
+
+\item{...}{magic dots to allow overflow. Ignored for now.}
 }
 \value{
 tibble

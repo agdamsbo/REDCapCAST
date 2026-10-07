@@ -26,7 +26,7 @@ server <- function(input, output, session) {
   ds <- shiny::reactive({
     shiny::req(input$ds)
 
-    out <- read_input(input$ds$datapath)
+    out <- read_input(input$ds$datapath,sheet=input$sheet_n)
 
     out <- out |>
       ## Parses data with readr functions
@@ -252,6 +252,7 @@ ui <-
         shiny::conditionalPanel(
           # condition = "output.uploaded=='yes'",
           condition = "input.options > 0",
+          shiny::numericInput(inputId = "sheet_n",label = "Select sheet to handle (ignored if not a workbook)",value = 1,min = 1,max = 10,step = 1),
           shiny::radioButtons(
             inputId = "add_id",
             label = "Add ID, or use first column?",

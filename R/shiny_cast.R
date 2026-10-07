@@ -43,6 +43,8 @@ file_extension <- function(filenames) {
 #'
 #' @param file file name
 #' @param consider.na character vector of strings to consider as NAs
+#' @param sheet sheet number
+#' @param ... magic dots to allow overflow. Ignored for now.
 #'
 #' @return tibble
 #' @export
@@ -55,7 +57,7 @@ file_extension <- function(filenames) {
 #'
 #' @examples
 #' read_input("https://raw.githubusercontent.com/agdamsbo/cognitive.index.lookup/main/data/sample.csv")
-read_input <- function(file, consider.na = c("NA", '""', "")) {
+read_input <- function(file, consider.na = c("NA", '""', ""),sheet=1,...) {
   ext <- tolower(tools::file_ext(file))
 
   tryCatch(
@@ -63,11 +65,11 @@ read_input <- function(file, consider.na = c("NA", '""', "")) {
       if (ext == "csv") {
         df <- read_csv(file = file, na = consider.na)
       } else if (ext %in% c("xls", "xlsx")) {
-        df <- read_xlsx(file = file, na.strings = consider.na)
+        df <- read_xlsx(file = file, na.strings = consider.na,sheet = sheet)
       } else if (ext == "dta") {
         df <- read_dta(file = file)
       } else if (ext == "ods") {
-        df <- read_ods(path = file)
+        df <- read_ods(path = file,sheet = sheet)
       } else if (ext == "rds") {
         df <- read_rds(file = file)
       }else {
