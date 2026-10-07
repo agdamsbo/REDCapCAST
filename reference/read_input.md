@@ -5,7 +5,7 @@ Flexible file import based on extension
 ## Usage
 
 ``` r
-read_input(file, consider.na = c("NA", "\"\"", ""))
+read_input(file, consider.na = c("NA", "\"\"", ""), sheet = 1, ...)
 ```
 
 ## Arguments
@@ -17,6 +17,14 @@ read_input(file, consider.na = c("NA", "\"\"", ""))
 - consider.na:
 
   character vector of strings to consider as NAs
+
+- sheet:
+
+  sheet number
+
+- ...:
+
+  magic dots to allow overflow. Ignored for now.
 
 ## Value
 
