@@ -78,7 +78,7 @@ server <- function(input, output, session) {
     ds2dd_detailed(
       data = dat(),
       add.auto.id = input$add_id == "yes",
-      # field.label.row = input$row_labels == "yes",
+      field.label.row = input$row_labels == "yes",
       metadata = c(
         "field_name", "form_name", "section_header", "field_type",
         "field_label", "select_choices_or_calculations", "field_note",
@@ -265,7 +265,7 @@ ui <-
           ),
           shiny::radioButtons(
             inputId = "row_labels",
-            label = "Use second row as field labels?",
+            label = "Use first row as field labels?",
             selected = "no",
             inline = TRUE,
             choices = list(
