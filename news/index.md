@@ -12,15 +12,15 @@
 
 - NEW: topological_sort() function allows for guessing the event names
   and the correct order when creating an events overview based on long
-  data format of longitudinal REDCap data with event nae column being a
-  character. This be used for implementing support for creating data
-  bases for longitudinal projects. API support and other steps are still
-  needed, but the first steps have been taken in the latest REDCap
-  version. This function was developed with Claude to allow for this
-  support. The REDCapCAST interface will also support option to reorder
-  the event names before creating database metadata, which will be
-  shared from the FreesearchR project. This will be implemented
-  eventually when the need and time is there.
+  data format of longitudinal REDCap data with event name column being a
+  character. This is to be used for implementing support for creating
+  data bases for longitudinal projects. This function was developed with
+  Claude AI, and will attempt a reproducible way of ordering levels from
+  incomplete ordering data. The REDCapCAST interface will also support
+  option to reorder the event names before creating database metadata,
+  which will be shared from the FreesearchR project. This will be
+  implemented eventually when the need and time is there, but is
+  currently beeing tested.
 
 ## REDCapCAST 26.1.1
 
