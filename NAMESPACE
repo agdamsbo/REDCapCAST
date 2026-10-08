@@ -72,20 +72,28 @@ export(strsplitx)
 export(suffix2label)
 export(var2fct)
 export(vec2choice)
-importFrom(REDCapR,redcap_event_instruments)
-importFrom(REDCapR,redcap_metadata_read)
-importFrom(REDCapR,redcap_read)
-importFrom(forcats,as_factor)
-importFrom(forcats,fct_drop)
+importFrom(REDCapR,
+  redcap_event_instruments,
+  redcap_metadata_read,
+  redcap_read
+)
+importFrom(forcats,
+  as_factor,
+  fct_drop
+)
 importFrom(haven,read_dta)
-importFrom(keyring,key_get)
-importFrom(keyring,key_list)
-importFrom(keyring,key_set)
+importFrom(keyring,
+  key_get,
+  key_list,
+  key_set
+)
 importFrom(openxlsx2,read_xlsx)
 importFrom(purrr,reduce)
 importFrom(readODS,read_ods)
-importFrom(readr,parse_time)
-importFrom(readr,read_csv)
-importFrom(readr,read_rds)
+importFrom(readr,
+  parse_time,
+  read_csv,
+  read_rds
+)
 importFrom(tidyr,pivot_wider)
 importFrom(tidyselect,all_of)

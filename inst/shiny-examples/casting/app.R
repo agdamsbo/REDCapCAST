@@ -42,21 +42,31 @@ server <- function(input, output, session) {
     out <- df()
     if (v$file.ext %in% c("xls", "xlsx", "ods")) {
       if (input$row_labels == "yes") {
-        labels <- out[1, ]
+        labels <- unlist(out[1, ])
         out <- purrr::map2(out[-1, ], labels, \(col, l) {
-          set_attr(col, l, overwrite = TRUE)
+          # browser()
+          attr(x = col, which = "label") <- l
+          col
+          # ?set_attr(data = col, attr = l, , overwrite = TRUE)
         }) |>
           dplyr::bind_cols()
       }
       out <- header.row(out)
     }
-    # browser()
+
+    # Universal approach to preserve column labels for field labels
+    v$field.labels <- out |>
+      sapply(function(x) {
+        get_attr(x, attr = "label")
+      }) |>
+      unlist()
 
     out <- out |>
       ## Parses data with readr functions
       parse_data() |>
+      as_logical()
       ## Converts logical to factor, preserving attributes with own function
-      dplyr::mutate(dplyr::across(dplyr::where(is.logical), as_factor))
+      # dplyr::mutate(dplyr::across(dplyr::where(is.logical), as_factor))
 
     if (!is.null(input$factor_vars)) {
       out <- out |>
@@ -81,25 +91,25 @@ server <- function(input, output, session) {
 
   dat <- shiny::reactive({
     out <- ds()
-
-    if (!is.null(input$factor_vars)) {
-      out <- out |>
-        dplyr::mutate(
-          dplyr::across(
-            dplyr::all_of(input$factor_vars),
-            as_factor
-          )
-        )
-    }
-
-    if (input$factorize == "yes") {
-      out <- out |>
-        (\(.x) {
-          suppressWarnings(
-            numchar2fct(.x)
-          )
-        })()
-    }
+    #
+    # if (!is.null(input$factor_vars)) {
+    #   out <- out |>
+    #     dplyr::mutate(
+    #       dplyr::across(
+    #         dplyr::all_of(input$factor_vars),
+    #         as_factor
+    #       )
+    #     )
+    # }
+    #
+    # if (input$factorize == "yes") {
+    #   out <- out |>
+    #     (\(.x) {
+    #       suppressWarnings(
+    #         numchar2fct(.x)
+    #       )
+    #     })()
+    # }
     out
   })
 
@@ -121,6 +131,7 @@ server <- function(input, output, session) {
     ds2dd_detailed(
       data = dat(),
       add.auto.id = input$add_id == "yes",
+      field.label = v$field.labels,convert.logicals = FALSE,
       metadata = c(
         "field_name",
         "form_name",
@@ -440,7 +451,8 @@ ui <-
       ),
       bslib::nav_panel(
         title = "Intro",
-        shiny::markdown(readLines("www/SHINYCAST.md")),
+        shiny_descr(),
+        # shiny::markdown(readLines("www/SHINYCAST.md")),
         shiny::br(),
         shiny::textOutput(outputId = "data.load")
       ),

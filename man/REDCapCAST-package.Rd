@@ -22,6 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Andreas Gammelgaard Damsbo \email{andreas@gdamsbo.dk} (\href{https://orcid.org/0000-0002-7559-1154}{ORCID})
   \item Paul Egeler \email{paulegeler@gmail.com} (\href{https://orcid.org/0000-0001-6948-9498}{ORCID})
 }
 
