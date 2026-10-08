@@ -36,5 +36,8 @@ Useful links:
 
 Authors:
 
+- Andreas Gammelgaard Damsbo <andreas@gdamsbo.dk>
+  ([ORCID](https://orcid.org/0000-0002-7559-1154))
+
 - Paul Egeler <paulegeler@gmail.com>
   ([ORCID](https://orcid.org/0000-0001-6948-9498))

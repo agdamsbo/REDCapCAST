@@ -2,6 +2,9 @@
 
 ## REDCapCAST 26.10.1
 
+Main focus on Shiny App improvements from practical experience using the
+app in different workflows.
+
 - NEW: New flag added to the shiny app to allow for using the first row
   of a dataset as field labels or explaining notes in the REDCap
   instrument(s). When the data set starts of as a simple flat
@@ -11,6 +14,7 @@
   always shows, but is ignored when different file format is uploaded.
 - NEW: the shiny app is now using accordions in the sidebar instead of
   buttons and conditional panels. What an old school approach(!)
+- FIX: fixed parsing logicals correctly in the shiny app.
 
 ## REDCapCAST 26.3.1
 
