@@ -2,13 +2,15 @@
 
 ## REDCapCAST 26.10.1
 
-- NEW: New flag added to ds2dd_detailed() to allow for using the first
-  row of a dataset as field labels or explaining notes in the REDCap
+- NEW: New flag added to the shiny app to allow for using the first row
+  of a dataset as field labels or explaining notes in the REDCap
   instrument(s). When the data set starts of as a simple flat
   spreadsheet, this is a practical approach to adding explaining notes
   on each variable/column.
-- NEW: Added option to choose sheet in workbook (xlsx or ods). It always
-  shows, but is ignored when different file format is uploaded.
+- NEW: Added option to choose sheet in workbook (xls, xlsx or ods). It
+  always shows, but is ignored when different file format is uploaded.
+- NEW: the shiny app is now using accordions in the sidebar instead of
+  buttons and conditional panels. What an old school approach(!)
 
 ## REDCapCAST 26.3.1
 

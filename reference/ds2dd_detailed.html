@@ -55,10 +55,9 @@
 <span>  field.type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  field.label <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  field.label.attr <span class="op">=</span> <span class="st">"label"</span>,</span>
-<span>  field.label.row <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  field.validation <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  metadata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">REDCapCAST</span><span class="fu">::</span><span class="va"><a href="redcapcast_meta.html">redcapcast_meta</a></span><span class="op">)</span>,</span>
-<span>  convert.logicals <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  convert.logicals <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -110,11 +109,7 @@ ncol(data). Default is NULL and colnames(data) is used or attribute
 
 <dt id="arg-field-label-attr">field.label.attr<a class="anchor" aria-label="anchor" href="#arg-field-label-attr"></a></dt>
 <dd><p>attribute name for named labels for haven_labelled
-data set (imported .dta file with `haven::read_dta()`. Default is "label"</p></dd>
-
-
-<dt id="arg-field-label-row">field.label.row<a class="anchor" aria-label="anchor" href="#arg-field-label-row"></a></dt>
-<dd><p>Use the first row as field label. Setting this to TRUE will overwrite any attributes. Default is FALSE.</p></dd>
+data set (imported .dta file with `haven::read_dta()`. Default is "label".</p></dd>
 
 
 <dt id="arg-field-validation">field.validation<a class="anchor" aria-label="anchor" href="#arg-field-validation"></a></dt>
@@ -189,7 +184,7 @@ Please, do always inspect the data dictionary before upload.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> cohabitation   data      <span style="color: #BB0000;">NA</span>             text       cohabitation  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> hypertension   data      <span style="color: #BB0000;">NA</span>             text       hypertension  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;lgl&gt;, field_note &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;chr&gt;, field_note &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_min &lt;lgl&gt;, text_validation_max &lt;lgl&gt;, identifier &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   branching_logic &lt;lgl&gt;, required_field &lt;lgl&gt;, custom_alignment &lt;lgl&gt;,</span></span>
@@ -296,7 +291,7 @@ Please, do always inspect the data dictionary before upload.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> am         data      <span style="color: #BB0000;">NA</span>             radio      am         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> gear       data      <span style="color: #BB0000;">NA</span>             radio      gear       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> carb       data      <span style="color: #BB0000;">NA</span>             radio      carb       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> unknown    data      <span style="color: #BB0000;">NA</span>             truefalse  unknown    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> unknown    data      <span style="color: #BB0000;">NA</span>             radio      unknown    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;chr&gt;, field_note &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_min &lt;lgl&gt;, text_validation_max &lt;lgl&gt;, identifier &lt;lgl&gt;,</span></span>

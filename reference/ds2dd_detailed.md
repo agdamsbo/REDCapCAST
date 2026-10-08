@@ -15,10 +15,9 @@ ds2dd_detailed(
   field.type = NULL,
   field.label = NULL,
   field.label.attr = "label",
-  field.label.row = FALSE,
   field.validation = NULL,
   metadata = names(REDCapCAST::redcapcast_meta),
-  convert.logicals = FALSE
+  convert.logicals = TRUE
 )
 ```
 
@@ -68,12 +67,7 @@ ds2dd_detailed(
 - field.label.attr:
 
   attribute name for named labels for haven_labelled data set (imported
-  .dta file with \`haven::read_dta()\`. Default is "label"
-
-- field.label.row:
-
-  Use the first row as field label. Setting this to TRUE will overwrite
-  any attributes. Default is FALSE.
+  .dta file with \`haven::read_dta()\`. Default is "label".
 
 - field.validation:
 
@@ -150,7 +144,7 @@ redcapcast_data |>
 #>  9 cohabitation   data      NA             text       cohabitation  
 #> 10 hypertension   data      NA             text       hypertension  
 #> # ℹ 14 more rows
-#> # ℹ 13 more variables: select_choices_or_calculations <lgl>, field_note <lgl>,
+#> # ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <lgl>,
 #> #   text_validation_type_or_show_slider_number <chr>,
 #> #   text_validation_min <lgl>, text_validation_max <lgl>, identifier <lgl>,
 #> #   branching_logic <lgl>, required_field <lgl>, custom_alignment <lgl>,
@@ -257,7 +251,7 @@ mtcars |>
 #> 10 am         data      NA             radio      am         
 #> 11 gear       data      NA             radio      gear       
 #> 12 carb       data      NA             radio      carb       
-#> 13 unknown    data      NA             truefalse  unknown    
+#> 13 unknown    data      NA             radio      unknown    
 #> # ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <lgl>,
 #> #   text_validation_type_or_show_slider_number <chr>,
 #> #   text_validation_min <lgl>, text_validation_max <lgl>, identifier <lgl>,
