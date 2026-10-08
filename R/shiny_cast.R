@@ -65,11 +65,11 @@ read_input <- function(file, consider.na = c("NA", '""', ""),sheet=1,...) {
       if (ext == "csv") {
         df <- read_csv(file = file, na = consider.na)
       } else if (ext %in% c("xls", "xlsx")) {
-        df <- read_xlsx(file = file, na.strings = consider.na,sheet = sheet)
+        df <- read_xlsx(file = file, na.strings = consider.na,sheet = sheet,col_names = FALSE)
       } else if (ext == "dta") {
         df <- read_dta(file = file)
       } else if (ext == "ods") {
-        df <- read_ods(path = file,sheet = sheet)
+        df <- read_ods(path = file,sheet = sheet,col_names = FALSE)
       } else if (ext == "rds") {
         df <- read_rds(file = file)
       }else {
@@ -84,6 +84,11 @@ read_input <- function(file, consider.na = c("NA", '""', ""),sheet=1,...) {
   )
 
   df
+}
+
+header.row <- function(df) {
+  names(df) <- as.character(unlist(df[1,]))
+  df[-1,]
 }
 
 #' Overview of REDCapCAST data for shiny

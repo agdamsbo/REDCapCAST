@@ -20,13 +20,37 @@ if (file.exists(here::here("functions.R"))) {
 
 server <- function(input, output, session) {
   v <- shiny::reactiveValues(
-    file = NULL
+    file = NULL,
+    field.labels = NULL,
+    file.ext = NULL
   )
 
-  ds <- shiny::reactive({
+  df <- shiny::reactive({
     shiny::req(input$ds)
 
-    out <- read_input(input$ds$datapath,sheet=input$sheet_n)
+    out <- read_input(input$ds$datapath, sheet = input$sheet_n)
+
+    out
+  })
+
+  shiny::observe({
+    # shiny::req(input$ds)
+    v$file.ext <- tolower(tools::file_ext(x = input$ds$datapath))
+  })
+
+  ds <- shiny::reactive({
+    out <- df()
+    if (v$file.ext %in% c("xls", "xlsx", "ods")) {
+      if (input$row_labels == "yes") {
+        labels <- out[1, ]
+        out <- purrr::map2(out[-1, ], labels, \(col, l) {
+          set_attr(col, l, overwrite = TRUE)
+        }) |>
+          dplyr::bind_cols()
+      }
+      out <- header.row(out)
+    }
+    # browser()
 
     out <- out |>
       ## Parses data with readr functions
@@ -34,6 +58,24 @@ server <- function(input, output, session) {
       ## Converts logical to factor, preserving attributes with own function
       dplyr::mutate(dplyr::across(dplyr::where(is.logical), as_factor))
 
+    if (!is.null(input$factor_vars)) {
+      out <- out |>
+        dplyr::mutate(
+          dplyr::across(
+            dplyr::all_of(input$factor_vars),
+            as_factor
+          )
+        )
+    }
+
+    if (input$factorize == "yes") {
+      out <- out |>
+        (\(.x) {
+          suppressWarnings(
+            numchar2fct(.x)
+          )
+        })()
+    }
     out
   })
 
@@ -52,7 +94,7 @@ server <- function(input, output, session) {
 
     if (input$factorize == "yes") {
       out <- out |>
-        (\(.x){
+        (\(.x) {
           suppressWarnings(
             numchar2fct(.x)
           )
@@ -74,17 +116,29 @@ server <- function(input, output, session) {
 
   dd <- shiny::reactive({
     shiny::req(input$ds)
+    shiny::req(input$row_labels)
     # v$file <- "loaded"
     ds2dd_detailed(
       data = dat(),
       add.auto.id = input$add_id == "yes",
-      field.label.row = input$row_labels == "yes",
       metadata = c(
-        "field_name", "form_name", "section_header", "field_type",
-        "field_label", "select_choices_or_calculations", "field_note",
-        "text_validation_type_or_show_slider_number", "text_validation_min",
-        "text_validation_max", "identifier", "branching_logic", "required_field",
-        "custom_alignment", "question_number", "matrix_group_name", "matrix_ranking",
+        "field_name",
+        "form_name",
+        "section_header",
+        "field_type",
+        "field_label",
+        "select_choices_or_calculations",
+        "field_note",
+        "text_validation_type_or_show_slider_number",
+        "text_validation_min",
+        "text_validation_max",
+        "identifier",
+        "branching_logic",
+        "required_field",
+        "custom_alignment",
+        "question_number",
+        "matrix_group_name",
+        "matrix_ranking",
         "field_annotation"
       )
     )
@@ -130,7 +184,8 @@ server <- function(input, output, session) {
       readr::write_csv(
         x = purrr::pluck(dd(), "data"),
         file = file,
-        na = "")
+        na = ""
+      )
       # write.csv(purrr::pluck(dd(), "data"), file, row.names = FALSE, na = "")
     }
   )
@@ -142,7 +197,8 @@ server <- function(input, output, session) {
       readr::write_csv(
         x = purrr::pluck(dd(), "meta"),
         file = file,
-        na = "")
+        na = ""
+      )
       # write.csv(purrr::pluck(dd(), "meta"), file, row.names = FALSE, na = "")
     }
   )
@@ -151,7 +207,8 @@ server <- function(input, output, session) {
   output$downloadInstrument <- shiny::downloadHandler(
     filename = paste0("REDCapCAST_instrument", Sys.Date(), ".zip"),
     content = function(file) {
-      export_redcap_instrument(purrr::pluck(dd(), "meta"),
+      export_redcap_instrument(
+        purrr::pluck(dd(), "meta"),
         file = file,
         record.id = ifelse(input$add_id == "none", NA, names(dat())[1])
       )
@@ -179,7 +236,8 @@ server <- function(input, output, session) {
       ds = purrr::pluck(dd(), "meta"),
       redcap_uri = input$uri,
       token = input$api
-    ) |> purrr::pluck("success")
+    ) |>
+      purrr::pluck("success")
   }
 
   upload_data <- function() {
@@ -241,93 +299,95 @@ ui <-
             ".ods"
           )
         ),
-        shiny::actionButton(
-          inputId = "options",
-          label = "Show options",
-          icon = shiny::icon("wrench")
-        ),
-        shiny::helpText("Choose and upload a dataset, then press the button for data modification and options for data download or upload."),
-        # For some odd reason this only unfolds when the preview panel is shown..
-        # This has been solved by adding an arbitrary button to load data - which was abandoned again
-        shiny::conditionalPanel(
-          # condition = "output.uploaded=='yes'",
-          condition = "input.options > 0",
-          shiny::numericInput(inputId = "sheet_n",label = "Select sheet to handle (ignored if not a workbook)",value = 1,min = 1,max = 10,step = 1),
-          shiny::radioButtons(
-            inputId = "add_id",
-            label = "Add ID, or use first column?",
-            selected = "no",
-            inline = TRUE,
-            choices = list(
-              "First column" = "no",
-              "Add ID" = "yes",
-              "No ID" = "none"
+        bslib::accordion(
+          open = FALSE,
+          multiple = FALSE,
+          bslib::accordion_panel(
+            title = "Settings",
+            icon = shiny::icon("wrench"),
+            shiny::numericInput(
+              inputId = "sheet_n",
+              label = "Select sheet to handle (ignored if not a workbook)",
+              value = 1,
+              min = 1,
+              max = 10,
+              step = 1
+            ),
+            shiny::radioButtons(
+              inputId = "row_labels",
+              label = "Use first row as readable variable name (field label)?",
+              selected = "no",
+              inline = TRUE,
+              choices = list(
+                "Yes" = "yes",
+                "No" = "no"
+              )
+            ),
+            shiny::radioButtons(
+              inputId = "add_id",
+              label = "Add ID, or use first column?",
+              selected = "no",
+              inline = TRUE,
+              choices = list(
+                "First column" = "no",
+                "Add ID" = "yes",
+                "No ID" = "none"
+              )
+            ),
+            shiny::radioButtons(
+              inputId = "factorize",
+              label = "Factorize variables with few levels?",
+              selected = "yes",
+              inline = TRUE,
+              choices = list(
+                "Yes" = "yes",
+                "No" = "no"
+              )
+            ),
+            shiny::radioButtons(
+              inputId = "specify_factors",
+              label = "Specify categorical variables?",
+              selected = "no",
+              inline = TRUE,
+              choices = list(
+                "Yes" = "yes",
+                "No" = "no"
+              )
+            ),
+            shiny::conditionalPanel(
+              condition = "input.specify_factors=='yes'",
+              shiny::uiOutput("factor_vars")
             )
           ),
-          shiny::radioButtons(
-            inputId = "row_labels",
-            label = "Use first row as field labels?",
-            selected = "no",
-            inline = TRUE,
-            choices = list(
-              "Yes" = "yes",
-              "No" = "no"
+          bslib::accordion_panel(
+            title = "Download",
+            icon = shiny::icon("download"),
+            shiny::h4("Download data for manual upload"),
+            shiny::helpText("Look further down for direct upload option"),
+            # Button
+            shiny::downloadButton(
+              outputId = "downloadData",
+              label = "Download renamed data"
+            ),
+            shiny::em("and then"),
+            # Button
+            shiny::downloadButton(
+              outputId = "downloadMeta",
+              label = "Download data dictionary"
+            ),
+            shiny::em("or"),
+            shiny::downloadButton(
+              outputId = "downloadInstrument",
+              label = "Download as instrument"
             )
           ),
-          shiny::radioButtons(
-            inputId = "factorize",
-            label = "Factorize variables with few levels?",
-            selected = "yes",
-            inline = TRUE,
-            choices = list(
-              "Yes" = "yes",
-              "No" = "no"
-            )
-          ),
-          shiny::radioButtons(
-            inputId = "specify_factors",
-            label = "Specify categorical variables?",
-            selected = "no",
-            inline = TRUE,
-            choices = list(
-              "Yes" = "yes",
-              "No" = "no"
-            )
-          ),
-          shiny::conditionalPanel(
-            condition = "input.specify_factors=='yes'",
-            shiny::uiOutput("factor_vars")
-          ),
-          # condition = "input.load_data",
-          #  shiny::helpText("Below you can download the dataset formatted for upload and the
-          # corresponding data dictionary for a new data base, if you want to upload manually."),
-          shiny::tags$hr(),
-          shiny::h4("Download data for manual upload"),
-          shiny::helpText("Look further down for direct upload option"),
-          # Button
-          shiny::downloadButton(outputId = "downloadData", label = "Download renamed data"),
-          shiny::em("and then"),
-          # Button
-          shiny::downloadButton(outputId = "downloadMeta", label = "Download data dictionary"),
-          shiny::em("or"),
-          shiny::downloadButton(outputId = "downloadInstrument", label = "Download as instrument"),
-
-          # Horizontal line ----
-          shiny::tags$hr(),
-          shiny::radioButtons(
-            inputId = "upload_redcap",
-            label = "Upload directly to a REDCap server?",
-            selected = "no",
-            inline = TRUE,
-            choices = list(
-              "Yes" = "yes",
-              "No" = "no"
-            )
-          ),
-          shiny::conditionalPanel(
-            condition = "input.upload_redcap=='yes'",
+          bslib::accordion_panel(
+            title = "Upload",
+            icon = shiny::icon("upload"),
             shiny::h4("2) Data base upload"),
-            shiny::helpText("This tool is usable for now. Detailed instructions are coming."),
+            shiny::helpText(
+              "This tool is usable for now. Detailed instructions are coming."
+            ),
             shiny::textInput(
               inputId = "uri",
               label = "URI",
@@ -338,27 +398,44 @@ ui <-
               label = "API key",
               value = ""
             ),
-            shiny::helpText("An API key is an access key to the REDCap database. Please", shiny::a("see here for directions", href = "https://www.iths.org/news/redcap-tip/redcap-api-101/"), " to obtain an API key for your project."),
+            shiny::helpText(
+              "An API key is an access key to the REDCap database. Please",
+              shiny::a(
+                "see here for directions",
+                href = "https://www.iths.org/news/redcap-tip/redcap-api-101/"
+              ),
+              " to obtain an API key for your project."
+            ),
             shiny::actionButton(
               inputId = "upload.meta",
-              label = "Upload datadictionary", icon = shiny::icon("book-bookmark")
+              label = "Upload datadictionary",
+              icon = shiny::icon("book-bookmark")
             ),
-            shiny::helpText("Please note, that before uploading any real data, put your project
-         into production mode."),
+            shiny::helpText(
+              "Please note, that before uploading any real data, put your project
+         into production mode."
+            ),
             shiny::actionButton(
               inputId = "upload.data",
-              label = "Upload data", icon = shiny::icon("upload")
+              label = "Upload data",
+              icon = shiny::icon("upload")
             )
           )
         ),
         shiny::br(),
         shiny::br(),
-        shiny::br(),
         shiny::p(
-          "License: ", shiny::a("GPL-3+", href = "https://agdamsbo.github.io/REDCapCAST/LICENSE.html")
+          "License: ",
+          shiny::a(
+            "GPL-3+",
+            href = "https://agdamsbo.github.io/REDCapCAST/LICENSE.html"
+          )
         ),
         shiny::p(
-          shiny::a("Package documentation", href = "https://agdamsbo.github.io/REDCapCAST")
+          shiny::a(
+            "Package documentation",
+            href = "https://agdamsbo.github.io/REDCapCAST"
+          )
         )
       ),
       bslib::nav_panel(
