@@ -28,7 +28,7 @@ app in different workflows.
   option to reorder the event names before creating database metadata,
   which will be shared from the FreesearchR project. This will be
   implemented eventually when the need and time is there, but is
-  currently beeing tested.
+  currently being tested.
 
 ## REDCapCAST 26.1.1
 
