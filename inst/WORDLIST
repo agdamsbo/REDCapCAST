@@ -2,13 +2,12 @@ Andreas
 Assesment
 CMD
 Codecov
-DEPRICATED
-DOI
 DataDictionary
+FreesearchR
 Gammelgaard
 Github
 GithubActions
-JSON
+Kahn's
 Lifecycle
 METACRAN
 MMRM
@@ -33,10 +32,9 @@ csv
 da
 dafault
 datadictionary
-datetime
+deduplicated
 demonstrational
 detatched
-dir
 dmy
 docx
 doi
@@ -45,6 +43,7 @@ dropdown
 droplevels
 ds
 dta
+enqueue
 et
 factorises
 factorising
@@ -69,6 +68,7 @@ mtcars
 na
 natively
 ncol
+ods
 og
 param
 params
@@ -104,4 +104,6 @@ unlabelled
 uri
 vec
 wil
+xls
+xlsx
 ymd
