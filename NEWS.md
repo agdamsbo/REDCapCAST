@@ -9,7 +9,7 @@ Main focus on Shiny App improvements from practical experience using the app in 
 
 # REDCapCAST 26.3.1
 
-* NEW: topological_sort() function allows for guessing the event names and the correct order when creating an events overview based on long data format of longitudinal REDCap data with event name column being a character. This is to be used for implementing support for creating data bases for longitudinal projects. This function was developed with Claude AI, and will attempt a reproducible way of ordering levels from incomplete ordering data. The REDCapCAST interface will also support option to reorder the event names before creating database metadata, which will be shared from the FreesearchR project. This will be implemented eventually when the need and time is there, but is currently beeing tested.
+* NEW: topological_sort() function allows for guessing the event names and the correct order when creating an events overview based on long data format of longitudinal REDCap data with event name column being a character. This is to be used for implementing support for creating data bases for longitudinal projects. This function was developed with Claude AI, and will attempt a reproducible way of ordering levels from incomplete ordering data. The REDCapCAST interface will also support option to reorder the event names before creating database metadata, which will be shared from the FreesearchR project. This will be implemented eventually when the need and time is there, but is currently being tested.
 
 # REDCapCAST 26.1.1
 
